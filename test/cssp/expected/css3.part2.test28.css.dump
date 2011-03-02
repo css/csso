@@ -1,0 +1,5 @@
+type(ruleset)
+value(E,:,lang,(,fr,))
+{
+    name(p): value(v)
+}

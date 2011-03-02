@@ -1,0 +1,5 @@
+type(ruleset)
+value(E,+,F)
+{
+    name(p): value(v)
+}

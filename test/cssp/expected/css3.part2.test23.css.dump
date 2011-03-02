@@ -1,0 +1,5 @@
+type(ruleset)
+value(E,:,visited)
+{
+    name(p): value(v)
+}

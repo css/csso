@@ -1,0 +1,5 @@
+type(ruleset)
+value(E,:,nth-last-of-type,(,n,))
+{
+    name(p): value(v)
+}
