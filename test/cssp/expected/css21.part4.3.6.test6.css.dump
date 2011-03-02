@@ -1,0 +1,19 @@
+type(ruleset)
+value(a)
+{
+    name(color0): value(yellow 'yellow');
+    name(color1): value(fuchsia 'fuchsia');
+    name(color2): value(white 'white');
+    name(color3): value(black 'black');
+    name(color4): value(blue 'blue');
+    name(color5): value(aqua 'aqua');
+    name(color6): value(#f00 '#f00');
+    name(color7): value(#c0c0c0 '#c0c0c0');
+    name(color8): value(#808080 '#808080');
+    name(color9): value(#800000 '#800000');
+    name(color10): value(#800080 '#800080');
+    name(color11): value(#008000 '#008000');
+    name(color12): value(#808000 '#808000');
+    name(color13): value(#000080 '#000080');
+    name(color14): value(#008080 '#008080')
+}

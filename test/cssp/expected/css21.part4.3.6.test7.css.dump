@@ -1,0 +1,20 @@
+type(ruleset)
+value(color)
+{
+    name(a0): value(#000000);
+    name(a1): value(#111111);
+    name(a2): value(#222222);
+    name(a3): value(#333333);
+    name(a4): value(#444444);
+    name(a5): value(#555555);
+    name(a6): value(#666666);
+    name(a7): value(#777777);
+    name(a8): value(#888888);
+    name(a9): value(#999999);
+    name(a10): value(#aaaaaa);
+    name(a11): value(#bbbbbb);
+    name(a12): value(#cccccc);
+    name(a13): value(#dddddd);
+    name(a14): value(#eeeeee);
+    name(a15): value(#ffffff)
+}
