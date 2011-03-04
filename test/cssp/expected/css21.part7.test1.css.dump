@@ -1,0 +1,9 @@
+type(atrule)
+value(@,media, ,screen)
+{
+type(ruleset)
+    value(E)
+    {
+        name(p): value(v)
+    }
+}

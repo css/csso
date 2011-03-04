@@ -1,0 +1,2 @@
+type(atrule)
+value(@,import, ,url,(,"fineprint.css",),print)
