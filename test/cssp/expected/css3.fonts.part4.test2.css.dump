@@ -1,0 +1,7 @@
+type(atrule)
+value(@,font-face)
+{
+    name(font-family): value(DroidSans);
+    name(src): value(url(DroidSans.ttf));
+    name(unicode-range): value(U+000-5FF,U+1e00-1fff,U+2000-2300)
+}
