@@ -1,0 +1,5 @@
+type(ruleset)
+value(E,:,not,(,test-smth,))
+{
+    name(p): value(v)
+}

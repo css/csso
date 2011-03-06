@@ -1,0 +1,5 @@
+type(ruleset)
+value(a10,:,nth-of-type,(,n,+,2,),:,nth-last-of-type,(,n,+,2,))
+{
+    name(p): value(v)
+}

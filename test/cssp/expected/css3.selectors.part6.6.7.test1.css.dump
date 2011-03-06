@@ -1,0 +1,5 @@
+type(ruleset)
+value(E,:,not,(,[,DISABLED,],))
+{
+    name(p): value(v)
+}
