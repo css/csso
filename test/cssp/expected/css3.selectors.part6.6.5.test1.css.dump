@@ -1,0 +1,5 @@
+type(ruleset)
+value(a0,:,nth-child,(,odd,))
+{
+    name(p): value(v)
+}
