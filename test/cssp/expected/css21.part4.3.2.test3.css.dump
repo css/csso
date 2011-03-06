@@ -1,0 +1,5 @@
+type(ruleset)
+value(p)
+{
+    name(font-size): value(12px)
+}

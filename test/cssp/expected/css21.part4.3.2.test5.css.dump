@@ -1,0 +1,5 @@
+type(ruleset)
+value(h2)
+{
+    name(line-height): value(3cm)
+}
