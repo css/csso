@@ -10,6 +10,9 @@
     <script src="lib/cssm.js"></script>
     <script src="lib/cssoutils.js"></script>
 
+    <div class="stat">
+        Src length: <span id="slength">0</span>, dst length: <span id="dlength">0</span>, compression: <span id="result">0</span>%.
+    </div>
     <textarea class="csstxt" id="csssrc"></textarea>
     <input type="button" value="basic" id="basic" />
     <input type="button" value="min" id="min" />
@@ -17,25 +20,34 @@
     <textarea class="csstxt" id="cssdst"></textarea>
 
     <script>
-        document.getElementById('basic').onclick = function() {
-            var csssrc = document.getElementById('csssrc'),
-                cssdst = document.getElementById('cssdst');
+        var csssrc = document.getElementById('csssrc'),
+            cssdst = document.getElementById('cssdst'),
+            slength = document.getElementById('slength'),
+            dlength = document.getElementById('dlength'),
+            result = document.getElementById('result');
 
+        csssrc.onchange = function() {
+            slength.innerText = csssrc.value.length;
+        };
+
+        function updateStat() {
+            dlength.innerText = cssdst.value.length;
+            result.innerText = (100 * cssdst.value.length / csssrc.value.length).toFixed(2);
+        }
+
+        document.getElementById('basic').onclick = function() {
             cssdst.value = $cssoutils.basic2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
+            updateStat();
         };
 
         document.getElementById('min').onclick = function() {
-            var csssrc = document.getElementById('csssrc'),
-                cssdst = document.getElementById('cssdst');
-
             cssdst.value = $cssoutils.min2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
+            updateStat();
         };
 
         document.getElementById('dump').onclick = function() {
-            var csssrc = document.getElementById('csssrc'),
-                cssdst = document.getElementById('cssdst');
-
             cssdst.value = $cssoutils.dump2string($cssp.parse(csssrc.value).nodes, '');
+            updateStat();
         }
     </script>
 
