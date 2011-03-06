@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>CSS optimizer</title>
+    <link rel="stylesheet" href="csso.css" type="text/css">
+</head>
+<body>
+    <script src="lib/cssp.js"></script>
+    <script src="lib/cssm.js"></script>
+    <script src="lib/cssoutils.js"></script>
+
+    <textarea class="csstxt" id="csssrc"></textarea>
+    <input type="button" value="basic" id="basic" />
+    <input type="button" value="min" id="min" />
+    <input type="button" value="dump" id="dump" />
+    <textarea class="csstxt" id="cssdst"></textarea>
+
+    <script>
+        document.getElementById('basic').onclick = function() {
+            var csssrc = document.getElementById('csssrc'),
+                cssdst = document.getElementById('cssdst');
+
+            cssdst.value = $cssoutils.basic2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
+        };
+
+        document.getElementById('min').onclick = function() {
+            var csssrc = document.getElementById('csssrc'),
+                cssdst = document.getElementById('cssdst');
+
+            cssdst.value = $cssoutils.min2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
+        };
+
+        document.getElementById('dump').onclick = function() {
+            var csssrc = document.getElementById('csssrc'),
+                cssdst = document.getElementById('cssdst');
+
+            cssdst.value = $cssoutils.dump2string($cssp.parse(csssrc.value).nodes, '');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 type(atrule)
 value(@,media, ,screen,,,3D)
 {
-type(ruleset)
+    type(ruleset)
     value(E)
     {
         name(p): value(v)
