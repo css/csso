@@ -1,7 +1,7 @@
 var fs = require('fs'),
     parse = require('../../lib/cssp').parse,
     minimize = require('../../lib/cssm').minimize,
-    utils = require('../../lib/utils'),
+    utils = require('../../lib/cssoutils'),
     c_dir = './css',
     c_list = fs.readdirSync(c_dir),
     e_dir = './expected',
