@@ -1,0 +1,5 @@
+type(ruleset)
+value(E)
+{
+    name(p): value(expression( a.x = test ? 1 : "2" ))
+}
