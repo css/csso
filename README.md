@@ -36,6 +36,7 @@
 ### Мелкое
 
 * 0px => 0?
+* 0.x => .x
 * font-weight;
 * более удобный command-line.
 
