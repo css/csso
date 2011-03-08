@@ -16,6 +16,7 @@
     <textarea class="csstxt" id="csssrc"></textarea>
     <input type="button" value="basic" id="basic" />
     <input type="button" value="min" id="min" />
+    <input type="button" value="minbasic" id="minbasic" />
     <input type="button" value="dump" id="dump" />
     <textarea class="csstxt" id="cssdst"></textarea>
 
@@ -36,12 +37,17 @@
         }
 
         document.getElementById('basic').onclick = function() {
-            cssdst.value = $cssoutils.basic2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
+            cssdst.value = $cssoutils.basic2string($cssp.parse(csssrc.value).nodes, '');
             updateStat();
         };
 
         document.getElementById('min').onclick = function() {
             cssdst.value = $cssoutils.min2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
+            updateStat();
+        };
+
+        document.getElementById('minbasic').onclick = function() {
+            cssdst.value = $cssoutils.basic2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
             updateStat();
         };
 
