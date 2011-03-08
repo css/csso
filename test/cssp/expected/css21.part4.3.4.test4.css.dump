@@ -1,0 +1,7 @@
+type(atrule)
+value(@,import, ,url,(,http://www.a.com/test.gif,))
+type(ruleset)
+value(E)
+{
+    name(p): value(url(http://www.a.com/test.gif))
+}

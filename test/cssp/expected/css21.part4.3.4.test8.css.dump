@@ -1,0 +1,7 @@
+type(atrule)
+value(@,import, ,url,(,http://a.com/?x+y+\"+#blah\'test,))
+type(ruleset)
+value(E)
+{
+    name(p): value(url(http://a.com/?x+y+\"+#blah\'test))
+}
