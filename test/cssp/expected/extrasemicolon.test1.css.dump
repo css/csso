@@ -1,0 +1,6 @@
+type(ruleset)
+value(a)
+{
+    name(b): value(c);
+    name(d): value(e)
+}
