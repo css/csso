@@ -17,6 +17,8 @@
     <input type="button" value="basic" id="basic" />
     <input type="button" value="min" id="min" />
     <input type="button" value="minbasic" id="minbasic" />
+    <input type="button" value="statbasic" id="statbasic" />
+    <input type="button" value="statmin" id="statmin" />
     <input type="button" value="dump" id="dump" />
     <textarea class="csstxt" id="cssdst"></textarea>
 
@@ -48,6 +50,16 @@
 
         document.getElementById('minbasic').onclick = function() {
             cssdst.value = $cssoutils.basic2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
+            updateStat();
+        };
+
+        document.getElementById('statbasic').onclick = function() {
+            cssdst.value = $cssoutils.getstatstring($cssp.parse(csssrc.value).nodes, '');
+            updateStat();
+        };
+
+        document.getElementById('statmin').onclick = function() {
+            cssdst.value = $cssoutils.getstatstring($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
             updateStat();
         };
 
