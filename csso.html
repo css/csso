@@ -14,12 +14,18 @@
         Src length: <span id="slength">0</span>, dst length: <span id="dlength">0</span>, compression: <span id="result">0</span>%.
     </div>
     <textarea class="csstxt" id="csssrc"></textarea>
-    <input type="button" value="basic" id="basic" />
-    <input type="button" value="min" id="min" />
-    <input type="button" value="minbasic" id="minbasic" />
-    <input type="button" value="statbasic" id="statbasic" />
-    <input type="button" value="statmin" id="statmin" />
-    <input type="button" value="dump" id="dump" />
+    <span class="first">
+        <input type="button" value="minimize" id="min" />
+    </span>
+    <span class="second">
+        <input type="button" value="format" id="basic" />
+        <input type="button" value="format after minimize" id="minbasic" />
+    </span>
+    <span class="third">
+        <input type="button" value="stat" id="statbasic" />
+        <input type="button" value="stat after minimize" id="statmin" />
+        <input type="button" value="dump" id="dump" />
+    </span>
     <textarea class="csstxt" id="cssdst"></textarea>
 
     <script>
