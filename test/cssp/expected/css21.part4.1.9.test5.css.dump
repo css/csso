@@ -1,5 +1,8 @@
+comment(/* test */)
 type(ruleset)
-value(a, ,b)
+value(a, ,/* test */, ,b, ,/* test */)
 {
-    name(c): value(d)
+    comment(/* test */);
+    name(c,/* test */): value(/* test */ d /* test */)
 }
+comment(/* test */)

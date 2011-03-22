@@ -1,7 +1,7 @@
 type(ruleset)
 value(a)
 {
-    name(b): value(c)
+    name(b): value(c/*x*/)
 }
 type(ruleset)
 value(d)

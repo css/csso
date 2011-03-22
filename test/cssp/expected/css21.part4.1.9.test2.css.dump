@@ -1,5 +1,5 @@
 type(ruleset)
-value(a)
+value(a, ,/* test */)
 {
     name(b): value(c)
 }

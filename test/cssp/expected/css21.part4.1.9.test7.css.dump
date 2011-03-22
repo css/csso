@@ -3,3 +3,6 @@ value(a)
 {
     name(b): value(c)
 }
+comment(/*
+ * test
+ */)

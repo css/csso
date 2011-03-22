@@ -1,3 +1,4 @@
+comment(/* test */)
 type(ruleset)
 value(a)
 {

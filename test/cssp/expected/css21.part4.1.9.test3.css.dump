@@ -1,5 +1,6 @@
 type(ruleset)
 value(a)
 {
+    comment(/* test */);
     name(b): value(c)
 }

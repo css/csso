@@ -1,5 +1,5 @@
 type(ruleset)
 value(a)
 {
-    name(b): value(c)
+    name(b): value(/* test */ c)
 }
