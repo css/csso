@@ -1,1 +1,1 @@
-.b-bla{a:b;background:red}.b-bla2{background:red}
+.b-bla{a:b}.b-bla,.b-bla2{background:red}
