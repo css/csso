@@ -1,0 +1,8 @@
+a {
+    p0: v;
+    p1: v;
+}
+@import url(test.css);
+b {
+    p0: v;
+}

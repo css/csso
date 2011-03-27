@@ -1,0 +1,9 @@
+@charset "test";
+a {
+    p0: v;
+    p1: v;
+}
+b {
+    p0: v;
+    p2: v;
+}
