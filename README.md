@@ -166,9 +166,48 @@ TODO
 TODO
 
 Было:
-    TODO
+    .test0 {
+        margin-top: 1em;
+        margin-right: 2em;
+        margin-bottom: 3em;
+        margin-left: 4em;
+    }
+    
+    .test1 {
+        margin: 1 2 3 2
+    }
+    
+    .test2 {
+        margin: 1 2 1 2
+    }
+    
+    .test3 {
+        margin: 1 1 1 1
+    }
+    
+    .test4 {
+        margin: 1 1 1
+    }
+    
+    .test5 {
+        margin: 1 1
+    }
 Стало:
-    TODO
+    .test0 {
+        margin: 1em 2em 3em 4em
+    }
+    
+    .test1 {
+        margin: 1 2 3
+    }
+    
+    .test2 {
+        margin: 1 2
+    }
+    
+    .test3, .test4, .test5 {
+        margin: 1
+    }
 
 ### Склеивание многострочных строк в однострочные
 
