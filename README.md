@@ -267,10 +267,99 @@ TODO
 
 TODO
 
-### Группировка
+#### Сведение блоков с одинаковыми селекторами
+
+TODO
+
+Было:
+    .test0 {
+        color: red;
+        margin: 0;
+    }
+    
+    .test1 {
+        font-size: 12pt
+    }
+    
+    .test0 {
+        line-height: 3cm
+    }
+    
+    .test1 {
+        text-indent: 3em;
+    }
+Стало:
+    .test0 {
+        color: red;
+        margin: 0;
+        line-height: 3cm
+    }
+    
+    .test1 {
+        font-size: 12pt;
+        text-indent: 3em
+    }
+
+#### Удаление перекрываемых свойств
+
+TODO
+
+Было:
+    .test {
+        color: red;
+        margin: 0;
+    }
+    
+    .test {
+        line-height: 3cm;
+        color: green;
+    }
+Стало:
+    .test {
+        margin: 0;
+        line-height: 3cm;
+        color: green
+    }
+
+### Группирование
 
 TODO
 
 ### Управление структурными изменениями
 
 TODO
+
+#### Защита от удаления
+
+Было без защиты:
+    .test {
+        color: red;
+    }
+    
+    .test {
+        color: green;
+    }
+Стало:
+    .test {
+        color: green
+    }
+Было с защитой:
+    .test {
+        /*p*/color: red;
+    }
+    
+    .test {
+        color: green;
+    }
+Стало:
+    .test {
+        color: red; <-- свойство не было перекрыто `color: green`
+        color: green
+    }
+
+#### Защита от смены порядка
+
+TODO
+
+Было:
+Стало:
