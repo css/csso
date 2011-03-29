@@ -127,9 +127,18 @@ TODO
 TODO
 
 Было:
-    TODO
+    .test0 {
+        font:;
+        color: red;
+        :green;
+    }
+    
+    .test1 {
+    }
 Стало:
-    TODO
+    .test0 {
+        color: red;
+    }
 
 ### Оптимизация цвета
 
@@ -157,9 +166,13 @@ TODO
 TODO
 
 Было:
-    TODO
+    .test {
+        fakeprop: .0 0. 0.0 000 00.00 0px 0.1 0.1em 0.000em 00% 00.00% 010.00
+    }
 Стало:
-    TODO
+    .test {
+        fakeprop: 0 0 0 0 0 0 .1 .1em 0em 0% 0% 10
+    }
 
 ### Оптимизация margin и padding
 
