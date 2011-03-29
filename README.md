@@ -62,9 +62,15 @@ TODO
 
 # Минимизация
 
+TODO
+
 ## Минимизация без изменения структуры
 
+TODO
+
 ### Удаление whitespace
+
+TODO
 
 Было:
     .test
@@ -77,28 +83,48 @@ TODO
     .test{margin-top:1em;margin-left:2em}
 Для большего удобства чтения текст остальных примеров приводится с пробелами (переводом строки и т.п.).
 
-### Удаление комментариев
-
-Было:
-    TODO
-Стало:
-    TODO
-
 ### Удаление лишних `;`
 
-Было:
-    TODO
-Стало:
-    TODO
-
-### Удаление неправильного @charset
+TODO
 
 Было:
-    TODO
+    .test {
+        margin-top: 1em;;;
+        ;;
+    }
 Стало:
-    TODO
+    .test {
+        margin-top: 1em
+    }
+
+#### Удаление комментариев
+
+TODO
+
+Было:
+    /* comment */
+
+    .test /* comment */ {
+        /* comment */ margin-top: /* comment */ 1em;
+    }
+Стало:
+    .test {
+        margin-top: 1em
+    }
+
+## Удаление неправильного @charset
+
+TODO
+
+Было:
+    @charset 'UTF-8';
+    @charset 'ISO-8859-15';
+Стало:
+    @charset 'UTF-8'
 
 ### Удаление пустых элементов стиля
+
+TODO
 
 Было:
     TODO
@@ -107,12 +133,28 @@ TODO
 
 ### Оптимизация цвета
 
+TODO
+
 Было:
-    TODO
+    .test0 {
+        color: yellow;
+        border-color: #c0c0c0;
+        background: #ffffff;
+        border-top-color: #f00;
+        outline-color: rgb(0, 0, 0);
+    }
 Стало:
-    TODO
+    .test0 {
+        color: #ff0;
+        border-color: silver;
+        background: #fff;
+        border-top-color: red;
+        outline-color: #000;
+    }
 
 ### Оптимизация числовых значений
+
+TODO
 
 Было:
     TODO
@@ -121,12 +163,16 @@ TODO
 
 ### Оптимизация margin и padding
 
+TODO
+
 Было:
     TODO
 Стало:
     TODO
 
 ### Склеивание многострочных строк в однострочные
+
+TODO
 
 Было:
     TODO
@@ -135,12 +181,16 @@ TODO
 
 ### Оптимизация `font-weight`
 
+TODO
+
 Было:
     TODO
 Стало:
     TODO
 
 ## Минимизация с изменением структуры
+
+TODO
 
 ### Расчёт стиля
 
