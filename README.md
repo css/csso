@@ -136,7 +136,7 @@ TODO
 TODO
 
 Было:
-    .test0 {
+    .test {
         color: yellow;
         border-color: #c0c0c0;
         background: #ffffff;
@@ -144,12 +144,12 @@ TODO
         outline-color: rgb(0, 0, 0);
     }
 Стало:
-    .test0 {
+    .test {
         color: #ff0;
         border-color: silver;
         background: #fff;
         border-top-color: red;
-        outline-color: #000;
+        outline-color: #000
     }
 
 ### Оптимизация числовых значений
@@ -175,18 +175,37 @@ TODO
 TODO
 
 Было:
-    TODO
+    .test[title="abc\
+    def"] {
+        background: url("foo/\
+    bar")
+    }
+
 Стало:
-    TODO
+    .test[title="abcdef"] {
+        background: url("foo/bar")
+    }
 
 ### Оптимизация `font-weight`
 
 TODO
 
 Было:
-    TODO
+    .test0 {
+        font-weight: bold
+    }
+    
+    .test1 {
+        font-weight: normal
+    }
 Стало:
-    TODO
+    .test0 {
+        font-weight: 700
+    }
+    
+    .test1 {
+        font-weight: 400
+    }
 
 ## Минимизация с изменением структуры
 
