@@ -308,9 +308,6 @@ TODO
     .test {
         color: red;
         margin: 0;
-    }
-    
-    .test {
         line-height: 3cm;
         color: green;
     }
@@ -353,7 +350,7 @@ TODO
     }
 Стало:
     .test {
-        color: red; <-- свойство не было перекрыто `color: green`
+        color: red; <-- свойство не было перекрыто 'color: green'
         color: green
     }
 
@@ -361,5 +358,25 @@ TODO
 
 TODO
 
-Было:
+Было без защиты:
+    .test0 {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    .test1 {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
 Стало:
+    .test0, .test1 { <-- порядок '.test1' перекрыл порядок '.test0'
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+Было с защитой:
+    TODO
+Стало:
+    TODO
