@@ -1,1 +1,4 @@
-E{a:expression(var b={},c=b; alert(c);)}
+E{a:expression(
+        var b = {}, c = b;
+        alert(c);
+       )}
