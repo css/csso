@@ -133,7 +133,7 @@ TODO
     }
 Стало:
     .test {
-        fakeprop: 0 0 0 0 0 0 .1 .1em 0em 0% 0% 10
+        fakeprop: 0 0 0 0 0 0 .1 .1em 0 0% 0% 10
     }
 
 ### Оптимизация margin и padding
