@@ -284,7 +284,7 @@ TODO
 
 TODO
 
-#### 4.2.2.1. Частичное выделение свойств
+#### 4.2.2.1. Частичное выделение свойств в отдельный блок
 
 TODO
 
@@ -307,15 +307,15 @@ a) Выделение произошло.
 Стало:
     .test0, .test1 {
         color: red;
-        font: x-large/110% "New Century Schoolbook",serif;
+        font: x-large/110% "New Century Schoolbook",serif
     }
     
     .test0 {
-        margin: 10px;
+        margin: 10px
     }
     
     .test1 {
-        margin: 20px;
+        margin: 20px
     }
 б) Выделение не произошло.
 
@@ -332,29 +332,38 @@ a) Выделение произошло.
 Стало:
     .test0 {
         color: red;
+        margin: 10px
+    }
+    
+    .test1 {
+        color: red;
+        margin: 20px
+    }
+
+#### 4.2.2.2. Частичное слияние блоков
+
+TODO
+
+Было:
+    .test0 {
+        color: red;
+        font: x-large/110% "New Century Schoolbook", serif;
         margin: 10px;
     }
     
     .test1 {
         color: red;
-        margin: 20px;
+        font: x-large/110% "New Century Schoolbook", serif;
     }
-
-#### 4.2.2.2. Вниз
-
-TODO
-
-Было:
-
 Стало:
-
-#### 4.2.2.3. Вверх
-
-TODO
-
-Было:
-
-Стало:
+    .test0 {
+        margin: 10px
+    }
+    
+    .test0, .test1 {
+        color: red;
+        font: x-large/110% "New Century Schoolbook",serif
+    }
 
 ### 4.2.3. Управление структурными изменениями
 
