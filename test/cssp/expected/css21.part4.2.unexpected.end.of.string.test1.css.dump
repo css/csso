@@ -1,0 +1,8 @@
+type(ruleset)
+value(p)
+{
+    name(color): value(green);
+    name(font-family): value();
+    name(color): value(red);
+    name(color): value(green)
+}
