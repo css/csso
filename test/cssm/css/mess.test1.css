@@ -1,10 +1,24 @@
-.b-bla
-{
-    a: b;
-    background: red;
+.a {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: red url(//test/ru);
 }
 
-.b-bla2
-{
+.c {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+}
+
+.d {
+    position: absolute;
+}
+
+.b {
+    position: relative;
+    width: 100%;
+    height: 50px;
     background: red;
 }
