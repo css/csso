@@ -89,7 +89,7 @@ TODO
 
 Минимизатор удаляет те элементы, что являются ошибочными структурно, но не проверяет на правильность имена или значения свойств.
 
-Таким образом, из [http://www.w3.org/TR/CSS21/syndata.html#parsing-errors](CSS 2.1 / 4.2 Rules for handling parsing errors) поддерживается обработка и коррекция следующих ошибок:
+Таким образом, из [CSS 2.1 / 4.2 Rules for handling parsing errors](http://www.w3.org/TR/CSS21/syndata.html#parsing-errors) поддерживается обработка и коррекция следующих ошибок:
 
 * Malformed declarations.
 
