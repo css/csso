@@ -427,23 +427,15 @@ TODO
 
 ### 4.2.3. Управление структурными изменениями
 
-TODO
+Управление структурными изменениями происходит с помощью комментариев специального содержания.
 
 #### 4.2.3.1. Защита от удаления
 
-Было без защиты:
-    .test {
-        color: red;
-    }
-    
-    .test {
-        color: green;
-    }
-Стало:
-    .test {
-        color: green
-    }
-Было с защитой:
+Удаление перекрываемых свойств (см. 4.2.1.2) можно запрещать с помощью комментария `/*p*/` перед защищаемым свойством или с помощью пары комментариев `/*p<*/` и `/*>p*/`, между которыми находятся защищаемые свойства.
+
+Комментарий `/*p<*/` защищает все следующие за ним свойства вне зависимости от того, на каком уровне вложенности они находятся. Комментарий `/*>p*/` выключает эту защиту. Любой из этих комментариев может находиться либо между блоками, либо между свойствами.
+
+Было с защитой (с помощью `/*p*/`):
     .test {
         /*p*/color: red;
     }
@@ -451,38 +443,118 @@ TODO
     .test {
         color: green;
     }
-Стало:
+Стало с защитой:
     .test {
         color: red; <-- свойство не было перекрыто 'color: green'
+        color: green
+    }
+Стало без защиты:
+    .test {
+        color: green
+    }
+Было с защитой (с помощью пары `/*p<*/` и `/*>p*/`):
+    /*p<*/
+    .test0 {
+        color: green;
+        color: red;/*>p*/
+        color: silver;
+    }
+
+    .test1 {
+        color: white;
+        color: green;
+    }
+Стало с защитой:
+    .test0 {
+        color: red;
+        color: silver
+    }
+
+    .test0, .test1 {
+        color: green
+    }
+Стало без защиты:
+    .test0 {
+        color: silver
+    }
+    
+    .test1 {
         color: green
     }
 
 #### 4.2.3.2. Защита от смены порядка
 
-TODO
+В процессе минимизации может произойти смена порядка, в котором следуют свойства. Например, сливаются два блока, которые отличаются лишь порядком свойств.
 
-Было без защиты:
+Смену порядка можно запрещать с помощью комментария `/*o*/` перед защищаемым свойством или с помощью пары комментариев `/*o<*/` и `/*>o*/`, между которыми находятся защищаемые свойства.
+
+Комментарий `/*o<*/` защищает все следующие за ним свойства вне зависимости от того, на каком уровне вложенности они находятся. Комментарий `/*>o*/` выключает эту защиту. Любой из этих комментариев может находиться либо между блоками, либо между свойствами.
+
+Было с защитой (с помощью `/*o*/`):
     .test0 {
         -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
+        /*o*/-webkit-box-sizing: border-box;
+        /*o*/box-sizing: border-box;
     }
-    
+
     .test1 {
         box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
+        /*o*/-moz-box-sizing: border-box;
+        /*o*/-webkit-box-sizing: border-box;
     }
-Стало:
-    .test0, .test1 { <-- порядок '.test1' перекрыл порядок '.test0'
+Стало с защитой:
+    .test0, .test1 {
+        -moz-box-sizing: border-box
+    }
+
+    .test0 {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box
+    }
+
+    .test1 {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box
+    }
+Стало без защиты:
+    .test0, .test1 {
         box-sizing: border-box;
         -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box
+    }
+Было с защитой (с помощью пары `/*o<*/` и `/*>o*/`):
+    /*o<*/
+    .test0 {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;/*>o*/
+        box-sizing: border-box;
+    }
+
+    .test1 {
+        /*o<*/box-sizing: border-box;
+        -moz-box-sizing: border-box;/*>o*/
         -webkit-box-sizing: border-box;
     }
-Было с защитой:
-    TODO
-Стало:
-    TODO
+Стало с защитой:
+    .test0, .test1 {
+        box-sizing: border-box
+    }
+
+    .test0 {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box
+    }
+
+    .test1 {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box
+    }
+Стало без защиты:
+    .test0, .test1 {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box
+    }
 
 # 5. Советы
 
