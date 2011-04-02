@@ -1,0 +1,11 @@
+.test0 {
+    -moz-box-sizing: border-box;
+    /*o*/-webkit-box-sizing: border-box;
+    /*o*/box-sizing: border-box;
+}
+
+.test1 {
+/*o*/box-sizing: border-box;
+/*o*/-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}

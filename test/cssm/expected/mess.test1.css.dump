@@ -1,1 +1,1 @@
-.a,.b{position:relative;z-index:1}.a,.c,.b{width:100%}.a{height:100%;background:red url(//test/ru)}.c,.d{position:absolute}.b{height:50px;background:red}
+.a,.b{z-index:1;position:relative}.a,.c,.b{width:100%}.a{height:100%;background:red url(//test/ru)}.c,.d{position:absolute}.b{height:50px;background:red}
