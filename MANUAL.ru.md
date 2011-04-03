@@ -83,18 +83,24 @@ TODO
 
 ### 2.1.5. Удаление ошибочных элементов стиля
 
-TODO
-
-Минимизатор удаляет те элементы, что являются ошибочными структурно, но не проверяет на правильность имена или значения свойств.
+Минимизатор удаляет те элементы, что являются ошибочными структурно, но не проверяет правильность имён или значений свойств.
 
 Таким образом, из [CSS 2.1 / 4.2 Rules for handling parsing errors](http://www.w3.org/TR/CSS21/syndata.html#parsing-errors) поддерживается обработка и коррекция следующих ошибок:
 
 * Malformed declarations.
 
     Было:
-        TODO
-    Стало (без учёта остальной минимизации):
-        TODO
+        .a { color:green; color }
+        .b { color:red;   color; color:green }
+        .c { color:green; color: }
+        .d { color:red;   color:; color:green }
+    Стало:
+        .a, .b, .c, .d {
+            color: green
+        }
+    **Не** поддерживается обработка следующих ошибок:
+        p { color:green; color{;color:maroon} }
+        p { color:red;   color{;color:maroon}; color:green }
 
 * Malformed statements.
 
