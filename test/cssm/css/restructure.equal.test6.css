@@ -1,7 +1,7 @@
 a {
     p0: v;
 }
-@import url(test.css);
+@media print { a { p: v }}
 a {
     p1: v;
 }

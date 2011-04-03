@@ -2,7 +2,7 @@ a {
     p0: v;
     p1: v;
 }
-@import url(test.css);
+@media print { a { p: v }}
 b {
     p0: v;
     p2: v;

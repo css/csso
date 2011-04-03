@@ -1,1 +1,1 @@
-a,b{p0:v}@import url(test.css);b{p1:v}
+a,b{p0:v}@media print{a{p:v}}b{p1:v}
