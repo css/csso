@@ -34,7 +34,7 @@ TODO
 ## 3.1. При установке через git
 
 * открыть в браузере файл `web/csso.html`
-* или запускать `bin/csso`, но в таком случае потребуется npm&nbsp;— [http://github.com/isaacs/npm/](http://github.com/isaacs/npm/)
+* или запускать `bin/csso`, но в таком случае потребуется nodejs версии 0.4.x&nbsp;— [http://nodejs.org](http://nodejs.org)
 
 ## 3.2. При установке через npm
 
