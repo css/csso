@@ -46,7 +46,7 @@ TODO
 
 ### 2.1.3. Удаление комментариев
 
-Комментарии не влияют на результат применения стиля: [CSS 2.1 / 4.1.9 Comments](http://www.w3.org/TR/CSS21/syndata.html#comments)
+Комментарии не влияют на результат применения стиля: [CSS 2.1 / 4.1.9 Comments](http://www.w3.org/TR/CSS21/syndata.html#comments).
 
 * Было:
         /* comment */
@@ -61,7 +61,7 @@ TODO
 
 ### 2.1.4. Удаление неправильного @charset
 
-Единственно верным расположением `@charset` является начало стиля: [CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset)
+Единственно верным расположением `@charset` является начало стиля: [CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset).
 
 Однако CSSO позволяет обходиться с этим правилом достаточно вольно, т.к. оставляет первый после whitespace и комментариев `@charset`.
 
@@ -83,11 +83,11 @@ TODO
 
 ### 2.1.5. Удаление ошибочных элементов стиля
 
-Минимизатор удаляет те элементы, что являются ошибочными структурно, но не проверяет правильность имён или значений свойств.
+Минимизатор удаляет те элементы, что являются ошибочными структурно, но не проверяет правильность имён или значений свойств. Предполагается, что минимизировать неправильный CSS является в свою очередь неправильным.
 
-Таким образом, из [CSS 2.1 / 4.2 Rules for handling parsing errors](http://www.w3.org/TR/CSS21/syndata.html#parsing-errors) поддерживается обработка и коррекция следующих ошибок:
+Из [CSS 2.1 / 4.2 Rules for handling parsing errors](http://www.w3.org/TR/CSS21/syndata.html#parsing-errors) поддерживается обработка и коррекция следующих ошибок:
 
-* Malformed declarations.
+* Malformed declarations
 
     Было:
         .a { color:green; color }
@@ -102,30 +102,28 @@ TODO
         p { color:green; color{;color:maroon} }
         p { color:red;   color{;color:maroon}; color:green }
 
-* Malformed statements.
+* Unexpected end of string
 
     Было:
-        TODO
-    Стало (без учёта остальной минимизации):
-        TODO
-
-* Unexpected end of style sheet.
-
-    Было:
-        TODO
-    Стало (без учёта остальной минимизации):
-        TODO
-
-* Unexpected end of string.
-
-    Было:
-        TODO
-    Стало (без учёта остальной минимизации):
-        TODO
+        p {
+            color: green;
+            font-family: 'Courier New Times
+            color: red;
+            color: green;
+        }
+    Стало:
+        p {
+            color: green
+        }
+    **Не** поддерживается обработка следующих ошибок:
+        p[b="abcd
+        efg"] {
+            color : red
+        }
 
 ### 2.1.6. Минимизация цвета
 
-TODO
+Некоторые значения цвета минимизируются согласно [CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units).
 
 * Было:
         .test {
@@ -146,7 +144,9 @@ TODO
 
 ### 2.1.7. Минимизация `0`
 
-TODO
+В ряде случаев числовое значение можно сократить до `0` или же отбросить `0`.
+
+Значения `0%` не сокращаются до `0`, чтобы избежать ошибок вида `rgb(100%, 100%, 0)`.
 
 * Было:
         .test {
