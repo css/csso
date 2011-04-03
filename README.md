@@ -4,20 +4,43 @@ TODO
 
 # 2. Установка
 
-TODO
+## 2.1. Предварительные требования
 
-## 2.1. git
+* OS Linux / Mac OS X
 
-* git clone git@github.com:afelix/csso.git
-* открыть в браузере файл web/csso.html
-* или запускать bin/csso
+## 2.2. Установка с помощью `git`
 
-## 2.2. npm
+Предварительные требования:
 
-* npm install csso
-* запускать csso
+* git&nbsp;— [http://git-scm.com/](http://git-scm.com/)
+
+Установка:
+
+* выполнить `git clone git@github.com:afelix/csso.git`
+
+## 2.3. Установка с помощью `npm`
+
+Предварительные требования:
+
+* nodejs версии 0.4.x&nbsp;— [http://nodejs.org](http://nodejs.org)
+* npm&nbsp;— [http://github.com/isaacs/npm/](http://github.com/isaacs/npm/)
+
+Установка:
+
+* выполнить `npm install csso`
 
 # 3. Использование
+
+## 3.1. При установке через `git`
+
+* открыть в браузере файл `web/csso.html`
+* или запускать `bin/csso`, но в таком случае потребуется npm&nbsp;— [http://github.com/isaacs/npm/](http://github.com/isaacs/npm/)
+
+## 3.2. При установке через `npm`
+
+* запускать `csso`
+
+## 3.3. Интеграция в исходный код
 
 TODO
 
@@ -45,6 +68,6 @@ TODO
 
 # 5. Документация
 
-* [Полное руководство](https://github.com/afelix/csso/blob/master/MANUAL.ru.md)
+* [Детальное описание минимизации](https://github.com/afelix/csso/blob/master/MANUAL.ru.md)
 * TODO
 * Лицензия
