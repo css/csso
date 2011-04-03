@@ -187,7 +187,7 @@ TODO
 
 ### 2.1.8. Минимизация margin и padding
 
-TODO
+Свойства `margin` и `padding` минимизируются согласно \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\]
 
 * Было:
         .test0 {
