@@ -6,7 +6,7 @@
 * 2.1.1\. Удаление whitespace
 * 2.1.2\. Удаление концевых ';'
 * 2.1.3\. Удаление комментариев
-* 2.1.4\. Удаление неправильного @charset
+* 2.1.4\. Удаление неправильных @charset и @import
 * 2.1.5\. Удаление ошибочных элементов стиля
 * 2.1.6\. Минимизация цвета
 * 2.1.7\. Минимизация 0
@@ -86,25 +86,31 @@ TODO
             margin-top: 1em
         }
 
-### 2.1.4. Удаление неправильного @charset
+### 2.1.4. Удаление неправильных @charset и @import
 
 Единственно верным расположением `@charset` является начало стиля: \[[CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset)\].
 
 Однако CSSO позволяет обходиться с этим правилом достаточно вольно, т.к. оставляет первый после whitespace и комментариев `@charset`.
 
+Правило `@import` на неправильном месте удаляется согласно \[[CSS 2.1 / 6.3 The @import rule](http://www.w3.org/TR/CSS21/cascade.html#at-import)\].
+
 * Было:
         /* comment */
         @charset 'UTF-8';
+        @import "test0.css";
+        @import "test1.css";
+        @charset 'wrong';
 
-        .test {
-            color: red;
+        h1 {
+            color: red
         }
 
-        @charset 'ISO-8859-15';
+        @import "wrong";
 * Стало:
         @charset 'UTF-8';
-
-        .test {
+        @import "test0.css";
+        @import "test1.css";
+        h1 {
             color: red
         }
 
@@ -186,7 +192,7 @@ TODO
 
 ### 2.1.8. Минимизация margin и padding
 
-Свойства `margin` и `padding` минимизируются согласно \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\]
+Свойства `margin` и `padding` минимизируются согласно \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
 
 * Было:
         .test0 {
