@@ -267,7 +267,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont">$cssoutils.<b><a href="../symbols/%24cssoutils.html#.basic2string">basic2string</a></b>(nodes, tab)
 								</div>
-								<div class="description">TODO:</div>
+								<div class="description">Формирует форматированный текст из CSS-дерева.</div>
 							</td>
 						</tr>
 					
@@ -276,25 +276,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont">$cssoutils.<b><a href="../symbols/%24cssoutils.html#.dump2string">dump2string</a></b>(nodes, tab)
 								</div>
-								<div class="description">TODO:</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">$cssoutils.<b><a href="../symbols/%24cssoutils.html#.getstat">getstat</a></b>(nodes, stat)
-								</div>
-								<div class="description">TODO:</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">$cssoutils.<b><a href="../symbols/%24cssoutils.html#.getstatstring">getstatstring</a></b>(nodes)
-								</div>
-								<div class="description">TODO:</div>
+								<div class="description">Формирует технический дамп из CSS-дерева.</div>
 							</td>
 						</tr>
 					
@@ -303,16 +285,7 @@ ul.inheritsList
 							<td class="nameDescription">
 								<div class="fixedFont">$cssoutils.<b><a href="../symbols/%24cssoutils.html#.min2string">min2string</a></b>(nodes)
 								</div>
-								<div class="description">TODO:</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">$cssoutils.<b><a href="../symbols/%24cssoutils.html#.stat2string">stat2string</a></b>(stat)
-								</div>
-								<div class="description">TODO:</div>
+								<div class="description">Формирует минимизированный текст из CSS-дерева.</div>
 							</td>
 						</tr>
 					
@@ -367,12 +340,12 @@ ul.inheritsList
 					<a name=".basic2string"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					
+					<span class="light">{String}</span>
 					<span class="light">$cssoutils.</span><b>basic2string</b>(nodes, tab)
 					
 					</div>
 					<div class="description">
-						TODO:
+						Формирует форматированный текст из CSS-дерева.
 						
 						
 					</div>
@@ -384,22 +357,29 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>nodes</b>
+									<span class="light fixedFont">{Object[]}</span> <b>nodes</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>массив узлов</dd>
 							
 								<dt>
-									<b>tab</b>
+									<span class="light fixedFont">{String}</span> <b>tab</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>строка отступа</dd>
 							
 							</dl>
 						
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> форматированный текст</dd>
+							
+							</dl>
 						
 						
 						
@@ -409,12 +389,12 @@ ul.inheritsList
 					<a name=".dump2string"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					
+					<span class="light">{String}</span>
 					<span class="light">$cssoutils.</span><b>dump2string</b>(nodes, tab)
 					
 					</div>
 					<div class="description">
-						TODO:
+						Формирует технический дамп из CSS-дерева.
 						
 						
 					</div>
@@ -426,100 +406,29 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>nodes</b>
+									<span class="light fixedFont">{Object[]}</span> <b>nodes</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>массив узлов</dd>
 							
 								<dt>
-									<b>tab</b>
+									<span class="light fixedFont">{String}</span> <b>tab</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>строка отступа</dd>
 							
 							</dl>
 						
 						
 						
 						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".getstat"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">$cssoutils.</span><b>getstat</b>(nodes, stat)
-					
-					</div>
-					<div class="description">
-						TODO:
-						
-						
-					</div>
-					
-					
-					
 						
 							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dt>
-									<b>nodes</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>stat</b>
-									
-								</dt>
-								<dd></dd>
+								<dd><span class="light fixedFont">{String}</span> технический дамп</dd>
 							
 							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".getstatstring"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">$cssoutils.</span><b>getstatstring</b>(nodes)
-					
-					</div>
-					<div class="description">
-						TODO:
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>nodes</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
 						
 						
 						
@@ -529,12 +438,12 @@ ul.inheritsList
 					<a name=".min2string"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					
+					<span class="light">{String}</span>
 					<span class="light">$cssoutils.</span><b>min2string</b>(nodes)
 					
 					</div>
 					<div class="description">
-						TODO:
+						Формирует минимизированный текст из CSS-дерева.
 						
 						
 					</div>
@@ -546,52 +455,23 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>nodes</b>
+									<span class="light fixedFont">{Object[]}</span> <b>nodes</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>массив узлов</dd>
 							
 							</dl>
 						
 						
 						
 						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".stat2string"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">$cssoutils.</span><b>stat2string</b>(stat)
-					
-					</div>
-					<div class="description">
-						TODO:
-						
-						
-					</div>
-					
-					
-					
 						
 							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
+							<dt class="heading">Returns:</dt>
 							
-								<dt>
-									<b>stat</b>
-									
-								</dt>
-								<dd></dd>
+								<dd><span class="light fixedFont">{String}</span> минимизированный текст</dd>
 							
 							</dl>
-						
-						
-						
-						
 						
 						
 						
@@ -610,7 +490,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.2 on Sun Apr 03 2011 03:46:22 GMT+0300 (EEST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.3.2 on Mon Apr 04 2011 02:49:39 GMT+0300 (EEST)
 		</div>
 	</body>
 </html>
