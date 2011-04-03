@@ -1,0 +1,18 @@
+Использование:
+    csso
+        показывает этот текст
+    csso <имя_файла>
+        минимизирует CSS из <имя_файла> и записывает результат в stdout
+    csso --help
+        показывает этот текст
+    csso --version
+        показывает номер версии CSSO
+Usage:
+    csso
+        print this text
+    csso <file_name>
+        minimize CSS from file_name and write the result to stdout
+    csso --help
+        print this text
+    csso --version
+        print the CSSO version number
