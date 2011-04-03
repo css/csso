@@ -6,17 +6,16 @@ TODO
 
 TODO
 
-Пока наиболее удобно так:
+## 2.1. git
 
 * git clone git@github.com:afelix/csso.git
-* открыть в браузере файл csso.html
-* проверять
+* открыть в браузере файл web/csso.html
+* или запускать bin/csso
 
-Неудобно:
+## 2.2. npm
 
-* git clone git@github.com:afelix/csso.git
-* node ccli.js файл.css
-* в ccli.js раскомментировать нужный формат вывода и комментировать ненужный
+* npm install csso
+* запускать csso
 
 # 3. Использование
 
