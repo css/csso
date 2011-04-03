@@ -4,16 +4,10 @@
 }
 
 .first {
-    width:20%;
     padding-right:10%;
     background-color:green;
 }
 
 .second {
     padding-right:10%;
-    background-color:yellow;
-}
-
-.third {
-    background-color:red
 }
