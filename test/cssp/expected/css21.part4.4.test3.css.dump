@@ -1,0 +1,4 @@
+type(atrule)
+value(@,charset, ,"test0")
+type(atrule)
+value(@,charset, ,"test1")

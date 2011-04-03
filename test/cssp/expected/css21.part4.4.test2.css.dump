@@ -1,0 +1,7 @@
+type(atrule)
+value(@,charset, ,"test")
+type(ruleset)
+value(E)
+{
+    name(p): value(v)
+}
