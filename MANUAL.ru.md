@@ -4,7 +4,7 @@
 * 2\. Минимизация
 * 2.1\. Минимизация без изменения структуры
 * 2.1.1\. Удаление whitespace
-* 2.1.2\. Удаление концевых ;
+* 2.1.2\. Удаление концевых ';'
 * 2.1.3\. Удаление комментариев
 * 2.1.4\. Удаление неправильного @charset
 * 2.1.5\. Удаление ошибочных элементов стиля
@@ -59,7 +59,7 @@ TODO
 
 Для большего удобства чтения текст остальных примеров приводится с пробелами (переводом строки и т.п.).
 
-### 2.1.2. Удаление концевых ;
+### 2.1.2. Удаление концевых ';'
 
 Символ `;`, завершающий перечисление свойств в блоке, является необязательным и не влияет на результат применения стиля.
 
@@ -74,7 +74,7 @@ TODO
 
 ### 2.1.3. Удаление комментариев
 
-Комментарии не влияют на результат применения стиля: [CSS 2.1 / 4.1.9 Comments](http://www.w3.org/TR/CSS21/syndata.html#comments).
+Комментарии не влияют на результат применения стиля: \[[CSS 2.1 / 4.1.9 Comments](http://www.w3.org/TR/CSS21/syndata.html#comments)\].
 
 * Было:
         /* comment */
@@ -89,7 +89,7 @@ TODO
 
 ### 2.1.4. Удаление неправильного @charset
 
-Единственно верным расположением `@charset` является начало стиля: [CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset).
+Единственно верным расположением `@charset` является начало стиля: \[[CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset)\].
 
 Однако CSSO позволяет обходиться с этим правилом достаточно вольно, т.к. оставляет первый после whitespace и комментариев `@charset`.
 
@@ -113,7 +113,7 @@ TODO
 
 Минимизатор удаляет те элементы, что являются ошибочными структурно, но не проверяет правильность имён или значений свойств. Предполагается, что минимизировать неправильный CSS является в свою очередь неправильным.
 
-Из [CSS 2.1 / 4.2 Rules for handling parsing errors](http://www.w3.org/TR/CSS21/syndata.html#parsing-errors) поддерживается обработка и коррекция следующих ошибок:
+Из \[[CSS 2.1 / 4.2 Rules for handling parsing errors](http://www.w3.org/TR/CSS21/syndata.html#parsing-errors)\] поддерживается обработка и коррекция следующих ошибок:
 
 * Malformed declarations
 
@@ -151,7 +151,7 @@ TODO
 
 ### 2.1.6. Минимизация цвета
 
-Некоторые значения цвета минимизируются согласно [CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units).
+Некоторые значения цвета минимизируются согласно \[[CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units)\].
 
 * Было:
         .test {
@@ -196,23 +196,23 @@ TODO
             margin-bottom: 3em;
             margin-left: 4em;
         }
-    
+
         .test1 {
             margin: 1 2 3 2
         }
-    
+
         .test2 {
             margin: 1 2 1 2
         }
-    
+
         .test3 {
             margin: 1 1 1 1
         }
-    
+
         .test4 {
             margin: 1 1 1
         }
-    
+
         .test5 {
             margin: 1 1
         }
@@ -220,22 +220,22 @@ TODO
         .test0 {
             margin: 1em 2em 3em 4em
         }
-    
+
         .test1 {
             margin: 1 2 3
         }
-    
+
         .test2 {
             margin: 1 2
         }
-    
+
         .test3, .test4, .test5 {
             margin: 1
         }
 
 ### 2.1.9. Слияние многострочных строк в однострочные
 
-TODO
+Многострочные строки минимизируются согласно \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
 
 * Было:
         .test[title="abc\
@@ -250,7 +250,7 @@ TODO
 
 ### 2.1.10. Минимизация font-weight
 
-TODO
+Значения `bold` и `normal` свойства `font-weight` минимизируются согласно \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
 
 * Было:
         .test0 {
