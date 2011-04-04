@@ -1,7 +1,7 @@
 {
     "name" : "csso",
     "description" : "CSSO — CSS optimizer",
-    "version" : "0.9.0",
+    "version" : "1.0.0",
     "homepage": "http://github.com/afelix/csso",
     "author" : "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (http://github.com/afelix)",
     "repository" : {
@@ -10,6 +10,6 @@
     },
     "bin" : "./bin/csso",
     "engines" : { "node" : ">=0.4.0" },
-    "licenses" : [ { "type" : "AS IS" } ]
+    "licenses" : [ { "type" : "MIT" } ]
 }
 
