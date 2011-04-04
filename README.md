@@ -81,7 +81,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 * Частичное выделение свойств в отдельный блок
 * Частичное слияние блоков
 
-# 5. Остальное
+# 5. Авторы
+
+* идея и поддержка&nbsp;— Виталий Харисов (vitaly@harisov.name)
+* реализация&nbsp;— Сергей Крыжановский (skryzhanovsky@ya.ru)
+
+# 6. Остальное
 
 * [TODO](https://github.com/afelix/csso/blob/master/TODO.md)
 * CSSO распространяется под [лицензией MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)
