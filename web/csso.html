@@ -30,13 +30,10 @@
             dlength = document.getElementById('dlength'),
             result = document.getElementById('result');
 
-        csssrc.onchange = function() {
-            slength.innerText = csssrc.value.length;
-        };
-
         function updateStat() {
-            dlength.innerText = cssdst.value.length;
-            result.innerText = (100 * cssdst.value.length / csssrc.value.length).toFixed(2);
+            slength.innerHTML = csssrc.value.length;
+            dlength.innerHTML = cssdst.value.length;
+            result.innerHTML = (100 * cssdst.value.length / csssrc.value.length).toFixed(2);
         }
 
         document.getElementById('basic').onclick = function() {
