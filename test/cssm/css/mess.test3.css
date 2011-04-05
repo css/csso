@@ -1,0 +1,26 @@
+#admin_main .button {
+overflow: hidden;
+box-sizing: border-box;
+-moz-box-sizing: border-box;
+-webkit-box-sizing border-box;
+-moz-box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #fff;
+-webkit-box-shadow: inset 1px 1px 0px #fff;
+box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #fff;
+}
+#admin_main .button > p {
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+#admin_main_logon > form > button {
+-moz-box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #fff;
+-webkit-box-shadow: inset 1px 1px 0px #fff;
+box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #fff;
+}
+.admin_popup .s_but {
+overflow: hidden;
+border: 1px solid #c3cfed;
+-moz-box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #fff;
+-webkit-box-shadow: inset 1px 1px 0px #fff;
+box-shadow: inset 1px 1px 0px #fff, inset -1px -1px 0px #fff;
+}
