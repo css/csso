@@ -1,7 +1,0 @@
-a {
-    p0: v;
-}
-@media print { a { p: v }}
-a {
-    p1: v;
-}
