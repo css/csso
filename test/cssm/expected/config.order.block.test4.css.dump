@@ -1,1 +1,1 @@
-a,b{p0:v;p1:v}a{p2:v}b{p3:v}
+a{p0:v;p1:v;p2:v}b{p0:v;p1:v;p3:v}
