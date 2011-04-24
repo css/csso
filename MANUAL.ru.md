@@ -132,21 +132,25 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 * Malformed declarations
 
     Было:
+
         .a { color:green; color }
         .b { color:red;   color; color:green }
         .c { color:green; color: }
         .d { color:red;   color:; color:green }
     Стало:
+
         .a, .b, .c, .d {
             color: green
         }
     **Не** поддерживается обработка следующих ошибок:
+
         p { color:green; color{;color:maroon} }
         p { color:red;   color{;color:maroon}; color:green }
 
 * Unexpected end of string
 
     Было:
+
         p {
             color: green;
             font-family: 'Courier New Times
@@ -154,10 +158,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             color: green;
         }
     Стало:
+
         p {
             color: green
         }
     **Не** поддерживается обработка следующих ошибок:
+
         p[b="abcd
         efg"] {
             color : red
