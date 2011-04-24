@@ -48,14 +48,15 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 В ряде случаев символы ряда whitespace (` `, `\n`, `\r`, `\t`, `\f`) являются необязательными и не влияют на результат применения таблицы стилей.
 
 * Было:
+
         .test
         {
             margin-top: 1em;
 
             margin-left  : 2em;
         }
-
 * Стало:
+
         .test{margin-top:1em;margin-left:2em}
 
 Для большего удобства чтения текст остальных примеров приводится с пробелами (переводом строки и т.п.).
@@ -65,10 +66,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Символ `;`, завершающий перечисление свойств в блоке, является необязательным и не влияет на результат применения таблицы стилей.
 
 * Было:
+
         .test {
             margin-top: 1em;;
         }
 * Стало:
+
         .test {
             margin-top: 1em
         }
@@ -78,12 +81,14 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Комментарии не влияют на результат применения таблицы стилей: \[[CSS 2.1 / 4.1.9 Comments](http://www.w3.org/TR/CSS21/syndata.html#comments)\].
 
 * Было:
+
         /* comment */
 
         .test /* comment */ {
             /* comment */ margin-top: /* comment */ 1em;
         }
 * Стало:
+
         .test {
             margin-top: 1em
         }
@@ -97,6 +102,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Правило `@import` на неправильном месте удаляется согласно \[[CSS 2.1 / 6.3 The @import rule](http://www.w3.org/TR/CSS21/cascade.html#at-import)\].
 
 * Было:
+
         /* comment */
         @charset 'UTF-8';
         @import "test0.css";
@@ -109,6 +115,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
         @import "wrong";
 * Стало:
+
         @charset 'UTF-8';
         @import "test0.css";
         @import "test1.css";
@@ -161,6 +168,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Некоторые значения цвета минимизируются согласно \[[CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units)\].
 
 * Было:
+
         .test {
             color: yellow;
             border-color: #c0c0c0;
@@ -169,6 +177,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             outline-color: rgb(0, 0, 0);
         }
 * Стало:
+
         .test {
             color: #ff0;
             border-color: silver;
@@ -184,10 +193,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Значения `0%` не сокращаются до `0`, чтобы избежать ошибок вида `rgb(100%, 100%, 0)`.
 
 * Было:
+
         .test {
             fakeprop: .0 0. 0.0 000 00.00 0px 0.1 0.1em 0.000em 00% 00.00% 010.00
         }
 * Стало:
+
         .test {
             fakeprop: 0 0 0 0 0 0 .1 .1em 0 0% 0% 10
         }
@@ -197,6 +208,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Свойства `margin` и `padding` минимизируются согласно \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
 
 * Было:
+
         .test0 {
             margin-top: 1em;
             margin-right: 2em;
@@ -224,6 +236,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             margin: 1 1
         }
 * Стало:
+
         .test0 {
             margin: 1em 2em 3em 4em
         }
@@ -245,12 +258,14 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Многострочные строки минимизируются согласно \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
 
 * Было:
+
         .test[title="abc\
         def"] {
             background: url("foo/\
         bar")
         }
 * Стало:
+
         .test[title="abcdef"] {
             background: url("foo/bar")
         }
@@ -260,6 +275,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Значения `bold` и `normal` свойства `font-weight` минимизируются согласно \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
 
 * Было:
+
         .test0 {
             font-weight: bold
         }
@@ -268,6 +284,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             font-weight: normal
         }
 * Стало:
+
         .test0 {
             font-weight: 700
         }
@@ -283,6 +300,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 В один блок сливаются соседние блоки с одинаковым набором селекторов.
 
 * Было:
+
         .test0 {
             margin: 0
         }
@@ -299,6 +317,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             padding: 0
         }
 * Стало:
+
         .test0 {
             margin: 0
         }
@@ -317,6 +336,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 В один блок сливаются соседние блоки с одинаковым набором свойств.
 
 * Было:
+
         .test0 {
             margin: 0
         }
@@ -333,6 +353,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             padding: 0
         }
 * Стало:
+
         .test0 {
             margin: 0
         }
@@ -355,6 +376,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Это позволяет избавиться от всех игнорируемых браузером свойств.
 
 * Было:
+
         .test {
             color: red;
             margin: 0;
@@ -362,6 +384,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             color: green;
         }
 * Стало:
+
         .test {
             margin: 0;
             line-height: 3cm;
@@ -376,6 +399,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 * селекторы исходного блока копируются в принимающий блок.
 
 * Было:
+
         .test0 {
             color: red
         }
@@ -389,6 +413,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             border: none
         }
 * Стало:
+
         .test0, .test1 {
             color: red
         }
@@ -400,6 +425,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Если в символах размер копируемых селекторов больше размера пересекающегося набора свойств, минимизация не производится.
 
 * Было:
+
         .test0 {
             color: red
         }
@@ -413,6 +439,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             border: none
         }
 * Стало:
+
         .test0 {
             color: red
         }
@@ -439,6 +466,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Пример использования `/*p*/`:
 
 * Было с защитой:
+
         .test {
             /*p*/color: red;
         }
@@ -447,11 +475,13 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             color: green;
         }
 * Стало с защитой:
+
         .test {
             color: red; <-- свойство не было перекрыто 'color: green'
             color: green
         }
 * Стало без защиты:
+
         .test {
             color: green
         }
@@ -459,6 +489,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Пример использования пары `/*p<*/` и `/*>p*/`:
 
 * Было с защитой:
+
         /*p<*/
         .test0 {
             color: green;
@@ -471,6 +502,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             color: green;
         }
 * Стало с защитой:
+
         .test0 {
             color: red;
             color: silver
@@ -480,6 +512,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             color: green
         }
 * Стало без защиты:
+
         .test0 {
             color: silver
         }
@@ -499,6 +532,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Пример использования `/*o*/`:
 
 * Было с защитой:
+
         .test0 {
             -moz-box-sizing: border-box;
             /*o*/-webkit-box-sizing: border-box;
@@ -511,6 +545,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             /*o*/-webkit-box-sizing: border-box;
         }
 * Стало с защитой:
+
         .test0, .test1 {
             -moz-box-sizing: border-box
         }
@@ -525,6 +560,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             -webkit-box-sizing: border-box
         }
 * Стало без защиты:
+
         .test0, .test1 {
             box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -534,6 +570,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Пример использования пары `/*o<*/` и `/*>o*/`:
 
 * Было с защитой:
+
         /*o<*/
         .test0 {
             -moz-box-sizing: border-box;
@@ -547,6 +584,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             -webkit-box-sizing: border-box;
         }
 * Стало с защитой:
+
         .test0, .test1 {
             box-sizing: border-box
         }
@@ -561,6 +599,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             -moz-box-sizing: border-box
         }
 * Стало без защиты:
+
       .test0, .test1 {
             box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -592,6 +631,7 @@ TODO.
 Плохо:
 
 * Было:
+
         .test0 {
             color: red
         }
@@ -604,11 +644,13 @@ TODO.
             color: red
         }
 * Стало (53 символа):
+
         .test0{color:red}.test1{color:green}.test2{color:red}
 
 Хорошо:
 
 * Было:
+
         .test1 {
             color: green
         }
@@ -621,6 +663,7 @@ TODO.
             color: red
         }
 * Стало (43 символа):
+
         .test1{color:green}.test0,.test2{color:red}
 
 ## 3.4. Использование !important
@@ -630,19 +673,23 @@ TODO.
 Плохо:
 
 * Было:
+
         .test {
             margin: 1px;
             margin-left: 2px !important;
         }
 * Стало (44 символа):
+
         .test{margin:1px;margin-left:2px !important}
 
 Хорошо:
 
 * Было:
+
         .test {
             margin: 1px;
             margin-left: 2px;
         }
 * Стало (29 символов):
+
         .test{margin:1px 1px 1px 2px}
