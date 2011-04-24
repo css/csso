@@ -53,6 +53,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 При npm-установке запускать `csso`.
 
 Справка командной строки:
+
     csso
         показывает этот текст
     csso <имя_файла>
@@ -68,6 +69,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         показывает номер версии CSSO
 
 Пример использования:
+
     $ echo ".test { color: red; color: green }" > test.css
     $ csso test.css
     .test{color:green}
