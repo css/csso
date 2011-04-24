@@ -49,12 +49,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 * Было:
 
-    .test
-    {
-        margin-top: 1em;
+        .test
+        {
+            margin-top: 1em;
 
-        margin-left  : 2em;
-    }
+            margin-left  : 2em;
+        }
 
 * Стало:
     .test{margin-top:1em;margin-left:2em}
