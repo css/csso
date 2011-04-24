@@ -48,12 +48,14 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 В ряде случаев символы ряда whitespace (` `, `\n`, `\r`, `\t`, `\f`) являются необязательными и не влияют на результат применения таблицы стилей.
 
 * Было:
+
     .test
     {
         margin-top: 1em;
 
         margin-left  : 2em;
     }
+
 * Стало:
     .test{margin-top:1em;margin-left:2em}
 
