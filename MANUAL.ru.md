@@ -608,7 +608,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         }
 * Стало без защиты:
 
-      .test0, .test1 {
+        .test0, .test1 {
             box-sizing: border-box;
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box
