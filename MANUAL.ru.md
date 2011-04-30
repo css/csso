@@ -405,16 +405,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 * Было:
 
-        .test0, .test1 {
-            color: red
-        }
-
-        .test1, .test0 {
+        .test, .test {
             color: red
         }
 * Стало:
 
-        .test0, .test1 {
+        .test {
             color: red
         }
 
