@@ -27,7 +27,7 @@ Prerequisites:
 
 To install:
 
-* run `git clone git@github.com:afelix/csso.git`
+* run `git clone git://github.com/afelix/csso.git`
 
 ## 2.3. Install using npm
 

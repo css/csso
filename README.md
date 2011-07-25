@@ -27,7 +27,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 Установка:
 
-* выполнить `git clone git@github.com:afelix/csso.git`
+* выполнить `git clone git://github.com/afelix/csso.git`
 
 ## 2.3. Установка с помощью npm
 
