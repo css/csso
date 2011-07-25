@@ -38,16 +38,16 @@ This document describes the minification techniques we employ. If you are lookin
 
 # 2. Minification
 
-Цель минимизации заключается в трансформации исходного CSS в CSS меньшего размера. Наиболее распространёнными стратегиями в достижении этой цели являются:
+Minification is a process of transforming a CSS document into a smaller document without losses. The typical strategies of achieving this are:
 
-* минимизация без изменения структуры&nbsp;— удаление необязательных элементов (например, `;` у последнего свойства в блоке), сведение значений к меньшим по размеру (например, `0px` к `0`) и т.п.;
-* минимизация с изменением структуры&nbsp;— удаление перекрываемых свойств, полное или частичное слияние блоков.
+* safe modifications, such as removal of unnecessary elements (e.g. trailing semicolons) or transforming the values into more compact representations (e.g. `0px` to `0`);
+* structural optimizations, such as removal of overridden properties or merging of blocks.
 
 ## 2.1. Safe transformations
 
 ### 2.1.1. Removal of whitespace
 
-В ряде случаев символы ряда whitespace (` `, `\n`, `\r`, `\t`, `\f`) являются необязательными и не влияют на результат применения таблицы стилей.
+In some cases, whitespace characters (` `, `\n`, `\r`, `\t`, `\f`) are unnecessary and do not affect rendering.
 
 * Before:
 
@@ -61,11 +61,11 @@ This document describes the minification techniques we employ. If you are lookin
 
         .test{margin-top:1em;margin-left:2em}
 
-Для большего удобства чтения текст остальных примеров приводится с пробелами (переводом строки и т.п.).
+The following examples are provided with whitespace left intact for better readability.
 
 ### 2.1.2. Removal of trailing ';'
 
-Символ `;`, завершающий перечисление свойств в блоке, является необязательным и не влияет на результат применения таблицы стилей.
+The last semicolon in a block is not required and does not affect rendering.
 
 * Before:
 
@@ -80,7 +80,7 @@ This document describes the minification techniques we employ. If you are lookin
 
 ### 2.1.3. Removal of comments
 
-Комментарии не влияют на результат применения таблицы стилей: \[[CSS 2.1 / 4.1.9 Comments](http://www.w3.org/TR/CSS21/syndata.html#comments)\].
+Comments do not affect rendering: \[[CSS 2.1 / 4.1.9 Comments](http://www.w3.org/TR/CSS21/syndata.html#comments)\].
 
 * Before:
 
@@ -97,11 +97,11 @@ This document describes the minification techniques we employ. If you are lookin
 
 ### 2.1.4. Removal of invalid @charset and @import declarations
 
-Единственно верным расположением `@charset` является начало текста: \[[CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset)\].
+According to the specification, `@charset` must be placed at the very beginning of the stylesheet: \[[CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset)\].
 
-Однако CSSO позволяет обходиться с этим правилом достаточно вольно, т.к. оставляет первый после whitespace и комментариев `@charset`.
+CSSO handles this rule in a slightly relaxed manner - we keep the `@charset` rule which immediately follows whitespace and comments in the beginning of the stylesheet.
 
-Правило `@import` на неправильном месте удаляется согласно \[[CSS 2.1 / 6.3 The @import rule](http://www.w3.org/TR/CSS21/cascade.html#at-import)\].
+Incorrectly placed `@import` rules are deleted according to \[[CSS 2.1 / 6.3 The @import rule](http://www.w3.org/TR/CSS21/cascade.html#at-import)\].
 
 * Before:
 
@@ -127,9 +127,9 @@ This document describes the minification techniques we employ. If you are lookin
 
 ### 2.1.5. Removal of invalid elements
 
-Минимизатор удаляет те элементы, что являются ошибочными структурно, но не проверяет правильность имён или значений свойств. Предполагается, что минимизировать неправильный CSS является в свою очередь неправильным.
+CSSO removes invalid elements but it doesn't check the correctness of property names and values. We assume that minification of an invalid CSS document is a bad practice.
 
-Из \[[CSS 2.1 / 4.2 Rules for handling parsing errors](http://www.w3.org/TR/CSS21/syndata.html#parsing-errors)\] поддерживается обработка и коррекция следующих ошибок:
+According to \[[CSS 2.1 / 4.2 Rules for handling parsing errors](http://www.w3.org/TR/CSS21/syndata.html#parsing-errors)\] we are handling and correcting the following errors:
 
 * Malformed declarations
 
@@ -144,7 +144,7 @@ This document describes the minification techniques we employ. If you are lookin
         .a, .b, .c, .d {
             color: green
         }
-    **Не** поддерживается обработка следующих ошибок:
+    The following errors are **not** corrected:
 
         p { color:green; color{;color:maroon} }
         p { color:red;   color{;color:maroon}; color:green }
@@ -164,7 +164,7 @@ This document describes the minification techniques we employ. If you are lookin
         p {
             color: green
         }
-    **Не** поддерживается обработка следующих ошибок:
+    The following errors are **not** corrected:
 
         p[b="abcd
         efg"] {
@@ -173,7 +173,7 @@ This document describes the minification techniques we employ. If you are lookin
 
 ### 2.1.6. Minification of color properties
 
-Некоторые значения цвета минимизируются согласно \[[CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units)\].
+Some color values are minimized according to \[[CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units)\].
 
 * Before:
 
@@ -196,9 +196,9 @@ This document describes the minification techniques we employ. If you are lookin
 
 ### 2.1.7. Minification of 0
 
-В ряде случаев числовое значение можно сократить до `0` или же отбросить `0`.
+In some cases, the numeric values can be compacted to `0` or even dropped.
 
-Значения `0%` не сокращаются до `0`, чтобы избежать ошибок вида `rgb(100%, 100%, 0)`.
+The `0%` value is not being compacted to avoid the following situation: `rgb(100%, 100%, 0)`.
 
 * Before:
 
@@ -213,7 +213,7 @@ This document describes the minification techniques we employ. If you are lookin
 
 ### 2.1.8. Minification of margin and padding properties
 
-Свойства `margin` и `padding` минимизируются согласно \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
+The `margin` and `padding` properties are minimized according to \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
 
 * Before:
 
@@ -263,7 +263,7 @@ This document describes the minification techniques we employ. If you are lookin
 
 ### 2.1.9. Minification of multi-line strings
 
-Многострочные строки минимизируются согласно \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
+Multi-line strings are minified according to \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
 
 * Before:
 
@@ -280,7 +280,7 @@ This document describes the minification techniques we employ. If you are lookin
 
 ### 2.1.10. Minification of the font-weight property
 
-Значения `bold` и `normal` свойства `font-weight` минимизируются согласно \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
+The `bold` and `normal` values of the `font-weight` property are minimized according to \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
 
 * Before:
 
@@ -305,7 +305,7 @@ This document describes the minification techniques we employ. If you are lookin
 
 #### 2.2.1. Merging blocks with identical selectors
 
-В один блок сливаются соседние блоки с одинаковым набором селекторов.
+Adjacent blocks with identical selectors are merged.
 
 * Before:
 
@@ -341,7 +341,7 @@ This document describes the minification techniques we employ. If you are lookin
 
 #### 2.2.2. Merging blocks with identical properties
 
-В один блок сливаются соседние блоки с одинаковым набором свойств.
+Adjacent blocks with identical properties are merged.
 
 * Before:
 
