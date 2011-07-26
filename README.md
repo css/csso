@@ -2,7 +2,7 @@
 
 CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
 
-This document describes installation and usage of CSSO. If you want to learn more about the inner workings of CSSO, please consult the [manual] (https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
+This document describes installation and usage of CSSO. If you want to learn more about the inner workings of CSSO, please consult the [manual] (https://github.com/afelix/csso/blob/master/MANUAL.en.md).
 
 Please report issues on [Github] (https://github.com/afelix/csso/issues).
 
