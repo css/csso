@@ -544,15 +544,15 @@ Minification won't take place if there's no gain in character count.
 
 ### 2.3. Managing structural optimizations
 
-Управление структурными изменениями происходит с помощью комментариев специального содержания.
+You can manually manage the structural optimizations that will take place using special comments.
 
 #### 2.3.1. Guarding against deletion
 
-Удаление перекрываемых свойств (см. 2.2.3) можно запрещать с помощью комментария `/*p*/` перед защищаемым свойством или с помощью пары комментариев `/*p<*/` и `/*>p*/`, между которыми находятся защищаемые свойства.
+Guarding against deletion of overridden properties is possible using a `/*p*/` comment before the protected property or a pair of `/*p<*/` - `/*>p*/` comments around the protected properties.
 
-Комментарий `/*p<*/` защищает все следующие за ним свойства вне зависимости от того, на каком уровне вложенности они находятся. Комментарий `/*>p*/` выключает эту защиту. Любой из этих комментариев может находиться либо между блоками, либо между свойствами.
+The opening `/*p<*/` comment guards all following properties regardless of the nesting level. The closing `/*>p*/` turns the guard off. Both comments can be used between blocks or properties.
 
-Пример использования `/*p*/`:
+Example of `/*p*/`:
 
 * Before:
 
@@ -566,7 +566,7 @@ Minification won't take place if there's no gain in character count.
 * After:
 
         .test {
-            color: red; <-- свойство не было перекрыто 'color: green'
+            color: red; <-- the property was not overridden by 'color: green'
             color: green
         }
 * After (without a guard):
@@ -575,7 +575,7 @@ Minification won't take place if there's no gain in character count.
             color: green
         }
 
-Пример использования пары `/*p<*/` и `/*>p*/`:
+Example of `/*p<*/` and `/*>p*/`:
 
 * Before:
 
@@ -612,13 +612,11 @@ Minification won't take place if there's no gain in character count.
 
 #### 2.3.2. Guarding against re-ordering
 
-В процессе минимизации может произойти смена порядка, в котором следуют свойства. Например, сливаются два блока, которые отличаются лишь порядком свойств.
+Guarding against re-ordering of properties is possible using an `/*o*/` comment before the protected property or a pair of `/*o<*/` - `/*>o*/` comments around the protected properties.
 
-Смену порядка можно запрещать с помощью комментария `/*o*/` перед защищаемым свойством или с помощью пары комментариев `/*o<*/` и `/*>o*/`, между которыми находятся защищаемые свойства.
+The opening `/*o<*/` comment guards all following properties regardless of the nesting level. The closing `/*>o*/` turns the guard off. Both comments can be used between blocks or properties.
 
-Комментарий `/*o<*/` защищает все следующие за ним свойства вне зависимости от того, на каком уровне вложенности они находятся. Комментарий `/*>o*/` выключает эту защиту. Любой из этих комментариев может находиться либо между блоками, либо между свойствами.
-
-Пример использования `/*o*/`:
+Example of `/*o*/`:
 
 * Before:
 
@@ -656,7 +654,7 @@ Minification won't take place if there's no gain in character count.
             -webkit-box-sizing: border-box
         }
 
-Пример использования пары `/*o<*/` и `/*>o*/`:
+Example of `/*o<*/` and `/*>o*/`:
 
 * Before:
 
