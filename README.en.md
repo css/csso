@@ -93,7 +93,7 @@ Structural optimizations:
 
 * Merging blocks with identical selectors
 * Merging blocks with identical properties
-* Removal of overriden properties
+* Removal of overridden properties
 * Removal of repeating selectors
 * Partial merging of blocks
 * Partial splitting of blocks

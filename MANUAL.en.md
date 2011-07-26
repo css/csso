@@ -16,7 +16,7 @@
 * 2.2\. Structural optimization
 * 2.2.1\. Merging blocks with identical selectors
 * 2.2.2\. Merging blocks with idential properties
-* 2.2.3\. Removal of overriden properties
+* 2.2.3\. Removal of overridden properties
 * 2.2.4\. Removal of repeating selectors
 * 2.2.5\. Partial merging of blocks
 * 2.2.6\. Partial splitting of blocks
@@ -374,14 +374,12 @@ Adjacent blocks with identical properties are merged.
             padding: 0
         }
 
-#### 2.2.3. Removal of overriden properties
+#### 2.2.3. Removal of overridden properties
 
-Минимизация удалением перекрываемых свойств основана на том, что внутри блока применяется:
+Properties ignored by the browser can be removed using the following rules:
 
-* последнее по порядку свойство, если все свойства не `!important`;
-* последнее по порядку свойство `!important`.
-
-Это позволяет избавиться от всех игнорируемых браузером свойств.
+* the last property in a CSS rule is applied, if none of the properties have an `!important` declaration;
+* among `!important` properties, the last one is applied.
 
 * Before:
 
@@ -401,7 +399,7 @@ Adjacent blocks with identical properties are merged.
 
 #### 2.2.4. Removal of repeating selectors
 
-Повторяющиеся селекторы излишни и потому могут быть удалены.
+Repeating selectors can be removed.
 
 * Before:
 
@@ -416,12 +414,12 @@ Adjacent blocks with identical properties are merged.
 
 #### 2.2.5. Partial merging of blocks
 
-Если рядом расположены блоки, один из которых набором свойств полностью входит в другой, возможна следующая минимизация:
+Given two adjacent blocks where one of the blocks is a subset of the other one, the following optimization is possible:
 
-* в исходном (наибольшем) блоке удаляется пересекающийся набор свойств;
-* селекторы исходного блока копируются в принимающий блок.
+* overlapping properties are removed from the source block;
+* the remaining properties of the source block are copied into a receiving block.
 
-Если в символах размер копируемых селекторов меньше размера пересекающегося набора свойств, минимизация происходит.
+Minification will take place if character count of the properties to be copied is smaller than character count of the overlapping properties.
 
 * Before:
 
@@ -447,7 +445,7 @@ Adjacent blocks with identical properties are merged.
             border: none
         }
 
-Если в символах размер копируемых селекторов больше размера пересекающегося набора свойств, минимизация не происходит.
+Minification won't take place if character count of the properties to be copied is larger than character count of the overlapping properties.
 
 * Before:
 
@@ -480,12 +478,12 @@ Adjacent blocks with identical properties are merged.
 
 #### 2.2.6. Partial splitting of blocks
 
-Если рядом расположены блоки, частично пересекающиеся набором свойств, возможна следующая минимизация:
+If two adjacent blocks contain intersecting properties the following minification is possible:
 
-* из обоих блоков выделяется пересекающийся набор свойств;
-* между блоками создаётся новый блок с выделенным набором свойств и с селекторами обоих блоков.
+* property intersection is determined;
+* a new block containing the intersection is created in between the two blocks.
 
-Если в символах размер копируемых селекторов меньше размера пересекающегося набора свойств, минимизация происходит.
+Minification will take place if there's a gain in character count.
 
 * Before:
 
@@ -515,7 +513,7 @@ Adjacent blocks with identical properties are merged.
             color: green
         }
 
-Если в символах размер копируемых селекторов больше размера пересекающегося набора свойств, минимизация не происходит.
+Minification won't take place if there's no gain in character count.
 
 * Before:
 
@@ -703,21 +701,21 @@ TODO.
 
 # 3. Recommendations
 
-С точки зрения минимизации таблицы стилей можно разделить на две группы: удобные и неудобные. Разница даже в один символ может превратить вполне сокращаемый исходный текст в минимально обрабатываемый.
+Some stylesheets compress better than the others. Sometimes, one character difference can turn a well-compressible stylesheet to a very inconvenient one.
 
-Если вы хотите помочь минимизатору хорошо выполнить работу, следуйте рекомендациям.
+You can help the minimizer by following these recommendations.
 
 ## 3.1. Length of selectors
 
-Чем короче селектор (whitespace не учитываются), тем больше вероятность удачного группирования.
+Shorter selectors are easier to re-group.
 
 ## 3.2. Order of properties
 
-Придерживайтесь во всём CSS одного порядка, в котором перечисляются свойства, так вам не потребуется защита от смены порядка. Соответственно, меньше вероятность допустить ошибку и помешать минимизатору излишним управлением.
+Stick to the same order of properties throughout the stylesheet - it will allow you to not use the guards. The less manual intervention there is, the easier it is for the minimizer to work optimally.
 
 ## 3.3. Positioning of similar blocks
 
-Располагайте блоки со схожим набором свойств как можно ближе друг к другу.
+Keep blocks with similar sets of properties close to each other.
 
 Bad:
 
@@ -759,7 +757,7 @@ Good:
 
 ## 3.4. Using !important
 
-Очевидно, `!important` оказывает серьёзное влияние на минимизацию, особенно заметно это может отразиться на минимизации `margin` и `padding`, потому им лучше не злоупотреблять.
+It should go without saying that using the `!important` declaration harms minification performance.
 
 Bad:
 
