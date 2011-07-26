@@ -1,115 +1,115 @@
-# 1. Описание
+# 1. Introduction
 
-CSSO (CSS Optimizer) является минимизатором CSS, выполняющим как минимизацию без изменения структуры, так и структурную минимизацию с целью получить как можно меньший текст.
+CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
 
-Этот документ является инструкцией по установке и использованию. Если вам нужна детальная инструкция по минимизации, она находится [здесь](https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
+This document describes installation and usage of CSSO. If you want to learn more about the inner workings of CSSO, please consult the [manual] (https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
 
-Замеченные ошибки лучше добавлять в [Issues](https://github.com/afelix/csso/issues) проекта.
+Please report issues on [Github] (https://github.com/afelix/csso/issues).
 
-Советы, предложения, отзывы, а также ошибки, которые почему-то лучше выслать письмом, высылайте на адрес <skryzhanovsky@ya.ru>.
+For feedback, suggestions, etc. write to <skryzhanovsky@ya.ru>.
 
-**Внимание**: проект находится в статусе beta и может содержать недоработки и ошибки. Текущая версия: 1.1.2
+**Important**: this project is in beta and may contain bugs. Current version: 1.1.2
 
-**Внимание**: он и в самом деле содержит недоработки и ошибки, после которых вёрстка ломается.
+**Important**: indeed, it does contain bugs which break the resulting CSS. You've been warned.
 
-# 2. Установка
+# 2. Installation
 
-## 2.1. Предварительные требования
+## 2.1. Prerequisites
 
-* для использования из браузера: любая OS с современным браузером
-* для использования из командной строки: OS Linux / Mac OS X
+* for browser use: any OS and a modern web browser
+* for command line use: Linux / Mac OS X
 
-## 2.2. Установка с помощью git
+## 2.2. Install using git
 
-Предварительные требования:
+Prerequisites:
 
 * git&nbsp;— [http://git-scm.com/](http://git-scm.com/)
 
-Установка:
+To install:
 
-* выполнить `git clone git://github.com/afelix/csso.git`
+* run `git clone git://github.com/afelix/csso.git`
 
-## 2.3. Установка с помощью npm
+## 2.3. Install using npm
 
-Предварительные требования:
+Prerequisites:
 
-* nodejs версии 0.4.x&nbsp;— [http://nodejs.org](http://nodejs.org)
+* nodejs 0.4.x&nbsp;— [http://nodejs.org](http://nodejs.org)
 * npm&nbsp;— [http://github.com/isaacs/npm/](http://github.com/isaacs/npm/)
 
-Установка:
+To install:
 
-* выполнить `npm install csso`
+* run `npm install csso`
 
-# 3. Использование
+# 3. Usage
 
-## 3.1. Через браузер (при установке с помощью git)
+## 3.1. From the browser
 
-Открыть в браузере файл `web/csso.html`.
+Open `web/csso.html` in your browser.
 
-## 3.2. Через командную строку
+## 3.2. From the command line
 
-При git-установке запускать `bin/csso`, но в таком случае потребуется nodejs версии 0.4.x&nbsp;— [http://nodejs.org](http://nodejs.org)
+Run `bin/csso` (when installed from git), you will need to have nodejs 0.4.x installed&nbsp;— [http://nodejs.org](http://nodejs.org)
 
-При npm-установке запускать `csso`.
+Run `csso` (when installed from npm).
 
-Справка командной строки:
+Usage:
 
     csso
-        показывает этот текст
-    csso <имя_файла>
-        минимизирует CSS из <имя_файла> и записывает результат в stdout
-    csso -r <имя_файла>
-    csso --restructure <имя_файла>
-        выключить структурную минимизацию
+        shows usage information
+    csso <filename>
+        minimizes the CSS in <filename> and outputs the result to stdout
+    csso -r <filename>
+    csso --restructure <filename>
+        disables structural optimization
     csso -h
     csso --help
-        показывает этот текст
+        shows usage information
     csso -v
     csso --version
-        показывает номер версии CSSO
+        shows the version number
 
-Пример использования:
+Example:
 
     $ echo ".test { color: red; color: green }" > test.css
     $ csso test.css
     .test{color:green}
 
-# 4. Минимизация (кратко)
+# 4. Minification (in a nutshell)
 
-Минимизация без изменения структуры:
+Safe transformations:
 
-* Удаление whitespace
-* Удаление концевых `;`
-* Удаление комментариев
-* Удаление неправильных `@charset` и `@import`
-* Удаление ошибочных элементов
-* Минимизация цвета
-* Минимизация `0`
-* Минимизация `margin` и `padding`
-* Слияние многострочных строк в однострочные
-* Минимизация `font-weight`
+* Removal of whitespace
+* Removal of trailing `;`
+* Removal of comments
+* Removal of invalid `@charset` и `@import` declarations
+* Removal of invalid elements
+* Minification of color properties
+* Minification of `0`
+* Minification of `margin` and `padding` properties
+* Minification of multi-line strings
+* Minification of the `font-weight` property
 
-Минимизация с изменением структуры:
+Structural optimizations:
 
-* Слияние блоков с одинаковыми селекторами
-* Слияние блоков с одинаковыми свойствами
-* Удаление перекрываемых свойств
-* Удаление повторяющихся селекторов
-* Частичное слияние блоков
-* Частичное разделение блоков
+* Merging blocks with identical selectors
+* Merging blocks with identical properties
+* Removal of overridden properties
+* Removal of repeating selectors
+* Partial merging of blocks
+* Partial splitting of blocks
 
-Детальное описание минимизации находится [здесь](https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
+The minification techniques are described in detail in the [manual](https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
 
-# 5. Разработчикам
+# 5. Note to developers
 
-Исходный код CSSO написан на очень простом Javascript. Это позволяет легко портировать CSSO на распространённые языки типа Python, Java, PHP, Perl, C++, C и т.п. Лицензия MIT позволяет вам использовать CSSO так, как вам угодно, но на всякий случай прочтите текст [лицензии](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt).
+CSSO is written in easy-to-understand JavaScript. It's easily portable to other languages, such as Python, Java, PHP, Perl, C++, C, etc. The source code is licensed under [MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt).
 
-# 6. Авторы
+# 6. Authors
 
-* идея и поддержка&nbsp;— Виталий Харисов (<vitaly@harisov.name>)
-* реализация&nbsp;— Сергей Крыжановский (<skryzhanovsky@ya.ru>)
+* initial idea&nbsp;— Vitaly Harisov (<vitaly@harisov.name>)
+* implementation&nbsp;— Sergey Kryzhanovsky (<skryzhanovsky@ya.ru>)
 
-# 7. Остальное
+# 7. And finally
 
-* [TODO](https://github.com/afelix/csso/blob/master/TODO.md)
-* CSSO распространяется под [лицензией MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)
+* [TODO items](https://github.com/afelix/csso/blob/master/TODO.md)
+* CSSO is licensed under [MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)
