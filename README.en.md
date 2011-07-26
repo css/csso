@@ -60,7 +60,7 @@ Usage:
         minimizes the CSS in <filename> and outputs the result to stdout
     csso -r <filename>
     csso --restructure <filename>
-        enable structural optimization
+        disables structural optimization
     csso -h
     csso --help
         shows usage information

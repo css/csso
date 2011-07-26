@@ -1,3 +1,18 @@
+Usage:
+    csso
+        shows usage information
+    csso <filename>
+        minimizes the CSS in <filename> and outputs the result to stdout
+    csso -r <filename>
+    csso --restructure <filename>
+        disables structural optimization
+    csso -h
+    csso --help
+        shows usage information
+    csso -v
+    csso --version
+        shows the version number
+
 Использование:
     csso
         показывает этот текст
@@ -12,17 +27,3 @@
     csso -v
     csso --version
         показывает номер версии CSSO
-Usage:
-    csso
-        print this text
-    csso <file_name>
-        minimize CSS from file_name and write the result to stdout
-    csso -r <file_name>
-    csso --restructure <file_name>
-        turn off restructure
-    csso -h
-    csso --help
-        print this text
-    csso -v
-    csso --version
-        print the CSSO version number
