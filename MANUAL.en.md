@@ -10,9 +10,8 @@
 * 2.1.5\. Removal of invalid elements
 * 2.1.6\. Minification of color properties
 * 2.1.7\. Minification of 0
-* 2.1.8\. Minification of margin and padding properties
-* 2.1.9\. Minification of multi-line strings
-* 2.1.10\. Minification of the font-weight property
+* 2.1.8\. Minification of multi-line strings
+* 2.1.9\. Minification of the font-weight property
 * 2.2\. Structural optimization
 * 2.2.1\. Merging blocks with identical selectors
 * 2.2.2\. Merging blocks with idential properties
@@ -20,10 +19,6 @@
 * 2.2.4\. Removal of repeating selectors
 * 2.2.5\. Partial merging of blocks
 * 2.2.6\. Partial splitting of blocks
-* 2.3\. Managing structural optimizations
-* 2.3.1\. Guarding against deletion
-* 2.3.2\. Guarding against re-ordering
-* 2.3.3\. Combining guards
 * 3\. Recommendations
 * 3.1\. Length of selectors
 * 3.2\. Order of properties
@@ -211,57 +206,7 @@ The `0%` value is not being compacted to avoid the following situation: `rgb(100
             fakeprop: 0 0 0 0 0 0 .1 .1em 0 0% 0% 10
         }
 
-### 2.1.8. Minification of margin and padding properties
-
-The `margin` and `padding` properties are minimized according to \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
-
-* Before:
-
-        .test0 {
-            margin-top: 1em;
-            margin-right: 2em;
-            margin-bottom: 3em;
-            margin-left: 4em;
-        }
-
-        .test1 {
-            margin: 1 2 3 2
-        }
-
-        .test2 {
-            margin: 1 2 1 2
-        }
-
-        .test3 {
-            margin: 1 1 1 1
-        }
-
-        .test4 {
-            margin: 1 1 1
-        }
-
-        .test5 {
-            margin: 1 1
-        }
-* After:
-
-        .test0 {
-            margin: 1em 2em 3em 4em
-        }
-
-        .test1 {
-            margin: 1 2 3
-        }
-
-        .test2 {
-            margin: 1 2
-        }
-
-        .test3, .test4, .test5 {
-            margin: 1
-        }
-
-### 2.1.9. Minification of multi-line strings
+### 2.1.8. Minification of multi-line strings
 
 Multi-line strings are minified according to \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
 
@@ -278,7 +223,7 @@ Multi-line strings are minified according to \[[CSS 2.1 / 4.3.7 Strings](http://
             background: url("foo/bar")
         }
 
-### 2.1.10. Minification of the font-weight property
+### 2.1.9. Minification of the font-weight property
 
 The `bold` and `normal` values of the `font-weight` property are minimized according to \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
 
@@ -541,161 +486,6 @@ Minification won't take place if there's no gain in character count.
             border: none;
             margin: 0
         }
-
-### 2.3. Managing structural optimizations
-
-You can manually manage the structural optimizations that will take place using special comments.
-
-#### 2.3.1. Guarding against deletion
-
-Guarding against deletion of overridden properties is possible using a `/*p*/` comment before the protected property or a pair of `/*p<*/` - `/*>p*/` comments around the protected properties.
-
-The opening `/*p<*/` comment guards all following properties regardless of the nesting level. The closing `/*>p*/` turns the guard off. Both comments can be used between blocks or properties.
-
-Example of `/*p*/`:
-
-* Before:
-
-        .test {
-            /*p*/color: red;
-        }
-
-        .test {
-            color: green;
-        }
-* After:
-
-        .test {
-            color: red; <-- the property was not overridden by 'color: green'
-            color: green
-        }
-* After (without a guard):
-
-        .test {
-            color: green
-        }
-
-Example of `/*p<*/` and `/*>p*/`:
-
-* Before:
-
-        /*p<*/
-        .test0 {
-            color: green;
-            color: red;/*>p*/
-            color: silver;
-        }
-
-        .test1 {
-            color: white;
-            color: green;
-        }
-* After:
-
-        .test0 {
-            color: red;
-            color: silver
-        }
-
-        .test0, .test1 {
-            color: green
-        }
-* After (without a guard):
-
-        .test0 {
-            color: silver
-        }
-
-        .test1 {
-            color: green
-        }
-
-#### 2.3.2. Guarding against re-ordering
-
-Guarding against re-ordering of properties is possible using an `/*o*/` comment before the protected property or a pair of `/*o<*/` - `/*>o*/` comments around the protected properties.
-
-The opening `/*o<*/` comment guards all following properties regardless of the nesting level. The closing `/*>o*/` turns the guard off. Both comments can be used between blocks or properties.
-
-Example of `/*o*/`:
-
-* Before:
-
-        .test0 {
-            -moz-box-sizing: border-box;
-            /*o*/-webkit-box-sizing: border-box;
-            /*o*/box-sizing: border-box;
-        }
-
-        .test1 {
-            box-sizing: border-box;
-            /*o*/-moz-box-sizing: border-box;
-            /*o*/-webkit-box-sizing: border-box;
-        }
-* After:
-
-        .test0, .test1 {
-            -moz-box-sizing: border-box
-        }
-
-        .test0 {
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box
-        }
-
-        .test1 {
-            box-sizing: border-box;
-            -webkit-box-sizing: border-box
-        }
-* After (without a guard):
-
-        .test0, .test1 {
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box
-        }
-
-Example of `/*o<*/` and `/*>o*/`:
-
-* Before:
-
-        /*o<*/
-        .test0 {
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;/*>o*/
-            box-sizing: border-box;
-        }
-
-        .test1 {
-            /*o<*/box-sizing: border-box;
-            -moz-box-sizing: border-box;/*>o*/
-            -webkit-box-sizing: border-box;
-        }
-* After:
-
-        .test0, .test1 {
-            box-sizing: border-box
-        }
-
-        .test0 {
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box
-        }
-
-        .test1 {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box
-        }
-* After (without a guard):
-
-        .test0, .test1 {
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box
-        }
-
-#### 2.3.3. Combining the guards
-
-TODO.
 
 # 3. Recommendations
 

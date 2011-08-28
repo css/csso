@@ -10,9 +10,8 @@
 * 2.1.5\. Удаление ошибочных элементов
 * 2.1.6\. Минимизация цвета
 * 2.1.7\. Минимизация 0
-* 2.1.8\. Минимизация margin и padding
-* 2.1.9\. Слияние многострочных строк в однострочные
-* 2.1.10\. Минимизация font-weight
+* 2.1.8\. Слияние многострочных строк в однострочные
+* 2.1.9\. Минимизация font-weight
 * 2.2\. Минимизация с изменением структуры
 * 2.2.1\. Слияние блоков с одинаковыми селекторами
 * 2.2.2\. Слияние блоков с одинаковыми свойствами
@@ -20,10 +19,6 @@
 * 2.2.4\. Удаление повторяющихся селекторов
 * 2.2.5\. Частичное слияние блоков
 * 2.2.6\. Частичное разделение блоков
-* 2.3\. Управление структурными изменениями
-* 2.3.1\. Защита от удаления
-* 2.3.2\. Защита от смены порядка
-* 2.3.3\. Комбинирование защит
 * 3\. Рекомендации
 * 3.1\. Длина селекторов
 * 3.2\. Порядок свойств
@@ -211,57 +206,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             fakeprop: 0 0 0 0 0 0 .1 .1em 0 0% 0% 10
         }
 
-### 2.1.8. Минимизация margin и padding
-
-Свойства `margin` и `padding` минимизируются согласно \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
-
-* Было:
-
-        .test0 {
-            margin-top: 1em;
-            margin-right: 2em;
-            margin-bottom: 3em;
-            margin-left: 4em;
-        }
-
-        .test1 {
-            margin: 1 2 3 2
-        }
-
-        .test2 {
-            margin: 1 2 1 2
-        }
-
-        .test3 {
-            margin: 1 1 1 1
-        }
-
-        .test4 {
-            margin: 1 1 1
-        }
-
-        .test5 {
-            margin: 1 1
-        }
-* Стало:
-
-        .test0 {
-            margin: 1em 2em 3em 4em
-        }
-
-        .test1 {
-            margin: 1 2 3
-        }
-
-        .test2 {
-            margin: 1 2
-        }
-
-        .test3, .test4, .test5 {
-            margin: 1
-        }
-
-### 2.1.9. Слияние многострочных строк в однострочные
+### 2.1.8. Слияние многострочных строк в однострочные
 
 Многострочные строки минимизируются согласно \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
 
@@ -278,7 +223,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             background: url("foo/bar")
         }
 
-### 2.1.10. Минимизация font-weight
+### 2.1.9. Минимизация font-weight
 
 Значения `bold` и `normal` свойства `font-weight` минимизируются согласно \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
 
@@ -543,163 +488,6 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             border: none;
             margin: 0
         }
-
-### 2.3. Управление структурными изменениями
-
-Управление структурными изменениями происходит с помощью комментариев специального содержания.
-
-#### 2.3.1. Защита от удаления
-
-Удаление перекрываемых свойств (см. 2.2.3) можно запрещать с помощью комментария `/*p*/` перед защищаемым свойством или с помощью пары комментариев `/*p<*/` и `/*>p*/`, между которыми находятся защищаемые свойства.
-
-Комментарий `/*p<*/` защищает все следующие за ним свойства вне зависимости от того, на каком уровне вложенности они находятся. Комментарий `/*>p*/` выключает эту защиту. Любой из этих комментариев может находиться либо между блоками, либо между свойствами.
-
-Пример использования `/*p*/`:
-
-* Было с защитой:
-
-        .test {
-            /*p*/color: red;
-        }
-
-        .test {
-            color: green;
-        }
-* Стало с защитой:
-
-        .test {
-            color: red; <-- свойство не было перекрыто 'color: green'
-            color: green
-        }
-* Стало без защиты:
-
-        .test {
-            color: green
-        }
-
-Пример использования пары `/*p<*/` и `/*>p*/`:
-
-* Было с защитой:
-
-        /*p<*/
-        .test0 {
-            color: green;
-            color: red;/*>p*/
-            color: silver;
-        }
-
-        .test1 {
-            color: white;
-            color: green;
-        }
-* Стало с защитой:
-
-        .test0 {
-            color: red;
-            color: silver
-        }
-
-        .test0, .test1 {
-            color: green
-        }
-* Стало без защиты:
-
-        .test0 {
-            color: silver
-        }
-
-        .test1 {
-            color: green
-        }
-
-#### 2.3.2. Защита от смены порядка
-
-В процессе минимизации может произойти смена порядка, в котором следуют свойства. Например, сливаются два блока, которые отличаются лишь порядком свойств.
-
-Смену порядка можно запрещать с помощью комментария `/*o*/` перед защищаемым свойством или с помощью пары комментариев `/*o<*/` и `/*>o*/`, между которыми находятся защищаемые свойства.
-
-Комментарий `/*o<*/` защищает все следующие за ним свойства вне зависимости от того, на каком уровне вложенности они находятся. Комментарий `/*>o*/` выключает эту защиту. Любой из этих комментариев может находиться либо между блоками, либо между свойствами.
-
-Пример использования `/*o*/`:
-
-* Было с защитой:
-
-        .test0 {
-            -moz-box-sizing: border-box;
-            /*o*/-webkit-box-sizing: border-box;
-            /*o*/box-sizing: border-box;
-        }
-
-        .test1 {
-            box-sizing: border-box;
-            /*o*/-moz-box-sizing: border-box;
-            /*o*/-webkit-box-sizing: border-box;
-        }
-* Стало с защитой:
-
-        .test0, .test1 {
-            -moz-box-sizing: border-box
-        }
-
-        .test0 {
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box
-        }
-
-        .test1 {
-            box-sizing: border-box;
-            -webkit-box-sizing: border-box
-        }
-* Стало без защиты:
-
-        .test0, .test1 {
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box
-        }
-
-Пример использования пары `/*o<*/` и `/*>o*/`:
-
-* Было с защитой:
-
-        /*o<*/
-        .test0 {
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;/*>o*/
-            box-sizing: border-box;
-        }
-
-        .test1 {
-            /*o<*/box-sizing: border-box;
-            -moz-box-sizing: border-box;/*>o*/
-            -webkit-box-sizing: border-box;
-        }
-* Стало с защитой:
-
-        .test0, .test1 {
-            box-sizing: border-box
-        }
-
-        .test0 {
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box
-        }
-
-        .test1 {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box
-        }
-* Стало без защиты:
-
-        .test0, .test1 {
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box
-        }
-
-#### 2.3.3. Комбинирование защит
-
-TODO.
 
 # 3. Рекомендации
 
