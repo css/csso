@@ -7,11 +7,10 @@
 * 2.1.2\. Removal of trailing ';'
 * 2.1.3\. Removal of comments
 * 2.1.4\. Removal of invalid @charset and @import declarations
-* 2.1.5\. Removal of invalid elements
-* 2.1.6\. Minification of color properties
-* 2.1.7\. Minification of 0
-* 2.1.8\. Minification of multi-line strings
-* 2.1.9\. Minification of the font-weight property
+* 2.1.5\. Minification of color properties
+* 2.1.6\. Minification of 0
+* 2.1.7\. Minification of multi-line strings
+* 2.1.8\. Minification of the font-weight property
 * 2.2\. Structural optimization
 * 2.2.1\. Merging blocks with identical selectors
 * 2.2.2\. Merging blocks with idential properties
@@ -120,53 +119,7 @@ Incorrectly placed `@import` rules are deleted according to \[[CSS 2.1 / 6.3 The
             color: red
         }
 
-### 2.1.5. Removal of invalid elements
-
-CSSO removes invalid elements but it doesn't check the correctness of property names and values. We assume that minification of an invalid CSS document is a bad practice.
-
-According to \[[CSS 2.1 / 4.2 Rules for handling parsing errors](http://www.w3.org/TR/CSS21/syndata.html#parsing-errors)\] we are handling and correcting the following errors:
-
-* Malformed declarations
-
-    Before:
-
-        .a { color:green; color }
-        .b { color:red;   color; color:green }
-        .c { color:green; color: }
-        .d { color:red;   color:; color:green }
-    After:
-
-        .a, .b, .c, .d {
-            color: green
-        }
-    The following errors are **not** corrected:
-
-        p { color:green; color{;color:maroon} }
-        p { color:red;   color{;color:maroon}; color:green }
-
-* Unexpected end of string
-
-    Before:
-
-        p {
-            color: green;
-            font-family: 'Courier New Times
-            color: red;
-            color: green;
-        }
-    After:
-
-        p {
-            color: green
-        }
-    The following errors are **not** corrected:
-
-        p[b="abcd
-        efg"] {
-            color : red
-        }
-
-### 2.1.6. Minification of color properties
+### 2.1.5. Minification of color properties
 
 Some color values are minimized according to \[[CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units)\].
 
@@ -189,7 +142,7 @@ Some color values are minimized according to \[[CSS 2.1 / 4.3.6 Colors](http://w
             outline-color: #000
         }
 
-### 2.1.7. Minification of 0
+### 2.1.6. Minification of 0
 
 In some cases, the numeric values can be compacted to `0` or even dropped.
 
@@ -206,7 +159,7 @@ The `0%` value is not being compacted to avoid the following situation: `rgb(100
             fakeprop: 0 0 0 0 0 0 .1 .1em 0 0% 0% 10
         }
 
-### 2.1.8. Minification of multi-line strings
+### 2.1.7. Minification of multi-line strings
 
 Multi-line strings are minified according to \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
 
@@ -223,7 +176,7 @@ Multi-line strings are minified according to \[[CSS 2.1 / 4.3.7 Strings](http://
             background: url("foo/bar")
         }
 
-### 2.1.9. Minification of the font-weight property
+### 2.1.8. Minification of the font-weight property
 
 The `bold` and `normal` values of the `font-weight` property are minimized according to \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
 
