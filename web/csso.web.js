@@ -923,6 +923,7 @@ CSSOCompressor.prototype.defCCfg = {
     'compressColor': 1,
     'compressDimension': 1,
     'compressString': 1,
+    'compressFontWeight': 1,
     'cleanEmptyBlock': 1
 };
 
@@ -960,6 +961,7 @@ CSSOCompressor.prototype.order = [
     'compressColor',
     'compressDimension',
     'compressString',
+    'compressFontWeight',
     'destroyDelims',
     'preTranslate',
     'restructureBlock',
@@ -993,6 +995,9 @@ CSSOCompressor.prototype.profile = {
     },
     'compressString': {
         'string': 1
+    },
+    'compressFontWeight': {
+        'declaration': 1
     },
     'cleanComment': {
         'comment': 1
@@ -1331,6 +1336,16 @@ CSSOCompressor.prototype.compressString = function(token) {
         else r += c;
     }
     if (s.length !== r.length) return [{}, 'string', r];
+};
+
+CSSOCompressor.prototype.compressFontWeight = function(token) {
+    var p = token[2],
+        v = token[3];
+    if (p[2][2].indexOf('font-weight') !== -1 && v[2][1] === 'ident') {
+        if (v[2][2] === 'normal') v[2] = [{}, 'number', '400'];
+        else if (v[2][2] === 'bold') v[2] = [{}, 'number', '700'];
+        return token;
+    }
 };
 
 CSSOCompressor.prototype.cleanEmptyBlock = function(token) {
