@@ -1,7 +1,0 @@
-type(atrule)
-value(@,import, ,url,(,0.0,))
-type(ruleset)
-value(E)
-{
-    name(p): value(url(0.0))
-}

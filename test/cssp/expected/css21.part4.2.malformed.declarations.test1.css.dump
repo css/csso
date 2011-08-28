@@ -1,5 +1,0 @@
-type(ruleset)
-value(p)
-{
-    name(color): value(green)
-}

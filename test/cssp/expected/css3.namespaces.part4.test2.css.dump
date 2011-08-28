@@ -1,5 +1,0 @@
-type(ruleset)
-value(foo,|,*)
-{
-    name(a): value(b)
-}

@@ -1,5 +1,0 @@
-type(ruleset)
-value(h1)
-{
-    name(margin): value(0.5in)
-}

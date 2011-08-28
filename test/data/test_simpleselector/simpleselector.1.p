@@ -1,0 +1,3 @@
+['simpleselector', 
+  ['class', 
+    ['ident', 'test']]]

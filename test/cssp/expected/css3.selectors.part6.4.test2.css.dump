@@ -1,5 +1,0 @@
-type(ruleset)
-value(.,px)
-{
-    name(p): value(v)
-}

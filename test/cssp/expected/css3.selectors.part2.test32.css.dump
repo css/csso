@@ -1,5 +1,0 @@
-type(ruleset)
-value(E,::,first-line)
-{
-    name(p): value(v)
-}

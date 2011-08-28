@@ -1,5 +1,0 @@
-type(ruleset)
-value(E,:,only-child)
-{
-    name(p): value(v)
-}

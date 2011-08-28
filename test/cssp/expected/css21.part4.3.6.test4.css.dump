@@ -1,5 +1,0 @@
-type(ruleset)
-value(em)
-{
-    name(color): value(rgb(100%,0%,0%))
-}

@@ -1,5 +1,0 @@
-type(ruleset)
-value(E,:,only-of-type)
-{
-    name(p): value(v)
-}

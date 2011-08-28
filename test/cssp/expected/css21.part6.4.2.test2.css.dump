@@ -1,6 +1,0 @@
-type(ruleset)
-value(a)
-{
-    name(p): value(v0 !important);
-    name(p): value(v)
-}

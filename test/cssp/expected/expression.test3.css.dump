@@ -1,6 +1,0 @@
-type(ruleset)
-value(E)
-{
-    name(p0): value(v);
-    name(p1): value(expression( 0.0 ))
-}

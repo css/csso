@@ -1,5 +1,0 @@
-type(ruleset)
-value(*,:,not,(,FOO,))
-{
-    name(p): value(v)
-}

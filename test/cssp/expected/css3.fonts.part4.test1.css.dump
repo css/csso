@@ -1,6 +1,0 @@
-type(atrule)
-value(@,font-face)
-{
-    name(font-family): value(Gentium);
-    name(src): value(url(http://site/fonts/Gentium.ttf))
-}

@@ -1,5 +1,0 @@
-type(ruleset)
-value(E,[,foo,$=,"bar",])
-{
-    name(p): value(v)
-}

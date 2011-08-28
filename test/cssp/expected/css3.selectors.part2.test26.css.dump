@@ -1,5 +1,0 @@
-type(ruleset)
-value(E,:,focus)
-{
-    name(p): value(v)
-}

@@ -6,20 +6,14 @@
     <link rel="stylesheet" href="csso.css" type="text/css">
 </head>
 <body>
-    <script src="../lib/cssp.js"></script>
-    <script src="../lib/cssm.js"></script>
-    <script src="../lib/cssoutils.js"></script>
+    <script src="csso.js"></script>
 
     <div class="stat">
         Src length: <span id="slength">0</span>, dst length: <span id="dlength">0</span>, compression: <span id="result">0</span>%.
     </div>
     <textarea class="csstxt" id="csssrc"></textarea>
     <span class="first">
-        <input type="button" value="minimize" id="min" />
-    </span>
-    <span class="second">
-        <input type="button" value="format" id="basic" />
-        <input type="button" value="format after minimize" id="minbasic" />
+        <input type="button" value="minimize" id="minimize" />
     </span>
     <textarea class="csstxt" id="cssdst"></textarea>
 
@@ -36,18 +30,11 @@
             result.innerHTML = (100 * cssdst.value.length / csssrc.value.length).toFixed(2);
         }
 
-        document.getElementById('basic').onclick = function() {
-            cssdst.value = $cssoutils.basic2string($cssp.parse(csssrc.value).nodes, '');
-            updateStat();
-        };
-
-        document.getElementById('min').onclick = function() {
-            cssdst.value = $cssoutils.min2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
-            updateStat();
-        };
-
-        document.getElementById('minbasic').onclick = function() {
-            cssdst.value = $cssoutils.basic2string($cssm.minimize($cssp.parse(csssrc.value)).nodes, '');
+        document.getElementById('minimize').onclick = function() {
+            var parser = new CSSOParser(),
+                compressor = new CSSOCompressor(),
+                translator = new CSSOTranslator();
+            cssdst.value = translator.translate(cleanInfo(compressor.compress(parser.parse(csssrc.value, 'stylesheet'))));
             updateStat();
         };
     </script>

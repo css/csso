@@ -1,6 +1,0 @@
-comment(/* test */)
-type(ruleset)
-value(a)
-{
-    name(b): value(c)
-}

@@ -1,8 +1,0 @@
-comment(/* test */)
-type(ruleset)
-value(a, ,/* test */, ,b, ,/* test */)
-{
-    comment(/* test */);
-    name(c,/* test */): value(/* test */ d /* test */)
-}
-comment(/* test */)

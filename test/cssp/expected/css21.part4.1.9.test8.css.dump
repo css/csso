@@ -1,7 +1,0 @@
-type(ruleset)
-value(a, ,/*
-test
-*/)
-{
-    name(b): value(c)
-}

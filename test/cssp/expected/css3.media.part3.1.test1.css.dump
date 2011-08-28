@@ -1,9 +1,0 @@
-type(atrule)
-value(@,media, ,all, ,and, ,(,color,))
-{
-    type(ruleset)
-    value(a)
-    {
-        name(p): value(v)
-    }
-}

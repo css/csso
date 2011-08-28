@@ -1,5 +1,0 @@
-type(ruleset)
-value(E,:,checked)
-{
-    name(p): value(v)
-}

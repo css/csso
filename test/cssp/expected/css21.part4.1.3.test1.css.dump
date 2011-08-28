@@ -1,5 +1,0 @@
-type(ruleset)
-value(a\bc)
-{
-    name(p): value(v)
-}

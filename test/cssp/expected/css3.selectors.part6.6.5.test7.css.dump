@@ -1,5 +1,0 @@
-type(ruleset)
-value(a6,:,nth-child,(,10n,-,1,))
-{
-    name(p): value(v)
-}

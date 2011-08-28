@@ -1,0 +1,3 @@
+['function', 
+  ['ident', 'test'], 
+  ['functionBody']]

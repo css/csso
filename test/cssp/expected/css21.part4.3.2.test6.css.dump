@@ -1,5 +1,0 @@
-type(ruleset)
-value(h3)
-{
-    name(word-spacing): value(4mm)
-}

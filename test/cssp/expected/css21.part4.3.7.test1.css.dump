@@ -1,5 +1,0 @@
-type(ruleset)
-value(a)
-{
-    name(b): value("this is a 'string'")
-}

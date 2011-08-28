@@ -1,5 +1,0 @@
-type(ruleset)
-value(E,|,*,:,not,(,:,link,),:,not,(,:,visited,))
-{
-    name(p): value(v)
-}

@@ -1,5 +1,0 @@
-type(ruleset)
-value(h4)
-{
-    name(font-size): value(12pt)
-}

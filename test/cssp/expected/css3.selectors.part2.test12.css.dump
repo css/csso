@@ -1,5 +1,0 @@
-type(ruleset)
-value(E,:,nth-last-child,(,n,))
-{
-    name(p): value(v)
-}

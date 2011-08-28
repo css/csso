@@ -1,5 +1,0 @@
-type(ruleset)
-value(E,:,hover)
-{
-    name(p): value(v)
-}

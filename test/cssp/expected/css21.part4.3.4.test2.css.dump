@@ -1,7 +1,0 @@
-type(atrule)
-value(@,import, ,url,(,a/test.gif,))
-type(ruleset)
-value(E)
-{
-    name(p): value(url(a/test.gif))
-}

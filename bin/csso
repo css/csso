@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 SELF_PATH=$(cd -P -- "$(dirname -- "$0")" && pwd -P) && SELF_PATH="$SELF_PATH/$(basename -- "$0")"
 
@@ -10,5 +10,5 @@ done
 
 CSSO_HOME=$(dirname -- "$(dirname -- "$SELF_PATH")")
 
-node $CSSO_HOME/lib/ccli.js $@
+node $CSSO_HOME/lib/csso.js $@
 
