@@ -8,16 +8,12 @@ Please report issues on [Github] (https://github.com/afelix/csso/issues).
 
 For feedback, suggestions, etc. write to <skryzhanovsky@ya.ru>.
 
-**Important**: this project is in beta and may contain bugs. Current version: 1.1.2
-
-**Important**: indeed, it does contain bugs which break the resulting CSS. You've been warned.
-
 # 2. Installation
 
 ## 2.1. Prerequisites
 
 * for browser use: any OS and a modern web browser
-* for command line use: Linux / Mac OS X
+* for command line use: Linux / Mac OS X / any OS with working Node.js
 
 ## 2.2. Install using git
 
@@ -44,7 +40,7 @@ To install:
 
 ## 3.1. From the browser
 
-Open `web/csso.html` in your browser.
+Open `web/csso.html` or [http://afelix.github.com/csso/csso.html](http://afelix.github.com/csso/csso.html) in your browser.
 
 ## 3.2. From the command line
 
@@ -58,9 +54,6 @@ Usage:
         shows usage information
     csso <filename>
         minimizes the CSS in <filename> and outputs the result to stdout
-    csso -r <filename>
-    csso --restructure <filename>
-        disables structural optimization
     csso -h
     csso --help
         shows usage information
@@ -82,10 +75,8 @@ Safe transformations:
 * Removal of trailing `;`
 * Removal of comments
 * Removal of invalid `@charset` и `@import` declarations
-* Removal of invalid elements
 * Minification of color properties
 * Minification of `0`
-* Minification of `margin` and `padding` properties
 * Minification of multi-line strings
 * Minification of the `font-weight` property
 
@@ -94,6 +85,7 @@ Structural optimizations:
 * Merging blocks with identical selectors
 * Merging blocks with identical properties
 * Removal of overridden properties
+* Removal of overridden shorthand properties
 * Removal of repeating selectors
 * Partial merging of blocks
 * Partial splitting of blocks
@@ -108,8 +100,8 @@ CSSO is written in easy-to-understand JavaScript. It's easily portable to other 
 
 * initial idea&nbsp;— Vitaly Harisov (<vitaly@harisov.name>)
 * implementation&nbsp;— Sergey Kryzhanovsky (<skryzhanovsky@ya.ru>)
+* english translation&nbsp;— Leonid Khachaturov (leonidkhachaturov@gmail.com)
 
 # 7. And finally
 
-* [TODO items](https://github.com/afelix/csso/blob/master/TODO.md)
 * CSSO is licensed under [MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)
