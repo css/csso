@@ -298,7 +298,7 @@ Properties ignored by the browser can be removed using the following rules:
 
 #### 2.2.3.1. Removal of overridden shorthand properties
 
-In the case of `border`, `margin`, `padding`, `background`, `font` and `list-style` properties the next removal rule will be applied: if the last property is 'general' one (for example, `border`), then all overridden properties will be removed (for example, `border-top-width` or `border-style`).
+In the case of `border`, `margin`, `padding`, `background`, `font` and `list-style` properties the next removal rule will be applied: if the last property is 'general' one (for example, `border`), then all antecedent overridden properties will be removed (for example, `border-top-width` or `border-style`).
 
 * Before:
 
