@@ -883,6 +883,7 @@ function CSSOCompressor() {}
 
 CSSOCompressor.prototype.init = function() {
     this.props = {};
+    this.ccrules = {}; // clean comment rules — special case to resolve ambiguity
     this.crules = {}; // compress rules
     this.prules = {}; // prepare rules
     this.rbrules = {}; // restructure block rules
@@ -891,6 +892,7 @@ CSSOCompressor.prototype.init = function() {
     this.frules = {}; // finalize rules
 
     this.initRules(this.crules, this.defCCfg);
+    this.initRules(this.ccrules, this.cleanCfg);
     this.initRules(this.prules, this.preCfg);
     this.initRules(this.rbrules, this.defRBCfg);
     this.initRules(this.rjrules, this.defRJCfg);
@@ -913,10 +915,13 @@ CSSOCompressor.prototype.initRules = function(r, cfg) {
     }
 };
 
+CSSOCompressor.prototype.cleanCfg = {
+    'cleanComment': 1
+};
+
 CSSOCompressor.prototype.defCCfg = {
     'cleanCharset': 1,
     'cleanImport': 1,
-    'cleanComment': 1,
     'cleanWhitespace': 1,
     'cleanDecldelim': 1,
     'compressNumber': 1,
@@ -1063,6 +1068,7 @@ CSSOCompressor.prototype.compress = function(tree) {
     this.info = typeof tree[0] !== 'string';
     var x = this.info ? tree : this.injectInfo([tree])[0],
         l0, l1 = 100000000000;
+    x = this.walk(this.ccrules, x, '/0');
     x = this.walk(this.crules, x, '/0');
     x = this.walk(this.prules, x, '/0');
     this.disjoin(x);
