@@ -102,7 +102,7 @@ Structural optimizations:
 * Partial merging of blocks
 * Partial splitting of blocks
 
-The minification techniques are described in detail in the [manual](https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
+The minification techniques are described in detail in the [manual](https://github.com/afelix/csso/blob/master/MANUAL.en.md).
 
 # 5. Note to developers
 
