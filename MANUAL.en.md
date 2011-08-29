@@ -15,6 +15,7 @@
 * 2.2.1\. Merging blocks with identical selectors
 * 2.2.2\. Merging blocks with idential properties
 * 2.2.3\. Removal of overridden properties
+* 2.2.3.1\. Removal of overridden shorthand properties
 * 2.2.4\. Removal of repeating selectors
 * 2.2.5\. Partial merging of blocks
 * 2.2.6\. Partial splitting of blocks
@@ -294,6 +295,22 @@ Properties ignored by the browser can be removed using the following rules:
             line-height: 3cm;
             color: green
         }
+
+#### 2.2.3.1. Removal of overridden shorthand properties
+
+In the case of `border`, `margin`, `padding`, `background`, `font` and `list-style` properties the next removal rule will be applied: if the last property is 'general' one (for example, `border`), then all overridden properties will be removed (for example, `border-top-width` or `border-style`).
+
+* Before:
+
+    .test {
+        border-top-color: red;
+        border-color: green
+    }
+* After:
+
+    .test {
+        border-color:green
+    }
 
 #### 2.2.4. Removal of repeating selectors
 
