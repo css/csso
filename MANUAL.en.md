@@ -302,15 +302,15 @@ In the case of `border`, `margin`, `padding`, `background`, `font` and `list-sty
 
 * Before:
 
-    .test {
-        border-top-color: red;
-        border-color: green
-    }
+        .test {
+            border-top-color: red;
+            border-color: green
+        }
 * After:
 
-    .test {
-        border-color:green
-    }
+        .test {
+            border-color:green
+        }
 
 #### 2.2.4. Removal of repeating selectors
 

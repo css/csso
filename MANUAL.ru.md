@@ -304,15 +304,15 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 * Было:
 
-    .test {
-        border-top-color: red;
-        border-color: green
-    }
+        .test {
+            border-top-color: red;
+            border-color: green
+        }
 * Стало:
 
-    .test {
-        border-color:green
-    }
+        .test {
+            border-color:green
+        }
 
 #### 2.2.4. Удаление повторяющихся селекторов
 
