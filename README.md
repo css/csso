@@ -42,7 +42,19 @@ To install:
 
 Open `web/csso.html` or [http://afelix.github.com/csso/csso.html](http://afelix.github.com/csso/csso.html) in your browser.
 
-## 3.2. From the command line
+## 3.2. From the npm-module
+
+Sample (`test.js`):
+
+    var csso = require('csso'),
+        css = '.test, .test { color: rgb(255, 255, 255) }';
+
+        console.log(csso.justDoIt(css));
+Output (`> node test.js`):
+
+    .test{color:#fff}
+
+## 3.3. From the command line
 
 Run `bin/csso` (when installed from git), you will need to have nodejs 0.4.x installed&nbsp;— [http://nodejs.org](http://nodejs.org)
 

@@ -42,7 +42,19 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 Открыть в браузере файл `web/csso.html` или [http://afelix.github.com/csso/csso.html](http://afelix.github.com/csso/csso.html).
 
-## 3.2. Через командную строку
+## 3.2. Через npm-модуль (при установке с помощью npm)
+
+Пример (`test.js`):
+
+    var csso = require('csso'),
+        css = '.test, .test { color: rgb(255, 255, 255) }';
+
+        console.log(csso.justDoIt(css));
+Вывод (`> node test.js`):
+
+    .test{color:#fff}
+
+## 3.3. Через командную строку
 
 При git-установке запускать `bin/csso`, но в таком случае потребуется nodejs версии 0.4.x&nbsp;— [http://nodejs.org](http://nodejs.org)
 
