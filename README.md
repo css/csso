@@ -49,7 +49,7 @@ Sample (`test.js`):
     var csso = require('csso'),
         css = '.test, .test { color: rgb(255, 255, 255) }';
 
-        console.log(csso.justDoIt(css));
+    console.log(csso.justDoIt(css));
 Output (`> node test.js`):
 
     .test{color:#fff}

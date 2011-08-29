@@ -49,7 +49,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
     var csso = require('csso'),
         css = '.test, .test { color: rgb(255, 255, 255) }';
 
-        console.log(csso.justDoIt(css));
+    console.log(csso.justDoIt(css));
 Вывод (`> node test.js`):
 
     .test{color:#fff}
