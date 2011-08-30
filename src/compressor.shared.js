@@ -660,7 +660,7 @@ CSSOCompressor.prototype.restructureRuleset = function(token, rule, container, i
                     bl = this.calcLength(r.eq) + // declarations length
                          r.eq.length - 1; // decldelims length
 
-                if (bl > rl) { // ok, it's good enough to extract
+                if (bl >= rl) { // ok, it's good enough to extract
                     ns[0].s = nss;
                     nr = [{f:0, l:0}, 'ruleset', ns, [{f:0,l:0}, 'block'].concat(r.eq)];
                     token[3].splice(2);
