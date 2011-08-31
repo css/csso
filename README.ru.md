@@ -42,6 +42,8 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 Открыть в браузере файл `web/csso.html` или [http://afelix.github.com/csso/csso.html](http://afelix.github.com/csso/csso.html).
 
+**Работа CSSO в браузерах не гарантирована. Рекомендуемый путь использования этой утилиты&nbsp;— использование из командной строки или npm-модулей.**
+
 ## 3.2. Через npm-модуль (при установке с помощью npm)
 
 Пример (`test.js`):

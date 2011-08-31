@@ -42,6 +42,8 @@ To install:
 
 Open `web/csso.html` or [http://afelix.github.com/csso/csso.html](http://afelix.github.com/csso/csso.html) in your browser.
 
+**CSSO is not guaranteed to work in browsers. Prefered way to use this tool is to use it from the command line or npm-modules.**
+
 ## 3.2. From the npm-module
 
 Sample (`test.js`):
