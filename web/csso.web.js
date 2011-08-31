@@ -1384,8 +1384,9 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, i, 
             v = x[3];
             imp = v[v.length - 1][1] === 'important';
             p = x[2][0].s;
+            if (p.indexOf('background') !== -1) ppre = pre + x[0].s;
+            else ppre = pre + p;
             x[0].id = path + '/' + i;
-            ppre = pre + p;
             if (t = props[ppre]) {
                 if (imp && !t.imp) {
                     props[ppre] = { block: token, imp: imp, id: x[0].id };
@@ -1437,11 +1438,6 @@ CSSOCompressor.prototype.nlTable = {
     'padding-right': ['padding'],
     'padding-bottom': ['padding'],
     'padding-left': ['padding'],
-    'background-color': ['background'],
-    'background-image': ['background'],
-    'background-repeat': ['background'],
-    'background-attachment': ['background'],
-    'background-position': ['background'],
     'font-style': ['font'],
     'font-variant': ['font'],
     'font-weight': ['font'],

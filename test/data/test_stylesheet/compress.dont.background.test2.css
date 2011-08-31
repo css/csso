@@ -1,12 +1,12 @@
-a {
+.a {
     background-color: green;
     color: red;
     background: black
 }
-b {
+.b {
     p: v
 }
-a {
+.a {
     background: gray;
     background-url: url("test")
 }
