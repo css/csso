@@ -1384,19 +1384,53 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, i, 
             v = x[3];
             imp = v[v.length - 1][1] === 'important';
             p = x[2][0].s;
-            if (p.indexOf('background') !== -1) ppre = pre + x[0].s;
-            else ppre = pre + p;
+            ppre = this.buildPPre(pre, p, v, x);
             x[0].id = path + '/' + i;
             if (t = props[ppre]) {
                 if (imp && !t.imp) {
                     props[ppre] = { block: token, imp: imp, id: x[0].id };
                     this.deleteProperty(t.block, t.id);
                 } else token.splice(i, 1);
-            } else if (this.needless(p, props, pre, imp)) token.splice(i, 1);
+            } else if (this.needless(p, props, pre, imp, v, x)) token.splice(i, 1);
             else props[ppre] = { block: token, imp: imp, id: x[0].id };
         }
     }
     return token;
+};
+
+CSSOCompressor.prototype.buildPPre = function(pre, p, v, d) {
+    if (p.indexOf('background') !== -1) return pre + d[0].s;
+
+    var ppre = pre,
+        _v = v.slice(2),
+        colorMark = [
+            0, // ident, vhash, rgb
+            0, // hsl
+            0, // hsla
+            0  // rgba
+        ];
+
+    for (var i = 0; i < _v.length; i++) {
+        switch(_v[i][1]) {
+            case 'vhash':
+            case 'ident':
+                colorMark[0] = 1; break;
+            case 'function':
+                switch(_v[i][2][2]) {
+                    case 'rgb':
+                        colorMark[0] = 1; break;
+                    case 'hsl':
+                        colorMark[1] = 1; break;
+                    case 'hsla':
+                        colorMark[2] = 1; break;
+                    case 'rgba':
+                        colorMark[3] = 1; break;
+                }
+                break;
+        }
+    }
+
+    return pre + p + colorMark.join('');
 };
 
 CSSOCompressor.prototype.deleteProperty = function(block, id) {
@@ -1448,14 +1482,15 @@ CSSOCompressor.prototype.nlTable = {
     'list-style-image': ['list-style']
 };
 
-CSSOCompressor.prototype.needless = function(name, props, pre, imp) {
+CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d) {
     var vendor = name.charAt(0) === '-' ? name.substr(0, name.indexOf('-', 2) + 1) : '',
         prop = name.substr(vendor.length),
-        x, t;
+        x, t, ppre;
     if (prop in this.nlTable) {
         x = this.nlTable[prop];
         for (var i = 0; i < x.length; i++) {
-            if (t = props[pre + vendor + x[i]]) return (!imp || t.imp);
+            ppre = this.buildPPre(pre, vendor + x[i], v, d);
+            if (t = props[ppre]) return (!imp || t.imp);
         }
     }
 };
