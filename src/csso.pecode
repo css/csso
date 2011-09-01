@@ -79,7 +79,7 @@ pecode CSSOParser {
 
     attrib = '[' *sc ident *sc attrselector *sc (ident, string) *sc ']' -> [#.info, #.name].concat(#1, [#2], #3, [#4], #5, [#6], #7),
 
-    class = '.' ident -> @t1,
+    clazz = '.' ident -> @t1,
 
     pseudoe = '::' ident -> @t1,
 
@@ -96,7 +96,7 @@ pecode CSSOParser {
 
     namespace = '|' -> @t,
 
-    simpleselector = +(nthselector, combinator, attrib, pseudo, class, shash, any, sc, namespace) -> this._cc([#.info, #.name], [#0]),
+    simpleselector = +(nthselector, combinator, attrib, pseudo, clazz, shash, any, sc, namespace) -> this._cc([#.info, #.name], [#0]),
 
     selector = +(simpleselector, delim) -> @tc0,
 

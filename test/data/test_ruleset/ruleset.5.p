@@ -1,7 +1,7 @@
 ['ruleset', 
   ['selector', 
     ['simpleselector', 
-      ['class', 
+      ['clazz', 
         ['ident', 'test']]]], 
   ['block', 
     ['declaration', 
