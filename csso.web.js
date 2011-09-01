@@ -454,10 +454,10 @@ CSSOParser.prototype.attrib = function() {
         return [this._info(), 'attrib'].concat(_b_[1], [_b_[2]], _b_[3], [_b_[4]], _b_[5], [_b_[6]], _b_[7]);
     }
 };
-CSSOParser.prototype.class = function() {
+CSSOParser.prototype.clazz = function() {
     var _b_;
     if (_b_ = this.$()._o('..')._o('ident')._()) {
-        return [this._info(), 'class', _b_[1]];
+        return [this._info(), 'clazz', _b_[1]];
     }
 };
 CSSOParser.prototype.pseudoe = function() {
@@ -507,7 +507,7 @@ CSSOParser.prototype.namespace = function() {
 };
 CSSOParser.prototype.simpleselector = function() {
     var _b_;
-    if (_b_ = this.$()._om('nthselector','combinator','attrib','pseudo','class','shash','any','sc','namespace')._()) {
+    if (_b_ = this.$()._om('nthselector','combinator','attrib','pseudo','clazz','shash','any','sc','namespace')._()) {
         return this._cc([this._info(), 'simpleselector'], [_b_[0]]);
     }
 };
@@ -1726,7 +1726,7 @@ CSSOTranslator.prototype.comment = function(t) {
     return '/*' + t[1] + '*/';
 };
 
-CSSOTranslator.prototype.class = function(t) {
+CSSOTranslator.prototype.clazz = function(t) {
     return '.' + this._t(t[1]);
 };
 
