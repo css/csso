@@ -38,13 +38,13 @@ To install:
 
 # 3. Usage
 
-## 3.1. From the browser
+## 3.1. In the browser
 
 Open `web/csso.html` or [http://afelix.github.com/csso/csso.html](http://afelix.github.com/csso/csso.html) in your browser.
 
-**CSSO is not guaranteed to work in browsers. Prefered way to use this tool is to use it from the command line or npm-modules.**
+**CSSO is not guaranteed to work in browsers. Preferred way to use this tool is to run it from the command line or via npm modules.**
 
-## 3.2. From the npm-module
+## 3.2. As an npm module
 
 Sample (`test.js`):
 

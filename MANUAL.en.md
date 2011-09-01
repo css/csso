@@ -2,7 +2,7 @@
 
 * 1\. Introduction
 * 2\. Minification
-* 2.1\. Safe transformations
+* 2.1\. Basic transformations
 * 2.1.1\. Removal of whitespace
 * 2.1.2\. Removal of trailing ';'
 * 2.1.3\. Removal of comments
@@ -35,10 +35,10 @@ This document describes the minification techniques we employ. If you are lookin
 
 Minification is a process of transforming a CSS document into a smaller document without losses. The typical strategies of achieving this are:
 
-* safe modifications, such as removal of unnecessary elements (e.g. trailing semicolons) or transforming the values into more compact representations (e.g. `0px` to `0`);
+* basic transformations, such as removal of unnecessary elements (e.g. trailing semicolons) or transforming the values into more compact representations (e.g. `0px` to `0`);
 * structural optimizations, such as removal of overridden properties or merging of blocks.
 
-## 2.1. Safe transformations
+## 2.1. Basic transformations
 
 ### 2.1.1. Removal of whitespace
 
@@ -298,7 +298,7 @@ Properties ignored by the browser can be removed using the following rules:
 
 #### 2.2.3.1. Removal of overridden shorthand properties
 
-In the case of `border`, `margin`, `padding`, `font` and `list-style` properties the next removal rule will be applied: if the last property is 'general' one (for example, `border`), then all antecedent overridden properties will be removed (for example, `border-top-width` or `border-style`).
+In case of `border`, `margin`, `padding`, `font` and `list-style` properties, the following removal rule will be applied: if the last property is a 'general' one (for example, `border`), then all preceding overridden properties will be removed (for example, `border-top-width` or `border-style`).
 
 * Before:
 
