@@ -1,7 +1,7 @@
 ['simpleselector', 
   ['ident', 'x'], 
   ['pseudoc', 
-    ['function', 
+    ['funktion', 
       ['ident', 'not'], 
       ['functionBody', 
         ['braces', '[', ']', 

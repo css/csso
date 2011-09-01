@@ -7,7 +7,7 @@
   ['s', ' '], 
   ['ident', 'y'], 
   ['s', ' '], 
-  ['function', 
+  ['funktion', 
     ['ident', 'x'], 
     ['functionBody', 
       ['number', '1'], 

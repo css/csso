@@ -83,7 +83,7 @@ pecode CSSOParser {
 
     pseudoe = '::' ident -> @t1,
 
-    pseudoc = ':' (function, ident) -> @t1,
+    pseudoc = ':' (funktion, ident) -> @t1,
 
     pseudo = (pseudoe, pseudoc) -> #0,
 
@@ -133,7 +133,7 @@ pecode CSSOParser {
 
     functionBody = *tset -> @tc0,
 
-    function = ident '(' functionBody ')' -> [#.info, #.name, #0, #2],
+    funktion = ident '(' functionBody ')' -> [#.info, #.name, #0, #2],
 
     braces = '(' *tset ')' -> [#.info, #.name, '(', ')'].concat(#1)
            | '[' *tset ']' -> [#.info, #.name, '[', ']'].concat(#1),
@@ -173,5 +173,5 @@ pecode CSSOParser {
 
     functionExpression = 'expression(' *functionExpressionBody ')' -> [#.info, #.name, #1.join('')],
 
-    any = (braces, string, percentage, dimension, number, uri, functionExpression, function, ident, unary) -> #0
+    any = (braces, string, percentage, dimension, number, uri, functionExpression, funktion, ident, unary) -> #0
 }

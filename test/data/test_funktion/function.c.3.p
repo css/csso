@@ -1,4 +1,4 @@
-['function', 
+['funktion', 
   ['ident', 'test'], 
   ['functionBody', 
     ['comment', 'test'], 

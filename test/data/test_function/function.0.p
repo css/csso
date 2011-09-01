@@ -1,3 +1,0 @@
-['function', 
-  ['ident', 'test'], 
-  ['functionBody']]

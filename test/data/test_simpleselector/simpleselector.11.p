@@ -3,7 +3,7 @@
   ['namespace'], 
   ['ident', '*'], 
   ['pseudoc', 
-    ['function', 
+    ['funktion', 
       ['ident', 'not'], 
       ['functionBody', 
         ['ident', '*']]]]]

@@ -9,7 +9,7 @@
     ['comment', 'test'], 
     ['ident', 'y'], 
     ['comment', 'test'], 
-    ['function', 
+    ['funktion', 
       ['ident', 'f'], 
       ['functionBody', 
         ['comment', 'test'], 

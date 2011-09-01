@@ -1,10 +1,10 @@
-['function', 
+['funktion', 
   ['ident', 'test'], 
   ['functionBody', 
     ['s', '  '], 
     ['ident', 'x'], 
     ['s', '  '], 
-    ['unary', '+'], 
+    ['operator', ','], 
     ['s', '  '], 
     ['ident', 'y'], 
     ['s', '  ']]]

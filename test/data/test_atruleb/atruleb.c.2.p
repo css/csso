@@ -8,7 +8,7 @@
   ['comment', 'test'], 
   ['ident', 'y'], 
   ['comment', 'test'], 
-  ['function', 
+  ['funktion', 
     ['ident', 'x'], 
     ['functionBody', 
       ['comment', 'test'], 

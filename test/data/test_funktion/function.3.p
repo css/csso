@@ -1,6 +1,6 @@
-['function', 
+['funktion', 
   ['ident', 'test'], 
   ['functionBody', 
     ['ident', 'x'], 
-    ['operator', ','], 
+    ['unary', '+'], 
     ['ident', 'y']]]
