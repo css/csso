@@ -468,7 +468,7 @@ CSSOParser.prototype.pseudoe = function() {
 };
 CSSOParser.prototype.pseudoc = function() {
     var _b_;
-    if (_b_ = this.$()._o('.:')._o('function','ident')._()) {
+    if (_b_ = this.$()._o('.:')._o('funktion','ident')._()) {
         return [this._info(), 'pseudoc', _b_[1]];
     }
 };
@@ -616,10 +616,10 @@ CSSOParser.prototype.functionBody = function() {
         return [this._info(), 'functionBody'].concat(_b_[0]);
     }
 };
-CSSOParser.prototype.function = function() {
+CSSOParser.prototype.funktion = function() {
     var _b_;
     if (_b_ = this.$()._o('ident')._o('.(')._o('functionBody')._o('.)')._()) {
-        return [this._info(), 'function', _b_[0], _b_[2]];
+        return [this._info(), 'funktion', _b_[0], _b_[2]];
     }
 };
 CSSOParser.prototype.braces = function() {
@@ -738,7 +738,7 @@ CSSOParser.prototype.functionExpression = function() {
 };
 CSSOParser.prototype.any = function() {
     var _b_;
-    if (_b_ = this.$()._o('braces','string','percentage','dimension','number','uri','functionExpression','function','ident','unary')._()) {
+    if (_b_ = this.$()._o('braces','string','percentage','dimension','number','uri','functionExpression','funktion','ident','unary')._()) {
         return _b_[0];
     }
 };
@@ -992,7 +992,7 @@ CSSOCompressor.prototype.profile = {
     },
     'compressColor': {
         'vhash': 1,
-        'function': 1,
+        'funktion': 1,
         'ident': 1
     },
     'compressDimension': {
@@ -1235,7 +1235,7 @@ CSSOCompressor.prototype._cleanWhitespace = function(r, left) {
     }
     if (left) {
         switch(r) {
-            case 'function':
+            case 'funktion':
             case 'braces':
             case 'uri':
                 return true;
@@ -1268,7 +1268,7 @@ CSSOCompressor.prototype.compressColor = function(token, rule, container, i) {
     switch(rule) {
         case 'vhash':
             return this.compressHashColor(token);
-        case 'function':
+        case 'funktion':
             return this.compressFunctionColor(token);
         case 'ident':
             return this.compressIdentColor(token, rule, container, i);
@@ -1415,7 +1415,7 @@ CSSOCompressor.prototype.buildPPre = function(pre, p, v, d) {
             case 'vhash':
             case 'ident':
                 colorMark[0] = 1; break;
-            case 'function':
+            case 'funktion':
                 switch(_v[i][2][2]) {
                     case 'rgb':
                         colorMark[0] = 1; break;
@@ -1754,7 +1754,7 @@ CSSOTranslator.prototype.nthselector = function(t) {
     return ':' + this._simple(t[1]) + '(' + this._composite(t, 2) + ')';
 };
 
-CSSOTranslator.prototype.function = function(t) {
+CSSOTranslator.prototype.funktion = function(t) {
     return this._simple(t[1]) + '(' + this._composite(t[2]) + ')';
 };
 
