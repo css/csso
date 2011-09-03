@@ -929,7 +929,7 @@ CSSOCompressor.prototype.defCCfg = {
     'compressDimension': 1,
     'compressString': 1,
     'compressFontWeight': 1,
-    'cleanEmptyBlock': 1
+    'cleanEmpty': 1
 };
 
 CSSOCompressor.prototype.defRBCfg = {
@@ -938,16 +938,16 @@ CSSOCompressor.prototype.defRBCfg = {
 
 CSSOCompressor.prototype.defRJCfg = {
     'rejoinRuleset': 1,
-    'cleanEmptyBlock': 1
+    'cleanEmpty': 1
 };
 
 CSSOCompressor.prototype.defRRCfg = {
     'restructureRuleset': 1,
-    'cleanEmptyBlock': 1
+    'cleanEmpty': 1
 };
 
 CSSOCompressor.prototype.defFCfg = {
-    'cleanEmptyBlock': 1,
+    'cleanEmpty': 1,
     'delimSelectors': 1,
     'delimBlocks': 1
 };
@@ -972,7 +972,7 @@ CSSOCompressor.prototype.order = [
     'restructureBlock',
     'rejoinRuleset',
     'restructureRuleset',
-    'cleanEmptyBlock',
+    'cleanEmpty',
     'delimSelectors',
     'delimBlocks'
 ];
@@ -1010,8 +1010,10 @@ CSSOCompressor.prototype.profile = {
     'cleanDecldelim': {
         'block': 1
     },
-    'cleanEmptyBlock': {
-        'ruleset': 1
+    'cleanEmpty': {
+        'ruleset': 1,
+        'atruleb': 1,
+        'atruler': 1
     },
     'destroyDelims': {
         'decldelim': 1,
@@ -1369,8 +1371,18 @@ CSSOCompressor.prototype.compressFontWeight = function(token) {
     }
 };
 
-CSSOCompressor.prototype.cleanEmptyBlock = function(token) {
-    if (token[3].length === 2) return null;
+CSSOCompressor.prototype.cleanEmpty = function(token, rule) {
+    switch(rule) {
+        case 'ruleset':
+            if (token[3].length === 2) return null;
+            break;
+        case 'atruleb':
+            if (token[token.length - 1].length < 3) return null;
+            break;
+        case 'atruler':
+            if (token[4].length < 3) return null;
+            break;
+    }
 };
 
 CSSOCompressor.prototype.destroyDelims = function() {
