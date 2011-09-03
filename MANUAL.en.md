@@ -19,6 +19,7 @@
 * 2.2.4\. Removal of repeating selectors
 * 2.2.5\. Partial merging of blocks
 * 2.2.6\. Partial splitting of blocks
+* 2.2.7\. Removal of empty ruleset and at-rule
 * 3\. Recommendations
 * 3.1\. Length of selectors
 * 3.2\. Order of properties
@@ -456,6 +457,32 @@ Minification won't take place if there's no gain in character count.
             border: none;
             margin: 0
         }
+
+#### 2.2.7. Removal of empty ruleset and at-rule
+
+Empty ruleset and at-rule will be removed.
+
+Before:
+
+        .test {
+            color: red
+        }
+
+        .empty {}
+
+        @font-face {}
+
+        @media print {
+            .empty {}
+        }
+
+        .test {
+            border: none
+        }
+
+After:
+
+        .test{color:red;border:none}
 
 # 3. Recommendations
 

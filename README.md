@@ -103,6 +103,7 @@ Structural optimizations:
 * Removal of repeating selectors
 * Partial merging of blocks
 * Partial splitting of blocks
+* Removal of empty ruleset and at-rule
 
 The minification techniques are described in detail in the [manual](https://github.com/afelix/csso/blob/master/MANUAL.en.md).
 
