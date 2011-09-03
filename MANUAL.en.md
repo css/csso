@@ -462,7 +462,7 @@ Minification won't take place if there's no gain in character count.
 
 Empty ruleset and at-rule will be removed.
 
-Before:
+* Before:
 
         .test {
             color: red
@@ -479,8 +479,7 @@ Before:
         .test {
             border: none
         }
-
-After:
+* After:
 
         .test{color:red;border:none}
 

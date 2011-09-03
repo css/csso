@@ -464,7 +464,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 Пустые ruleset и at-rule удаляются.
 
-Было:
+* Было:
 
         .test {
             color: red
@@ -481,8 +481,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test {
             border: none
         }
-
-Стало:
+* Стало:
 
         .test{color:red;border:none}
 
