@@ -522,21 +522,21 @@ Bad:
 * Before:
 
         .test {
-            margin: 1px;
             margin-left: 2px !important;
+            margin: 1px;
         }
-* After (44 characters):
+* After (43 characters):
 
-        .test{margin:1px;margin-left:2px !important}
+        .test{margin-left:2px!important;margin:1px}
 
 Good:
 
 * Before:
 
         .test {
-            margin: 1px;
             margin-left: 2px;
+            margin: 1px;
         }
-* After (29 characters):
+* After (17 characters):
 
-        .test{margin:1px 1px 1px 2px}
+        .test{margin:1px}

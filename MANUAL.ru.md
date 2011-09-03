@@ -524,21 +524,21 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 * Было:
 
         .test {
-            margin: 1px;
             margin-left: 2px !important;
+            margin: 1px;
         }
-* Стало (44 символа):
+* Стало (43 символа):
 
-        .test{margin:1px;margin-left:2px !important}
+        .test{margin-left:2px!important;margin:1px}
 
 Хорошо:
 
 * Было:
 
         .test {
-            margin: 1px;
             margin-left: 2px;
+            margin: 1px;
         }
-* Стало (29 символов):
+* Стало (17 символов):
 
-        .test{margin:1px 1px 1px 2px}
+        .test{margin:1px}
