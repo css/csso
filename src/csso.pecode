@@ -122,7 +122,7 @@ pecode CSSOParser {
 
     unary = ('-', '+') -> @t0,
 
-    operator = ('/', ',', ':') -> @t0,
+    operator = ('/', ',', ':', '=') -> @t0,
 
     uri0 = !(')', mw) -> [#.info, 'raw', #0],
 

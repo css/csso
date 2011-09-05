@@ -585,7 +585,7 @@ CSSOParser.prototype.unary = function() {
 };
 CSSOParser.prototype.operator = function() {
     var _b_;
-    if (_b_ = this.$()._o('./','.,','.:')._()) {
+    if (_b_ = this.$()._o('./','.,','.:','.=')._()) {
         return [this._info(), 'operator', _b_[0]];
     }
 };
