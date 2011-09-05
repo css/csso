@@ -36,6 +36,14 @@ To install:
 
 * run `npm install csso`
 
+To update:
+
+* run `npm update csso`
+
+To uninstall:
+
+* run `npm uninstall csso`
+
 # 3. Usage
 
 ## 3.1. In the browser
