@@ -1022,7 +1022,8 @@ CSSOCompressor.prototype.profile = {
     'preTranslate': {
         'declaration': 1,
         'property': 1,
-        'simpleselector': 1
+        'simpleselector': 1,
+        'filter': 1
     },
     'restructureBlock': {
         'block': 1
