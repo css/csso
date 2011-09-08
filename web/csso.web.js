@@ -232,6 +232,12 @@ CSSOParser.prototype._cc = function(x, y) {
 
     return x;
 };
+CSSOParser.prototype.unknown = function() {
+    var _b_;
+    if (_b_ = this.$()._o('munknown')._()) {
+        return [this._info(), 'unknown', _b_[0]];
+    }
+};
 CSSOParser.prototype.mstring1 = function() {
     var _b_;
     if (_b_ = this.$()._not('."','.\\"')._()) {
@@ -363,7 +369,7 @@ CSSOParser.prototype.tset = function() {
 };
 CSSOParser.prototype.stylesheet = function() {
     var _b_;
-    if (_b_ = this.$()._zme('cdo','cdc','sc','statement')._()) {
+    if (_b_ = this.$()._zme('cdo','cdc','sc','statement','unknown')._()) {
         return [this._info(), 'stylesheet'].concat(_b_[0]);
     }
 };
@@ -886,6 +892,21 @@ CSSOParser.prototype.mname2 = function() {
         return v;
     }
 };
+
+CSSOParser.prototype.munknown = function() {
+    var s = this._src,
+        sl = s.length,
+        f = this._gi() + 1, i = f, v = '', c, n;
+    for (; i < sl; i++) {
+        c = s.charAt(i);
+        v += c;
+        if (c === '\n' || c === '\r') break;
+    }
+    if (v) {
+        this._si(f + v.length - 1);
+        return v;
+    }
+};
 var translator = new CSSOTranslator(),
     cleanInfo = $util.cleanInfo;
 function CSSOCompressor() {}
@@ -1225,13 +1246,17 @@ CSSOCompressor.prototype.cleanWhitespace = function(token, rule, container, i) {
               (container[1] !== 'braces' && i === 2)) ? null : this.getRule(container[i - 1]),
         nr = i === container.length - 1 ? null : this.getRule(container[i + 1]);
 
-    if (!(container[1] === 'atrulerq' && !pr) && !this.issue16(container, i)) {
-        if (nr !== null && pr !== null) {
-            if (this._cleanWhitespace(nr, false) || this._cleanWhitespace(pr, true)) return null;
-        } else return null;
+    if (nr === 'unknown') token[2] = '\n';
+    else {
+        if (!(container[1] === 'atrulerq' && !pr) && !this.issue16(container, i)) {
+            if (nr !== null && pr !== null) {
+                if (this._cleanWhitespace(nr, false) || this._cleanWhitespace(pr, true)) return null;
+            } else return null;
+        }
+
+        token[2] = ' ';
     }
 
-    token[2] = ' ';
     return token;
 };
 
@@ -1541,7 +1566,7 @@ CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d) {
 };
 
 CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
-    var p = i === 2 ? null : container[i - 1],
+    var p = (i === 2 || container[i - 1][1] === 'unknown') ? null : container[i - 1],
         ps = p ? p[2].slice(2) : [],
         pb = p ? p[3].slice(2) : [],
         ts = token[2].slice(2),
@@ -1569,7 +1594,7 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
 };
 
 CSSOCompressor.prototype.restructureRuleset = function(token, rule, container, i) {
-    var p = i === 2 ? null : container[i - 1],
+    var p = (i === 2 || container[i - 1][1] === 'unknown') ? null : container[i - 1],
         ps = p ? p[2].slice(2) : [],
         pb = p ? p[3].slice(2) : [],
         ts = token[2].slice(2),
@@ -1731,7 +1756,7 @@ CSSOTranslator.prototype.translate = function(tree) {
 
 CSSOTranslator.prototype._m_simple = {
     'unary': 1, 'nth': 1, 'combinator': 1, 'ident': 1, 'number': 1, 's': 1,
-    'string': 1, 'attrselector': 1, 'operator': 1, 'raw': 1
+    'string': 1, 'attrselector': 1, 'operator': 1, 'raw': 1, 'unknown': 1
 };
 
 CSSOTranslator.prototype._m_composite = {

@@ -5,6 +5,8 @@ pecode CSSOParser {
     @t1 = [#.info, #.name, #1],
     @tc0 = [#.info, #.name].concat(#0),
 
+    unknown = munknown -> @t0,
+
     mstring1 = !('"', '\\"') -> #0,
 
     mstring2 = !("'", "\\'") -> #0,
@@ -48,7 +50,7 @@ pecode CSSOParser {
 
     tset = (vhash, any, sc, operator) -> #0,
 
-    stylesheet = *(cdo, cdc, sc, statement) -> @tc0,
+    stylesheet = *(cdo, cdc, sc, statement, unknown) -> @tc0,
 
     statement = (ruleset, atrule) -> #0,
 

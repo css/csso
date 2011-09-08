@@ -133,3 +133,18 @@ CSSOParser.prototype.mname2 = function() {
         return v;
     }
 };
+
+CSSOParser.prototype.munknown = function() {
+    var s = this._src,
+        sl = s.length,
+        f = this._gi() + 1, i = f, v = '', c, n;
+    for (; i < sl; i++) {
+        c = s.charAt(i);
+        v += c;
+        if (c === '\n' || c === '\r') break;
+    }
+    if (v) {
+        this._si(f + v.length - 1);
+        return v;
+    }
+};
