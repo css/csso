@@ -116,7 +116,10 @@ pecode CSSOParser {
 
     filter = filterp ':' filterv -> [#.info, #.name, #0, #2],
 
-    property = ident *sc -> [#.info, #.name, #0].concat(#1),
+    identp = '//' mident -> [#.info, 'ident', #0 + #1],
+
+    property = identp *sc -> [#.info, #.name, #0].concat(#1)
+             | ident *sc -> [#.info, #.name, #0].concat(#1),
 
     important = '!' *sc 'important' -> [#.info, #.name].concat(#1),
 

@@ -627,13 +627,24 @@ CSSOCompressor.prototype.nlTable = {
 };
 
 CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d) {
-    var vendor = name.charAt(0) === '-' ? name.substr(0, name.indexOf('-', 2) + 1) : '',
-        prop = name.substr(vendor.length),
+    var hack = name.charAt(0);
+    if (hack === '*' || hack === '_') name = name.substr(1);
+    else if (hack === '/' && name.charAt(1) === '/') {
+        hack = '//';
+        name = name.substr(2);
+    } else hack = '';
+
+    var vendor = name.charAt(0), i;
+    if (vendor === '-') {
+        if ((i = name.indexOf('-', 2)) !== -1) vendor = name.substr(0, i + 1);
+    } else vendor = '';
+
+    var prop = name.substr(vendor.length),
         x, t, ppre;
     if (prop in this.nlTable) {
         x = this.nlTable[prop];
         for (var i = 0; i < x.length; i++) {
-            ppre = this.buildPPre(pre, vendor + x[i], v, d);
+            ppre = this.buildPPre(pre, hack + vendor + x[i], v, d);
             if (t = props[ppre]) return (!imp || t.imp);
         }
     }
