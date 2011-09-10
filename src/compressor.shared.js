@@ -501,12 +501,15 @@ CSSOCompressor.prototype.compressDimension = function(token) {
     if (token[2][2] === '0') return token[2];
 };
 
-CSSOCompressor.prototype.compressString = function(token) {
+CSSOCompressor.prototype.compressString = function(token, rule, container) {
     var s = token[2], r = '', c;
     for (var i = 0; i < s.length; i++) {
         c = s.charAt(i);
         if (c === '\\' && s.charAt(i + 1) === '\n') i++;
         else r += c;
+    }
+    if (container[1] === 'attrib' && /^('|")[a-zA-Z0-9]*('|")$/.test(r)) {
+        r = r.substring(1, r.length - 1);
     }
     if (s.length !== r.length) return [{}, 'string', r];
 };

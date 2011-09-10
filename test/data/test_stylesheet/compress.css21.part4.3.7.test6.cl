@@ -1,1 +1,1 @@
-a[b="abcdefg"]{b:c}
+a[b="ab cdefg"]{b:c}
