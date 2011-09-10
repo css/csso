@@ -14,7 +14,7 @@ $util.cleanInfo = function(tree) {
 $util.treeToString = function(tree, level) {
     var spaces = $util.dummySpaces(level),
         level = level ? level : 0,
-        s = (level ? '\n' + spaces : '') + '[', t;
+        s = (level ? '\n' + spaces : '') + '[';
 
     tree.forEach(function(e) {
         s += (Array.isArray(e) ? $util.treeToString(e, level + 1) : e.f !== undefined ? $util.ircToString(e) : ('\'' + e.toString() + '\'')) + ', ';
@@ -459,6 +459,9 @@ CSSOParser.prototype.attrib = function() {
     if (_b_ = this.$()._o('.[')._zme('sc')._o('ident')._zme('sc')._o('attrselector')._zme('sc')._o('ident','string')._zme('sc')._o('.]')._()) {
         return [this._info(), 'attrib'].concat(_b_[1], [_b_[2]], _b_[3], [_b_[4]], _b_[5], [_b_[6]], _b_[7]);
     }
+    if (_b_ = this.$()._o('.[')._zme('sc')._o('ident')._zme('sc')._o('.]')._()) {
+        return [this._info(), 'attrib'].concat(_b_[1], [_b_[2]], _b_[3]);
+    }
 };
 CSSOParser.prototype.clazz = function() {
     var _b_;
@@ -825,7 +828,6 @@ CSSOParser.prototype.mident = function() {
 
 CSSOParser.prototype.mcomment1 = function() {
     var s = this._src,
-        sl = s.length,
         f = this._gi() + 1, v = '', i;
     if (s.charAt(f) === '/' && s.charAt(f + 1) === '*') {
         if ((i = s.indexOf('*/', f + 2)) !== -1) {
@@ -841,7 +843,6 @@ CSSOParser.prototype.mcomment1 = function() {
 
 CSSOParser.prototype.mcomment2 = function() {
     var s = this._src,
-        sl = s.length,
         f = this._gi() + 1, v = '/*', i;
     if (s.charAt(f) === '/' && s.charAt(f + 1) === '*') {
         if ((i = s.indexOf('*/', f + 2)) !== -1) {
@@ -909,13 +910,132 @@ CSSOParser.prototype.munknown = function() {
 };
 var translator = new CSSOTranslator(),
     cleanInfo = $util.cleanInfo;
+function TRBL(name) {
+    this.name = TRBL.extractMain(name);
+    this.sides = {
+        'top': null,
+        'right': null,
+        'bottom': null,
+        'left': null
+    };
+}
+
+TRBL.props = {
+    'margin': 1,
+    'margin-top': 1,
+    'margin-right': 1,
+    'margin-bottom': 1,
+    'margin-left': 1,
+    'padding': 1,
+    'padding-top': 1,
+    'padding-right': 1,
+    'padding-bottom': 1,
+    'padding-left': 1
+};
+
+TRBL.extractMain = function(name) {
+    var i = name.indexOf('-');
+    return i === -1 ? name : name.substr(0, i);
+};
+
+TRBL.prototype.add = function(name, sValue, tValue) {
+    var s = this.sides,
+        i, x, side, a = [];
+    if ((i = name.lastIndexOf('-')) !== -1) {
+        side = name.substr(i + 1);
+        if (side in s) {
+            if (!s[side]) s[side] = { s: sValue, t: tValue[0] };
+            return true;
+        }
+    } else if (name === this.name) {
+        for (i = 0; i < tValue.length; i++) {
+            x = tValue[i];
+            switch(x[1]) {
+                case 'number':
+                case 'ident':
+                    a.push({ s: x[2], t: x });
+                    break;
+                case 'percentage':
+                    a.push({ s: x[2][2] + '%', t: x });
+                    break;
+                case 'dimension':
+                    a.push({ s: x[2][2] + x[3][2], t: x });
+                    break;
+                case 's':
+                case 'comment':
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        if (a.length > 4) return false;
+
+        if (!a[1]) a[1] = a[0];
+        if (!a[2]) a[2] = a[0];
+        if (!a[3]) a[3] = a[1];
+
+        if (!s.top) s.top = a[0];
+        if (!s.right) s.right = a[1];
+        if (!s.bottom) s.bottom = a[2];
+        if (!s.left) s.left = a[3];
+
+        return true;
+    }
+};
+
+TRBL.prototype.isOkToMinimize = function() {
+    var s = this.sides;
+    return !!(s.top && s.right && s.bottom && s.left);
+};
+
+TRBL.prototype.getValue = function() {
+    var s = this.sides,
+        a = [s.top, s.right, s.bottom, s.left],
+        r = [{}, 'value'];
+
+    if (s.left.s === s.right.s) {
+        a.length--;
+        if (s.bottom.s === s.top.s) {
+            a.length--;
+            if (s.right.s === s.top.s) {
+                a.length--;
+            }
+        }
+    }
+
+    for (var i = 0; i < a.length - 1; i++) {
+        r.push(a[i].t);
+        r.push([{ s: ' ' }, 's', ' ']);
+    }
+    r.push(a[i].t);
+
+    return r;
+};
+
+TRBL.prototype.getProperty = function() {
+    return [{ s: this.name }, 'property', [{ s: this.name }, 'ident', this.name]];
+};
+
+TRBL.prototype.getString = function() {
+    var p = this.getProperty(),
+        v = this.getValue().slice(2),
+        r = p[0].s + ':';
+
+    for (var i = 0; i < v.length; i++) r += v[i][0].s;
+
+    return r;
+};
 function CSSOCompressor() {}
 
 CSSOCompressor.prototype.init = function() {
     this.props = {};
+    this.shorts = {};
     this.ccrules = {}; // clean comment rules — special case to resolve ambiguity
     this.crules = {}; // compress rules
     this.prules = {}; // prepare rules
+    this.msrules = {}; // mark shorthands rules
+    this.csrules = {}; // clean shorthands rules
     this.rbrules = {}; // restructure block rules
     this.rjrules = {}; // rejoin ruleset rules
     this.rrrules = {}; // restructure ruleset rules
@@ -924,6 +1044,8 @@ CSSOCompressor.prototype.init = function() {
     this.initRules(this.crules, this.defCCfg);
     this.initRules(this.ccrules, this.cleanCfg);
     this.initRules(this.prules, this.preCfg);
+    this.initRules(this.msrules, this.msCfg);
+    this.initRules(this.csrules, this.csCfg);
     this.initRules(this.rbrules, this.defRBCfg);
     this.initRules(this.rjrules, this.defRJCfg);
     this.initRules(this.rrrules, this.defRRCfg);
@@ -987,6 +1109,15 @@ CSSOCompressor.prototype.preCfg = {
     'preTranslate': 1
 };
 
+CSSOCompressor.prototype.msCfg = {
+    'markShorthands': 1
+};
+
+CSSOCompressor.prototype.csCfg = {
+    'cleanShorthands': 1,
+    'cleanEmpty': 1
+};
+
 CSSOCompressor.prototype.order = [
     'cleanCharset',
     'cleanImport',
@@ -999,6 +1130,8 @@ CSSOCompressor.prototype.order = [
     'compressFontWeight',
     'destroyDelims',
     'preTranslate',
+    'markShorthands',
+    'cleanShorthands',
     'restructureBlock',
     'rejoinRuleset',
     'restructureRuleset',
@@ -1053,7 +1186,12 @@ CSSOCompressor.prototype.profile = {
         'declaration': 1,
         'property': 1,
         'simpleselector': 1,
-        'filter': 1
+        'filter': 1,
+        'value': 1,
+        'number': 1,
+        'percentage': 1,
+        'dimension': 1,
+        'ident': 1
     },
     'restructureBlock': {
         'block': 1
@@ -1069,6 +1207,12 @@ CSSOCompressor.prototype.profile = {
     },
     'delimBlocks': {
         'block': 1
+    },
+    'markShorthands': {
+        'block': 1
+    },
+    'cleanShorthands': {
+        'declaration': 1
     }
 };
 
@@ -1078,12 +1222,8 @@ CSSOCompressor.prototype.isContainer = function(o) {
     }
 };
 
-CSSOCompressor.prototype.getRule = function(token) {
-    if (token !== undefined && token !== null) return token[1];
-};
-
 CSSOCompressor.prototype.process = function(rules, token, container, i, path) {
-    var rule = this.getRule(token);
+    var rule = token[1];
     if (rule && rules[rule]) {
         var r = rules[rule],
             x1 = token, x2;
@@ -1112,6 +1252,8 @@ CSSOCompressor.prototype.compress = function(tree) {
     xs = this.copyArray(x);
 
     this.disjoin(x);
+    x = this.walk(this.msrules, x, '/0');
+    x = this.walk(this.csrules, x, '/0');
     x = this.walk(this.rbrules, x, '/0');
     do {
         l0 = l1;
@@ -1125,6 +1267,7 @@ CSSOCompressor.prototype.compress = function(tree) {
     else if (l0 < l1) x = x0;
 
     x = this.walk(this.frules, x, '/0');
+
     return this.info ? x : cleanInfo(x);
 };
 
@@ -1141,7 +1284,7 @@ CSSOCompressor.prototype.injectInfo = function(token) {
 };
 
 CSSOCompressor.prototype.disjoin = function(container) {
-    var t, x, s, r, sr;
+    var t, s, r, sr;
     for (var i = container.length - 1; i > -1; i--) {
         t = container[i];
         if (t && Array.isArray(t)) {
@@ -1202,8 +1345,8 @@ CSSOCompressor.prototype.cleanImport = function(token, rule, container, i) {
 
 CSSOCompressor.prototype.cleanComment = function(token, rule, container, i) {
     var pr = ((container[1] === 'braces' && i === 4) ||
-              (container[1] !== 'braces' && i === 2)) ? null : this.getRule(container[i - 1]),
-        nr = i === container.length - 1 ? null : this.getRule(container[i + 1]);
+              (container[1] !== 'braces' && i === 2)) ? null : container[i - 1][1],
+        nr = i === container.length - 1 ? null : container[i + 1][1];
 
     if (nr !== null && pr !== null) {
         if (this._cleanComment(nr) || this._cleanComment(pr)) return null;
@@ -1243,8 +1386,8 @@ CSSOCompressor.prototype.nextToken = function(container, type, i, exactly) {
 
 CSSOCompressor.prototype.cleanWhitespace = function(token, rule, container, i) {
     var pr = ((container[1] === 'braces' && i === 4) ||
-              (container[1] !== 'braces' && i === 2)) ? null : this.getRule(container[i - 1]),
-        nr = i === container.length - 1 ? null : this.getRule(container[i + 1]);
+              (container[1] !== 'braces' && i === 2)) ? null : container[i - 1][1],
+        nr = i === container.length - 1 ? null : container[i + 1][1];
 
     if (nr === 'unknown') token[2] = '\n';
     else {
@@ -1294,10 +1437,10 @@ CSSOCompressor.prototype._cleanWhitespace = function(r, left) {
 
 CSSOCompressor.prototype.cleanDecldelim = function(token) {
     for (var i = token.length - 1; i > 1; i--) {
-        if (this.getRule(token[i]) === 'decldelim' &&
-            this.getRule(token[i + 1]) !== 'declaration') token.splice(i, 1);
+        if (token[i][1] === 'decldelim' &&
+            token[i + 1][1] !== 'declaration') token.splice(i, 1);
     }
-    if (this.getRule(token[2]) === 'decldelim') token.splice(2, 1);
+    if (token[2][1] === 'decldelim') token.splice(2, 1);
     return token;
 };
 
@@ -1310,6 +1453,7 @@ CSSOCompressor.prototype.compressNumber = function(token) {
     if (x === '.' || x === '') x = '0';
 
     token[2] = x;
+    token[0].s = x;
     return token;
 };
 
@@ -1324,7 +1468,7 @@ CSSOCompressor.prototype.compressColor = function(token, rule, container, i) {
     }
 };
 
-CSSOCompressor.prototype.compressIdentColor = function(token, rule, container, i) {
+CSSOCompressor.prototype.compressIdentColor = function(token, rule, container) {
     var map = { 'yellow': 'ff0',
                 'fuchsia': 'f0f',
                 'white': 'fff',
@@ -1363,13 +1507,12 @@ CSSOCompressor.prototype._compressHashColor = function(x, info) {
 };
 
 CSSOCompressor.prototype.compressFunctionColor = function(token) {
-    var ident = token[2],
-        i, v = [], t, h = '', body;
+    var i, v = [], t, h = '', body;
 
     if (token[2][2] === 'rgb') {
         body = token[3];
         for (i = 2; i < body.length; i++) {
-            t = this.getRule(body[i]);
+            t = body[i][1];
             if (t === 'number') v.push(body[i]);
             else if (t !== 'operator') { v = []; break }
         }
@@ -1386,12 +1529,15 @@ CSSOCompressor.prototype.compressDimension = function(token) {
     if (token[2][2] === '0') return token[2];
 };
 
-CSSOCompressor.prototype.compressString = function(token) {
+CSSOCompressor.prototype.compressString = function(token, rule, container) {
     var s = token[2], r = '', c;
     for (var i = 0; i < s.length; i++) {
         c = s.charAt(i);
         if (c === '\\' && s.charAt(i + 1) === '\n') i++;
         else r += c;
+    }
+    if (container[1] === 'attrib' && /^('|")[a-zA-Z0-9]*('|")$/.test(r)) {
+        r = r.substring(1, r.length - 1);
     }
     if (s.length !== r.length) return [{}, 'string', r];
 };
@@ -1429,8 +1575,57 @@ CSSOCompressor.prototype.preTranslate = function(token) {
     return token;
 };
 
-CSSOCompressor.prototype.restructureBlock = function(token, rule, container, i, path) {
-    var x, p, v, imp,
+CSSOCompressor.prototype.markShorthands = function(token, rule, container, j, path) {
+    var x, p, v, imp, s, key,
+        r = container[1],
+        selector = r === 'ruleset' ? container[2][2][0].s : '',
+        pre = this.pathUp(path) + '/' + selector + '/';
+
+    for (var i = token.length - 1; i > -1; i--) {
+        x = token[i];
+        if (x[1] === 'declaration') {
+            v = x[3];
+            imp = v[v.length - 1][1] === 'important';
+            p = x[2][0].s;
+            x[0].id = path + '/' + i;
+            if (p in TRBL.props) {
+                key = pre + TRBL.extractMain(p);
+                if (s = this.shorts[key]) {
+                    if (imp) s.invalid = true;
+                } else {
+                    s = new TRBL(p);
+                    x[0].replaceByShort = true;
+                    x[0].shorthandKey = key;
+                }
+                if (!s.invalid) {
+                    s.add(p, v[0].s, v.slice(2));
+                    this.shorts[key] = s;
+                    x[0].removeByShort = true;
+                    x[0].shorthandKey = key;
+                }
+            }
+        }
+    }
+    return token;
+};
+
+CSSOCompressor.prototype.cleanShorthands = function(token) {
+    if (token[0].removeByShort || token[0].replaceByShort) {
+        var s, t;
+
+        s = this.shorts[token[0].shorthandKey];
+        if (!s.invalid && s.isOkToMinimize()) {
+            if (token[0].replaceByShort) {
+                t = [{}, 'declaration', s.getProperty(), s.getValue()];
+                t[0].s = translator.translate(cleanInfo(t));
+                return t;
+            } else return null;
+        }
+    }
+};
+
+CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, path) {
+    var x, p, v, imp, t,
         r = container[1],
         props =  r === 'ruleset' ? this.props : {},
         selector = r === 'ruleset' ? container[2][2][0].s : '',
@@ -1439,7 +1634,7 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, i, 
 
     for (var i = token.length - 1; i > -1; i--) {
         x = token[i];
-        if (this.getRule(x) === 'declaration') {
+        if (x[1] === 'declaration') {
             v = x[3];
             imp = v[v.length - 1][1] === 'important';
             p = x[2][0].s;
@@ -1460,8 +1655,7 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, i, 
 CSSOCompressor.prototype.buildPPre = function(pre, p, v, d) {
     if (p.indexOf('background') !== -1) return pre + d[0].s;
 
-    var ppre = pre,
-        _v = v.slice(2),
+    var _v = v.slice(2),
         colorMark = [
             0, // ident, vhash, rgb
             0, // hsl
@@ -1558,7 +1752,7 @@ CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d) {
         x, t, ppre;
     if (prop in this.nlTable) {
         x = this.nlTable[prop];
-        for (var i = 0; i < x.length; i++) {
+        for (i = 0; i < x.length; i++) {
             ppre = this.buildPPre(pre, hack + vendor + x[i], v, d);
             if (t = props[ppre]) return (!imp || t.imp);
         }
@@ -1571,7 +1765,7 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
         pb = p ? p[3].slice(2) : [],
         ts = token[2].slice(2),
         tb = token[3].slice(2),
-        ph, th, r, nr;
+        ph, th, r;
 
     if (!tb.length) return null;
 
@@ -1597,9 +1791,8 @@ CSSOCompressor.prototype.restructureRuleset = function(token, rule, container, i
     var p = (i === 2 || container[i - 1][1] === 'unknown') ? null : container[i - 1],
         ps = p ? p[2].slice(2) : [],
         pb = p ? p[3].slice(2) : [],
-        ts = token[2].slice(2),
         tb = token[3].slice(2),
-        ph, th, r, nr;
+        r, nr;
 
     if (!tb.length) return null;
 
@@ -1678,9 +1871,7 @@ CSSOCompressor.prototype.cleanSelector = function(token) {
 };
 
 CSSOCompressor.prototype.analyze = function(r1, r2) {
-    var s1 = r1[2], s2 = r2[2],
-        ss1 = s1.slice(2), ss2 = s2.slice(2),
-        b1 = r1[3], b2 = r2[3],
+    var b1 = r1[3], b2 = r2[3],
         d1 = b1.slice(2), d2 = b2.slice(2),
         r = { eq: [], ne1: [], ne2: [] },
         h1, h2, i, x;
@@ -1703,8 +1894,9 @@ CSSOCompressor.prototype.analyze = function(r1, r2) {
 };
 
 CSSOCompressor.prototype.equalHash = function(h0, h1) {
-    for (var k in h0) if (!(k in h1)) return false;
-    for (var k in h1) if (!(k in h0)) return false;
+    var k;
+    for (k in h0) if (!(k in h1)) return false;
+    for (k in h1) if (!(k in h0)) return false;
     return true;
 };
 
