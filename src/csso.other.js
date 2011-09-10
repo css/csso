@@ -66,7 +66,6 @@ CSSOParser.prototype.mident = function() {
 
 CSSOParser.prototype.mcomment1 = function() {
     var s = this._src,
-        sl = s.length,
         f = this._gi() + 1, v = '', i;
     if (s.charAt(f) === '/' && s.charAt(f + 1) === '*') {
         if ((i = s.indexOf('*/', f + 2)) !== -1) {
@@ -82,7 +81,6 @@ CSSOParser.prototype.mcomment1 = function() {
 
 CSSOParser.prototype.mcomment2 = function() {
     var s = this._src,
-        sl = s.length,
         f = this._gi() + 1, v = '/*', i;
     if (s.charAt(f) === '/' && s.charAt(f + 1) === '*') {
         if ((i = s.indexOf('*/', f + 2)) !== -1) {

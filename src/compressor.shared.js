@@ -256,7 +256,7 @@ CSSOCompressor.prototype.injectInfo = function(token) {
 };
 
 CSSOCompressor.prototype.disjoin = function(container) {
-    var t, x, s, r, sr;
+    var t, s, r, sr;
     for (var i = container.length - 1; i > -1; i--) {
         t = container[i];
         if (t && Array.isArray(t)) {
@@ -416,7 +416,7 @@ CSSOCompressor.prototype.cleanDecldelim = function(token) {
     return token;
 };
 
-CSSOCompressor.prototype.compressNumber = function(token, rule, container, i) {
+CSSOCompressor.prototype.compressNumber = function(token) {
     var x = token[2];
 
     if (/^0*/.test(x)) x = x.replace(/^0+/, '');
@@ -440,7 +440,7 @@ CSSOCompressor.prototype.compressColor = function(token, rule, container, i) {
     }
 };
 
-CSSOCompressor.prototype.compressIdentColor = function(token, rule, container, i) {
+CSSOCompressor.prototype.compressIdentColor = function(token, rule, container) {
     var map = { 'yellow': 'ff0',
                 'fuchsia': 'f0f',
                 'white': 'fff',
@@ -479,8 +479,7 @@ CSSOCompressor.prototype._compressHashColor = function(x, info) {
 };
 
 CSSOCompressor.prototype.compressFunctionColor = function(token) {
-    var ident = token[2],
-        i, v = [], t, h = '', body;
+    var i, v = [], t, h = '', body;
 
     if (token[2][2] === 'rgb') {
         body = token[3];
@@ -545,7 +544,7 @@ CSSOCompressor.prototype.preTranslate = function(token) {
     return token;
 };
 
-CSSOCompressor.prototype.markShorthands = function(token, rule, container, i, path) {
+CSSOCompressor.prototype.markShorthands = function(token, rule, container, j, path) {
     var x, p, v, imp, s, key,
         r = container[1],
         selector = r === 'ruleset' ? container[2][2][0].s : '',
@@ -579,7 +578,7 @@ CSSOCompressor.prototype.markShorthands = function(token, rule, container, i, pa
     return token;
 };
 
-CSSOCompressor.prototype.cleanShorthands = function(token, rule, container, i, path) {
+CSSOCompressor.prototype.cleanShorthands = function(token) {
     if (token[0].removeByShort || token[0].replaceByShort) {
         var s, t;
 
@@ -594,8 +593,8 @@ CSSOCompressor.prototype.cleanShorthands = function(token, rule, container, i, p
     }
 };
 
-CSSOCompressor.prototype.restructureBlock = function(token, rule, container, i, path) {
-    var x, p, v, imp,
+CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, path) {
+    var x, p, v, imp, t,
         r = container[1],
         props =  r === 'ruleset' ? this.props : {},
         selector = r === 'ruleset' ? container[2][2][0].s : '',
@@ -625,8 +624,7 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, i, 
 CSSOCompressor.prototype.buildPPre = function(pre, p, v, d) {
     if (p.indexOf('background') !== -1) return pre + d[0].s;
 
-    var ppre = pre,
-        _v = v.slice(2),
+    var _v = v.slice(2),
         colorMark = [
             0, // ident, vhash, rgb
             0, // hsl
@@ -723,7 +721,7 @@ CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d) {
         x, t, ppre;
     if (prop in this.nlTable) {
         x = this.nlTable[prop];
-        for (var i = 0; i < x.length; i++) {
+        for (i = 0; i < x.length; i++) {
             ppre = this.buildPPre(pre, hack + vendor + x[i], v, d);
             if (t = props[ppre]) return (!imp || t.imp);
         }
@@ -736,7 +734,7 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
         pb = p ? p[3].slice(2) : [],
         ts = token[2].slice(2),
         tb = token[3].slice(2),
-        ph, th, r, nr;
+        ph, th, r;
 
     if (!tb.length) return null;
 
@@ -762,9 +760,8 @@ CSSOCompressor.prototype.restructureRuleset = function(token, rule, container, i
     var p = (i === 2 || container[i - 1][1] === 'unknown') ? null : container[i - 1],
         ps = p ? p[2].slice(2) : [],
         pb = p ? p[3].slice(2) : [],
-        ts = token[2].slice(2),
         tb = token[3].slice(2),
-        ph, th, r, nr;
+        r, nr;
 
     if (!tb.length) return null;
 
@@ -843,9 +840,7 @@ CSSOCompressor.prototype.cleanSelector = function(token) {
 };
 
 CSSOCompressor.prototype.analyze = function(r1, r2) {
-    var s1 = r1[2], s2 = r2[2],
-        ss1 = s1.slice(2), ss2 = s2.slice(2),
-        b1 = r1[3], b2 = r2[3],
+    var b1 = r1[3], b2 = r2[3],
         d1 = b1.slice(2), d2 = b2.slice(2),
         r = { eq: [], ne1: [], ne2: [] },
         h1, h2, i, x;
@@ -868,8 +863,9 @@ CSSOCompressor.prototype.analyze = function(r1, r2) {
 };
 
 CSSOCompressor.prototype.equalHash = function(h0, h1) {
-    for (var k in h0) if (!(k in h1)) return false;
-    for (var k in h1) if (!(k in h0)) return false;
+    var k;
+    for (k in h0) if (!(k in h1)) return false;
+    for (k in h1) if (!(k in h0)) return false;
     return true;
 };
 

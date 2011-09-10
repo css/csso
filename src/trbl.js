@@ -96,7 +96,7 @@ TRBL.prototype.getValue = function() {
         r.push(a[i].t);
         r.push([{ s: ' ' }, 's', ' ']);
     }
-    r.push(a[i].t)
+    r.push(a[i].t);
 
     return r;
 };
