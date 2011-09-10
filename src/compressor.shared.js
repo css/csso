@@ -194,12 +194,8 @@ CSSOCompressor.prototype.isContainer = function(o) {
     }
 };
 
-CSSOCompressor.prototype.getRule = function(token) {
-    if (token !== undefined && token !== null) return token[1];
-};
-
 CSSOCompressor.prototype.process = function(rules, token, container, i, path) {
-    var rule = this.getRule(token);
+    var rule = token[1];
     if (rule && rules[rule]) {
         var r = rules[rule],
             x1 = token, x2;
@@ -321,8 +317,8 @@ CSSOCompressor.prototype.cleanImport = function(token, rule, container, i) {
 
 CSSOCompressor.prototype.cleanComment = function(token, rule, container, i) {
     var pr = ((container[1] === 'braces' && i === 4) ||
-              (container[1] !== 'braces' && i === 2)) ? null : this.getRule(container[i - 1]),
-        nr = i === container.length - 1 ? null : this.getRule(container[i + 1]);
+              (container[1] !== 'braces' && i === 2)) ? null : container[i - 1][1],
+        nr = i === container.length - 1 ? null : container[i + 1][1];
 
     if (nr !== null && pr !== null) {
         if (this._cleanComment(nr) || this._cleanComment(pr)) return null;
@@ -362,8 +358,8 @@ CSSOCompressor.prototype.nextToken = function(container, type, i, exactly) {
 
 CSSOCompressor.prototype.cleanWhitespace = function(token, rule, container, i) {
     var pr = ((container[1] === 'braces' && i === 4) ||
-              (container[1] !== 'braces' && i === 2)) ? null : this.getRule(container[i - 1]),
-        nr = i === container.length - 1 ? null : this.getRule(container[i + 1]);
+              (container[1] !== 'braces' && i === 2)) ? null : container[i - 1][1],
+        nr = i === container.length - 1 ? null : container[i + 1][1];
 
     if (nr === 'unknown') token[2] = '\n';
     else {
@@ -413,10 +409,10 @@ CSSOCompressor.prototype._cleanWhitespace = function(r, left) {
 
 CSSOCompressor.prototype.cleanDecldelim = function(token) {
     for (var i = token.length - 1; i > 1; i--) {
-        if (this.getRule(token[i]) === 'decldelim' &&
-            this.getRule(token[i + 1]) !== 'declaration') token.splice(i, 1);
+        if (token[i][1] === 'decldelim' &&
+            token[i + 1][1] !== 'declaration') token.splice(i, 1);
     }
-    if (this.getRule(token[2]) === 'decldelim') token.splice(2, 1);
+    if (token[2][1] === 'decldelim') token.splice(2, 1);
     return token;
 };
 
@@ -489,7 +485,7 @@ CSSOCompressor.prototype.compressFunctionColor = function(token) {
     if (token[2][2] === 'rgb') {
         body = token[3];
         for (i = 2; i < body.length; i++) {
-            t = this.getRule(body[i]);
+            t = body[i][1];
             if (t === 'number') v.push(body[i]);
             else if (t !== 'operator') { v = []; break }
         }
@@ -557,7 +553,7 @@ CSSOCompressor.prototype.markShorthands = function(token, rule, container, i, pa
 
     for (var i = token.length - 1; i > -1; i--) {
         x = token[i];
-        if (this.getRule(x) === 'declaration') {
+        if (x[1] === 'declaration') {
             v = x[3];
             imp = v[v.length - 1][1] === 'important';
             p = x[2][0].s;
@@ -608,7 +604,7 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, i, 
 
     for (var i = token.length - 1; i > -1; i--) {
         x = token[i];
-        if (this.getRule(x) === 'declaration') {
+        if (x[1] === 'declaration') {
             v = x[3];
             imp = v[v.length - 1][1] === 'important';
             p = x[2][0].s;
