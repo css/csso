@@ -117,7 +117,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 * Частичное слияние блоков
 * Частичное разделение блоков
 * Удаление пустых ruleset и at-rule
-* Минимизация margin и padding
+* Минимизация `margin` и `padding`
 
 Детальное описание минимизации находится [здесь](https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
 
