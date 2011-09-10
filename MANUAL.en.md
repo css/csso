@@ -21,6 +21,7 @@
 * 2.2.5\. Partial merging of blocks
 * 2.2.6\. Partial splitting of blocks
 * 2.2.7\. Removal of empty ruleset and at-rule
+* 2.2.8\. Minification of margin and padding properties
 * 3\. Recommendations
 * 3.1\. Length of selectors
 * 3.2\. Order of properties
@@ -219,7 +220,7 @@ The `bold` and `normal` values of the `font-weight` property are minimized accor
 
 ## 2.2. Structural optimizations
 
-#### 2.2.1. Merging blocks with identical selectors
+### 2.2.1. Merging blocks with identical selectors
 
 Adjacent blocks with identical selectors are merged.
 
@@ -255,7 +256,7 @@ Adjacent blocks with identical selectors are merged.
             padding: 0
         }
 
-#### 2.2.2. Merging blocks with identical properties
+### 2.2.2. Merging blocks with identical properties
 
 Adjacent blocks with identical properties are merged.
 
@@ -290,7 +291,7 @@ Adjacent blocks with identical properties are merged.
             padding: 0
         }
 
-#### 2.2.3. Removal of overridden properties
+### 2.2.3. Removal of overridden properties
 
 Properties ignored by the browser can be removed using the following rules:
 
@@ -329,7 +330,7 @@ In case of `border`, `margin`, `padding`, `font` and `list-style` properties, th
             border-color:green
         }
 
-#### 2.2.4. Removal of repeating selectors
+### 2.2.4. Removal of repeating selectors
 
 Repeating selectors can be removed.
 
@@ -344,7 +345,7 @@ Repeating selectors can be removed.
             color: red
         }
 
-#### 2.2.5. Partial merging of blocks
+### 2.2.5. Partial merging of blocks
 
 Given two adjacent blocks where one of the blocks is a subset of the other one, the following optimization is possible:
 
@@ -408,7 +409,7 @@ Minification won't take place if character count of the properties to be copied 
             border: none
         }
 
-#### 2.2.6. Partial splitting of blocks
+### 2.2.6. Partial splitting of blocks
 
 If two adjacent blocks contain intersecting properties the following minification is possible:
 
@@ -474,7 +475,7 @@ Minification won't take place if there's no gain in character count.
             margin: 0
         }
 
-#### 2.2.7. Removal of empty ruleset and at-rule
+### 2.2.7. Removal of empty ruleset and at-rule
 
 Empty ruleset and at-rule will be removed.
 
@@ -498,6 +499,56 @@ Empty ruleset and at-rule will be removed.
 * After:
 
         .test{color:red;border:none}
+
+### 2.2.8. Minification of margin and padding properties
+
+The `margin` and `padding` properties are minimized according to \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
+
+* Before:
+
+        .test0 {
+            margin-top: 1em;
+            margin-right: 2em;
+            margin-bottom: 3em;
+            margin-left: 4em;
+        }
+
+        .test1 {
+            margin: 1 2 3 2
+        }
+
+        .test2 {
+            margin: 1 2 1 2
+        }
+
+        .test3 {
+            margin: 1 1 1 1
+        }
+
+        .test4 {
+            margin: 1 1 1
+        }
+
+        .test5 {
+            margin: 1 1
+        }
+* After:
+
+        .test0 {
+            margin: 1em 2em 3em 4em
+        }
+
+        .test1 {
+            margin: 1 2 3
+        }
+
+        .test2 {
+            margin: 1 2
+        }
+
+        .test3, .test4, .test5 {
+            margin: 1
+        }
 
 # 3. Recommendations
 
