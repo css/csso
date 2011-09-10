@@ -2,9 +2,12 @@ function CSSOCompressor() {}
 
 CSSOCompressor.prototype.init = function() {
     this.props = {};
+    this.shorts = {};
     this.ccrules = {}; // clean comment rules — special case to resolve ambiguity
     this.crules = {}; // compress rules
     this.prules = {}; // prepare rules
+    this.msrules = {}; // mark shorthands rules
+    this.csrules = {}; // clean shorthands rules
     this.rbrules = {}; // restructure block rules
     this.rjrules = {}; // rejoin ruleset rules
     this.rrrules = {}; // restructure ruleset rules
@@ -13,6 +16,8 @@ CSSOCompressor.prototype.init = function() {
     this.initRules(this.crules, this.defCCfg);
     this.initRules(this.ccrules, this.cleanCfg);
     this.initRules(this.prules, this.preCfg);
+    this.initRules(this.msrules, this.msCfg);
+    this.initRules(this.csrules, this.csCfg);
     this.initRules(this.rbrules, this.defRBCfg);
     this.initRules(this.rjrules, this.defRJCfg);
     this.initRules(this.rrrules, this.defRRCfg);
@@ -76,6 +81,15 @@ CSSOCompressor.prototype.preCfg = {
     'preTranslate': 1
 };
 
+CSSOCompressor.prototype.msCfg = {
+    'markShorthands': 1
+};
+
+CSSOCompressor.prototype.csCfg = {
+    'cleanShorthands': 1,
+    'cleanEmpty': 1
+};
+
 CSSOCompressor.prototype.order = [
     'cleanCharset',
     'cleanImport',
@@ -88,6 +102,8 @@ CSSOCompressor.prototype.order = [
     'compressFontWeight',
     'destroyDelims',
     'preTranslate',
+    'markShorthands',
+    'cleanShorthands',
     'restructureBlock',
     'rejoinRuleset',
     'restructureRuleset',
@@ -142,7 +158,12 @@ CSSOCompressor.prototype.profile = {
         'declaration': 1,
         'property': 1,
         'simpleselector': 1,
-        'filter': 1
+        'filter': 1,
+        'value': 1,
+        'number': 1,
+        'percentage': 1,
+        'dimension': 1,
+        'ident': 1
     },
     'restructureBlock': {
         'block': 1
@@ -158,6 +179,12 @@ CSSOCompressor.prototype.profile = {
     },
     'delimBlocks': {
         'block': 1
+    },
+    'markShorthands': {
+        'block': 1
+    },
+    'cleanShorthands': {
+        'declaration': 1
     }
 };
 
@@ -201,6 +228,8 @@ CSSOCompressor.prototype.compress = function(tree) {
     xs = this.copyArray(x);
 
     this.disjoin(x);
+    x = this.walk(this.msrules, x, '/0');
+    x = this.walk(this.csrules, x, '/0');
     x = this.walk(this.rbrules, x, '/0');
     do {
         l0 = l1;
@@ -214,6 +243,7 @@ CSSOCompressor.prototype.compress = function(tree) {
     else if (l0 < l1) x = x0;
 
     x = this.walk(this.frules, x, '/0');
+
     return this.info ? x : cleanInfo(x);
 };
 
@@ -390,7 +420,7 @@ CSSOCompressor.prototype.cleanDecldelim = function(token) {
     return token;
 };
 
-CSSOCompressor.prototype.compressNumber = function(token) {
+CSSOCompressor.prototype.compressNumber = function(token, rule, container, i) {
     var x = token[2];
 
     if (/^0*/.test(x)) x = x.replace(/^0+/, '');
@@ -399,6 +429,7 @@ CSSOCompressor.prototype.compressNumber = function(token) {
     if (x === '.' || x === '') x = '0';
 
     token[2] = x;
+    token[0].s = x;
     return token;
 };
 
@@ -516,6 +547,55 @@ CSSOCompressor.prototype.destroyDelims = function() {
 CSSOCompressor.prototype.preTranslate = function(token) {
     token[0].s = translator.translate(cleanInfo(token));
     return token;
+};
+
+CSSOCompressor.prototype.markShorthands = function(token, rule, container, i, path) {
+    var x, p, v, imp, s, key,
+        r = container[1],
+        selector = r === 'ruleset' ? container[2][2][0].s : '',
+        pre = this.pathUp(path) + '/' + selector + '/';
+
+    for (var i = token.length - 1; i > -1; i--) {
+        x = token[i];
+        if (this.getRule(x) === 'declaration') {
+            v = x[3];
+            imp = v[v.length - 1][1] === 'important';
+            p = x[2][0].s;
+            x[0].id = path + '/' + i;
+            if (p in TRBL.props) {
+                key = pre + TRBL.extractMain(p);
+                if (s = this.shorts[key]) {
+                    if (imp) s.invalid = true;
+                } else {
+                    s = new TRBL(p);
+                    x[0].replaceByShort = true;
+                    x[0].shorthandKey = key;
+                }
+                if (!s.invalid) {
+                    s.add(p, v[0].s, v.slice(2));
+                    this.shorts[key] = s;
+                    x[0].removeByShort = true;
+                    x[0].shorthandKey = key;
+                }
+            }
+        }
+    }
+    return token;
+};
+
+CSSOCompressor.prototype.cleanShorthands = function(token, rule, container, i, path) {
+    if (token[0].removeByShort || token[0].replaceByShort) {
+        var s, t;
+
+        s = this.shorts[token[0].shorthandKey];
+        if (!s.invalid && s.isOkToMinimize()) {
+            if (token[0].replaceByShort) {
+                t = [{}, 'declaration', s.getProperty(), s.getValue()];
+                t[0].s = translator.translate(cleanInfo(t));
+                return t;
+            } else return null;
+        }
+    }
 };
 
 CSSOCompressor.prototype.restructureBlock = function(token, rule, container, i, path) {

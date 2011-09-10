@@ -1,1 +1,1 @@
-a{color:red}b{p:v}a{margin:3;margin-left:4}
+a{color:red}b{p:v}a{margin:3 3 3 4}

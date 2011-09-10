@@ -14,7 +14,8 @@ node:
 shared:
 	@pecode src/csso.pecode > .parser.js
 	@cat src/csso.other.js >> .parser.js
-	@cat src/compressor.shared.js > .compressor.js
+	@cat src/trbl.js > .compressor.js
+	@cat src/compressor.shared.js >> .compressor.js
 	@cat src/util.shared.js > .util.js
 	@cat src/translator.shared.js > .translator.js
 
