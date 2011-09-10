@@ -79,7 +79,8 @@ pecode CSSOParser {
 
     combinator = ('+', '>', '~') -> @t0,
 
-    attrib = '[' *sc ident *sc attrselector *sc (ident, string) *sc ']' -> [#.info, #.name].concat(#1, [#2], #3, [#4], #5, [#6], #7),
+    attrib = '[' *sc ident *sc attrselector *sc (ident, string) *sc ']' -> [#.info, #.name].concat(#1, [#2], #3, [#4], #5, [#6], #7)
+           | '[' *sc ident *sc ']' -> [#.info, #.name].concat(#1, [#2], #3),
 
     clazz = '.' ident -> @t1,
 

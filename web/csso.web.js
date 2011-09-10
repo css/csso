@@ -459,6 +459,9 @@ CSSOParser.prototype.attrib = function() {
     if (_b_ = this.$()._o('.[')._zme('sc')._o('ident')._zme('sc')._o('attrselector')._zme('sc')._o('ident','string')._zme('sc')._o('.]')._()) {
         return [this._info(), 'attrib'].concat(_b_[1], [_b_[2]], _b_[3], [_b_[4]], _b_[5], [_b_[6]], _b_[7]);
     }
+    if (_b_ = this.$()._o('.[')._zme('sc')._o('ident')._zme('sc')._o('.]')._()) {
+        return [this._info(), 'attrib'].concat(_b_[1], [_b_[2]], _b_[3]);
+    }
 };
 CSSOParser.prototype.clazz = function() {
     var _b_;
