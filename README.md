@@ -76,6 +76,10 @@ Usage:
         shows usage information
     csso <filename>
         minimizes the CSS in <filename> and outputs the result to stdout
+    csso <in_filename> <out_filename>
+    csso -i <in_filename> -o <out_filename>
+    csso --input <in_filename> --output <out_filename>
+        minimizes the CSS in <in_filename> and outputs the result to <out_filename>
     csso -h
     csso --help
         shows usage information
