@@ -121,16 +121,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 Детальное описание минимизации находится [здесь](https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
 
-# 5. Разработчикам
-
-Исходный код CSSO написан на очень простом JavaScript. Это позволяет легко портировать CSSO на распространённые языки типа Python, Java, PHP, Perl, C++, C и т.п. Лицензия MIT позволяет вам использовать CSSO так, как вам угодно, но на всякий случай прочтите текст [лицензии](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt).
-
-# 6. Авторы
+# 5. Авторы
 
 * идея и поддержка&nbsp;— Виталий Харисов (<vitaly@harisov.name>)
 * реализация&nbsp;— Сергей Крыжановский (<skryzhanovsky@ya.ru>)
 * перевод на английский язык&nbsp;— Leonid Khachaturov (leonidkhachaturov@gmail.com)
 
-# 7. Остальное
+# 6. Остальное
 
 * CSSO распространяется под [лицензией MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)

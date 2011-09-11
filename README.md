@@ -121,16 +121,12 @@ Structural optimizations:
 
 The minification techniques are described in detail in the [manual](https://github.com/afelix/csso/blob/master/MANUAL.en.md).
 
-# 5. Note to developers
-
-CSSO is written in easy-to-understand JavaScript. It's easily portable to other languages, such as Python, Java, PHP, Perl, C++, C, etc. The source code is licensed under [MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt).
-
-# 6. Authors
+# 5. Authors
 
 * initial idea&nbsp;— Vitaly Harisov (<vitaly@harisov.name>)
 * implementation&nbsp;— Sergey Kryzhanovsky (<skryzhanovsky@ya.ru>)
 * english translation&nbsp;— Leonid Khachaturov (leonidkhachaturov@gmail.com)
 
-# 7. And finally
+# 6. And finally
 
 * CSSO is licensed under [MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)
