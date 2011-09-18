@@ -53,6 +53,7 @@ CSSOCompressor.prototype.defCCfg = {
     'compressDimension': 1,
     'compressString': 1,
     'compressFontWeight': 1,
+    'compressFont': 1,
     'cleanEmpty': 1
 };
 
@@ -94,6 +95,7 @@ CSSOCompressor.prototype.order = [
     'cleanCharset',
     'cleanImport',
     'cleanComment',
+    'compressFont',
     'cleanWhitespace',
     'compressNumber',
     'compressColor',
@@ -137,6 +139,9 @@ CSSOCompressor.prototype.profile = {
         'string': 1
     },
     'compressFontWeight': {
+        'declaration': 1
+    },
+    'compressFont': {
         'declaration': 1
     },
     'cleanComment': {
@@ -198,7 +203,8 @@ CSSOCompressor.prototype.process = function(rules, token, container, i, path) {
     var rule = token[1];
     if (rule && rules[rule]) {
         var r = rules[rule],
-            x1 = token, x2;
+            x1 = token, x2,
+            o = this.order, k;
         for (var k = 0; k < r.length; k++) {
             x2 = this[r[k]](x1, rule, container, i, path);
             if (x2 === null) return null;
@@ -520,6 +526,31 @@ CSSOCompressor.prototype.compressFontWeight = function(token) {
     if (p[2][2].indexOf('font-weight') !== -1 && v[2][1] === 'ident') {
         if (v[2][2] === 'normal') v[2] = [{}, 'number', '400'];
         else if (v[2][2] === 'bold') v[2] = [{}, 'number', '700'];
+        return token;
+    }
+};
+
+CSSOCompressor.prototype.compressFont = function(token) {
+    var p = token[2],
+        v = token[3],
+        i, x;
+    if (/font$/.test(p[2][2])) {
+        for (i = v.length - 1; i > 1; i--) {
+            x = v[i];
+            if (x[1] === 'ident') {
+                x = x[2];
+                if (x === 'bold') v[i] = [{}, 'number', '700'];
+                else if (x === 'normal') {
+                    if (v[i - 1][2] !== '/') v.splice(i, 1);
+                    else v.splice(i - 1, 2);
+                    if (v[i][1] === 's') v.splice(i, 1);
+                }
+                else if (x === 'medium' && v[i + 1] && v[i + 1][2] !== '/') {
+                    v.splice(i, 1);
+                    if (v[i][1] === 's') v.splice(i, 1);
+                }
+            }
+        }
         return token;
     }
 };
