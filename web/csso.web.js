@@ -1082,6 +1082,7 @@ CSSOCompressor.prototype.defCCfg = {
     'compressString': 1,
     'compressFontWeight': 1,
     'compressFont': 1,
+    'compressBackground': 1,
     'cleanEmpty': 1
 };
 
@@ -1123,13 +1124,14 @@ CSSOCompressor.prototype.order = [
     'cleanCharset',
     'cleanImport',
     'cleanComment',
-    'compressFont',
     'cleanWhitespace',
     'compressNumber',
     'compressColor',
     'compressDimension',
     'compressString',
     'compressFontWeight',
+    'compressFont',
+    'compressBackground',
     'destroyDelims',
     'preTranslate',
     'markShorthands',
@@ -1170,6 +1172,9 @@ CSSOCompressor.prototype.profile = {
         'declaration': 1
     },
     'compressFont': {
+        'declaration': 1
+    },
+    'compressBackground': {
         'declaration': 1
     },
     'cleanComment': {
@@ -1561,24 +1566,50 @@ CSSOCompressor.prototype.compressFontWeight = function(token) {
 CSSOCompressor.prototype.compressFont = function(token) {
     var p = token[2],
         v = token[3],
-        i, x;
-    if (/font$/.test(p[2][2])) {
-        for (i = v.length - 1; i > 1; i--) {
+        i, x, t;
+    if (/font$/.test(p[2][2]) && v.length) {
+        v.splice(2, 0, [{}, 's', '']);
+        for (i = v.length - 1; i > 2; i--) {
             x = v[i];
             if (x[1] === 'ident') {
                 x = x[2];
                 if (x === 'bold') v[i] = [{}, 'number', '700'];
                 else if (x === 'normal') {
-                    if (v[i - 1][2] !== '/') v.splice(i, 1);
-                    else v.splice(i - 1, 2);
-                    if (v[i][1] === 's') v.splice(i, 1);
+                    t = v[i - 1];
+                    if (t[1] === 'operator' && t[2] === '/') v.splice(--i, 2);
+                    else v.splice(i, 1);
+                    if (v[i - 1][1] === 's') v.splice(--i, 1);
                 }
                 else if (x === 'medium' && v[i + 1] && v[i + 1][2] !== '/') {
                     v.splice(i, 1);
-                    if (v[i][1] === 's') v.splice(i, 1);
+                    if (v[i - 1][1] === 's') v.splice(--i, 1);
                 }
             }
         }
+        if (v.length > 2 && v[2][1] === 's') v.splice(2, 1);
+        if (v.length === 2) v.push([{}, 'ident', 'normal']);
+        return token;
+    }
+};
+
+CSSOCompressor.prototype.compressBackground = function(token) {
+    var p = token[2],
+        v = token[3],
+        i, x, t;
+    if (/background$/.test(p[2][2]) && v.length) {
+        v.splice(2, 0, [{}, 's', '']);
+        for (i = v.length - 1; i > 2; i--) {
+            x = v[i];
+            if (x[1] === 'ident') {
+                x = x[2];
+                if (x === 'transparent' || x === 'none' || x === 'repeat' || x === 'scroll') {
+                    v.splice(i, 1);
+                    if (v[i - 1][1] === 's') v.splice(--i, 1);
+                }
+            }
+        }
+        if (v.length > 2 && v[2][1] === 's') v.splice(2, 1);
+        if (v.length === 2) v.splice(2, 0, [{}, 'number', '0'], [{}, 's', ' '], [{}, 'number', '0']);
         return token;
     }
 };
