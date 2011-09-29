@@ -63,6 +63,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Вывод (`> node test.js`):
 
     .test{color:#fff}
+Используйте `csso.justDoIt(css, true)`, если требуется выключить структурную минимизацию.
 
 ## 3.3. Через командную строку
 
@@ -80,6 +81,9 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
     csso -i <in_имя_файла> -o <out_имя_файла>
     csso --input <in_имя_файла> --output <out_имя_файла>
         минимизирует CSS из <in_имя_файла> и записывает результат в <out_имя_файла>
+    csso -off
+    csso --restructure-off
+        turns structure minimization off
     csso -h
     csso --help
         показывает этот текст

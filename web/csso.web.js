@@ -1247,7 +1247,7 @@ CSSOCompressor.prototype.process = function(rules, token, container, i, path) {
     return x1;
 };
 
-CSSOCompressor.prototype.compress = function(tree) {
+CSSOCompressor.prototype.compress = function(tree, ro) {
     this.init();
     this.info = typeof tree[0] !== 'string';
 
@@ -1260,22 +1260,24 @@ CSSOCompressor.prototype.compress = function(tree) {
     x = this.walk(this.crules, x, '/0');
     x = this.walk(this.prules, x, '/0');
     ls = translator.translate(cleanInfo(x)).length;
-    xs = this.copyArray(x);
 
-    this.disjoin(x);
-    x = this.walk(this.msrules, x, '/0');
-    x = this.walk(this.csrules, x, '/0');
-    x = this.walk(this.rbrules, x, '/0');
-    do {
-        l0 = l1;
-        x0 = this.copyArray(x);
-        x = this.walk(this.rjrules, x, '/0');
-        x = this.walk(this.rrrules, x, '/0');
-        l1 = translator.translate(cleanInfo(x)).length;
-        x1 = this.copyArray(x);
-    } while (l0 > l1);
-    if (ls < l0 && ls < l1) x = xs;
-    else if (l0 < l1) x = x0;
+    if (!ro) { // restructure ON
+        xs = this.copyArray(x);
+        this.disjoin(x);
+        x = this.walk(this.msrules, x, '/0');
+        x = this.walk(this.csrules, x, '/0');
+        x = this.walk(this.rbrules, x, '/0');
+        do {
+            l0 = l1;
+            x0 = this.copyArray(x);
+            x = this.walk(this.rjrules, x, '/0');
+            x = this.walk(this.rrrules, x, '/0');
+            l1 = translator.translate(cleanInfo(x)).length;
+            x1 = this.copyArray(x);
+        } while (l0 > l1);
+        if (ls < l0 && ls < l1) x = xs;
+        else if (l0 < l1) x = x0;
+    }
 
     x = this.walk(this.frules, x, '/0');
 

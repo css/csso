@@ -63,6 +63,7 @@ Sample (`test.js`):
 Output (`> node test.js`):
 
     .test{color:#fff}
+Use `csso.justDoIt(css, true)` to turn structure minimization off.
 
 ## 3.3. From the command line
 
@@ -80,6 +81,9 @@ Usage:
     csso -i <in_filename> -o <out_filename>
     csso --input <in_filename> --output <out_filename>
         minimizes the CSS in <in_filename> and outputs the result to <out_filename>
+    csso -off
+    csso --restructure-off
+        turns structure minimization off
     csso -h
     csso --help
         shows usage information
