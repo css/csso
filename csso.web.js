@@ -636,8 +636,29 @@ CSSOParser.prototype.functionBody = function() {
 };
 CSSOParser.prototype.funktion = function() {
     var _b_;
+    if (_b_ = this.$()._o('notselector')._()) {
+        return _b_[0];
+    }
     if (_b_ = this.$()._o('ident')._o('.(')._o('functionBody')._o('.)')._()) {
         return [this._info(), 'funktion', _b_[0], _b_[2]];
+    }
+};
+CSSOParser.prototype.notselectorident = function() {
+    var _b_;
+    if (_b_ = this.$()._o('.not')._()) {
+        return [this._info(), 'ident', _b_[0]];
+    }
+};
+CSSOParser.prototype.notselector = function() {
+    var _b_;
+    if (_b_ = this.$()._o('notselectorident')._o('.(')._o('notselectorBody')._o('.)')._()) {
+        return [this._info(), 'funktion', _b_[0], _b_[2]];
+    }
+};
+CSSOParser.prototype.notselectorBody = function() {
+    var _b_;
+    if (_b_ = this.$()._zo('simpleselector')._()) {
+        return [this._info(), 'functionBody', _b_[0]];
     }
 };
 CSSOParser.prototype.braces = function() {
@@ -940,26 +961,33 @@ TRBL.extractMain = function(name) {
 
 TRBL.prototype.add = function(name, sValue, tValue) {
     var s = this.sides,
-        i, x, side, a = [];
+        i, x, side, a = [],
+        last;
     if ((i = name.lastIndexOf('-')) !== -1) {
         side = name.substr(i + 1);
         if (side in s) {
-            if (!s[side]) s[side] = { s: sValue, t: tValue[0] };
+            if (!s[side]) {
+                s[side] = { s: sValue, t: [tValue[0]] };
+                if (tValue[0][1] === 'unary') s[side].t.push(tValue[1]);
+            }
             return true;
         }
     } else if (name === this.name) {
         for (i = 0; i < tValue.length; i++) {
             x = tValue[i];
             switch(x[1]) {
+                case 'unary':
+                    a.push({ s: x[2], t: last = [x] });
+                    break;
                 case 'number':
                 case 'ident':
-                    a.push({ s: x[2], t: x });
+                    last = (last ? last.push(x) : a.push({ s: x[2], t: [x] }), null);
                     break;
                 case 'percentage':
-                    a.push({ s: x[2][2] + '%', t: x });
+                    last = (last ? last.push(x) : a.push({ s: x[2][2] + '%', t: [x] }), null);
                     break;
                 case 'dimension':
-                    a.push({ s: x[2][2] + x[3][2], t: x });
+                    last = (last ? last.push(x) : a.push({ s: x[2][2] + x[3][2], t: [x] }), null);
                     break;
                 case 's':
                 case 'comment':
@@ -1005,10 +1033,10 @@ TRBL.prototype.getValue = function() {
     }
 
     for (var i = 0; i < a.length - 1; i++) {
-        r.push(a[i].t);
+        r = r.concat(a[i].t);
         r.push([{ s: ' ' }, 's', ' ']);
     }
-    r.push(a[i].t);
+    r = r.concat(a[i].t);
 
     return r;
 };
@@ -1081,6 +1109,8 @@ CSSOCompressor.prototype.defCCfg = {
     'compressDimension': 1,
     'compressString': 1,
     'compressFontWeight': 1,
+    'compressFont': 1,
+    'compressBackground': 1,
     'cleanEmpty': 1
 };
 
@@ -1128,6 +1158,8 @@ CSSOCompressor.prototype.order = [
     'compressDimension',
     'compressString',
     'compressFontWeight',
+    'compressFont',
+    'compressBackground',
     'destroyDelims',
     'preTranslate',
     'markShorthands',
@@ -1165,6 +1197,12 @@ CSSOCompressor.prototype.profile = {
         'string': 1
     },
     'compressFontWeight': {
+        'declaration': 1
+    },
+    'compressFont': {
+        'declaration': 1
+    },
+    'compressBackground': {
         'declaration': 1
     },
     'cleanComment': {
@@ -1226,7 +1264,8 @@ CSSOCompressor.prototype.process = function(rules, token, container, i, path) {
     var rule = token[1];
     if (rule && rules[rule]) {
         var r = rules[rule],
-            x1 = token, x2;
+            x1 = token, x2,
+            o = this.order, k;
         for (var k = 0; k < r.length; k++) {
             x2 = this[r[k]](x1, rule, container, i, path);
             if (x2 === null) return null;
@@ -1236,7 +1275,7 @@ CSSOCompressor.prototype.process = function(rules, token, container, i, path) {
     return x1;
 };
 
-CSSOCompressor.prototype.compress = function(tree) {
+CSSOCompressor.prototype.compress = function(tree, ro) {
     this.init();
     this.info = typeof tree[0] !== 'string';
 
@@ -1249,22 +1288,24 @@ CSSOCompressor.prototype.compress = function(tree) {
     x = this.walk(this.crules, x, '/0');
     x = this.walk(this.prules, x, '/0');
     ls = translator.translate(cleanInfo(x)).length;
-    xs = this.copyArray(x);
 
-    this.disjoin(x);
-    x = this.walk(this.msrules, x, '/0');
-    x = this.walk(this.csrules, x, '/0');
-    x = this.walk(this.rbrules, x, '/0');
-    do {
-        l0 = l1;
-        x0 = this.copyArray(x);
-        x = this.walk(this.rjrules, x, '/0');
-        x = this.walk(this.rrrules, x, '/0');
-        l1 = translator.translate(cleanInfo(x)).length;
-        x1 = this.copyArray(x);
-    } while (l0 > l1);
-    if (ls < l0 && ls < l1) x = xs;
-    else if (l0 < l1) x = x0;
+    if (!ro) { // restructure ON
+        xs = this.copyArray(x);
+        this.disjoin(x);
+        x = this.walk(this.msrules, x, '/0');
+        x = this.walk(this.csrules, x, '/0');
+        x = this.walk(this.rbrules, x, '/0');
+        do {
+            l0 = l1;
+            x0 = this.copyArray(x);
+            x = this.walk(this.rjrules, x, '/0');
+            x = this.walk(this.rrrules, x, '/0');
+            l1 = translator.translate(cleanInfo(x)).length;
+            x1 = this.copyArray(x);
+        } while (l0 > l1);
+        if (ls < l0 && ls < l1) x = xs;
+        else if (l0 < l1) x = x0;
+    }
 
     x = this.walk(this.frules, x, '/0');
 
@@ -1548,6 +1589,57 @@ CSSOCompressor.prototype.compressFontWeight = function(token) {
     if (p[2][2].indexOf('font-weight') !== -1 && v[2][1] === 'ident') {
         if (v[2][2] === 'normal') v[2] = [{}, 'number', '400'];
         else if (v[2][2] === 'bold') v[2] = [{}, 'number', '700'];
+        return token;
+    }
+};
+
+CSSOCompressor.prototype.compressFont = function(token) {
+    var p = token[2],
+        v = token[3],
+        i, x, t;
+    if (/font$/.test(p[2][2]) && v.length) {
+        v.splice(2, 0, [{}, 's', '']);
+        for (i = v.length - 1; i > 2; i--) {
+            x = v[i];
+            if (x[1] === 'ident') {
+                x = x[2];
+                if (x === 'bold') v[i] = [{}, 'number', '700'];
+                else if (x === 'normal') {
+                    t = v[i - 1];
+                    if (t[1] === 'operator' && t[2] === '/') v.splice(--i, 2);
+                    else v.splice(i, 1);
+                    if (v[i - 1][1] === 's') v.splice(--i, 1);
+                }
+                else if (x === 'medium' && v[i + 1] && v[i + 1][2] !== '/') {
+                    v.splice(i, 1);
+                    if (v[i - 1][1] === 's') v.splice(--i, 1);
+                }
+            }
+        }
+        if (v.length > 2 && v[2][1] === 's') v.splice(2, 1);
+        if (v.length === 2) v.push([{}, 'ident', 'normal']);
+        return token;
+    }
+};
+
+CSSOCompressor.prototype.compressBackground = function(token) {
+    var p = token[2],
+        v = token[3],
+        i, x, t;
+    if (/background$/.test(p[2][2]) && v.length) {
+        v.splice(2, 0, [{}, 's', '']);
+        for (i = v.length - 1; i > 2; i--) {
+            x = v[i];
+            if (x[1] === 'ident') {
+                x = x[2];
+                if (x === 'transparent' || x === 'none' || x === 'repeat' || x === 'scroll') {
+                    v.splice(i, 1);
+                    if (v[i - 1][1] === 's') v.splice(--i, 1);
+                }
+            }
+        }
+        if (v.length > 2 && v[2][1] === 's') v.splice(2, 1);
+        if (v.length === 2) v.splice(2, 0, [{}, 'number', '0'], [{}, 's', ' '], [{}, 'number', '0']);
         return token;
     }
 };
