@@ -139,7 +139,14 @@ pecode CSSOParser {
 
     functionBody = *tset -> @tc0,
 
-    funktion = ident '(' functionBody ')' -> [#.info, #.name, #0, #2],
+    funktion = notselector -> #0
+             | ident '(' functionBody ')' -> [#.info, #.name, #0, #2],
+
+    notselectorident = 'not' -> [#.info, 'ident', #0],
+
+    notselector = notselectorident '(' notselectorBody ')' -> [#.info, 'funktion', #0, #2],
+
+    notselectorBody = ?simpleselector -> [#.info, 'functionBody', #0],
 
     braces = '(' *tset ')' -> [#.info, #.name, '(', ')'].concat(#1)
            | '[' *tset ']' -> [#.info, #.name, '[', ']'].concat(#1),

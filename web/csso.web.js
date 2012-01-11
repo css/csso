@@ -636,8 +636,29 @@ CSSOParser.prototype.functionBody = function() {
 };
 CSSOParser.prototype.funktion = function() {
     var _b_;
+    if (_b_ = this.$()._o('notselector')._()) {
+        return _b_[0];
+    }
     if (_b_ = this.$()._o('ident')._o('.(')._o('functionBody')._o('.)')._()) {
         return [this._info(), 'funktion', _b_[0], _b_[2]];
+    }
+};
+CSSOParser.prototype.notselectorident = function() {
+    var _b_;
+    if (_b_ = this.$()._o('.not')._()) {
+        return [this._info(), 'ident', _b_[0]];
+    }
+};
+CSSOParser.prototype.notselector = function() {
+    var _b_;
+    if (_b_ = this.$()._o('notselectorident')._o('.(')._o('notselectorBody')._o('.)')._()) {
+        return [this._info(), 'funktion', _b_[0], _b_[2]];
+    }
+};
+CSSOParser.prototype.notselectorBody = function() {
+    var _b_;
+    if (_b_ = this.$()._zo('simpleselector')._()) {
+        return [this._info(), 'functionBody', _b_[0]];
     }
 };
 CSSOParser.prototype.braces = function() {
