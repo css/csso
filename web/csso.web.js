@@ -1062,6 +1062,7 @@ CSSOCompressor.prototype.init = function() {
     this.ccrules = {}; // clean comment rules — special case to resolve ambiguity
     this.crules = {}; // compress rules
     this.prules = {}; // prepare rules
+    this.frrules = {}; // freeze ruleset rules
     this.msrules = {}; // mark shorthands rules
     this.csrules = {}; // clean shorthands rules
     this.rbrules = {}; // restructure block rules
@@ -1071,6 +1072,7 @@ CSSOCompressor.prototype.init = function() {
 
     this.initRules(this.crules, this.defCCfg);
     this.initRules(this.ccrules, this.cleanCfg);
+    this.initRules(this.frrules, this.frCfg);
     this.initRules(this.prules, this.preCfg);
     this.initRules(this.msrules, this.msCfg);
     this.initRules(this.csrules, this.csCfg);
@@ -1143,6 +1145,10 @@ CSSOCompressor.prototype.msCfg = {
     'markShorthands': 1
 };
 
+CSSOCompressor.prototype.frCfg = {
+    'freezeRulesets': 1
+};
+
 CSSOCompressor.prototype.csCfg = {
     'cleanShorthands': 1,
     'cleanEmpty': 1
@@ -1160,6 +1166,7 @@ CSSOCompressor.prototype.order = [
     'compressFontWeight',
     'compressFont',
     'compressBackground',
+    'freezeRulesets',
     'destroyDelims',
     'preTranslate',
     'markShorthands',
@@ -1251,6 +1258,9 @@ CSSOCompressor.prototype.profile = {
     },
     'cleanShorthands': {
         'declaration': 1
+    },
+    'freezeRulesets': {
+        'ruleset': 1
     }
 };
 
@@ -1287,6 +1297,7 @@ CSSOCompressor.prototype.compress = function(tree, ro) {
     x = this.walk(this.ccrules, x, '/0');
     x = this.walk(this.crules, x, '/0');
     x = this.walk(this.prules, x, '/0');
+    x = this.walk(this.frrules, x, '/0');
     ls = translator.translate(cleanInfo(x)).length;
 
     if (!ro) { // restructure ON
@@ -1329,7 +1340,7 @@ CSSOCompressor.prototype.disjoin = function(container) {
     for (var i = container.length - 1; i > -1; i--) {
         t = container[i];
         if (t && Array.isArray(t)) {
-            if (t[1] === 'ruleset') {
+            if (t[1] === 'ruleset' && !t[0].freeze) {
                 s = t[2];
                 if (s.length > 3) {
                     sr = s.slice(0, 2);
@@ -1362,6 +1373,24 @@ CSSOCompressor.prototype.walk = function(rules, container, path) {
     }
     return container.length ? container : null;
 };
+
+CSSOCompressor.prototype.freezeRulesets = function(token, rule, container, i) {
+    if (this.freezeNeeded(token[2])) {
+        token[0].freeze = true;
+    }
+    return token;
+};
+
+CSSOCompressor.prototype.freezeNeeded = function(selector) {
+    var ss;
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        for (var j = 2; j < ss.length; j++) {
+            if (ss[j][1] === 'pseudoc') return true;
+        }
+    }
+};
+
 
 CSSOCompressor.prototype.cleanCharset = function(token, rule, container, i) {
     if (token[2][2][2] === 'charset') {
@@ -1721,8 +1750,9 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
         r = container[1],
         props =  r === 'ruleset' ? this.props : {},
         selector = r === 'ruleset' ? container[2][2][0].s : '',
+        freeze = r === 'ruleset' ? container[0].freeze : false,
         pre = this.pathUp(path) + '/' + selector + '/',
-        ppre;
+        ppre, fppre;
 
     for (var i = token.length - 1; i > -1; i--) {
         x = token[i];
@@ -1730,22 +1760,29 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
             v = x[3];
             imp = v[v.length - 1][1] === 'important';
             p = x[2][0].s;
-            ppre = this.buildPPre(pre, p, v, x);
+            ppre = this.buildPPre(pre, p, v, x, freeze);
+            fppre = this.buildPPre(pre, p, v, x, true);            
             x[0].id = path + '/' + i;
             if (t = props[ppre]) {
                 if (imp && !t.imp) {
-                    props[ppre] = { block: token, imp: imp, id: x[0].id };
+                    props[ppre] = { block: token, imp: imp, id: x[0].id, freeze: freeze };
                     this.deleteProperty(t.block, t.id);
-                } else token.splice(i, 1);
-            } else if (this.needless(p, props, pre, imp, v, x)) token.splice(i, 1);
-            else props[ppre] = { block: token, imp: imp, id: x[0].id };
+                } else {
+                    token.splice(i, 1);
+                }
+            } else if (this.needless(p, props, pre, imp, v, x, freeze)) {
+                token.splice(i, 1);
+            } else {
+                props[ppre] = { block: token, imp: imp, id: x[0].id, freeze: freeze };
+            }
         }
     }
     return token;
 };
 
-CSSOCompressor.prototype.buildPPre = function(pre, p, v, d) {
-    if (p.indexOf('background') !== -1) return pre + d[0].s;
+CSSOCompressor.prototype.buildPPre = function(pre, p, v, d, freeze) {
+    var fp = freeze ? 'ft:' : 'ff:';
+    if (p.indexOf('background') !== -1) return fp + pre + d[0].s;
 
     var _v = v.slice(2),
         colorMark = [
@@ -1775,7 +1812,7 @@ CSSOCompressor.prototype.buildPPre = function(pre, p, v, d) {
         }
     }
 
-    return pre + p + colorMark.join('');
+    return fp + pre + p + colorMark.join('');
 };
 
 CSSOCompressor.prototype.deleteProperty = function(block, id) {
@@ -1827,7 +1864,7 @@ CSSOCompressor.prototype.nlTable = {
     'list-style-image': ['list-style']
 };
 
-CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d) {
+CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d, freeze) {
     var hack = name.charAt(0);
     if (hack === '*' || hack === '_') name = name.substr(1);
     else if (hack === '/' && name.charAt(1) === '/') {
@@ -1845,7 +1882,7 @@ CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d) {
     if (prop in this.nlTable) {
         x = this.nlTable[prop];
         for (i = 0; i < x.length; i++) {
-            ppre = this.buildPPre(pre, hack + vendor + x[i], v, d);
+            ppre = this.buildPPre(pre, hack + vendor + x[i], v, d, freeze);
             if (t = props[ppre]) return (!imp || t.imp);
         }
     }
@@ -1869,12 +1906,14 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
             p[3] = p[3].concat(token[3].splice(2));
             return null;
         }
-        // try to join by properties
-        r = this.analyze(token, p);
-        if (!r.ne1.length && !r.ne2.length) {
-            p[2] = this.cleanSelector(p[2].concat(token[2].splice(2)));
-            p[2][0].s = translator.translate(cleanInfo(p[2]));
-            return null;
+        if (!token[0].freeze && !p[0].freeze) {
+            // try to join by properties
+            r = this.analyze(token, p);
+            if (!r.ne1.length && !r.ne2.length) {
+                p[2] = this.cleanSelector(p[2].concat(token[2].splice(2)));
+                p[2][0].s = translator.translate(cleanInfo(p[2]));
+                return null;
+            }
         }
     }
 };
@@ -1941,8 +1980,6 @@ CSSOCompressor.prototype.restructureRuleset = function(token, rule, container, i
         }
     }
 };
-
-
 
 CSSOCompressor.prototype.calcLength = function(tokens) {
     var r = 0;
