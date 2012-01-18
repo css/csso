@@ -873,7 +873,7 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
             p[3] = p[3].concat(token[3].splice(2));
             return null;
         }
-        if (!token[0].freeze && !p[0].freeze) {
+        if (this.okToJoinBySelectors(token, p)) {
             // try to join by properties
             r = this.analyze(token, p);
             if (!r.ne1.length && !r.ne2.length) {
@@ -883,6 +883,31 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
             }
         }
     }
+};
+
+CSSOCompressor.prototype.okToJoinBySelectors = function(r0, r1) {
+    if (r0[0].freeze && r1[0].freeze) {
+        return this.containsOnlyAllowedPClasses(r0[2]) && this.containsOnlyAllowedPClasses(r1[2]);
+    }
+    return !(r0[0].freeze || r1[0].freeze);
+};
+
+CSSOCompressor.prototype.allowedPClasses = {
+    'after': 1,
+    'before': 1
+};
+
+CSSOCompressor.prototype.containsOnlyAllowedPClasses = function(selector) {
+    var ss;
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        for (var j = 2; j < ss.length; j++) {
+            if (ss[j][1] == 'pseudoc' || ss[j][1] == 'pseudoe') {
+                if (!(ss[j][2][2] in this.allowedPClasses)) return false;
+            }
+        }
+    }
+    return true;
 };
 
 CSSOCompressor.prototype.restructureRuleset = function(token, rule, container, i) {
