@@ -325,6 +325,20 @@ CSSOCompressor.prototype.freezeRulesets = function(token, rule, container, i) {
     return token;
 };
 
+CSSOCompressor.prototype.notFPClasses = {
+    'link': 1,
+    'visited': 1,
+    'hover': 1,
+    'active': 1,
+    'first-letter': 1,
+    'first-line': 1
+};
+
+CSSOCompressor.prototype.notFPElements = {
+    'first-letter': 1,
+    'first-line': 1
+};
+
 CSSOCompressor.prototype.freezeNeeded = function(selector) {
     var ss;
     for (var i = 2; i < selector.length; i++) {
@@ -332,14 +346,18 @@ CSSOCompressor.prototype.freezeNeeded = function(selector) {
         for (var j = 2; j < ss.length; j++) {
             switch (ss[j][1]) {
                 case 'pseudoc':
+                    if (!(ss[j][2][2] in this.notFPClasses)) return true;
+                    break;
                 case 'pseudoe':
+                    if (!(ss[j][2][2] in this.notFPElements)) return true;
+                    break;
                 case 'nthselector':
                     return true;
+                    break;
             }
         }
     }
 };
-
 
 CSSOCompressor.prototype.cleanCharset = function(token, rule, container, i) {
     if (token[2][2][2] === 'charset') {
