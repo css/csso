@@ -330,7 +330,12 @@ CSSOCompressor.prototype.freezeNeeded = function(selector) {
     for (var i = 2; i < selector.length; i++) {
         ss = selector[i];
         for (var j = 2; j < ss.length; j++) {
-            if (ss[j][1] === 'pseudoc') return true;
+            switch (ss[j][1]) {
+                case 'pseudoc':
+                case 'pseudoe':
+                case 'nthselector':
+                    return true;
+            }
         }
     }
 };
