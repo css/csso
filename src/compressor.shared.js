@@ -321,8 +321,46 @@ CSSOCompressor.prototype.walk = function(rules, container, path) {
 CSSOCompressor.prototype.freezeRulesets = function(token, rule, container, i) {
     if (this.freezeNeeded(token[2])) {
         token[0].freeze = true;
+        token[0].freezeID = this.selectorSignature(token[2]);
     }
     return token;
+};
+
+CSSOCompressor.prototype.selectorSignature = function(selector) {
+    var a = [];
+
+    for (var i = 2; i < selector.length; i++) {
+        a.push(selector[i].s);
+    }
+
+    a.sort();
+
+    return a.join(',');
+};
+
+CSSOCompressor.prototype.pseudoSelectorSignature = function(selector, exclude) {
+    var a = [], b = {}, ss, wasExclude = false;
+    exclude = exclude || {};
+
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        for (var j = 2; j < ss.length; j++) {
+            switch (ss[j][1]) {
+                case 'pseudoc':
+                case 'pseudoe':
+                case 'nthselector':
+                    if (!(ss[j][2][2] in exclude)) b[ss[j][2][2]] = 1;
+                    else wasExclude = true;
+                    break;
+            }
+        }
+    }
+
+    for (var k in b) a.push(k);
+
+    a.sort();
+
+    return a.join(',') + wasExclude;
 };
 
 CSSOCompressor.prototype.notFPClasses = {
@@ -716,10 +754,11 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
     var x, p, v, imp, t,
         r = container[1],
         props =  r === 'ruleset' ? this.props : {},
-        selector = r === 'ruleset' ? container[2][2][0].s : '',
+        selector = r === 'ruleset' ? translator.translate(cleanInfo(container[2])) : '',
         freeze = r === 'ruleset' ? container[0].freeze : false,
+        freezeID = r === 'ruleset' ? container[0].freezeID : 'fake',
         pre = this.pathUp(path) + '/' + selector + '/',
-        ppre, fppre;
+        ppre;
 
     for (var i = token.length - 1; i > -1; i--) {
         x = token[i];
@@ -728,19 +767,20 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
             imp = v[v.length - 1][1] === 'important';
             p = x[2][0].s;
             ppre = this.buildPPre(pre, p, v, x, freeze);
-            fppre = this.buildPPre(pre, p, v, x, true);            
             x[0].id = path + '/' + i;
             if (t = props[ppre]) {
-                if (imp && !t.imp) {
-                    props[ppre] = { block: token, imp: imp, id: x[0].id, freeze: freeze };
-                    this.deleteProperty(t.block, t.id);
-                } else {
-                    token.splice(i, 1);
+                if (!freeze || freezeID === t.freezeID) {
+                    if (imp && !t.imp) {
+                        props[ppre] = { block: token, imp: imp, id: x[0].id, freeze: freeze, path: path, freezeID: freezeID };
+                        this.deleteProperty(t.block, t.id);
+                    } else {
+                        token.splice(i, 1);
+                    }
                 }
             } else if (this.needless(p, props, pre, imp, v, x, freeze)) {
                 token.splice(i, 1);
             } else {
-                props[ppre] = { block: token, imp: imp, id: x[0].id, freeze: freeze };
+                props[ppre] = { block: token, imp: imp, id: x[0].id, freeze: freeze, path: path, freezeID: freezeID };
             }
         }
     }
@@ -873,7 +913,7 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
             p[3] = p[3].concat(token[3].splice(2));
             return null;
         }
-        if (this.okToJoinBySelectors(token, p)) {
+        if (this.okToJoinByProperties(token, p)) {
             // try to join by properties
             r = this.analyze(token, p);
             if (!r.ne1.length && !r.ne2.length) {
@@ -885,9 +925,10 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
     }
 };
 
-CSSOCompressor.prototype.okToJoinBySelectors = function(r0, r1) {
+CSSOCompressor.prototype.okToJoinByProperties = function(r0, r1) {
     if (r0[0].freeze && r1[0].freeze) {
-        return this.containsOnlyAllowedPClasses(r0[2]) && this.containsOnlyAllowedPClasses(r1[2]);
+//        return (this.containsOnlyAllowedPClasses(r0[2]) && this.containsOnlyAllowedPClasses(r1[2]));
+        return this.pseudoSelectorSignature(r0[2], this.allowedPClasses) === this.pseudoSelectorSignature(r1[2], this.allowedPClasses);
     }
     return !(r0[0].freeze || r1[0].freeze);
 };
