@@ -319,16 +319,26 @@ CSSOCompressor.prototype.walk = function(rules, container, path) {
 };
 
 CSSOCompressor.prototype.freezeRulesets = function(token, rule, container, i) {
-    var info = token[0];
-    if (this.freezeNeeded(token[2])) {
-        info.freeze = true;
-        info.freezeID = this.selectorSignature(token[2]);
-    } else {
-        info.freeze = false;
-        info.freezeID = '';        
-    }
-    info.pseudoID = this.composePseudoID(token[2]);
+    var info = token[0],
+        selector = token[2];
+
+    info.freeze = this.freezeNeeded(selector);
+    info.freezeID = this.selectorSignature(selector);
+    info.pseudoID = this.composePseudoID(selector);
+    this.markSimplePseudo(selector);
+
     return token;
+};
+
+CSSOCompressor.prototype.markSimplePseudo = function(selector) {
+    var ss, sg = {};
+
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        ss[0].pseudo = this.containsPseudo(ss);
+        ss[0].sg = sg;
+        sg[ss[0].s] = 1;
+    }
 };
 
 CSSOCompressor.prototype.composePseudoID = function(selector) {
@@ -426,6 +436,7 @@ CSSOCompressor.prototype.freezeNeeded = function(selector) {
             }
         }
     }
+    return false;
 };
 
 CSSOCompressor.prototype.cleanCharset = function(token, rule, container, i) {
@@ -784,16 +795,20 @@ CSSOCompressor.prototype.cleanShorthands = function(token) {
 CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, path) {
     if (container[1] === 'ruleset') {
         var props = this.props,
+            isPseudo = container[2][2][0].pseudo,
             selector = container[2][2][0].s,
             freeze = container[0].freeze,
             freezeID = container[0].freezeID,
-            pseudoID = container[0].pseudoID;        
+            pseudoID = container[0].pseudoID,
+            sg = container[2][2][0].sg;
     } else {
         var props = {},
+            isPseudo = false,
             selector = '',
             freeze = false,
             freezeID = 'fake',
-            pseudoID = 'fake';        
+            pseudoID = 'fake',
+            sg = {};
     }
     var x, p, v, imp, t,
         pre = this.pathUp(path) + '/' + selector + '/',
@@ -808,19 +823,21 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
             ppre = this.buildPPre(pre, p, v, x, freeze);
             x[0].id = path + '/' + i;
             if (t = props[ppre]) {
-                if (pseudoID === t.pseudoID) {
+                if ((isPseudo && freezeID === t.freezeID) || // pseudo from equal selectors group
+                    (!isPseudo && pseudoID === t.pseudoID) || // not pseudo from equal pseudo signature group
+                    (isPseudo && pseudoID === t.pseudoID && this.hashInHash(sg, t.sg))) { // pseudo from covered selectors group
                     if (imp && !t.imp) {
-                        props[ppre] = { block: token, imp: imp, id: x[0].id,
+                        props[ppre] = { block: token, imp: imp, id: x[0].id, sg: sg,
                                         freeze: freeze, path: path, freezeID: freezeID, pseudoID: pseudoID };
                         this.deleteProperty(t.block, t.id);
                     } else {
                         token.splice(i, 1);
                     }
-                }
+                } 
             } else if (this.needless(p, props, pre, imp, v, x, freeze)) {
                 token.splice(i, 1);
             } else {
-                props[ppre] = { block: token, imp: imp, id: x[0].id,
+                props[ppre] = { block: token, imp: imp, id: x[0].id, sg: sg,
                                 freeze: freeze, path: path, freezeID: freezeID, pseudoID: pseudoID };
             }
         }
@@ -1117,6 +1134,11 @@ CSSOCompressor.prototype.getHash = function(tokens) {
     var r = {};
     for (var i = 0; i < tokens.length; i++) r[tokens[i][0].s] = 1;
     return r;
+};
+
+CSSOCompressor.prototype.hashInHash = function(h0, h1) {
+    for (var k in h0) if (!(k in h1)) return false;
+    return true;
 };
 
 CSSOCompressor.prototype.delimSelectors = function(token) {
