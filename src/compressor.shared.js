@@ -745,25 +745,16 @@ CSSOCompressor.prototype.preTranslate = function(token) {
 
 CSSOCompressor.prototype.markShorthands = function(token, rule, container, j, path) {
     if (container[1] === 'ruleset') {
-        var props = this.props,
-            isPseudo = container[2][2][0].pseudo,
-            selector = container[2][2][0].s,
+        var selector = container[2][2][0].s,
             freeze = container[0].freeze,
-            freezeID = container[0].freezeID,
-            pseudoID = container[0].pseudoID,
-            sg = container[2][2][0].sg;
+            freezeID = container[0].freezeID;
     } else {
-        var props = {},
-            isPseudo = false,
-            selector = '',
+        var selector = '',
             freeze = false,
-            freezeID = 'fake',
-            pseudoID = 'fake',
-            sg = {};
+            freezeID = 'fake';
     }
     var x, p, v, imp, s, key,
-        pre = this.pathUp(path) + '/' + (freeze ? '&' + freezeID + '&' : '') + selector + '/',
-        ppre;
+        pre = this.pathUp(path) + '/' + (freeze ? '&' + freezeID + '&' : '') + selector + '/';
 
     for (var i = token.length - 1; i > -1; i--) {
         x = token[i];
