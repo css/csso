@@ -284,7 +284,7 @@ CSSOCompressor.prototype.disjoin = function(container) {
     for (var i = container.length - 1; i > -1; i--) {
         t = container[i];
         if (t && Array.isArray(t)) {
-            if (t[1] === 'ruleset' && !t[0].freeze) {
+            if (t[1] === 'ruleset') {
                 s = t[2];
                 if (s.length > 3) {
                     sr = s.slice(0, 2);
@@ -319,18 +319,49 @@ CSSOCompressor.prototype.walk = function(rules, container, path) {
 };
 
 CSSOCompressor.prototype.freezeRulesets = function(token, rule, container, i) {
+    var info = token[0];
     if (this.freezeNeeded(token[2])) {
-        token[0].freeze = true;
-        token[0].freezeID = this.selectorSignature(token[2]);
+        info.freeze = true;
+        info.freezeID = this.selectorSignature(token[2]);
+    } else {
+        info.freeze = false;
+        info.freezeID = '';        
     }
+    info.pseudoID = this.composePseudoID(token[2]);
     return token;
+};
+
+CSSOCompressor.prototype.composePseudoID = function(selector) {
+    var a = [], ss;
+
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        if (this.containsPseudo(ss)) {
+            a.push(ss[0].s);
+        }
+    }
+
+    a.sort();
+
+    return a.join(',');
+};
+
+CSSOCompressor.prototype.containsPseudo = function(sselector) {
+    for (var j = 2; j < sselector.length; j++) {
+        switch (sselector[j][1]) {
+            case 'pseudoc':
+            case 'pseudoe':
+            case 'nthselector':
+                if (!(sselector[j][2][2] in this.notFPClasses)) return true;
+        }
+    }
 };
 
 CSSOCompressor.prototype.selectorSignature = function(selector) {
     var a = [];
 
     for (var i = 2; i < selector.length; i++) {
-        a.push(selector[i].s);
+        a.push(translator.translate(cleanInfo(selector[i])));
     }
 
     a.sort();
@@ -751,12 +782,20 @@ CSSOCompressor.prototype.cleanShorthands = function(token) {
 };
 
 CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, path) {
+    if (container[1] === 'ruleset') {
+        var props = this.props,
+            selector = container[2][2][0].s,
+            freeze = container[0].freeze,
+            freezeID = container[0].freezeID,
+            pseudoID = container[0].pseudoID;        
+    } else {
+        var props = {},
+            selector = '',
+            freeze = false,
+            freezeID = 'fake',
+            pseudoID = 'fake';        
+    }
     var x, p, v, imp, t,
-        r = container[1],
-        props =  r === 'ruleset' ? this.props : {},
-        selector = r === 'ruleset' ? translator.translate(cleanInfo(container[2])) : '',
-        freeze = r === 'ruleset' ? container[0].freeze : false,
-        freezeID = r === 'ruleset' ? container[0].freezeID : 'fake',
         pre = this.pathUp(path) + '/' + selector + '/',
         ppre;
 
@@ -769,9 +808,10 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
             ppre = this.buildPPre(pre, p, v, x, freeze);
             x[0].id = path + '/' + i;
             if (t = props[ppre]) {
-                if (!freeze || freezeID === t.freezeID) {
+                if (pseudoID === t.pseudoID) {
                     if (imp && !t.imp) {
-                        props[ppre] = { block: token, imp: imp, id: x[0].id, freeze: freeze, path: path, freezeID: freezeID };
+                        props[ppre] = { block: token, imp: imp, id: x[0].id,
+                                        freeze: freeze, path: path, freezeID: freezeID, pseudoID: pseudoID };
                         this.deleteProperty(t.block, t.id);
                     } else {
                         token.splice(i, 1);
@@ -780,7 +820,8 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
             } else if (this.needless(p, props, pre, imp, v, x, freeze)) {
                 token.splice(i, 1);
             } else {
-                props[ppre] = { block: token, imp: imp, id: x[0].id, freeze: freeze, path: path, freezeID: freezeID };
+                props[ppre] = { block: token, imp: imp, id: x[0].id,
+                                freeze: freeze, path: path, freezeID: freezeID, pseudoID: pseudoID };
             }
         }
     }
@@ -926,11 +967,21 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
 };
 
 CSSOCompressor.prototype.okToJoinByProperties = function(r0, r1) {
-    if (r0[0].freeze && r1[0].freeze) {
-//        return (this.containsOnlyAllowedPClasses(r0[2]) && this.containsOnlyAllowedPClasses(r1[2]));
+    var i0 = r0[0], i1 = r1[0];
+
+    // same frozen ruleset
+    if (i0.freezeID === i1.freezeID) return true;
+
+    // same pseudo-classes in selectors
+    if (i0.pseudoID === i1.pseudoID) return true;
+
+    // different frozen rulesets
+    if (i0.freeze && i1.freeze) {
         return this.pseudoSelectorSignature(r0[2], this.allowedPClasses) === this.pseudoSelectorSignature(r1[2], this.allowedPClasses);
     }
-    return !(r0[0].freeze || r1[0].freeze);
+
+    // is it frozen at all?
+    return !(i0.freeze || i1.freeze);
 };
 
 CSSOCompressor.prototype.allowedPClasses = {
