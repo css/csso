@@ -599,7 +599,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         a, b, x:-vendor-class {
             property: value1
         }
-Стало:
+* Стало:
 
         a, b, x:-vendor-class {
             property: value1
