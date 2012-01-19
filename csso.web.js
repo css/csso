@@ -1062,6 +1062,7 @@ CSSOCompressor.prototype.init = function() {
     this.ccrules = {}; // clean comment rules — special case to resolve ambiguity
     this.crules = {}; // compress rules
     this.prules = {}; // prepare rules
+    this.frrules = {}; // freeze ruleset rules
     this.msrules = {}; // mark shorthands rules
     this.csrules = {}; // clean shorthands rules
     this.rbrules = {}; // restructure block rules
@@ -1071,6 +1072,7 @@ CSSOCompressor.prototype.init = function() {
 
     this.initRules(this.crules, this.defCCfg);
     this.initRules(this.ccrules, this.cleanCfg);
+    this.initRules(this.frrules, this.frCfg);
     this.initRules(this.prules, this.preCfg);
     this.initRules(this.msrules, this.msCfg);
     this.initRules(this.csrules, this.csCfg);
@@ -1143,6 +1145,10 @@ CSSOCompressor.prototype.msCfg = {
     'markShorthands': 1
 };
 
+CSSOCompressor.prototype.frCfg = {
+    'freezeRulesets': 1
+};
+
 CSSOCompressor.prototype.csCfg = {
     'cleanShorthands': 1,
     'cleanEmpty': 1
@@ -1160,6 +1166,7 @@ CSSOCompressor.prototype.order = [
     'compressFontWeight',
     'compressFont',
     'compressBackground',
+    'freezeRulesets',
     'destroyDelims',
     'preTranslate',
     'markShorthands',
@@ -1251,6 +1258,9 @@ CSSOCompressor.prototype.profile = {
     },
     'cleanShorthands': {
         'declaration': 1
+    },
+    'freezeRulesets': {
+        'ruleset': 1
     }
 };
 
@@ -1287,6 +1297,7 @@ CSSOCompressor.prototype.compress = function(tree, ro) {
     x = this.walk(this.ccrules, x, '/0');
     x = this.walk(this.crules, x, '/0');
     x = this.walk(this.prules, x, '/0');
+    x = this.walk(this.frrules, x, '/0');
     ls = translator.translate(cleanInfo(x)).length;
 
     if (!ro) { // restructure ON
@@ -1361,6 +1372,127 @@ CSSOCompressor.prototype.walk = function(rules, container, path) {
         }
     }
     return container.length ? container : null;
+};
+
+CSSOCompressor.prototype.freezeRulesets = function(token, rule, container, i) {
+    var info = token[0],
+        selector = token[2];
+
+    info.freeze = this.freezeNeeded(selector);
+    info.freezeID = this.selectorSignature(selector);
+    info.pseudoID = this.composePseudoID(selector);
+    this.markSimplePseudo(selector);
+
+    return token;
+};
+
+CSSOCompressor.prototype.markSimplePseudo = function(selector) {
+    var ss, sg = {};
+
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        ss[0].pseudo = this.containsPseudo(ss);
+        ss[0].sg = sg;
+        sg[ss[0].s] = 1;
+    }
+};
+
+CSSOCompressor.prototype.composePseudoID = function(selector) {
+    var a = [], ss;
+
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        if (this.containsPseudo(ss)) {
+            a.push(ss[0].s);
+        }
+    }
+
+    a.sort();
+
+    return a.join(',');
+};
+
+CSSOCompressor.prototype.containsPseudo = function(sselector) {
+    for (var j = 2; j < sselector.length; j++) {
+        switch (sselector[j][1]) {
+            case 'pseudoc':
+            case 'pseudoe':
+            case 'nthselector':
+                if (!(sselector[j][2][2] in this.notFPClasses)) return true;
+        }
+    }
+};
+
+CSSOCompressor.prototype.selectorSignature = function(selector) {
+    var a = [];
+
+    for (var i = 2; i < selector.length; i++) {
+        a.push(translator.translate(cleanInfo(selector[i])));
+    }
+
+    a.sort();
+
+    return a.join(',');
+};
+
+CSSOCompressor.prototype.pseudoSelectorSignature = function(selector, exclude) {
+    var a = [], b = {}, ss, wasExclude = false;
+    exclude = exclude || {};
+
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        for (var j = 2; j < ss.length; j++) {
+            switch (ss[j][1]) {
+                case 'pseudoc':
+                case 'pseudoe':
+                case 'nthselector':
+                    if (!(ss[j][2][2] in exclude)) b[ss[j][2][2]] = 1;
+                    else wasExclude = true;
+                    break;
+            }
+        }
+    }
+
+    for (var k in b) a.push(k);
+
+    a.sort();
+
+    return a.join(',') + wasExclude;
+};
+
+CSSOCompressor.prototype.notFPClasses = {
+    'link': 1,
+    'visited': 1,
+    'hover': 1,
+    'active': 1,
+    'first-letter': 1,
+    'first-line': 1
+};
+
+CSSOCompressor.prototype.notFPElements = {
+    'first-letter': 1,
+    'first-line': 1
+};
+
+CSSOCompressor.prototype.freezeNeeded = function(selector) {
+    var ss;
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        for (var j = 2; j < ss.length; j++) {
+            switch (ss[j][1]) {
+                case 'pseudoc':
+                    if (!(ss[j][2][2] in this.notFPClasses)) return true;
+                    break;
+                case 'pseudoe':
+                    if (!(ss[j][2][2] in this.notFPElements)) return true;
+                    break;
+                case 'nthselector':
+                    return true;
+                    break;
+            }
+        }
+    }
+    return false;
 };
 
 CSSOCompressor.prototype.cleanCharset = function(token, rule, container, i) {
@@ -1668,10 +1800,17 @@ CSSOCompressor.prototype.preTranslate = function(token) {
 };
 
 CSSOCompressor.prototype.markShorthands = function(token, rule, container, j, path) {
+    if (container[1] === 'ruleset') {
+        var selector = container[2][2][0].s,
+            freeze = container[0].freeze,
+            freezeID = container[0].freezeID;
+    } else {
+        var selector = '',
+            freeze = false,
+            freezeID = 'fake';
+    }
     var x, p, v, imp, s, key,
-        r = container[1],
-        selector = r === 'ruleset' ? container[2][2][0].s : '',
-        pre = this.pathUp(path) + '/' + selector + '/';
+        pre = this.pathUp(path) + '/' + (freeze ? '&' + freezeID + '&' : '') + selector + '/';
 
     for (var i = token.length - 1; i > -1; i--) {
         x = token[i];
@@ -1717,10 +1856,24 @@ CSSOCompressor.prototype.cleanShorthands = function(token) {
 };
 
 CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, path) {
+    if (container[1] === 'ruleset') {
+        var props = this.props,
+            isPseudo = container[2][2][0].pseudo,
+            selector = container[2][2][0].s,
+            freeze = container[0].freeze,
+            freezeID = container[0].freezeID,
+            pseudoID = container[0].pseudoID,
+            sg = container[2][2][0].sg;
+    } else {
+        var props = {},
+            isPseudo = false,
+            selector = '',
+            freeze = false,
+            freezeID = 'fake',
+            pseudoID = 'fake',
+            sg = {};
+    }
     var x, p, v, imp, t,
-        r = container[1],
-        props =  r === 'ruleset' ? this.props : {},
-        selector = r === 'ruleset' ? container[2][2][0].s : '',
         pre = this.pathUp(path) + '/' + selector + '/',
         ppre;
 
@@ -1730,22 +1883,34 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
             v = x[3];
             imp = v[v.length - 1][1] === 'important';
             p = x[2][0].s;
-            ppre = this.buildPPre(pre, p, v, x);
+            ppre = this.buildPPre(pre, p, v, x, freeze);
             x[0].id = path + '/' + i;
             if (t = props[ppre]) {
-                if (imp && !t.imp) {
-                    props[ppre] = { block: token, imp: imp, id: x[0].id };
-                    this.deleteProperty(t.block, t.id);
-                } else token.splice(i, 1);
-            } else if (this.needless(p, props, pre, imp, v, x)) token.splice(i, 1);
-            else props[ppre] = { block: token, imp: imp, id: x[0].id };
+                if ((isPseudo && freezeID === t.freezeID) || // pseudo from equal selectors group
+                    (!isPseudo && pseudoID === t.pseudoID) || // not pseudo from equal pseudo signature group
+                    (isPseudo && pseudoID === t.pseudoID && this.hashInHash(sg, t.sg))) { // pseudo from covered selectors group
+                    if (imp && !t.imp) {
+                        props[ppre] = { block: token, imp: imp, id: x[0].id, sg: sg,
+                                        freeze: freeze, path: path, freezeID: freezeID, pseudoID: pseudoID };
+                        this.deleteProperty(t.block, t.id);
+                    } else {
+                        token.splice(i, 1);
+                    }
+                } 
+            } else if (this.needless(p, props, pre, imp, v, x, freeze)) {
+                token.splice(i, 1);
+            } else {
+                props[ppre] = { block: token, imp: imp, id: x[0].id, sg: sg,
+                                freeze: freeze, path: path, freezeID: freezeID, pseudoID: pseudoID };
+            }
         }
     }
     return token;
 };
 
-CSSOCompressor.prototype.buildPPre = function(pre, p, v, d) {
-    if (p.indexOf('background') !== -1) return pre + d[0].s;
+CSSOCompressor.prototype.buildPPre = function(pre, p, v, d, freeze) {
+    var fp = freeze ? 'ft:' : 'ff:';
+    if (p.indexOf('background') !== -1) return fp + pre + d[0].s;
 
     var _v = v.slice(2),
         colorMark = [
@@ -1775,7 +1940,7 @@ CSSOCompressor.prototype.buildPPre = function(pre, p, v, d) {
         }
     }
 
-    return pre + p + colorMark.join('');
+    return fp + pre + p + colorMark.join('');
 };
 
 CSSOCompressor.prototype.deleteProperty = function(block, id) {
@@ -1827,7 +1992,7 @@ CSSOCompressor.prototype.nlTable = {
     'list-style-image': ['list-style']
 };
 
-CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d) {
+CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d, freeze) {
     var hack = name.charAt(0);
     if (hack === '*' || hack === '_') name = name.substr(1);
     else if (hack === '/' && name.charAt(1) === '/') {
@@ -1845,7 +2010,7 @@ CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d) {
     if (prop in this.nlTable) {
         x = this.nlTable[prop];
         for (i = 0; i < x.length; i++) {
-            ppre = this.buildPPre(pre, hack + vendor + x[i], v, d);
+            ppre = this.buildPPre(pre, hack + vendor + x[i], v, d, freeze);
             if (t = props[ppre]) return (!imp || t.imp);
         }
     }
@@ -1869,14 +2034,52 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
             p[3] = p[3].concat(token[3].splice(2));
             return null;
         }
-        // try to join by properties
-        r = this.analyze(token, p);
-        if (!r.ne1.length && !r.ne2.length) {
-            p[2] = this.cleanSelector(p[2].concat(token[2].splice(2)));
-            p[2][0].s = translator.translate(cleanInfo(p[2]));
-            return null;
+        if (this.okToJoinByProperties(token, p)) {
+            // try to join by properties
+            r = this.analyze(token, p);
+            if (!r.ne1.length && !r.ne2.length) {
+                p[2] = this.cleanSelector(p[2].concat(token[2].splice(2)));
+                p[2][0].s = translator.translate(cleanInfo(p[2]));
+                return null;
+            }
         }
     }
+};
+
+CSSOCompressor.prototype.okToJoinByProperties = function(r0, r1) {
+    var i0 = r0[0], i1 = r1[0];
+
+    // same frozen ruleset
+    if (i0.freezeID === i1.freezeID) return true;
+
+    // same pseudo-classes in selectors
+    if (i0.pseudoID === i1.pseudoID) return true;
+
+    // different frozen rulesets
+    if (i0.freeze && i1.freeze) {
+        return this.pseudoSelectorSignature(r0[2], this.allowedPClasses) === this.pseudoSelectorSignature(r1[2], this.allowedPClasses);
+    }
+
+    // is it frozen at all?
+    return !(i0.freeze || i1.freeze);
+};
+
+CSSOCompressor.prototype.allowedPClasses = {
+    'after': 1,
+    'before': 1
+};
+
+CSSOCompressor.prototype.containsOnlyAllowedPClasses = function(selector) {
+    var ss;
+    for (var i = 2; i < selector.length; i++) {
+        ss = selector[i];
+        for (var j = 2; j < ss.length; j++) {
+            if (ss[j][1] == 'pseudoc' || ss[j][1] == 'pseudoe') {
+                if (!(ss[j][2][2] in this.allowedPClasses)) return false;
+            }
+        }
+    }
+    return true;
 };
 
 CSSOCompressor.prototype.restructureRuleset = function(token, rule, container, i) {
@@ -1942,8 +2145,6 @@ CSSOCompressor.prototype.restructureRuleset = function(token, rule, container, i
     }
 };
 
-
-
 CSSOCompressor.prototype.calcLength = function(tokens) {
     var r = 0;
     for (var i = 0; i < tokens.length; i++) r += tokens[i][0].s.length;
@@ -1996,6 +2197,11 @@ CSSOCompressor.prototype.getHash = function(tokens) {
     var r = {};
     for (var i = 0; i < tokens.length; i++) r[tokens[i][0].s] = 1;
     return r;
+};
+
+CSSOCompressor.prototype.hashInHash = function(h0, h1) {
+    for (var k in h0) if (!(k in h1)) return false;
+    return true;
 };
 
 CSSOCompressor.prototype.delimSelectors = function(token) {
