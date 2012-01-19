@@ -1,0 +1,6 @@
+a, b, x:test + c {
+    color: red
+}
+a, x:test + c {
+    color: green
+}
