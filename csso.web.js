@@ -931,7 +931,7 @@ CSSOParser.prototype.munknown = function() {
 };
 var translator = new CSSOTranslator(),
     cleanInfo = $util.cleanInfo;
-function TRBL(name) {
+function TRBL(name, imp) {
     this.name = TRBL.extractMain(name);
     this.sides = {
         'top': null,
@@ -939,6 +939,7 @@ function TRBL(name) {
         'bottom': null,
         'left': null
     };
+    this.imp = imp ? 4 : 0;
 }
 
 TRBL.props = {
@@ -959,15 +960,27 @@ TRBL.extractMain = function(name) {
     return i === -1 ? name : name.substr(0, i);
 };
 
-TRBL.prototype.add = function(name, sValue, tValue) {
+TRBL.prototype.impSum = function() {
+    var imp = 0, n = 0;
+    for (var k in this.sides) {
+        if (this.sides[k]) {
+            n++;
+            if (this.sides[k].imp) imp++;
+        }
+    }
+    return imp === n ? imp : 0;
+};
+
+TRBL.prototype.add = function(name, sValue, tValue, imp) {
     var s = this.sides,
-        i, x, side, a = [],
-        last;
+        i, x, side, a = [], last,
+        imp = imp ? 1 : 0,
+        wasUnary = false;
     if ((i = name.lastIndexOf('-')) !== -1) {
         side = name.substr(i + 1);
         if (side in s) {
             if (!s[side]) {
-                s[side] = { s: sValue, t: [tValue[0]] };
+                s[side] = { s: imp ? sValue.substring(0, sValue.length - 10) : sValue, t: [tValue[0]], imp: imp };
                 if (tValue[0][1] === 'unary') s[side].t.push(tValue[1]);
             }
             return true;
@@ -975,22 +988,43 @@ TRBL.prototype.add = function(name, sValue, tValue) {
     } else if (name === this.name) {
         for (i = 0; i < tValue.length; i++) {
             x = tValue[i];
+            last = a[a.length - 1];
             switch(x[1]) {
                 case 'unary':
-                    a.push({ s: x[2], t: last = [x] });
+                    a.push({ s: x[2], t: [x], imp: imp });
+                    wasUnary = true;
                     break;
                 case 'number':
                 case 'ident':
-                    last = (last ? last.push(x) : a.push({ s: x[2], t: [x] }), null);
+                    if (wasUnary) {
+                        last.t.push(x);
+                        last.s += x[2];
+                    } else {
+                        a.push({ s: x[2], t: [x], imp: imp });
+                    }
+                    wasUnary = false;
                     break;
                 case 'percentage':
-                    last = (last ? last.push(x) : a.push({ s: x[2][2] + '%', t: [x] }), null);
+                    if (wasUnary) {
+                        last.t.push(x);
+                        last.s += x[2][2] + '%';
+                    } else {
+                        a.push({ s: x[2][2] + '%', t: [x], imp: imp });
+                    }
+                    wasUnary = false;
                     break;
                 case 'dimension':
-                    last = (last ? last.push(x) : a.push({ s: x[2][2] + x[3][2], t: [x] }), null);
+                    if (wasUnary) {
+                        last.t.push(x);
+                        last.s += x[2][2] + x[3][2];
+                    } else {
+                        a.push({ s: x[2][2] + x[3][2], t: [x], imp: imp });
+                    }
+                    wasUnary = false;
                     break;
                 case 's':
                 case 'comment':
+                case 'important':
                     break;
                 default:
                     return false;
@@ -1013,8 +1047,14 @@ TRBL.prototype.add = function(name, sValue, tValue) {
 };
 
 TRBL.prototype.isOkToMinimize = function() {
-    var s = this.sides;
-    return !!(s.top && s.right && s.bottom && s.left);
+    var s = this.sides,
+        imp;
+
+    if (!!(s.top && s.right && s.bottom && s.left)) {
+        imp = s.top.imp + s.right.imp + s.bottom.imp + s.left.imp;
+        return (imp === 0 || imp === 4 || imp === this.imp);
+    }
+    return false;
 };
 
 TRBL.prototype.getValue = function() {
@@ -1037,6 +1077,8 @@ TRBL.prototype.getValue = function() {
         r.push([{ s: ' ' }, 's', ' ']);
     }
     r = r.concat(a[i].t);
+
+    if (this.imp) r.push([{ s: '!important'}, 'important']);
 
     return r;
 };
@@ -1757,10 +1799,11 @@ CSSOCompressor.prototype.compressFont = function(token) {
 CSSOCompressor.prototype.compressBackground = function(token) {
     var p = token[2],
         v = token[3],
-        i, x, t;
+        i, x, t,
+        n = v[v.length - 1][1] === 'important' ? 3 : 2;
     if (/background$/.test(p[2][2]) && v.length) {
         v.splice(2, 0, [{}, 's', '']);
-        for (i = v.length - 1; i > 2; i--) {
+        for (i = v.length - 1; i > n; i--) {
             x = v[i];
             if (x[1] === 'ident') {
                 x = x[2];
@@ -1822,14 +1865,14 @@ CSSOCompressor.prototype.markShorthands = function(token, rule, container, j, pa
             if (p in TRBL.props) {
                 key = pre + TRBL.extractMain(p);
                 if (s = this.shorts[key]) {
-                    if (imp) s.invalid = true;
+                    if (imp && !s.imp) s.invalid = true;
                 } else {
-                    s = new TRBL(p);
+                    s = new TRBL(p, imp);
                     x[0].replaceByShort = true;
                     x[0].shorthandKey = key;
                 }
                 if (!s.invalid) {
-                    s.add(p, v[0].s, v.slice(2));
+                    s.add(p, v[0].s, v.slice(2), imp);
                     this.shorts[key] = s;
                     x[0].removeByShort = true;
                     x[0].shorthandKey = key;
@@ -1845,6 +1888,7 @@ CSSOCompressor.prototype.cleanShorthands = function(token) {
         var s, t;
 
         s = this.shorts[token[0].shorthandKey];
+
         if (!s.invalid && s.isOkToMinimize()) {
             if (token[0].replaceByShort) {
                 t = [{}, 'declaration', s.getProperty(), s.getValue()];
