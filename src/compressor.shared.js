@@ -767,14 +767,14 @@ CSSOCompressor.prototype.markShorthands = function(token, rule, container, j, pa
             if (p in TRBL.props) {
                 key = pre + TRBL.extractMain(p);
                 if (s = this.shorts[key]) {
-                    if (imp) s.invalid = true;
+                    if (imp && !s.imp) s.invalid = true;
                 } else {
-                    s = new TRBL(p);
+                    s = new TRBL(p, imp);
                     x[0].replaceByShort = true;
                     x[0].shorthandKey = key;
                 }
                 if (!s.invalid) {
-                    s.add(p, v[0].s, v.slice(2));
+                    s.add(p, v[0].s, v.slice(2), imp);
                     this.shorts[key] = s;
                     x[0].removeByShort = true;
                     x[0].shorthandKey = key;
@@ -790,6 +790,7 @@ CSSOCompressor.prototype.cleanShorthands = function(token) {
         var s, t;
 
         s = this.shorts[token[0].shorthandKey];
+
         if (!s.invalid && s.isOkToMinimize()) {
             if (token[0].replaceByShort) {
                 t = [{}, 'declaration', s.getProperty(), s.getValue()];

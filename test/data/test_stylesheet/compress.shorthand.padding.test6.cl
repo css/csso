@@ -1,1 +1,1 @@
-a{padding-top:0!important;padding-right:1px!important;padding-bottom:2px!important;padding-left:3px!important}
+a{padding:0 1px 2px 3px!important}
