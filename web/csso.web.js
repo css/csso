@@ -961,8 +961,8 @@ TRBL.extractMain = function(name) {
 
 TRBL.prototype.add = function(name, sValue, tValue) {
     var s = this.sides,
-        i, x, side, a = [],
-        last;
+        i, x, side, a = [], last,
+        wasUnary = false;
     if ((i = name.lastIndexOf('-')) !== -1) {
         side = name.substr(i + 1);
         if (side in s) {
@@ -975,19 +975,39 @@ TRBL.prototype.add = function(name, sValue, tValue) {
     } else if (name === this.name) {
         for (i = 0; i < tValue.length; i++) {
             x = tValue[i];
+            last = a[a.length - 1];
             switch(x[1]) {
                 case 'unary':
-                    a.push({ s: x[2], t: last = [x] });
+                    a.push({ s: x[2], t: [x] });
+                    wasUnary = true;
                     break;
                 case 'number':
                 case 'ident':
-                    last = (last ? last.push(x) : a.push({ s: x[2], t: [x] }), null);
+                    if (wasUnary) {
+                        last.t.push(x);
+                        last.s += x[2];
+                    } else {
+                        a.push({ s: x[2], t: [x] });
+                    }
+                    wasUnary = false;
                     break;
                 case 'percentage':
-                    last = (last ? last.push(x) : a.push({ s: x[2][2] + '%', t: [x] }), null);
+                    if (wasUnary) {
+                        last.t.push(x);
+                        last.s += x[2][2] + '%';
+                    } else {
+                        a.push({ s: x[2][2] + '%', t: [x] });
+                    }
+                    wasUnary = false;
                     break;
                 case 'dimension':
-                    last = (last ? last.push(x) : a.push({ s: x[2][2] + x[3][2], t: [x] }), null);
+                    if (wasUnary) {
+                        last.t.push(x);
+                        last.s += x[2][2] + x[3][2];
+                    } else {
+                        a.push({ s: x[2][2] + x[3][2], t: [x] });
+                    }
+                    wasUnary = false;
                     break;
                 case 's':
                 case 'comment':
