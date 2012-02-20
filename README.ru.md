@@ -32,9 +32,9 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 * nodejs версии 0.4.x&nbsp;— [http://nodejs.org](http://nodejs.org)
 * npm&nbsp;— [http://github.com/isaacs/npm/](http://github.com/isaacs/npm/)
 
-Установка:
+Установка (глобально):
 
-* выполнить `npm install csso`
+* выполнить `npm install csso -g`
 
 Обновление:
 
