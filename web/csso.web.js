@@ -1899,6 +1899,11 @@ CSSOCompressor.prototype.cleanShorthands = function(token) {
     }
 };
 
+CSSOCompressor.prototype.dontRestructure = {
+    'src': 1, // https://github.com/afelix/csso/issues/50
+    'clip': 1 // https://github.com/afelix/csso/issues/57
+};
+
 CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, path) {
     if (container[1] === 'ruleset') {
         var props = this.props,
@@ -1929,7 +1934,7 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
             p = x[2][0].s;
             ppre = this.buildPPre(pre, p, v, x, freeze);
             x[0].id = path + '/' + i;
-            if (p !== 'src' && (t = props[ppre])) { // see https://github.com/afelix/csso/issues/50 about 'src'
+            if (!this.dontRestructure[p] && (t = props[ppre])) {
                 if ((isPseudo && freezeID === t.freezeID) || // pseudo from equal selectors group
                     (!isPseudo && pseudoID === t.pseudoID) || // not pseudo from equal pseudo signature group
                     (isPseudo && pseudoID === t.pseudoID && this.hashInHash(sg, t.sg))) { // pseudo from covered selectors group
