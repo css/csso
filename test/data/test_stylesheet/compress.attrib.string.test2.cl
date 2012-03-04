@@ -1,1 +1,1 @@
-*[title=test]{p:v}
+*[title='test']{p:v}
