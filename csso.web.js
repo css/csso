@@ -1149,6 +1149,7 @@ CSSOCompressor.prototype.defCCfg = {
     'cleanWhitespace': 1,
     'cleanDecldelim': 1,
     'compressNumber': 1,
+    'cleanUnary': 1,
     'compressColor': 1,
     'compressDimension': 1,
     'compressString': 1,
@@ -1202,6 +1203,7 @@ CSSOCompressor.prototype.order = [
     'cleanComment',
     'cleanWhitespace',
     'compressNumber',
+    'cleanUnary',
     'compressColor',
     'compressDimension',
     'compressString',
@@ -1233,6 +1235,9 @@ CSSOCompressor.prototype.profile = {
     },
     'compressNumber': {
         'number': 1
+    },
+    'cleanUnary': {
+        'unary': 1
     },
     'compressColor': {
         'vhash': 1,
@@ -1659,7 +1664,7 @@ CSSOCompressor.prototype.cleanDecldelim = function(token) {
     return token;
 };
 
-CSSOCompressor.prototype.compressNumber = function(token) {
+CSSOCompressor.prototype.compressNumber = function(token, rule, container, i) {
     var x = token[2];
 
     if (/^0*/.test(x)) x = x.replace(/^0+/, '');
@@ -1669,6 +1674,12 @@ CSSOCompressor.prototype.compressNumber = function(token) {
 
     token[2] = x;
     token[0].s = x;
+    return token;
+};
+
+CSSOCompressor.prototype.cleanUnary = function(token, rule, container, i) {
+    var next = container[i + 1];
+    if (next && next[1] === 'number' && next[2] === '0') return null;
     return token;
 };
 
