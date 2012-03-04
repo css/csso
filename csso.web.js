@@ -1751,9 +1751,9 @@ CSSOCompressor.prototype.compressString = function(token, rule, container) {
         if (c === '\\' && s.charAt(i + 1) === '\n') i++;
         else r += c;
     }
-    if (container[1] === 'attrib' && /^('|")[a-zA-Z0-9]*('|")$/.test(r)) {
-        r = r.substring(1, r.length - 1);
-    }
+//    if (container[1] === 'attrib' && /^('|")[a-zA-Z0-9]*('|")$/.test(r)) {
+//        r = r.substring(1, r.length - 1);
+//    }
     if (s.length !== r.length) return [{}, 'string', r];
 };
 
