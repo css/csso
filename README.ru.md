@@ -133,3 +133,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 # 6. Остальное
 
 * CSSO распространяется под [лицензией MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)
+
+<!-- Yandex.Metrika counter -->
+<img src="//mc.yandex.ru/watch/12831025" style="position:absolute; left:-9999px;" alt="" />
+<!-- /Yandex.Metrika counter -->

@@ -133,3 +133,7 @@ The minification techniques are described in detail in the [manual](https://gith
 # 6. And finally
 
 * CSSO is licensed under [MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)
+
+<!-- Yandex.Metrika counter -->
+<img src="//mc.yandex.ru/watch/12831025" style="position:absolute; left:-9999px;" alt="" />
+<!-- /Yandex.Metrika counter -->
