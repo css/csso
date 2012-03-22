@@ -2,9 +2,9 @@
 
 CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
 
-This document describes installation and usage of CSSO. If you want to learn more about the inner workings of CSSO, please consult the [manual] (https://github.com/afelix/csso/blob/master/MANUAL.en.md).
+This document describes installation and usage of CSSO. If you want to learn more about the inner workings of CSSO, please consult the [manual] (https://github.com/css/csso/blob/master/MANUAL.en.md).
 
-Please report issues on [Github] (https://github.com/afelix/csso/issues).
+Please report issues on [Github] (https://github.com/css/csso/issues).
 
 For feedback, suggestions, etc. write to <skryzhanovsky@ya.ru>.
 
@@ -23,7 +23,7 @@ Prerequisites:
 
 To install:
 
-* run `git clone git://github.com/afelix/csso.git`
+* run `git clone git://github.com/css/csso.git`
 
 ## 2.3. Install using npm
 
@@ -48,7 +48,7 @@ To uninstall:
 
 ## 3.1. In the browser
 
-Open `web/csso.html` or [http://afelix.github.com/csso/csso.html](http://afelix.github.com/csso/csso.html) in your browser.
+Open `web/csso.html` or [http://css.github.com/csso/csso.html](http://css.github.com/csso/csso.html) in your browser.
 
 **CSSO is not guaranteed to work in browsers. Preferred way to use this tool is to run it from the command line or via npm modules.**
 
@@ -122,7 +122,7 @@ Structural optimizations:
 * Removal of empty ruleset and at-rule
 * Minification of `margin` and `padding` properties
 
-The minification techniques are described in detail in the [manual](https://github.com/afelix/csso/blob/master/MANUAL.en.md).
+The minification techniques are described in detail in the [manual](https://github.com/css/csso/blob/master/MANUAL.en.md).
 
 # 5. Authors
 
@@ -132,7 +132,7 @@ The minification techniques are described in detail in the [manual](https://gith
 
 # 6. And finally
 
-* CSSO is licensed under [MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)
+* CSSO is licensed under [MIT](https://github.com/css/csso/blob/master/MIT-LICENSE.txt)
 
 <!-- Yandex.Metrika counter -->
 <img src="//mc.yandex.ru/watch/12831025" style="position:absolute; left:-9999px;" alt="" />

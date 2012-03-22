@@ -2,9 +2,9 @@
 
 CSSO (CSS Optimizer) является минимизатором CSS, выполняющим как минимизацию без изменения структуры, так и структурную минимизацию с целью получить как можно меньший текст.
 
-Этот документ является инструкцией по установке и использованию. Если вам нужна детальная инструкция по минимизации, она находится [здесь](https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
+Этот документ является инструкцией по установке и использованию. Если вам нужна детальная инструкция по минимизации, она находится [здесь](https://github.com/css/csso/blob/master/MANUAL.ru.md).
 
-Замеченные ошибки лучше добавлять в [Issues](https://github.com/afelix/csso/issues) проекта.
+Замеченные ошибки лучше добавлять в [Issues](https://github.com/css/csso/issues) проекта.
 
 Советы, предложения, отзывы, а также ошибки, которые почему-то лучше выслать письмом, высылайте на адрес <skryzhanovsky@ya.ru>.
 
@@ -23,7 +23,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 Установка:
 
-* выполнить `git clone git://github.com/afelix/csso.git`
+* выполнить `git clone git://github.com/css/csso.git`
 
 ## 2.3. Установка с помощью npm
 
@@ -48,7 +48,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 ## 3.1. Через браузер (при установке с помощью git)
 
-Открыть в браузере файл `web/csso.html` или [http://afelix.github.com/csso/csso.html](http://afelix.github.com/csso/csso.html).
+Открыть в браузере файл `web/csso.html` или [http://css.github.com/csso/csso.html](http://css.github.com/csso/csso.html).
 
 **Работа CSSO в браузерах не гарантирована. Рекомендуемый путь использования этой утилиты&nbsp;— использование из командной строки или npm-модулей.**
 
@@ -122,7 +122,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 * Удаление пустых ruleset и at-rule
 * Минимизация `margin` и `padding`
 
-Детальное описание минимизации находится [здесь](https://github.com/afelix/csso/blob/master/MANUAL.ru.md).
+Детальное описание минимизации находится [здесь](https://github.com/css/csso/blob/master/MANUAL.ru.md).
 
 # 5. Авторы
 
@@ -132,7 +132,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 # 6. Остальное
 
-* CSSO распространяется под [лицензией MIT](https://github.com/afelix/csso/blob/master/MIT-LICENSE.txt)
+* CSSO распространяется под [лицензией MIT](https://github.com/css/csso/blob/master/MIT-LICENSE.txt)
 
 <!-- Yandex.Metrika counter -->
 <img src="//mc.yandex.ru/watch/12831025" style="position:absolute; left:-9999px;" alt="" />
