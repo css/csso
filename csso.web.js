@@ -534,7 +534,7 @@ CSSOParser.prototype.declaration = function() {
 };
 CSSOParser.prototype.filtern = function() {
     var _b_;
-    if (_b_ = this.$()._o('.-filter','._filter','.*filter','.-ms-filter','.filter')._()) {
+    if (_b_ = this.$()._o('.-filter','.$filter','._filter','.*filter','.-ms-filter','.filter')._()) {
         return [this._info(), 'ident', _b_[0]];
     }
 };
@@ -826,7 +826,7 @@ CSSOParser.prototype.mident = function() {
         f = this._gi() + 1, i = f, v = '', c, n;
     if (s.charAt(i) === '-') v = '-', i++; // special case
     c = s.charAt(i); n = s.charAt(i + 1);
-    if (/^[_a-zA-Z*]$/.test(c)) v += c; // first char
+    if (/^[_$a-zA-Z*]$/.test(c)) v += c; // first char
     else if (c === '\\') {
         v += c;
         if (n) v += n, i++;
@@ -2054,7 +2054,7 @@ CSSOCompressor.prototype.nlTable = {
 
 CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d, freeze) {
     var hack = name.charAt(0);
-    if (hack === '*' || hack === '_') name = name.substr(1);
+    if (hack === '*' || hack === '_' || hack === '$') name = name.substr(1);
     else if (hack === '/' && name.charAt(1) === '/') {
         hack = '//';
         name = name.substr(2);
