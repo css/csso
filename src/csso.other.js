@@ -43,7 +43,7 @@ CSSOParser.prototype.mident = function() {
         f = this._gi() + 1, i = f, v = '', c, n;
     if (s.charAt(i) === '-') v = '-', i++; // special case
     c = s.charAt(i); n = s.charAt(i + 1);
-    if (/^[_a-zA-Z*]$/.test(c)) v += c; // first char
+    if (/^[_$a-zA-Z*]$/.test(c)) v += c; // first char
     else if (c === '\\') {
         v += c;
         if (n) v += n, i++;
