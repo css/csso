@@ -105,7 +105,7 @@ pecode CSSOParser {
 
     declaration = property ':' value -> [#.info, #.name, #0, #2],
 
-    filtern = ('-filter', '_filter', '*filter', '-ms-filter', 'filter') -> [#.info, 'ident', #0],
+    filtern = ('-filter', '$filter', '_filter', '*filter', '-ms-filter', 'filter') -> [#.info, 'ident', #0],
 
     filterp = filtern *sc -> [#.info, 'property', #0].concat(#1),
 
