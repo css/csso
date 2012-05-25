@@ -1,7 +1,7 @@
 {
     "name": "csso",
     "description": "CSSO — CSS optimizer",
-    "version": "1.2.13",
+    "version": "1.2.14",
     "homepage": "http://github.com/css/csso",
     "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (http://github.com/afelix)",
     "repository": {
