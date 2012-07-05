@@ -799,7 +799,7 @@ CSSOParser.prototype.mw = function() {
 CSSOParser.prototype.mnumber = function() {
     var s = this._src,
         sl = s.length,
-        f = this._gi() + 1, c, i,
+        f = this._gi() + 1, c, i, v = '',
         n0 = '', d = '', n1 = '';
     for (i = f; i < sl; i++) {
         c = s.charAt(i);
@@ -1912,7 +1912,8 @@ CSSOCompressor.prototype.cleanShorthands = function(token) {
 
 CSSOCompressor.prototype.dontRestructure = {
     'src': 1, // https://github.com/afelix/csso/issues/50
-    'clip': 1 // https://github.com/afelix/csso/issues/57
+    'clip': 1, // https://github.com/afelix/csso/issues/57
+    'display': 1 // https://github.com/afelix/csso/issues/71
 };
 
 CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, path) {
