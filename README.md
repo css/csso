@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/css/csso.png)](http://travis-ci.org/css/csso)
 # 1. Introduction
 
 CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
