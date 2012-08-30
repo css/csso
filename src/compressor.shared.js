@@ -1,3 +1,4 @@
+
 function CSSOCompressor() {}
 
 CSSOCompressor.prototype.init = function() {
@@ -990,6 +991,7 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
     if (!tb.length) return null;
 
     if (ps.length && pb.length) {
+        if (token[1] !== p[1]) return;
         // try to join by selectors
         ph = this.getHash(ps);
         th = this.getHash(ts);
@@ -1055,8 +1057,10 @@ CSSOCompressor.prototype.restructureRuleset = function(token, rule, container, i
     if (!tb.length) return null;
 
     if (ps.length && pb.length) {
+        if (token[1] !== p[1]) return;
         // try to join by properties
         r = this.analyze(token, p);
+
         if (r.eq.length && (r.ne1.length || r.ne2.length)) {
             if (r.ne1.length && !r.ne2.length) { // p in token
                 var ns = token[2].slice(2), // TODO: copypaste
@@ -1127,9 +1131,12 @@ CSSOCompressor.prototype.cleanSelector = function(token) {
 };
 
 CSSOCompressor.prototype.analyze = function(r1, r2) {
+    var r = { eq: [], ne1: [], ne2: [] };
+
+    if (r1[1] !== r2[1]) return r;
+
     var b1 = r1[3], b2 = r2[3],
         d1 = b1.slice(2), d2 = b2.slice(2),
-        r = { eq: [], ne1: [], ne2: [] },
         h1, h2, i, x;
 
     h1 = this.getHash(d1);
