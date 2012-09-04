@@ -540,6 +540,57 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             margin: 1
         }
 
+Минимизация не происходит в случаях, когда один набор `selector X / shorthands` прерывается другим набором `selector Y / shorthands`.
+
+* Было:
+
+        .test1 {
+            margin-top: 0
+        }
+
+        .test2 {
+            margin-top: 100px
+        }
+
+        .test1 {
+            margin-left: 0
+        }
+
+        .test1 {
+            margin-bottom: 0
+        }
+
+        .test1 {
+            margin-right: 0
+        }
+* Стало:
+
+        .test1 {
+            margin-top: 0
+        }
+
+        .test2 {
+            margin-top: 100px
+        }
+
+        .test1 {
+            margin-left: 0;
+            margin-bottom: 0;
+            margin-right: 0
+        }
+
+* Могло быть (неправильно):
+
+        .test2 {
+            margin-top: 100px
+        }
+
+        .test1 {
+            margin: 0
+        }
+
+К сожалению, результат рендеринга последнего варианта отличается от рендеринга исходного стиля, потому такая минимизация недопустима.
+
 ### 2.2.9. Специальная минимизация псевдоклассов
 
 Если в группе селекторов UA обнаружит неподдерживаемый селектор, он, согласно \[[CSS 3 / Selectors / 5. Groups of selectors](http://www.w3.org/TR/selectors/#grouping)\], посчитает неподдерживаемой всю группу и не применит стили к перечисленным в ней селекторам. Этим нередко пользуются для разграничения стилей по браузерам. Вот [пример](http://pornel.net/firefoxhack) метода:
