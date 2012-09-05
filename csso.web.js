@@ -1102,6 +1102,8 @@ function CSSOCompressor() {}
 CSSOCompressor.prototype.init = function() {
     this.props = {};
     this.shorts = {};
+    this.shorts2 = {};
+
     this.ccrules = {}; // clean comment rules — special case to resolve ambiguity
     this.crules = {}; // compress rules
     this.prules = {}; // prepare rules
@@ -1123,6 +1125,10 @@ CSSOCompressor.prototype.init = function() {
     this.initRules(this.rjrules, this.defRJCfg);
     this.initRules(this.rrrules, this.defRRCfg);
     this.initRules(this.frules, this.defFCfg);
+
+    this.shortGroupID = 0;
+    this.lastShortGroupID = 0;
+    this.lastShortSelector = 0;
 };
 
 CSSOCompressor.prototype.initRules = function(r, cfg) {
@@ -1350,6 +1356,7 @@ CSSOCompressor.prototype.compress = function(tree, ro) {
 
     if (!ro) { // restructure ON
         xs = this.copyArray(x);
+        x = this.walk(this.rjrules, x, '/0');
         this.disjoin(x);
         x = this.walk(this.msrules, x, '/0');
         x = this.walk(this.csrules, x, '/0');
@@ -1385,10 +1392,12 @@ CSSOCompressor.prototype.injectInfo = function(token) {
 
 CSSOCompressor.prototype.disjoin = function(container) {
     var t, s, r, sr;
+
     for (var i = container.length - 1; i > -1; i--) {
         t = container[i];
         if (t && Array.isArray(t)) {
             if (t[1] === 'ruleset') {
+                t[0].shortGroupID = this.shortGroupID++;
                 s = t[2];
                 if (s.length > 3) {
                     sr = s.slice(0, 2);
@@ -1864,10 +1873,12 @@ CSSOCompressor.prototype.markShorthands = function(token, rule, container, j, pa
             freeze = false,
             freezeID = 'fake';
     }
-    var x, p, v, imp, s, key,
-        pre = this.pathUp(path) + '/' + (freeze ? '&' + freezeID + '&' : '') + selector + '/';
+    var x, p, v, imp, s, key, sh,
+        pre = this.pathUp(path) + '/' + (freeze ? '&' + freezeID + '&' : '') + selector + '/',
+        createNew, shortsI, shortGroupID = container[0].shortGroupID;
 
     for (var i = token.length - 1; i > -1; i--) {
+        createNew = true;
         x = token[i];
         if (x[1] === 'declaration') {
             v = x[3];
@@ -1876,30 +1887,48 @@ CSSOCompressor.prototype.markShorthands = function(token, rule, container, j, pa
             x[0].id = path + '/' + i;
             if (p in TRBL.props) {
                 key = pre + TRBL.extractMain(p);
-                if (s = this.shorts[key]) {
-                    if (imp && !s.imp) s.invalid = true;
-                } else {
-                    s = new TRBL(p, imp);
+
+                var shorts = this.shorts2[key] || [];
+                shortsI = shorts.length === 0 ? 0 : shorts.length - 1;
+
+                if (!this.lastShortSelector || selector === this.lastShortSelector || shortGroupID === this.lastShortGroupID) {
+                    if (shorts.length) {
+                        sh = shorts[shortsI];
+                        if (imp && !sh.imp) sh.invalid = true;
+                        createNew = false;
+                    }
+                }
+
+                if (createNew) {
                     x[0].replaceByShort = true;
-                    x[0].shorthandKey = key;
+                    x[0].shorthandKey = { key: key, i: shortsI };
+                    sh = new TRBL(p, imp);
+                    shorts.push(sh);
                 }
-                if (!s.invalid) {
-                    s.add(p, v[0].s, v.slice(2), imp);
-                    this.shorts[key] = s;
+
+                if (!sh.invalid) {
                     x[0].removeByShort = true;
-                    x[0].shorthandKey = key;
+                    x[0].shorthandKey = { key: key, i: shortsI };
+                    sh.add(p, v[0].s, v.slice(2), imp);
                 }
+
+                this.shorts2[key] = shorts;
+
+                this.lastShortSelector = selector;
+                this.lastShortGroupID = shortGroupID;
             }
         }
     }
+
+
     return token;
 };
 
 CSSOCompressor.prototype.cleanShorthands = function(token) {
     if (token[0].removeByShort || token[0].replaceByShort) {
-        var s, t;
+        var s, t, sKey = token[0].shorthandKey;
 
-        s = this.shorts[token[0].shorthandKey];
+        s = this.shorts2[sKey.key][sKey.i];
 
         if (!s.invalid && s.isOkToMinimize()) {
             if (token[0].replaceByShort) {
@@ -1935,6 +1964,7 @@ CSSOCompressor.prototype.restructureBlock = function(token, rule, container, j, 
             pseudoID = 'fake',
             sg = {};
     }
+
     var x, p, v, imp, t,
         pre = this.pathUp(path) + '/' + selector + '/',
         ppre;
@@ -2069,6 +2099,7 @@ CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d, freeze
 
     var prop = name.substr(vendor.length),
         x, t, ppre;
+
     if (prop in this.nlTable) {
         x = this.nlTable[prop];
         for (i = 0; i < x.length; i++) {
@@ -2093,6 +2124,7 @@ CSSOCompressor.prototype.rejoinRuleset = function(token, rule, container, i) {
         // try to join by selectors
         ph = this.getHash(ps);
         th = this.getHash(ts);
+
         if (this.equalHash(th, ph)) {
             p[3] = p[3].concat(token[3].splice(2));
             return null;
