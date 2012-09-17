@@ -912,9 +912,11 @@ CSSOCompressor.prototype.buildPPre = function(pre, p, v, d, freeze) {
             0, // hsl
             0, // hsla
             0  // rgba
-        ];
+        ],
+        vID = '';
 
     for (var i = 0; i < _v.length; i++) {
+        if (!vID) vID = this.getVendorIDFromToken(_v[i]);
         switch(_v[i][1]) {
             case 'vhash':
             case 'ident':
@@ -934,7 +936,38 @@ CSSOCompressor.prototype.buildPPre = function(pre, p, v, d, freeze) {
         }
     }
 
-    return fp + pre + p + colorMark.join('');
+    return fp + pre + p + colorMark.join('') + (vID ? vID : '');
+};
+
+CSSOCompressor.prototype.vendorID = {
+    '-o-': 'o',
+    '-moz-': 'm',
+    '-webkit-': 'w',
+    '-ms-': 'i',
+    '-epub-': 'e',
+    '-apple-': 'a',
+    '-xv-': 'x',
+    '-wap-': 'p'
+};
+
+CSSOCompressor.prototype.getVendorIDFromToken = function(token) {
+    var vID;
+    switch(token[1]) {
+        case 'ident':
+            if (vID = this.getVendorFromString(token[2])) return this.vendorID[vID];
+            break;
+        case 'funktion':
+            if (vID = this.getVendorFromString(token[2][2])) return this.vendorID[vID];
+            break;
+    }
+};
+
+CSSOCompressor.prototype.getVendorFromString = function(string) {
+    var vendor = string.charAt(0), i;
+    if (vendor === '-') {
+        if ((i = string.indexOf('-', 2)) !== -1) return string.substr(0, i + 1);
+    } 
+    return '';
 };
 
 CSSOCompressor.prototype.deleteProperty = function(block, id) {
@@ -994,17 +1027,13 @@ CSSOCompressor.prototype.needless = function(name, props, pre, imp, v, d, freeze
         name = name.substr(2);
     } else hack = '';
 
-    var vendor = name.charAt(0), i;
-    if (vendor === '-') {
-        if ((i = name.indexOf('-', 2)) !== -1) vendor = name.substr(0, i + 1);
-    } else vendor = '';
-
-    var prop = name.substr(vendor.length),
+    var vendor = this.getVendorFromString(name),
+        prop = name.substr(vendor.length),
         x, t, ppre;
 
     if (prop in this.nlTable) {
         x = this.nlTable[prop];
-        for (i = 0; i < x.length; i++) {
+        for (var i = 0; i < x.length; i++) {
             ppre = this.buildPPre(pre, hack + vendor + x[i], v, d, freeze);
             if (t = props[ppre]) return (!imp || t.imp);
         }
