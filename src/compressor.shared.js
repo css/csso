@@ -789,14 +789,13 @@ CSSOCompressor.prototype.markShorthands = function(token, rule, container, j, pa
             x[0].id = path + '/' + i;
             if (p in TRBL.props) {
                 key = pre + TRBL.extractMain(p);
-
                 var shorts = this.shorts2[key] || [];
                 shortsI = shorts.length === 0 ? 0 : shorts.length - 1;
 
                 if (!this.lastShortSelector || selector === this.lastShortSelector || shortGroupID === this.lastShortGroupID) {
                     if (shorts.length) {
                         sh = shorts[shortsI];
-                        if (imp && !sh.imp) sh.invalid = true;
+                        //if (imp && !sh.imp) sh.invalid = true;
                         createNew = false;
                     }
                 }

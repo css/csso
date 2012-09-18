@@ -40,13 +40,14 @@ TRBL.prototype.impSum = function() {
 
 TRBL.prototype.add = function(name, sValue, tValue, imp) {
     var s = this.sides,
+        currentSide,
         i, x, side, a = [], last,
         imp = imp ? 1 : 0,
         wasUnary = false;
     if ((i = name.lastIndexOf('-')) !== -1) {
         side = name.substr(i + 1);
         if (side in s) {
-            if (!s[side]) {
+            if (!(currentSide = s[side]) || (imp && !currentSide.imp)) {
                 s[side] = { s: imp ? sValue.substring(0, sValue.length - 10) : sValue, t: [tValue[0]], imp: imp };
                 if (tValue[0][1] === 'unary') s[side].t.push(tValue[1]);
             }
@@ -145,7 +146,7 @@ TRBL.prototype.getValue = function() {
     }
     r = r.concat(a[i].t);
 
-    if (this.imp) r.push([{ s: '!important'}, 'important']);
+    if (this.impSum()) r.push([{ s: '!important'}, 'important']);
 
     return r;
 };
