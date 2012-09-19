@@ -1,0 +1,1 @@
+.foo{-moz-transition:0s;transition:0}
