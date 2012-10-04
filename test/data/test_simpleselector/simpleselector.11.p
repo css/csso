@@ -6,5 +6,4 @@
     ['funktion', 
       ['ident', 'not'], 
       ['functionBody', 
-        ['simpleselector', 
-          ['ident', '*']]]]]]
+        ['ident', '*']]]]]

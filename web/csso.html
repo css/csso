@@ -31,10 +31,9 @@
         }
 
         document.getElementById('minimize').onclick = function() {
-            var parser = new CSSOParser(),
-                compressor = new CSSOCompressor(),
+            var compressor = new CSSOCompressor(),
                 translator = new CSSOTranslator();
-            cssdst.value = translator.translate(cleanInfo(compressor.compress(parser.parse(csssrc.value, 'stylesheet'))));
+            cssdst.value = translator.translate(cleanInfo(compressor.compress(srcToCSSP(csssrc.value, 'stylesheet', true))));
             updateStat();
         };
     </script>

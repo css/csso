@@ -4,6 +4,5 @@
     ['funktion', 
       ['ident', 'not'], 
       ['functionBody', 
-        ['simpleselector', 
-          ['attrib', 
-            ['ident', 'ABC']]]]]]]
+        ['braces', '[', ']', 
+          ['ident', 'ABC']]]]]]

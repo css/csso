@@ -1,23 +1,23 @@
 var fs = require('fs'),
     csso = require('./../lib/cssoapi.js'),
     treeToString = csso.treeToString,
-    cleanInfo = csso.cleanInfo,
     _parse = csso.parse,
     _translate = csso.translate,
     _compress = csso.compress,
+    _cleanInfo = require('./../lib/util.js').cleanInfo,
     d_dir = __dirname + '/data',
     d_list = fs.readdirSync(d_dir),
     okn = total = 0;
 
 var funcs = {
     'p': function parse(src, match) {
-            return treeToString(cleanInfo(_parse(src, match)));
+            return treeToString(_cleanInfo(_parse(src, match, true)));
          },
     'l': function translate(src, match) {
-            return _translate(cleanInfo(_parse(src, match)));
+            return _translate(_cleanInfo(_parse(src, match, true)));
          },
     'cl': function translate(src, match) {
-            return _translate(cleanInfo(_compress(_parse(src, match))));
+            return _translate(_cleanInfo(_compress(_parse(src, match, true))));
          }
 };
 
@@ -52,6 +52,10 @@ d_list.forEach(function(rule_dir) {
                         r && okn++;
                         if (!r) {
                             console.log('FAIL: ' + t + a);
+                            console.log('======= expected');
+                            console.log(c);
+                            console.log('======= result');
+                            console.log(b);
                         }
                     }
                 }

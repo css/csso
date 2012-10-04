@@ -243,9 +243,9 @@ CSSOCompressor.prototype.process = function(rules, token, container, i, path) {
 
 CSSOCompressor.prototype.compress = function(tree, ro) {
     this.init();
-    this.info = typeof tree[0] !== 'string';
+    this.info = true;
 
-    var x = this.info ? tree : this.injectInfo([tree])[0],
+    var x = (typeof tree[0] !== 'string') ? tree : this.injectInfo([tree])[0],
         l0, l1 = 100000000000, ls,
         x0, x1, xs;
 
@@ -254,6 +254,7 @@ CSSOCompressor.prototype.compress = function(tree, ro) {
     x = this.walk(this.crules, x, '/0');
     x = this.walk(this.prules, x, '/0');
     x = this.walk(this.frrules, x, '/0');
+
     ls = translator.translate(cleanInfo(x)).length;
 
     if (!ro) { // restructure ON
