@@ -1129,6 +1129,10 @@ function getCSSPAST(_tokens, rule, _needInfo) {
 
         tokens[start].last_progid = _i;
 
+        if (_i < tokens.length && (l = checkSC(_i))) _i += l;
+
+        if (_i < tokens.length && (l = checkImportant(_i))) _i += l;
+
         return _i - start;
     }
 
@@ -1139,6 +1143,10 @@ function getCSSPAST(_tokens, rule, _needInfo) {
         while (pos < last_progid) {
             filterv.push(getProgid());
         }
+
+        filterv = filterv.concat(checkSC(pos) ? getSC() : []);
+
+        if (pos < tokens.length && checkImportant(pos)) filterv.push(getImportant());
 
         return filterv;
     }
