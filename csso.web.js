@@ -1278,7 +1278,9 @@ function getCSSPAST(_tokens, rule, _needInfo) {
         for (; _i < tokens.length; _i++) {
             if (tokens[_i].type !== TokenType.HyphenMinus &&
                 tokens[_i].type !== TokenType.LowLine) {
-                    if (tokens[_i].type !== TokenType.Identifier) break;
+                    if (tokens[_i].type !== TokenType.Identifier &&
+                        (tokens[_i].type !== TokenType.DecimalNumber || !wasIdent)
+                        ) break;
                     else wasIdent = true;
             }   
         }
