@@ -709,7 +709,7 @@ function getCSSPAST(_tokens, rule, _needInfo) {
 
         if (l = checkSC(_i)) _i += l;
 
-        while (l = checkRuleset(_i)) {
+        while ((l = checkRuleset(_i)) || (l = checkAtrule(_i)) || (l = checkSC(_i))) {
             _i += l;
         }
 
@@ -725,7 +725,13 @@ function getCSSPAST(_tokens, rule, _needInfo) {
             x;
 
         while (!tokens[pos].atrulers_end) {
-            atrulers.push(getRuleset());
+            if (checkSC(pos)) {
+                atrulers = atrulers.concat(getSC());
+            } else if (checkRuleset(pos)) {
+                atrulers.push(getRuleset());
+            } else {
+                atrulers.push(getAtrule());
+            }
         }
 
         return atrulers.concat(getSC());
