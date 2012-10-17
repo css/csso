@@ -42,3 +42,4 @@ For feedback, suggestions, etc. write to <skryzhanovsky@ya.ru>.
 # License
 
 * CSSO is licensed under [MIT](https://github.com/css/csso/blob/master/MIT-LICENSE.txt)
+

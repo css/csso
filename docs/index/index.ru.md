@@ -42,3 +42,4 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 # Лицензия
 
 * CSSO распространяется под [лицензией MIT](https://github.com/css/csso/blob/master/MIT-LICENSE.txt)
+
