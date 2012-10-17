@@ -44,7 +44,7 @@ Sample (`test.js`):
         css = '.test, .test { color: rgb(255, 255, 255) }';
 
     console.log(csso.justDoIt(css));
-``
+```
 Output (`> node test.js`):
 ```css
     .test{color:#fff}
