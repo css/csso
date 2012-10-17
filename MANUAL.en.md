@@ -47,16 +47,19 @@ Minification is a process of transforming a CSS document into a smaller document
 In some cases, whitespace characters (` `, `\n`, `\r`, `\t`, `\f`) are unnecessary and do not affect rendering.
 
 * Before:
-
+```css
         .test
         {
             margin-top: 1em;
 
             margin-left  : 2em;
         }
-* After:
+```
 
+* After:
+```css
         .test{margin-top:1em;margin-left:2em}
+```
 
 The following examples are provided with whitespace left intact for better readability.
 
@@ -65,32 +68,38 @@ The following examples are provided with whitespace left intact for better reada
 The last semicolon in a block is not required and does not affect rendering.
 
 * Before:
-
+```css
         .test {
             margin-top: 1em;;
         }
-* After:
+```
 
+* After:
+```css
         .test {
             margin-top: 1em
         }
+```
 
 ### 2.1.3. Removal of comments
 
 Comments do not affect rendering: \[[CSS 2.1 / 4.1.9 Comments](http://www.w3.org/TR/CSS21/syndata.html#comments)\].
 
 * Before:
-
+```css
         /* comment */
 
         .test /* comment */ {
             /* comment */ margin-top: /* comment */ 1em;
         }
-* After:
+```
 
+* After:
+```css
         .test {
             margin-top: 1em
         }
+```
 
 ### 2.1.4. Removal of invalid @charset and @import declarations
 
@@ -101,7 +110,7 @@ CSSO handles this rule in a slightly relaxed manner - we keep the `@charset` rul
 Incorrectly placed `@import` rules are deleted according to \[[CSS 2.1 / 6.3 The @import rule](http://www.w3.org/TR/CSS21/cascade.html#at-import)\].
 
 * Before:
-
+```css
         /* comment */
         @charset 'UTF-8';
         @import "test0.css";
@@ -113,21 +122,24 @@ Incorrectly placed `@import` rules are deleted according to \[[CSS 2.1 / 6.3 The
         }
 
         @import "wrong";
-* After:
+```
 
+* After:
+```css
         @charset 'UTF-8';
         @import "test0.css";
         @import "test1.css";
         h1 {
             color: red
         }
+```
 
 ### 2.1.5. Minification of color properties
 
 Some color values are minimized according to \[[CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units)\].
 
 * Before:
-
+```css
         .test {
             color: yellow;
             border-color: #c0c0c0;
@@ -135,8 +147,10 @@ Some color values are minimized according to \[[CSS 2.1 / 4.3.6 Colors](http://w
             border-top-color: #f00;
             outline-color: rgb(0, 0, 0);
         }
-* After:
+```
 
+* After:
+```css
         .test {
             color: #ff0;
             border-color: silver;
@@ -144,6 +158,7 @@ Some color values are minimized according to \[[CSS 2.1 / 4.3.6 Colors](http://w
             border-top-color: red;
             outline-color: #000
         }
+```
 
 ### 2.1.6. Minification of 0
 
@@ -152,39 +167,45 @@ In some cases, the numeric values can be compacted to `0` or even dropped.
 The `0%` value is not being compacted to avoid the following situation: `rgb(100%, 100%, 0)`.
 
 * Before:
-
+```css
         .test {
             fakeprop: .0 0. 0.0 000 00.00 0px 0.1 0.1em 0.000em 00% 00.00% 010.00
         }
-* After:
+```
 
+* After:
+```css
         .test {
             fakeprop: 0 0 0 0 0 0 .1 .1em 0 0% 0% 10
         }
+```
 
 ### 2.1.7. Minification of multi-line strings
 
 Multi-line strings are minified according to \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
 
 * Before:
-
+```css
         .test[title="abc\
         def"] {
             background: url("foo/\
         bar")
         }
-* After:
+```
 
+* After:
+```css
         .test[title="abcdef"] {
             background: url("foo/bar")
         }
+```
 
 ### 2.1.8. Minification of the font-weight property
 
 The `bold` and `normal` values of the `font-weight` property are minimized according to \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
 
 * Before:
-
+```css
         .test0 {
             font-weight: bold
         }
@@ -192,8 +213,10 @@ The `bold` and `normal` values of the `font-weight` property are minimized accor
         .test1 {
             font-weight: normal
         }
-* After:
+```
 
+* After:
+```css
         .test0 {
             font-weight: 700
         }
@@ -201,6 +224,7 @@ The `bold` and `normal` values of the `font-weight` property are minimized accor
         .test1 {
             font-weight: 400
         }
+```
 
 ## 2.2. Structural optimizations
 
@@ -209,7 +233,7 @@ The `bold` and `normal` values of the `font-weight` property are minimized accor
 Adjacent blocks with identical selectors are merged.
 
 * Before:
-
+```css
         .test0 {
             margin: 0
         }
@@ -225,8 +249,10 @@ Adjacent blocks with identical selectors are merged.
         .test0 {
             padding: 0
         }
-* After:
+```
 
+* After:
+```css
         .test0 {
             margin: 0
         }
@@ -239,13 +265,14 @@ Adjacent blocks with identical selectors are merged.
         .test0 {
             padding: 0
         }
+```
 
 ### 2.2.2. Merging blocks with identical properties
 
 Adjacent blocks with identical properties are merged.
 
 * Before:
-
+```css
         .test0 {
             margin: 0
         }
@@ -261,8 +288,10 @@ Adjacent blocks with identical properties are merged.
         .test0 {
             padding: 0
         }
-* After:
+```
 
+* After:
+```css
         .test0 {
             margin: 0
         }
@@ -274,6 +303,7 @@ Adjacent blocks with identical properties are merged.
         .test0 {
             padding: 0
         }
+```
 
 ### 2.2.3. Removal of overridden properties
 
@@ -283,51 +313,60 @@ Properties ignored by the browser can be removed using the following rules:
 * among `!important` properties, the last one is applied.
 
 * Before:
-
+```css
         .test {
             color: red;
             margin: 0;
             line-height: 3cm;
             color: green;
         }
-* After:
+```
 
+* After:
+```css
         .test {
             margin: 0;
             line-height: 3cm;
             color: green
         }
+```
 
 #### 2.2.3.1. Removal of overridden shorthand properties
 
 In case of `border`, `margin`, `padding`, `font` and `list-style` properties, the following removal rule will be applied: if the last property is a 'general' one (for example, `border`), then all preceding overridden properties will be removed (for example, `border-top-width` or `border-style`).
 
 * Before:
-
+```css
         .test {
             border-top-color: red;
             border-color: green
         }
-* After:
+```
 
+* After:
+```css
         .test {
             border-color:green
         }
+```
 
 ### 2.2.4. Removal of repeating selectors
 
 Repeating selectors can be removed.
 
 * Before:
-
+```css
         .test, .test {
             color: red
         }
-* After:
+```
 
+* After:
+```css
         .test {
             color: red
         }
+```
 
 ### 2.2.5. Partial merging of blocks
 
@@ -339,7 +378,7 @@ Given two adjacent blocks where one of the blocks is a subset of the other one, 
 Minification will take place if character count of the properties to be copied is smaller than character count of the overlapping properties.
 
 * Before:
-
+```css
         .test0 {
             color: red
         }
@@ -352,8 +391,10 @@ Minification will take place if character count of the properties to be copied i
         .test2 {
             border: none
         }
-* After:
+```
 
+* After:
+```css
         .test0, .test1 {
             color: red
         }
@@ -361,11 +402,12 @@ Minification will take place if character count of the properties to be copied i
         .test1, .test2 {
             border: none
         }
+```
 
 Minification won't take place if character count of the properties to be copied is larger than character count of the overlapping properties.
 
 * Before:
-
+```css
         .test0 {
             color: red
         }
@@ -378,8 +420,10 @@ Minification won't take place if character count of the properties to be copied 
         .test1 {
             border: none
         }
+```
+
 * After:
-
+```css
         .test0 {
             color: red
         }
@@ -392,6 +436,7 @@ Minification won't take place if character count of the properties to be copied 
         .test1 {
             border: none
         }
+```
 
 ### 2.2.6. Partial splitting of blocks
 
@@ -403,7 +448,7 @@ If two adjacent blocks contain intersecting properties the following minificatio
 Minification will take place if there's a gain in character count.
 
 * Before:
-
+```css
         .test0 {
             color: red;
             border: none;
@@ -415,8 +460,10 @@ Minification will take place if there's a gain in character count.
             border: none;
             margin: 0
         }
-* After:
+```
 
+* After:
+```css
         .test0 {
             color: red
         }
@@ -429,11 +476,12 @@ Minification will take place if there's a gain in character count.
         .test1 {
             color: green
         }
+```
 
 Minification won't take place if there's no gain in character count.
 
 * Before:
-
+```css
         .test0 {
             color: red;
             border: none;
@@ -445,8 +493,10 @@ Minification won't take place if there's no gain in character count.
             border: none;
             margin: 0
         }
+```
+
 * After:
-
+```css
         .test0 {
             color: red;
             border: none;
@@ -458,13 +508,14 @@ Minification won't take place if there's no gain in character count.
             border: none;
             margin: 0
         }
+```
 
 ### 2.2.7. Removal of empty ruleset and at-rule
 
 Empty ruleset and at-rule will be removed.
 
 * Before:
-
+```css
         .test {
             color: red
         }
@@ -480,16 +531,19 @@ Empty ruleset and at-rule will be removed.
         .test {
             border: none
         }
-* After:
+```
 
+* After:
+```css
         .test{color:red;border:none}
+```
 
 ### 2.2.8. Minification of margin and padding properties
 
 The `margin` and `padding` properties are minimized according to \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
 
 * Before:
-
+```css
         .test0 {
             margin-top: 1em;
             margin-right: 2em;
@@ -516,8 +570,10 @@ The `margin` and `padding` properties are minimized according to \[[CSS 2.1 / 8.
         .test5 {
             margin: 1 1
         }
-* After:
+```
 
+* After:
+```css
         .test0 {
             margin: 1em 2em 3em 4em
         }
@@ -533,6 +589,7 @@ The `margin` and `padding` properties are minimized according to \[[CSS 2.1 / 8.
         .test3, .test4, .test5 {
             margin: 1
         }
+```
 
 # 3. Recommendations
 
@@ -555,7 +612,7 @@ Keep blocks with similar sets of properties close to each other.
 Bad:
 
 * Before:
-
+```css
         .test0 {
             color: red
         }
@@ -567,14 +624,17 @@ Bad:
         .test2 {
             color: red
         }
-* After (53 characters):
+```
 
+* After (53 characters):
+```css
         .test0{color:red}.test1{color:green}.test2{color:red}
+```
 
 Good:
 
 * Before:
-
+```css
         .test1 {
             color: green
         }
@@ -586,9 +646,12 @@ Good:
         .test2 {
             color: red
         }
-* After (43 characters):
+```
 
+* After (43 characters):
+```css
         .test1{color:green}.test0,.test2{color:red}
+```
 
 ## 3.4. Using !important
 
@@ -597,23 +660,29 @@ It should go without saying that using the `!important` declaration harms minifi
 Bad:
 
 * Before:
-
+```css
         .test {
             margin-left: 2px !important;
             margin: 1px;
         }
-* After (43 characters):
+```
 
+* After (43 characters):
+```css
         .test{margin-left:2px!important;margin:1px}
+```
 
 Good:
 
 * Before:
-
+```css
         .test {
             margin-left: 2px;
             margin: 1px;
         }
-* After (17 characters):
+```
 
+* After (17 characters):
+```css
         .test{margin:1px}
+```
