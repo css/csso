@@ -35,8 +35,6 @@ CSSO(CSS Optimizer)は、他とはちがうCSS minimizerです。なぜなら通
 
 # 2. 縮小化
 
-Minification is a process of transforming a CSS document into a smaller document without losses. The typical strategies of achieving this are:
-
 縮小化というのはCSSファイルをより軽量なサイズに、それも不具合無く、変換するプロセスのことを言います。典型的なテクニックに関しては以下のとおりです。
 
 * 不必要な要素（例：最後尾のセミコロン）の削除や、値をよりコンパクトな表記に変更（例：`0px`を`0`に）するといったような基本的な変換
@@ -99,9 +97,9 @@ Minification is a process of transforming a CSS document into a smaller document
 
 仕様書によれば `@charset` スタイルシートの先頭に置かなければなりません: \[[CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset)\].
 
-CSSOは少しゆるやかにこのルールを操作します。- `@charset` rule which immediately follows whitespace and comments in the beginning of the stylesheet.
+CSSOは少しゆるやかにこのルールを操作します。- スタイルシートの上部にあり、ホワイトスペースやコメントのすぐ後にある`@charset`を保持します。
 
-Incorrectly placed `@import` rules are deleted according to \[[CSS 2.1 / 6.3 The @import rule](http://www.w3.org/TR/CSS21/cascade.html#at-import)\].
+\[[CSS 2.1 / 6.3 The @import rule](http://www.w3.org/TR/CSS21/cascade.html#at-import)\] の仕様に従って、間違った場所に置かれた`@import`は削除します。
 
 * 変換前:
 
@@ -127,7 +125,7 @@ Incorrectly placed `@import` rules are deleted according to \[[CSS 2.1 / 6.3 The
 
 ### 2.1.5. color プロパティの縮小化
 
-Some color values are minimized according to \[[CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units)\].
+\[[CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units)\] の仕様に従って、色の値を変換します。
 
 * 変換前:
 
@@ -150,9 +148,9 @@ Some color values are minimized according to \[[CSS 2.1 / 4.3.6 Colors](http://w
 
 ### 2.1.6. 0 の縮小化
 
-In some cases, the numeric values can be compacted to `0` or even dropped.
+あるケースにおいて、数値は`0`にすることでコンパクトにできますし、ときには削除さえします。
 
-The `0%` value is not being compacted to avoid the following situation: `rgb(100%, 100%, 0)`.
+`0%`の値は次のようなケースを考えると縮小化できません。 `rgb(100%, 100%, 0)`.
 
 * 変換前:
 
@@ -165,9 +163,9 @@ The `0%` value is not being compacted to avoid the following situation: `rgb(100
             fakeprop: 0 0 0 0 0 0 .1 .1em 0 0% 0% 10
         }
 
-### 2.1.7. Minification of multi-line strings
+### 2.1.7. 複数行文字列の縮小化
 
-Multi-line strings are minified according to \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
+\[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\] の仕様に従って、複数行文字列は縮小化されます。
 
 * 変換前:
 
@@ -182,9 +180,9 @@ Multi-line strings are minified according to \[[CSS 2.1 / 4.3.7 Strings](http://
             background: url("foo/bar")
         }
 
-### 2.1.8. Minification of the font-weight property
+### 2.1.8. font-weight プロパティの縮小化
 
-The `bold` and `normal` values of the `font-weight` property are minimized according to \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
+\[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\] の仕様に従って、`font-weight`プロパティの`bold` と `normal`は縮小化されます。
 
 * 変換前:
 
@@ -205,11 +203,11 @@ The `bold` and `normal` values of the `font-weight` property are minimized accor
             font-weight: 400
         }
 
-## 2.2. Structural optimizations
+## 2.2. 構造的な最適化
 
-### 2.2.1. Merging blocks with identical selectors
+### 2.2.1. 同一セレクタブロックのマージ
 
-Adjacent blocks with identical selectors are merged.
+同一のセレクタで隣接するブロックはマージされます。
 
 * 変換前:
 
@@ -243,9 +241,9 @@ Adjacent blocks with identical selectors are merged.
             padding: 0
         }
 
-### 2.2.2. Merging blocks with identical properties
+### 2.2.2. ブロック内の同一プロパティのマージ
 
-Adjacent blocks with identical properties are merged.
+隣接するブロック内の同一プロパティはマージされます。
 
 * 変換前:
 
@@ -278,12 +276,14 @@ Adjacent blocks with identical properties are merged.
             padding: 0
         }
 
-### 2.2.3. Removal of overridden properties
+### 2.2.3. 上書きされたプロパティの削除
 
-Properties ignored by the browser can be removed using the following rules:
+次のルールにより、ブラウザーによって無視されるプロパティは削除されます。
 
 * the last property in a CSS rule is applied, if none of the properties have an `!important` declaration;
-* among `!important` properties, the last one is applied.
+
+* もし、`!important`宣言がなければ、CSSルールないの最後のプロパティが適用されます。
+* `!important`が宣言されたプロパティが複数あれば、最後のものが適用されます。
 
 * 変換前:
 
@@ -301,9 +301,9 @@ Properties ignored by the browser can be removed using the following rules:
             color: green
         }
 
-#### 2.2.3.1. Removal of overridden shorthand properties
+#### 2.2.3.1. 上書きされたショートハンドプロパティの削除
 
-In case of `border`, `margin`, `padding`, `font` and `list-style` properties, the following removal rule will be applied: if the last property is a 'general' one (for example, `border`), then all preceding overridden properties will be removed (for example, `border-top-width` or `border-style`).
+`border`, `margin`, `padding`, `font`, `list-style` プロパティの場合、 次の削除ルールが適用されます: もし最後のプロパティが 'general' であれば (例： `border`), すべての先行の上書きされたプロパティは削除されます（例：`border-top-width` または `border-style`)。
 
 * 変換前:
 
@@ -317,9 +317,9 @@ In case of `border`, `margin`, `padding`, `font` and `list-style` properties, th
             border-color:green
         }
 
-### 2.2.4. Removal of repeating selectors
+### 2.2.4. 繰り返されているプロパティの削除
 
-Repeating selectors can be removed.
+繰り返されているプロパティは削除されます。
 
 * 変換前:
 
@@ -332,14 +332,14 @@ Repeating selectors can be removed.
             color: red
         }
 
-### 2.2.5. Partial merging of blocks
+### 2.2.5. ブロックの部分的なマージ
 
-Given two adjacent blocks where one of the blocks is a subset of the other one, the following optimization is possible:
+2つの隣接するブロックがあり、片方がもう片方のサブセットの場合、次の最適化が考えられます。
 
-* overlapping properties are removed from the source block;
-* the remaining properties of the source block are copied into a receiving block.
+* 重複するプロパティは、ブロックから削除されます。
+* ブロックの残りのプロパティは受け手のブロックにコピーされます。
 
-Minification will take place if character count of the properties to be copied is smaller than character count of the overlapping properties.
+重複プロパティの文字数よりもコピーするプロパティの文字数が少なければ、縮小化が実行されます。
 
 * 変換前:
 
@@ -365,7 +365,8 @@ Minification will take place if character count of the properties to be copied i
             border: none
         }
 
-Minification won't take place if character count of the properties to be copied is larger than character count of the overlapping properties.
+
+重複プロパティの文字数よりもコピーするプロパティの文字数が多いので、縮小化が実行されません。
 
 * 変換前:
 
@@ -396,14 +397,13 @@ Minification won't take place if character count of the properties to be copied 
             border: none
         }
 
-### 2.2.6. Partial splitting of blocks
+### 2.2.6. ブロックの部分的な分割
 
-If two adjacent blocks contain intersecting properties the following minification is possible:
+隣接する2つのブロックに重複するプロパティがあれば、縮小化が行われます。
 
-* property intersection is determined;
-* a new block containing the intersection is created in between the two blocks.
+* 新しいブロックには2つのブロックの重複プロパティが含まれています。
 
-Minification will take place if there's a gain in character count.
+文字数の節約が期待できるのであれは縮小化が実行されます。
 
 * 変換前:
 
@@ -433,7 +433,7 @@ Minification will take place if there's a gain in character count.
             color: green
         }
 
-Minification won't take place if there's no gain in character count.
+文字数が増えるので縮小化が実行されません。
 
 * 変換前:
 
@@ -462,9 +462,9 @@ Minification won't take place if there's no gain in character count.
             margin: 0
         }
 
-### 2.2.7. Removal of empty ruleset and at-rule
+### 2.2.7. 空のルールセット、ルールの削除
 
-Empty ruleset and at-rule will be removed.
+空のルールセットとルールは削除されます。
 
 * 変換前:
 
@@ -487,9 +487,9 @@ Empty ruleset and at-rule will be removed.
 
         .test{color:red;border:none}
 
-### 2.2.8. Minification of margin and padding properties
+### 2.2.8. margin と padding プロパティの縮小化
 
-The `margin` and `padding` properties are minimized according to \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
+\[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\]の仕様に従って、`margin`と`padding`プロパティの縮小化がされます。
 
 * 変換前:
 
