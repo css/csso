@@ -128,7 +128,7 @@ The minification techniques are described in detail in the [manual](https://gith
 
 * initial idea&nbsp;— Vitaly Harisov (<vitaly@harisov.name>)
 * implementation&nbsp;— Sergey Kryzhanovsky (<skryzhanovsky@ya.ru>)
-* english translation&nbsp;— Leonid Khachaturov (leonidkhachaturov@gmail.com)
+* english translation&nbsp;— Leonid Khachaturov (<leonidkhachaturov@gmail.com>)
 
 # 6. And finally
 
