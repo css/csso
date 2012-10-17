@@ -31,7 +31,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 * идея и поддержка&nbsp;— Виталий Харисов (<vitaly@harisov.name>)
 * реализация&nbsp;— Сергей Крыжановский (<skryzhanovsky@ya.ru>)
-* перевод на английский язык&nbsp;— Leonid Khachaturov (leonidkhachaturov@gmail.com)
+* перевод на английский язык&nbsp;— Leonid Khachaturov (<leonidkhachaturov@gmail.com>)
 
 # Обратная связь
 
