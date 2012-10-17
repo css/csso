@@ -14,16 +14,19 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 В ряде случаев символы ряда whitespace (` `, `\n`, `\r`, `\t`, `\f`) являются необязательными и не влияют на результат применения таблицы стилей.
 
 * Было:
-
+```css
         .test
         {
             margin-top: 1em;
 
             margin-left  : 2em;
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test{margin-top:1em;margin-left:2em}
+```
 
 Для большего удобства чтения текст остальных примеров приводится с пробелами (переводом строки и т.п.).
 
@@ -32,32 +35,38 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Символ `;`, завершающий перечисление свойств в блоке, является необязательным и не влияет на результат применения таблицы стилей.
 
 * Было:
-
+```css
         .test {
             margin-top: 1em;;
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test {
             margin-top: 1em
         }
+```
 
 ### 1.1.3. Удаление комментариев
 
 Комментарии не влияют на результат применения таблицы стилей: \[[CSS 2.1 / 4.1.9 Comments](http://www.w3.org/TR/CSS21/syndata.html#comments)\].
 
 * Было:
-
+```css
         /* comment */
 
         .test /* comment */ {
             /* comment */ margin-top: /* comment */ 1em;
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test {
             margin-top: 1em
         }
+```
 
 ### 1.1.4. Удаление неправильных @charset и @import
 
@@ -68,7 +77,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Правило `@import` на неправильном месте удаляется согласно \[[CSS 2.1 / 6.3 The @import rule](http://www.w3.org/TR/CSS21/cascade.html#at-import)\].
 
 * Было:
-
+```css
         /* comment */
         @charset 'UTF-8';
         @import "test0.css";
@@ -80,21 +89,24 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         }
 
         @import "wrong";
-* Стало:
+```
 
+* Стало:
+```css
         @charset 'UTF-8';
         @import "test0.css";
         @import "test1.css";
         h1 {
             color: red
         }
+```
 
 ### 1.1.5. Минимизация цвета
 
 Некоторые значения цвета минимизируются согласно \[[CSS 2.1 / 4.3.6 Colors](http://www.w3.org/TR/CSS21/syndata.html#color-units)\].
 
 * Было:
-
+```css
         .test {
             color: yellow;
             border-color: #c0c0c0;
@@ -102,8 +114,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             border-top-color: #f00;
             outline-color: rgb(0, 0, 0);
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test {
             color: #ff0;
             border-color: silver;
@@ -111,6 +125,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             border-top-color: red;
             outline-color: #000
         }
+```
 
 ### 1.1.6. Минимизация 0
 
@@ -119,39 +134,45 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Значения `0%` не сокращаются до `0`, чтобы избежать ошибок вида `rgb(100%, 100%, 0)`.
 
 * Было:
-
+```css
         .test {
             fakeprop: .0 0. 0.0 000 00.00 0px 0.1 0.1em 0.000em 00% 00.00% 010.00
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test {
             fakeprop: 0 0 0 0 0 0 .1 .1em 0 0% 0% 10
         }
+```
 
 ### 1.1.7. Слияние многострочных строк в однострочные
 
 Многострочные строки минимизируются согласно \[[CSS 2.1 / 4.3.7 Strings](http://www.w3.org/TR/CSS21/syndata.html#strings)\].
 
 * Было:
-
+```css
         .test[title="abc\
         def"] {
             background: url("foo/\
         bar")
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test[title="abcdef"] {
             background: url("foo/bar")
         }
+```
 
 ### 1.1.8. Минимизация font-weight
 
 Значения `bold` и `normal` свойства `font-weight` минимизируются согласно \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
 
 * Было:
-
+```css
         .test0 {
             font-weight: bold
         }
@@ -159,8 +180,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test1 {
             font-weight: normal
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test0 {
             font-weight: 700
         }
@@ -168,6 +191,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test1 {
             font-weight: 400
         }
+```
 
 ## 1.2. Минимизация с изменением структуры
 
@@ -176,7 +200,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 В один блок сливаются соседние блоки с одинаковым набором селекторов.
 
 * Было:
-
+```css
         .test0 {
             margin: 0
         }
@@ -192,8 +216,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test0 {
             padding: 0
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test0 {
             margin: 0
         }
@@ -206,13 +232,14 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test0 {
             padding: 0
         }
+```
 
 ### 1.2.2. Слияние блоков с одинаковыми свойствами
 
 В один блок сливаются соседние блоки с одинаковым набором свойств.
 
 * Было:
-
+```css
         .test0 {
             margin: 0
         }
@@ -228,8 +255,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test0 {
             padding: 0
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test0 {
             margin: 0
         }
@@ -241,6 +270,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test0 {
             padding: 0
         }
+```
 
 ### 1.2.3. Удаление перекрываемых свойств
 
@@ -252,51 +282,60 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Это позволяет избавиться от всех игнорируемых браузером свойств.
 
 * Было:
-
+```css
         .test {
             color: red;
             margin: 0;
             line-height: 3cm;
             color: green;
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test {
             margin: 0;
             line-height: 3cm;
             color: green
         }
+```
 
 #### 1.2.3.1. Удаление перекрываемых shorthand свойств
 
 Для свойств `border`, `margin`, `padding`, `font` и `list-style` используется следующий алгоритм удаления: если последним по порядку свойством является более 'широкое' свойство (например, `border`), то все предыдущие перекрываемые им свойства удаляются (например, `border-top-width` или `border-style`).
 
 * Было:
-
+```css
         .test {
             border-top-color: red;
             border-color: green
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test {
             border-color:green
         }
+```
 
 ### 1.2.4. Удаление повторяющихся селекторов
 
 Повторяющиеся селекторы излишни и потому могут быть удалены.
 
 * Было:
-
+```css
         .test, .test {
             color: red
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test {
             color: red
         }
+```
 
 ### 1.2.5. Частичное слияние блоков
 
@@ -308,7 +347,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Если в символах размер копируемых селекторов меньше размера пересекающегося набора свойств, минимизация происходит.
 
 * Было:
-
+```css
         .test0 {
             color: red
         }
@@ -321,8 +360,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test2 {
             border: none
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test0, .test1 {
             color: red
         }
@@ -330,11 +371,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test1, .test2 {
             border: none
         }
+```
 
 Если в символах размер копируемых селекторов больше размера пересекающегося набора свойств, минимизация не происходит.
 
 * Было:
-
+```css
         .test0 {
             color: red
         }
@@ -347,8 +389,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test1 {
             border: none
         }
+```
+
 * Стало:
-
+```css
         .test0 {
             color: red
         }
@@ -361,6 +405,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test1 {
             border: none
         }
+```
 
 ### 1.2.6. Частичное разделение блоков
 
@@ -372,7 +417,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Если в символах размер копируемых селекторов меньше размера пересекающегося набора свойств, минимизация происходит.
 
 * Было:
-
+```css
         .test0 {
             color: red;
             border: none;
@@ -384,8 +429,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             border: none;
             margin: 0
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test0 {
             color: red
         }
@@ -398,11 +445,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test1 {
             color: green
         }
+```
 
 Если в символах размер копируемых селекторов больше размера пересекающегося набора свойств, минимизация не происходит.
 
 * Было:
-
+```css
         .test0 {
             color: red;
             border: none;
@@ -414,8 +462,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             border: none;
             margin: 0
         }
+```
+
 * Стало:
-
+```css
         .test0 {
             color: red;
             border: none;
@@ -427,13 +477,14 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             border: none;
             margin: 0
         }
+```
 
 ### 1.2.7. Удаление пустых ruleset и at-rule
 
 Пустые ruleset и at-rule удаляются.
 
 * Было:
-
+```css
         .test {
             color: red
         }
@@ -449,16 +500,19 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test {
             border: none
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test{color:red;border:none}
+```
 
 ### 1.2.8. Минимизация margin и padding
 
 Свойства `margin` и `padding` минимизируются согласно \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] и \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
 
 * Было:
-
+```css
         .test0 {
             margin-top: 1em;
             margin-right: 2em;
@@ -485,8 +539,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test5 {
             margin: 1 1
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test0 {
             margin: 1em 2em 3em 4em
         }
@@ -502,11 +558,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test3, .test4, .test5 {
             margin: 1
         }
+```
 
 Минимизация не происходит в случаях, когда один набор `selector X / shorthands` прерывается другим набором `selector Y / shorthands`.
 
 * Было:
-
+```css
         .test1 {
             margin-top: 0
         }
@@ -526,8 +583,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test1 {
             margin-right: 0
         }
-* Стало:
+```
 
+* Стало:
+```css
         .test1 {
             margin-top: 0
         }
@@ -541,9 +600,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
             margin-bottom: 0;
             margin-right: 0
         }
+```
 
 * Могло быть (неправильно):
-
+```css
         .test2 {
             margin-top: 100px
         }
@@ -551,15 +611,17 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test1 {
             margin: 0
         }
+```
 
 К сожалению, результат рендеринга последнего варианта отличается от рендеринга исходного стиля, потому такая минимизация недопустима.
 
 ### 1.2.9. Специальная минимизация псевдоклассов
 
 Если в группе селекторов UA обнаружит неподдерживаемый селектор, он, согласно \[[CSS 3 / Selectors / 5. Groups of selectors](http://www.w3.org/TR/selectors/#grouping)\], посчитает неподдерживаемой всю группу и не применит стили к перечисленным в ней селекторам. Этим нередко пользуются для разграничения стилей по браузерам. Вот [пример](http://pornel.net/firefoxhack) метода:
-
+```css
         #hackme, x:-moz-any-link { Firefox 2.0 here }
         #hackme, x:-moz-any-link, x:default { Firefox 3.0 and newer }
+```
 
 Чтобы сохранить такие блоки, но в то же время минимизировать то, что поддаётся оптимизации, CSSO применяет нижеперечисленные правила. Предполагается, что вместе эти правила составляют компромисс, удовлетворяющий большинство пользователей.
 
@@ -568,7 +630,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 В общем случае (исключения описаны ниже) минимизация удалением перекрываемого селектора не происходит, если группа селекторов включает псевдокласс или псевдоэлемент. 
 
 * Было:
-
+```css
         a {
             property: value0
         }
@@ -576,8 +638,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         a, x:-vendor-class {
             property: value1
         }
-* Стало (структура не изменилась):
+```
 
+* Стало (структура не изменилась):
+```css
         a {
             property: value0
         }
@@ -585,11 +649,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         a, x:-vendor-class {
             property: value1
         }
+```
 
 Если же группы селекторов образуют одинаковую "сигнатуру псевдоклассов" (исключается ситуация, в которой браузер поддерживает одну группу, но не поддерживает другую), минимизация происходит.
 
 * Было:
-
+```css
         a, x:-vendor-class {
             property: value0
         }
@@ -597,18 +662,21 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         a, b, x:-vendor-class {
             property: value1
         }
-* Стало:
+```
 
+* Стало:
+```css
         a, b, x:-vendor-class {
             property: value1
         }
+```
 
 #### 1.2.9.2. Минимизация общеподдерживаемых псевдоклассов и псевдоэлементов
 
 Существуют псевдоклассы и псевдоэлементы, поддерживаемые большинством браузеров: `:link`, `:visited`, `:hover`, `:active`, `:first-letter`, `:first-line`. Для них минимизация происходит в общем порядке без сохранения группы.
 
 * Было:
-
+```css
         a, x:active {
             color: red
         }
@@ -616,7 +684,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         a {
             color: green
         }
+```
+
 * Стало:
+```css
         x:active {
             color: red
         }
@@ -624,13 +695,14 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         a {
             color: green
         }
+```
 
 #### 1.2.9.3. Минимизация :before и :after
 
 Псевдоэлементы `:before` и `:after` обычно поддерживаются браузерами парно, потому объединение блоков с их участием безопасно.
 
 * Было:
-
+```css
         a, x:before {
             color: red
         }
@@ -638,16 +710,19 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         a, x:after {
             color: red
         }
-* Стало:
+```
 
+* Стало:
+```css
         a, x:before, x:after {
             color:red
         }
+```
 
 Тем не менее, блоки, в которых участвует только один из этих псевдоэлементов, не объединяются:
 
 * Было:
-
+```css
         a {
             color: red
         }
@@ -655,8 +730,10 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         a, x:after {
             color: red
         }
+```
+
 * Стало:
-
+```css
         a {
             color: red
         }
@@ -664,6 +741,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         a, x:after {
             color: red
         }
+```
 
 В примере выше можно заметить, что удаление селектора `a` из второго блока не повлияло бы на итоговый рендеринг, но в общем случае это опасная минимизация, потому не применяется.
 
@@ -688,7 +766,7 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Плохо:
 
 * Было:
-
+```css
         .test0 {
             color: red
         }
@@ -700,14 +778,17 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test2 {
             color: red
         }
-* Стало (53 символа):
+```
 
+* Стало (53 символа):
+```css
         .test0{color:red}.test1{color:green}.test2{color:red}
+```
 
 Хорошо:
 
 * Было:
-
+```css
         .test1 {
             color: green
         }
@@ -719,9 +800,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         .test2 {
             color: red
         }
-* Стало (43 символа):
+```
 
+* Стало (43 символа):
+```css
         .test1{color:green}.test0,.test2{color:red}
+```
 
 ## 2.4. Использование !important
 
@@ -730,23 +814,29 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 Плохо:
 
 * Было:
-
+```css
         .test {
             margin-left: 2px !important;
             margin: 1px;
         }
-* Стало (43 символа):
+```
 
+* Стало (43 символа):
+```css
         .test{margin-left:2px!important;margin:1px}
+```
 
 Хорошо:
 
 * Было:
-
+```css
         .test {
             margin-left: 2px;
             margin: 1px;
         }
-* Стало (17 символов):
+```
 
+* Стало (17 символов):
+```css
         .test{margin:1px}
+```
