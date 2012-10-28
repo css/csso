@@ -3119,7 +3119,11 @@ CSSOCompressor.prototype.compressFunctionColor = function(token) {
 CSSOCompressor.prototype.compressDimension = function(token) {
     var declaration;
     if (token[2][2] === '0') {
-        if (token[3][2] === 's' && (declaration = this.findDeclaration(token)) && declaration[2][2][2] === '-moz-transition') return;
+        if (token[3][2] === 's' && (declaration = this.findDeclaration(token))) {
+            var declName = declaration[2][2][2];
+            if  (declName === '-moz-transition') return; // https://github.com/css/csso/issues/82
+            if  (declName === '-moz-animation' || declName === 'animation') return; // https://github.com/css/csso/issues/100
+        }
         return token[2];
     }
 };

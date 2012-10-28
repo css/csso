@@ -1,0 +1,1 @@
+.test1{animation:test 2s 0s}.test2{-moz-animation:test 2s 0s}
