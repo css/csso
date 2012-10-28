@@ -242,6 +242,7 @@ CSSOCompressor.prototype.process = function(rules, token, container, i, path) {
 };
 
 CSSOCompressor.prototype.compress = function(tree, ro) {
+    tree = tree || ['stylesheet'];
     this.init();
     this.info = true;
 
