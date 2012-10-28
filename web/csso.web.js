@@ -309,6 +309,7 @@ function getCSSPAST(_tokens, rule, _needInfo) {
     var tokens,
         pos,
         failLN = 0,
+        currentBlockLN = 0,
         needInfo = false;
 
     var CSSPNodeType,
@@ -422,8 +423,10 @@ function getCSSPAST(_tokens, rule, _needInfo) {
         if (token && token.ln > failLN) failLN = token.ln;
     }
 
-    function throwError(message) {
-        throw message;
+    function throwError() {
+        console.error('Please check the validity of the CSS block starting from the line #' + currentBlockLN);
+        if (process) process.exit(1);
+        throw new Error();
     }
 
     function _getAST(_tokens, rule, _needInfo) {
@@ -778,7 +781,7 @@ function getCSSPAST(_tokens, rule, _needInfo) {
 
         while (pos < end) {
             if (checkBlockdecl(pos)) block = block.concat(getBlockdecl());
-            else throwError('Error in line #' + failLN);
+            else throwError();
         }
 
         pos = end + 1;
@@ -1896,10 +1899,13 @@ function getCSSPAST(_tokens, rule, _needInfo) {
 
         while (_i < tokens.length) {
             if (l = checkSC(_i)) _i += l;
-            else if (l = checkAtrule(_i)) _i += l;
-            else if (l = checkRuleset(_i)) _i += l;
-            else if (l = checkUnknown(_i)) _i += l;
-            else throwError('Error in line #' + failLN);
+            else {
+                currentBlockLN = tokens[_i].ln;
+                if (l = checkAtrule(_i)) _i += l;
+                else if (l = checkRuleset(_i)) _i += l;
+                else if (l = checkUnknown(_i)) _i += l;
+                else throwError();
+            }
         }
 
         return _i - start;
@@ -1911,10 +1917,13 @@ function getCSSPAST(_tokens, rule, _needInfo) {
 
         while (pos < tokens.length) {
             if (checkSC(pos)) stylesheet = stylesheet.concat(getSC());
-            else if (checkRuleset(pos)) stylesheet.push(getRuleset());
-            else if (checkAtrule(pos)) stylesheet.push(getAtrule());
-            else if (checkUnknown(pos)) stylesheet.push(getUnknown());
-            else throwError('Error in line #' + failLN);
+            else {
+                currentBlockLN = tokens[pos].ln;
+                if (checkRuleset(pos)) stylesheet.push(getRuleset());
+                else if (checkAtrule(pos)) stylesheet.push(getAtrule());
+                else if (checkUnknown(pos)) stylesheet.push(getUnknown());
+                else throwError();
+            }
         }
 
         return stylesheet;
