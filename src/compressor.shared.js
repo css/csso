@@ -248,7 +248,8 @@ CSSOCompressor.prototype.compress = function(tree, ro) {
 
     var x = (typeof tree[0] !== 'string') ? tree : this.injectInfo([tree])[0],
         l0, l1 = 100000000000, ls,
-        x0, x1, xs;
+        x0, x1, xs,
+        protectedComment = this.findProtectedComment(tree);
 
     // compression without restructure
     x = this.walk(this.ccrules, x, '/0');
@@ -279,7 +280,18 @@ CSSOCompressor.prototype.compress = function(tree, ro) {
 
     x = this.walk(this.frules, x, '/0');
 
-    return this.info ? x : cleanInfo(x);
+    if (protectedComment) x.splice(2, 0, protectedComment);
+
+    return x;
+};
+
+CSSOCompressor.prototype.findProtectedComment = function(tree) {
+    var token;
+    for (var i = 2; i < tree.length; i++) {
+        token = tree[i];
+        if (token[1] === 'comment' && token[2].length > 0 && token[2].charAt(0) === '!') return token;
+        if (token[1] !== 's') return;
+    }
 };
 
 CSSOCompressor.prototype.injectInfo = function(token) {

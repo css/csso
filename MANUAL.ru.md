@@ -105,6 +105,26 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
         }
 ```
 
+Если вам требуется сохранить комментарий, CSSO позволяет это сделать только с одним первым комментарием, если его текст начинается с `!`.
+
+* Было:
+```css
+        /*! MIT license */
+        /*! will be removed */
+
+        .test {
+            color: red
+        }
+```
+
+* Стало:
+```css
+        /*! MIT license */
+        .test {
+            color: red
+        }
+```
+
 ### 2.1.4. Удаление неправильных @charset и @import
 
 Единственно верным расположением `@charset` является начало текста: \[[CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset)\].

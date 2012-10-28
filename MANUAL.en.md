@@ -101,6 +101,26 @@ Comments do not affect rendering: \[[CSS 2.1 / 4.1.9 Comments](http://www.w3.org
         }
 ```
 
+If you want to save the comment, CSSO can do it with only one first comment in case it starts with `!`.
+
+* Before:
+```css
+        /*! MIT license */
+        /*! will be removed */
+
+        .test {
+            color: red
+        }
+```
+
+* After:
+```css
+        /*! MIT license */
+        .test {
+            color: red
+        }
+```
+
 ### 2.1.4. Removal of invalid @charset and @import declarations
 
 According to the specification, `@charset` must be placed at the very beginning of the stylesheet: \[[CSS 2.1 / 4.4 CSS style sheet representation](http://www.w3.org/TR/CSS21/syndata.html#charset)\].
