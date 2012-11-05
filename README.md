@@ -104,7 +104,7 @@ Safe transformations:
 * Removal of whitespace
 * Removal of trailing `;`
 * Removal of comments
-* Removal of invalid `@charset` и `@import` declarations
+* Removal of invalid `@charset` and `@import` declarations
 * Minification of color properties
 * Minification of `0`
 * Minification of multi-line strings
