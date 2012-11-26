@@ -139,7 +139,7 @@ function getTokens(s) {
 
         tokens = [];
 
-        var c, nc;
+        var c, cn;
 
         for (pos = 0; pos < s.length; pos++) {
             c = s.charAt(pos);
@@ -586,6 +586,7 @@ function getCSSPAST(_tokens, rule, _needInfo) {
 //attrselector = (seq('=') | seq('~=') | seq('^=') | seq('$=') | seq('*=') | seq('|=')):x -> [#attrselector, x]
     function checkAttrselector(_i) {
         if (tokens[_i].type === TokenType.EqualsSign) return 1;
+        if (tokens[_i].type === TokenType.VerticalLine && (!tokens[_i + 1] || tokens[_i + 1].type !== TokenType.EqualsSign)) return 1;
 
         if (!tokens[_i + 1] || tokens[_i + 1].type !== TokenType.EqualsSign) return fail(tokens[_i]);
 
@@ -1237,7 +1238,9 @@ function getCSSPAST(_tokens, rule, _needInfo) {
 
         pos++;
 
-        var body = getFunctionBody();
+        var body = ident[needInfo? 2 : 1] !== 'not'?
+            getFunctionBody() :
+            getNotFunctionBody(); // ok, here we have CSS3 initial draft: http://dev.w3.org/csswg/selectors3/#negation
 
         return needInfo?
                 [{ ln: tokens[startPos].ln }, CSSPNodeType.FunktionType, ident, body] :
@@ -1252,11 +1255,33 @@ function getCSSPAST(_tokens, rule, _needInfo) {
         while (tokens[pos].type !== TokenType.RightParenthesis) {
             if (checkTset(pos)) {
                 x = getTset();
-
                 if ((needInfo && typeof x[1] === 'string') || typeof x[0] === 'string') body.push(x);
                 else body = body.concat(x);
             } else if (checkClazz(pos)) {
                 body.push(getClazz());
+            } else {
+                throwError();
+            }
+        }
+
+        pos++;
+
+        return (needInfo?
+                    [{ ln: tokens[startPos].ln }, CSSPNodeType.FunctionBodyType] :
+                    [CSSPNodeType.FunctionBodyType]
+                ).concat(body);
+    }
+
+    function getNotFunctionBody() {
+        var startPos = pos,
+            body = [],
+            x;
+
+        while (tokens[pos].type !== TokenType.RightParenthesis) {
+            if (checkSimpleselector(pos)) {
+                body.push(getSimpleSelector());
+            } else {
+                throwError();
             }
         }
 
