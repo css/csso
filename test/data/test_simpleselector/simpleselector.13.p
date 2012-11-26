@@ -3,6 +3,7 @@
     ['funktion', 
       ['ident', 'not'], 
       ['functionBody', 
-        ['ident', 'el'], 
-        ['clazz', 
-          ['ident', 'class-postfix']]]]]]
+        ['simpleselector', 
+          ['ident', 'el'], 
+          ['clazz', 
+            ['ident', 'class-postfix']]]]]]]
