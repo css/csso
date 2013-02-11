@@ -1,6 +1,10 @@
 CSSO changelog
 ===================
 
+11.02.2013, Version 1.3.7
+
+- Gonzales 1.0.7.
+
 26.11.2012, Version 1.3.6
 
 - Gonzales 1.0.6.
