@@ -1,31 +1,31 @@
-# Table of contents
+**Table of Contents**
 
-* 1\. Introduction
-* 2\. Minification
-* 2.1\. Basic transformations
-* 2.1.1\. Removal of whitespace
-* 2.1.2\. Removal of trailing ';'
-* 2.1.3\. Removal of comments
-* 2.1.4\. Removal of invalid @charset and @import declarations
-* 2.1.5\. Minification of color properties
-* 2.1.6\. Minification of 0
-* 2.1.7\. Minification of multi-line strings
-* 2.1.8\. Minification of the font-weight property
-* 2.2\. Structural optimization
-* 2.2.1\. Merging blocks with identical selectors
-* 2.2.2\. Merging blocks with idential properties
-* 2.2.3\. Removal of overridden properties
-* 2.2.3.1\. Removal of overridden shorthand properties
-* 2.2.4\. Removal of repeating selectors
-* 2.2.5\. Partial merging of blocks
-* 2.2.6\. Partial splitting of blocks
-* 2.2.7\. Removal of empty ruleset and at-rule
-* 2.2.8\. Minification of margin and padding properties
-* 3\. Recommendations
-* 3.1\. Length of selectors
-* 3.2\. Order of properties
-* 3.3\. Positioning of similar blocks
-* 3.4\. Using !important
+- [1. Introduction](#1-introduction)
+- [2. Minification](#2-minification)
+	- [2.1. Basic transformations](#21-basic-transformations)
+		- [2.1.1. Removal of whitespace](#211-removal-of-whitespace)
+		- [2.1.2. Removal of trailing ';'](#212-removal-of-trailing-';')
+		- [2.1.3. Removal of comments](#213-removal-of-comments)
+		- [2.1.4. Removal of invalid @charset and @import declarations](#214-removal-of-invalid-@charset-and-@import-declarations)
+		- [2.1.5. Minification of color properties](#215-minification-of-color-properties)
+		- [2.1.6. Minification of 0](#216-minification-of-0)
+		- [2.1.7. Minification of multi-line strings](#217-minification-of-multi-line-strings)
+		- [2.1.8. Minification of the font-weight property](#218-minification-of-the-font-weight-property)
+	- [2.2. Structural optimizations](#22-structural-optimizations)
+		- [2.2.1. Merging blocks with identical selectors](#221-merging-blocks-with-identical-selectors)
+		- [2.2.2. Merging blocks with identical properties](#222-merging-blocks-with-identical-properties)
+		- [2.2.3. Removal of overridden properties](#223-removal-of-overridden-properties)
+			- [2.2.3.1. Removal of overridden shorthand properties](#2231-removal-of-overridden-shorthand-properties)
+		- [2.2.4. Removal of repeating selectors](#224-removal-of-repeating-selectors)
+		- [2.2.5. Partial merging of blocks](#225-partial-merging-of-blocks)
+		- [2.2.6. Partial splitting of blocks](#226-partial-splitting-of-blocks)
+		- [2.2.7. Removal of empty ruleset and at-rule](#227-removal-of-empty-ruleset-and-at-rule)
+		- [2.2.8. Minification of margin and padding properties](#228-minification-of-margin-and-padding-properties)
+- [3. Recommendations](#3-recommendations)
+	- [3.1. Length of selectors](#31-length-of-selectors)
+	- [3.2. Order of properties](#32-order-of-properties)
+	- [3.3. Positioning of similar blocks](#33-positioning-of-similar-blocks)
+	- [3.4. Using !important](#34-using-!important)
 
 # 1. Introduction
 
