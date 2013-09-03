@@ -1,0 +1,15 @@
+{
+    "title": "Установка",
+    "longTitle": "Установка CSSO",
+    "createDate": "17-10-2012",
+    "editDate": "",
+    "summary": "Инструкция по установке CSSO.",
+    "thumbnail": "",
+    "authors": ["harisov-vitaly"],
+    "tags": ["tools", "css"],
+    "categories": [{"name": "Оптимизаторы/СSSO", "url": "optimizers/csso", "order": "20/20"}],
+    "translators": [],
+    "url": "/docs/install/",
+    "type": "tools",
+    "order": "20"
+} 

@@ -1,0 +1,14 @@
+{
+    "title": "CSSO",
+    "createDate": "17-10-2012",
+    "editDate": "28-10-2012",
+    "summary": "Краткое введение в CSSO.",
+    "thumbnail": "",
+    "authors": ["harisov-vitaly"],
+    "tags": ["tools", "css"],
+    "categories": [{"name": "Оптимизаторы/СSSO", "url": "optimizers/csso", "order": "20/20"}],
+    "translators": [],
+    "url": "/docs/index/",
+    "type": "tools",
+    "root" : "true"
+} 
