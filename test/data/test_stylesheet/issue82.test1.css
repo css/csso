@@ -1,4 +1,5 @@
 .foo {
-    -moz-transition: 0s;
-    transition: 0s;
+	-webkit-transition: 0s 0ms;
+    -moz-transition: 0s 0ms;
+    transition: 0s 0ms;
 }
