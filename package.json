@@ -11,6 +11,9 @@
     "bin": "./bin/csso",
     "main": "./lib/cssoapi",
     "engines": { "node": ">=0.4.0" },
-    "licenses": [ { "type": "MIT" } ]
+    "licenses": [ { "type": "MIT" } ],
+    "scripts": {
+        "test": "node test/test.js"
+    }
 }
 
