@@ -1,71 +1,82 @@
-var fs = require('fs'),
-    csso = require('./../lib/cssoapi.js'),
-    treeToString = csso.treeToString,
-    _parse = csso.parse,
-    _translate = csso.translate,
-    _compress = csso.compress,
-    _cleanInfo = require('./../lib/util.js').cleanInfo,
-    d_dir = __dirname + '/data',
-    d_list = fs.readdirSync(d_dir),
-    okn = total = 0;
+var fs = require('fs');
+var path = require('path');
+var assert = require('assert');
+var csso = require('../lib/cssoapi.js');
+var utils = require('../lib/util.js');
 
 var funcs = {
     'p': function parse(src, match) {
-            return treeToString(_cleanInfo(_parse(src, match, true)));
-         },
+        return csso.treeToString(clean(src, match));
+    },
     'l': function translate(src, match) {
-            return _translate(_cleanInfo(_parse(src, match, true)));
-         },
+        return csso.translate(clean(src, match));
+    },
     'cl': function translate(src, match) {
-            return _translate(_cleanInfo(_compress(_parse(src, match, true))));
-         }
+        return csso.translate(clean(src, match, true));
+    }
 };
 
-d_list.forEach(function(rule_dir) {
-    if (/^test/.test(rule_dir)) {
-        var rule = rule_dir.substring(5),
-            path = d_dir + '/' + rule_dir + '/',
-            list = fs.readdirSync(path),
-            ext,
-            files = {},
-            k, a, b, c, src, t, r;
+function parse(src, match) {
+    return csso.parse(src, match, true);
+}
 
-        list.forEach(function(f) {
-            var i = f.lastIndexOf('.');
-
-            if (i !== -1) {
-                ext = f.substring(i + 1);
-                k = f.substring(0, i);
-                if (!(k in files)) files[k] = {};
-                files[k][ext] = 1;
-            }
-        });
-
-        for (k in files) {
-            if (files[k].css) {
-                src = readFile(path + k + '.css').trim();
-                t = '\'' + rule + '\' / \'' + k + '.';
-                for (a in funcs) {
-                    if (a in files[k]) {
-                        total++;
-                        r = (((b = funcs[a](src, rule)) == (c = readFile(path + k + '.' + a).trim())));
-                        r && okn++;
-                        if (!r) {
-                            console.log('FAIL: ' + t + a);
-                            console.log('======= expected');
-                            console.log(c);
-                            console.log('======= result');
-                            console.log(b);
-                        }
-                    }
-                }
-            }
-        }
+function clean(src, match, compress) {
+    var out = parse(src, match);
+    if (compress) {
+        out = csso.compress(out);
     }
-});
 
-console.log('Total: ' + total + '. Ok: ' + okn + '. Fail: ' + (total - okn));
+    return utils.cleanInfo(out);
+}
 
 function readFile(path) {
-    return fs.readFileSync(path).toString();
+    return fs.readFileSync(path).toString().trim();
 }
+
+function runTest(files, filePrefix, rule) {
+    var src = readFile(filePrefix + '.css');
+    var basename = path.relative(__dirname, filePrefix);
+
+    var test = function(fn) {
+        it('in ' + basename, function() {
+            assert.equal(funcs[fn](src, rule), readFile(filePrefix + '.' + fn));
+        });
+    }
+    for (var fn in funcs) {
+        if (fn in files) {
+            test(fn);
+        }
+    }
+}
+
+function runTestsInDir(dir, rule) {
+    var files = {};
+    fs.readdirSync(dir).forEach(function(f) {
+        var ext = path.extname(f);
+        if (ext) {
+            var basename = path.basename(f, ext);
+            if (!files[basename]) {
+                files[basename] = {};
+            }
+
+            files[basename][ext.substring(1)] = 1;
+        }
+    });
+
+    for (var k in files) {
+        runTest(files[k], path.join(dir, k), rule);
+    }
+}
+
+describe('CSSO', function() {
+    var testDir = path.join(__dirname, 'data');
+    fs.readdirSync(testDir).forEach(function(ruleDir) {
+        var dir = path.join(testDir, ruleDir);
+        var stat = fs.statSync(dir);
+        if (!stat.isDirectory()) {
+            return;
+        }
+
+        runTestsInDir(dir, ruleDir.substring(5));
+    });
+});

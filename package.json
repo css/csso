@@ -1,19 +1,27 @@
 {
-    "name": "csso",
-    "description": "CSSO — CSS optimizer",
-    "version": "1.3.8",
-    "homepage": "http://github.com/css/csso",
-    "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (http://github.com/afelix)",
-    "repository": {
-        "type": "git",
-        "url": "http://github.com/css/csso.git"
-    },
-    "bin": "./bin/csso",
-    "main": "./lib/cssoapi",
-    "engines": { "node": ">=0.4.0" },
-    "licenses": [ { "type": "MIT" } ],
-    "scripts": {
-        "test": "node test/test.js"
+  "name": "csso",
+  "description": "CSSO — CSS optimizer",
+  "version": "1.3.8",
+  "homepage": "http://github.com/css/csso",
+  "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (http://github.com/afelix)",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/css/csso.git"
+  },
+  "bin": "./bin/csso",
+  "main": "./lib/cssoapi",
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
     }
+  ],
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha ./test/test.js"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0"
+  }
 }
-
