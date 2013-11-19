@@ -19,17 +19,17 @@ CSSO changelog
 - Japan manual
 - BEM ready documentation
 
-10.10.2012, Version 1.3.4 
+10.10.2012, Version 1.3.4
 -------------------------
 
 - @page inside @media Causes Error: https://github.com/css/csso/issues/90
 
-09.10.2012, Version 1.3.3 
+09.10.2012, Version 1.3.3
 -------------------------
 
 - CSSO 1.3.2 compresses ".t-1" and ".t-01" as identical classes: https://github.com/css/csso/issues/88
 
-08.10.2012, Version 1.3.2 
+08.10.2012, Version 1.3.2
 -------------------------
 
 - filter + important breaks CSSO v1.3.1: https://github.com/css/csso/issues/87
@@ -39,7 +39,7 @@ CSSO changelog
 
 - "filter" IE property breaks CSSO v1.3.0: https://github.com/css/csso/issues/86
 
-04.10.2012, Version 1.3.0 
+04.10.2012, Version 1.3.0
 -------------------------
 
 - PeCode CSS parser replaced by Gonzales CSS parser

@@ -148,7 +148,7 @@ function getTokens(s) {
             if (c === '/' && cn === '*') {
                 parseMLComment(s);
             } else if (!urlMode && c === '/' && cn === '/') {
-                if (blockMode > 0) parseIdentifier(s); 
+                if (blockMode > 0) parseIdentifier(s);
                 else parseSLComment(s);
             } else if (c === '"' || c === "'") {
                 parseString(s, c);
@@ -579,8 +579,8 @@ function getCSSPAST(_tokens, rule, _needInfo) {
     }
 
     function getAttrib() {
-        if (checkAttrib1(pos)) return getAttrib1(); 
-        if (checkAttrib2(pos)) return getAttrib2(); 
+        if (checkAttrib1(pos)) return getAttrib1();
+        if (checkAttrib2(pos)) return getAttrib2();
     }
 
 //attrselector = (seq('=') | seq('~=') | seq('^=') | seq('$=') | seq('*=') | seq('|=')):x -> [#attrselector, x]
@@ -1316,7 +1316,7 @@ function getCSSPAST(_tokens, rule, _needInfo) {
                         (tokens[_i].type !== TokenType.DecimalNumber || !wasIdent)
                         ) break;
                     else wasIdent = true;
-            }   
+            }
         }
 
         if (!wasIdent && tokens[start].type !== TokenType.Asterisk) return fail(tokens[_i]);
@@ -3463,7 +3463,7 @@ CSSOCompressor.prototype.getVendorFromString = function(string) {
     var vendor = string.charAt(0), i;
     if (vendor === '-') {
         if ((i = string.indexOf('-', 2)) !== -1) return string.substr(0, i + 1);
-    } 
+    }
     return '';
 };
 

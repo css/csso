@@ -11,4 +11,3 @@ done
 CSSO_HOME=$(dirname -- "$(dirname -- "$SELF_PATH")")
 
 node "$CSSO_HOME/lib/csso.js" $@
-

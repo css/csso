@@ -8,7 +8,7 @@
 
 gitからインストールした場合 `bin/csso` 、nodejs 0.4.x&nbsp;— [http://nodejs.org](http://nodejs.org)をインストールしておく必要があります。
 
-npmからインストールした場合 `csso` 
+npmからインストールした場合 `csso`
 
 使用方法:
 

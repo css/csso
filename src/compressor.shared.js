@@ -994,7 +994,7 @@ CSSOCompressor.prototype.getVendorFromString = function(string) {
     var vendor = string.charAt(0), i;
     if (vendor === '-') {
         if ((i = string.indexOf('-', 2)) !== -1) return string.substr(0, i + 1);
-    } 
+    }
     return '';
 };
 
