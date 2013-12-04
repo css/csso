@@ -33,6 +33,7 @@ The minification techniques are described in detail in the [detailed description
 * implementation&nbsp;— Sergey Kryzhanovsky (<skryzhanovsky@ya.ru>)
 * english translation&nbsp;— Leonid Khachaturov (<leonidkhachaturov@gmail.com>)
 * japanese translation&nbsp;— Koji Ishimoto (<ijok.ijok@gmail.com>)
+* korean translation&nbsp;— Wankyu Kim (<wankyu19@gmail.com>)
 
 # Feedback
 
