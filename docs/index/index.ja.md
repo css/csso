@@ -33,6 +33,7 @@ CSSO (CSSオプティマイザー)は、他とは違ったCSS縮小化ツール�
 * 実装&nbsp;— Sergey Kryzhanovsky (<skryzhanovsky@ya.ru>)
 * 英語翻訳&nbsp;— Leonid Khachaturov (<leonidkhachaturov@gmail.com>)
 * 日本語翻訳&nbsp;— Koji Ishimoto (<ijok.ijok@gmail.com>)
+* 韓国語翻訳&nbsp;— Wankyu Kim (<wankyu19@gmail.com>)
 
 # フィードバック
 
