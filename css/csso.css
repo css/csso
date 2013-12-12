@@ -1,7 +1,11 @@
 body {
-    margin-top: 1.0em;
     background-color: #fff;
+    color: #000;
     font-family: Helvetica, Arial, FreeSans, san-serif;
+    margin-top: 1.0em;
+}
+
+a {
     color: #000;
 }
 
@@ -22,8 +26,8 @@ h3 {
     text-align: center;
 }
 
-a {
-    color: #000;
+small {
+    font-size: 0.4em;
 }
 
 pre {
@@ -34,8 +38,8 @@ pre {
 
 hr {
     border: 0;
+    border-bottom: 1px solid #aaa;
     width: 80%;
-    border-bottom: 1px solid #aaa
 }
 
 ul {
@@ -43,13 +47,16 @@ ul {
     padding: 0;
 }
 
+footer {
+    font-style: italic;
+    padding-bottom: 8px;
+    padding-top: 30px;
+    text-align: center;
+}
+
 #container {
     margin: 0 auto;
     width: 700px;
-}
-
-small {
-    font-size: 0.4em;
 }
 
 .csstxt {
@@ -69,9 +76,9 @@ small {
 }
 .description {
     font-size: 1.2em;
+    font-style: italic;
     margin-bottom: 30px;
     margin-top: 30px;
-    font-style: italic;
 }
 
 .download {
@@ -80,11 +87,4 @@ small {
 
 .download a {
     display: inline-block;
-}
-
-footer {
-    text-align: center;
-    padding-bottom: 8px;
-    padding-top: 30px;
-    font-style: italic;
 }
