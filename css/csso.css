@@ -48,7 +48,7 @@ ul {
     width: 700px;
 }
 
-.small {
+small {
     font-size: 0.4em;
 }
 
@@ -82,7 +82,7 @@ ul {
     display: inline-block;
 }
 
-.footer {
+footer {
     text-align: center;
     padding-bottom: 8px;
     padding-top: 30px;
