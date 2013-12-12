@@ -41,6 +41,11 @@ hr {
     border-bottom: 1px solid #aaa
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
 #container {
     margin: 0 auto;
     width: 700px;
