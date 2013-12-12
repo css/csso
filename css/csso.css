@@ -1,0 +1,90 @@
+body {
+    background-color: #fff;
+    color: #000;
+    font-family: Helvetica, Arial, FreeSans, san-serif;
+    margin-top: 1.0em;
+}
+
+a {
+    color: #000;
+}
+
+h1 {
+    font-size: 3.8em;
+    margin-bottom: 3px;
+}
+
+h1 a {
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    text-align: center;
+}
+
+small {
+    font-size: 0.4em;
+}
+
+pre {
+    background-color: #000;
+    color: #fff;
+    padding: 15px;
+}
+
+hr {
+    border: 0;
+    border-bottom: 1px solid #aaa;
+    width: 80%;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer {
+    font-style: italic;
+    padding-bottom: 8px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.container {
+    margin: 0 auto;
+    width: 700px;
+}
+
+.csstxt {
+    width: 100%;
+    height: 200px;
+}
+
+.first {
+    padding-right: 10%;
+}
+
+.fork-me {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+}
+.description {
+    font-size: 1.2em;
+    font-style: italic;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.download {
+    float: right;
+}
+
+.download a {
+    display: inline-block;
+}
