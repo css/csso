@@ -7,7 +7,6 @@ body {
 
 h1 {
     font-size: 3.8em;
-    color: #000;
     margin-bottom: 3px;
 }
 
@@ -17,12 +16,10 @@ h1 a {
 
 h2 {
     font-size: 1.5em;
-    color: #000;
 }
 
 h3 {
     text-align: center;
-    color: #000;
 }
 
 a {
