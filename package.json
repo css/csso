@@ -19,6 +19,9 @@
   "scripts": {
     "test": "mocha ./test/test.js"
   },
+  "dependencies": {
+    "shelljs": "~0.2.6"
+  },
   "devDependencies": {
     "mocha": "~1.16.2"
   },
