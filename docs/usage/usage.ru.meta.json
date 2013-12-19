@@ -5,7 +5,7 @@
     "editDate": "28-10-2012",
     "summary": "Использование CSSO.",
     "thumbnail": "",
-    "authors": ["harisov-vitaly"],
+    "authors": ["kryzhanovsky-sergey"],
     "tags": ["tools", "css"],
     "categories": [{"name": "Оптимизаторы/CSSO", "url": "optimizers/csso", "order": "20/20"}],
     "translators": [],
