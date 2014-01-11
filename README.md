@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/css/csso.png?branch=master)](https://travis-ci.org/css/csso)
-[![devDependency Status](https://david-dm.org/css/csso/dev-status.png)](https://david-dm.org/css/csso#info=devDependencies)
+[![devDependency Status](https://david-dm.org/css/csso/dev-status.png?theme=shields.io)](https://david-dm.org/css/csso#info=devDependencies)
 
 # English
 

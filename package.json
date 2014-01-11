@@ -20,7 +20,7 @@
     "test": "mocha ./test/test.js"
   },
   "devDependencies": {
-    "mocha": "~1.15.0"
+    "mocha": "~1.16.2"
   },
   "engines": {
     "node": ">=0.8.0"
