@@ -539,7 +539,7 @@ CSSOCompressor.prototype.cleanWhitespace = function(token, rule, container, i) {
 
     if (nr === 'unknown') token[2] = '\n';
     else {
-        if (!(container[1] === 'atrulerq' && !pr) && !this.issue16(container, i)) {
+        if (!(container[1] === 'atrulerq' && !pr) && !this.issue16(container, i) && !this.issue165(container, pr, nr)) {
             if (nr !== null && pr !== null) {
                 if (this._cleanWhitespace(nr, false) || this._cleanWhitespace(pr, true)) return null;
             } else return null;
@@ -554,6 +554,11 @@ CSSOCompressor.prototype.cleanWhitespace = function(token, rule, container, i) {
 // See https://github.com/afelix/csso/issues/16
 CSSOCompressor.prototype.issue16 = function(container, i) {
     return (i !== 2 && i !== container.length - 1 && container[i - 1][1] === 'uri');
+};
+
+//See https://github.com/css/csso/issues/165
+CSSOCompressor.prototype.issue165 = function(container, pr, nr) {
+    return container[1] === 'atrulerq' && pr === 'braces' && nr === 'ident';
 };
 
 CSSOCompressor.prototype._cleanWhitespace = function(r, left) {
@@ -676,11 +681,26 @@ CSSOCompressor.prototype.compressFunctionColor = function(token) {
             if (t === 'number') v.push(body[i]);
             else if (t !== 'operator') { v = []; break }
         }
+
+        // check if color is followed by number
+        var parent = token[0].parent;
+        var parentIx = parent.indexOf(token);
+        var appendSpace = parent[parentIx + 1] && parent[parentIx + 1][1] != 's';
+
         if (v.length === 3) {
             h += (t = Number(v[0][2]).toString(16)).length === 1 ? '0' + t : t;
             h += (t = Number(v[1][2]).toString(16)).length === 1 ? '0' + t : t;
             h += (t = Number(v[2][2]).toString(16)).length === 1 ? '0' + t : t;
-            if (h.length === 6) return this._compressHashColor(h, {});
+            if (h.length === 6) {
+                var vhash = this._compressHashColor(h, {});
+                if (appendSpace) {
+                    // che: I guess this is not right: modify color token with
+                    // indentation, but I can't find any better solution right now
+                    vhash[2] += ' ';
+                }
+
+                return vhash;
+            }
         }
     }
 };
@@ -688,9 +708,9 @@ CSSOCompressor.prototype.compressFunctionColor = function(token) {
 CSSOCompressor.prototype.compressDimension = function(token) {
     var declaration;
     if (token[2][2] === '0') {
-        if (token[3][2] === 's' && (declaration = this.findDeclaration(token))) {
+        if ((token[3][2] === 's' || token[3][2] === 'ms') && (declaration = this.findDeclaration(token))) {
             var declName = declaration[2][2][2];
-            if  (declName === '-moz-transition') return; // https://github.com/css/csso/issues/82
+            if  (declName === '-moz-transition' || declName === 'transition') return; // https://github.com/css/csso/issues/82, also support recent Fx versions
             if  (declName === '-moz-animation' || declName === 'animation') return; // https://github.com/css/csso/issues/100
         }
         return token[2];
