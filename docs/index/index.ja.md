@@ -25,7 +25,7 @@ CSSO (CSSオプティマイザー)は、他とは違ったCSS縮小化ツール�
 * 空のルールセット・ルールの削除
 * `margin` と `padding` プロパティの縮小化
 
-縮小化テクニックの詳細は [detailed description](/tools/csso/description/) で解説されています。
+縮小化テクニックの詳細は [detailed description](../description/description.ja.md) で解説されています。
 
 # 著者
 
@@ -37,12 +37,10 @@ CSSO (CSSオプティマイザー)は、他とは違ったCSS縮小化ツール�
 
 # フィードバック
 
-問題の報告は [Github] (https://github.com/css/csso/issues) まで。
+問題の報告は [Github](https://github.com/css/csso/issues) まで。
 
 フィードバック、提案、その他は <skryzhanovsky@ya.ru> まで。
 
 # ライセンス
 
 * CSSOは [MIT](https://github.com/css/csso/blob/master/MIT-LICENSE.txt) ライセンスに基づいています。
-
-
