@@ -25,7 +25,7 @@ Structural optimizations:
 * Removal of empty ruleset and at-rule
 * Minification of `margin` and `padding` properties
 
-The minification techniques are described in detail in the [detailed description](/tools/csso/description/).
+The minification techniques are described in detail in the [detailed description](../description/description.en.md).
 
 # Authors
 
@@ -37,11 +37,10 @@ The minification techniques are described in detail in the [detailed description
 
 # Feedback
 
-Please report issues on [Github] (https://github.com/css/csso/issues).
+Please report issues on [Github](https://github.com/css/csso/issues).
 
 For feedback, suggestions, etc. write to <skryzhanovsky@ya.ru>.
 
 # License
 
 * CSSO is licensed under [MIT](https://github.com/css/csso/blob/master/MIT-LICENSE.txt)
-

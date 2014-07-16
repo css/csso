@@ -25,7 +25,7 @@ CSSO (CSS Optimizer)는 다른 CSS압축툴과는 다릅니다. 일반적인 압
 * 비어있는 룰셋과 @룰을 삭제한다.
 * `margin`과 `padding`속성을 최소화한다.
 
-최소화 기법의 상세한 내용은 [detailed description](/tools/csso/description/)에 있습니다.
+최소화 기법의 상세한 내용은 [detailed description](../description/description.ko.md)에 있습니다.
 
 # 저자
 
@@ -37,12 +37,10 @@ CSSO (CSS Optimizer)는 다른 CSS압축툴과는 다릅니다. 일반적인 압
 
 # 피드백
 
-문제가 있을 경우 [Github] (https://github.com/css/csso/issues)에 올려주시기 바랍니다.
+문제가 있을 경우 [Github](https://github.com/css/csso/issues)에 올려주시기 바랍니다.
 
 피드백, 제안 등은 <skryzhanovsky@ya.ru>로 전달바랍니다.
 
 # 라이센스
 
 * CSSO는 [MIT](https://github.com/css/csso/blob/master/MIT-LICENSE.txt)라이센스를 따릅니다.
-
-
