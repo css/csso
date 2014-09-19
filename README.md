@@ -5,13 +5,13 @@
 
 CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
 
-See detailed information on [bem.info/tools/optimizers/csso](http://ru.bem.info/tools/optimizers/csso/).
+See detailed information on [bem.info/tools/optimizers/csso](http://bem.info/tools/optimizers/csso/).
 
 # 中文
 
 CSSO (CSS 优化器) 是一个与众不同的CSS代码压缩器。相比其他压缩器，除了常用的压缩技术外，它还会通过重建CSS代码结构信息的优化技术从而使文件压缩到更小的尺寸。
 
-访问[bem.info/tools/optimizers/csso](http://ru.bem.info/tools/optimizers/csso/)获取更详细的信息。
+访问[bem.info/tools/optimizers/csso](http://bem.info/tools/optimizers/csso/)获取更详细的信息。
 
 # 日本語
 
