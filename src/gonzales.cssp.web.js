@@ -1249,7 +1249,11 @@ function getCSSPAST(_tokens, rule, _needInfo) {
             if (checkSimpleselector(pos)) {
                 body.push(getSimpleSelector());
             } else {
-                throwError();
+                if (checkOperator(pos)){
+                    body.push(getOperator());
+                } else {
+                   throwError();
+                } 
             }
         }
 
