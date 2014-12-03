@@ -2,8 +2,8 @@
 
 Предварительные требования:
 
-* nodejs версии 0.4.x&nbsp;— [http://nodejs.org](http://nodejs.org)
-* npm&nbsp;— [http://github.com/isaacs/npm/](http://github.com/isaacs/npm/)
+* [NodeJS 0.8.x](http://nodejs.org)
+* [npm](http://github.com/isaacs/npm/)
 
 Установка (глобально):
 
@@ -21,7 +21,7 @@
 
 Предварительные требования:
 
-* git&nbsp;— [http://git-scm.com/](http://git-scm.com/)
+* [git](http://git-scm.com/)
 
 Установка:
 
