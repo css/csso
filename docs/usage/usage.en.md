@@ -1,10 +1,10 @@
-# In the browser
+## In the browser
 
 Use a [browser vesion of CSSO](http://css.github.com/csso/csso.html) to minimize your code.
 
 **CSSO is not guaranteed to work in browsers. Preferred way to use this tool is to run it from the command line or via npm modules.**
 
-# From the command line
+## From the command line
 
 Run `bin/csso` (when installed from git), [NodeJS](http://nodejs.org) 0.8.x is required.
 
@@ -36,7 +36,7 @@ Example:
     $ csso test.css
     .test{color:green}
 
-# As an npm module
+## As an npm module
 
 Sample (`test.js`):
 ```js
