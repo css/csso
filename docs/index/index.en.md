@@ -1,6 +1,6 @@
 CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
 
-# Minification (in a nutshell)
+## Minification (in a nutshell)
 
 Safe transformations:
 
@@ -27,7 +27,7 @@ Structural optimizations:
 
 The minification techniques are described in detail in the [detailed description](../description/description.en.md).
 
-# Authors
+## Authors
 
 * initial idea&nbsp;— Vitaly Harisov (<vitaly@harisov.name>)
 * implementation&nbsp;— Sergey Kryzhanovsky (<skryzhanovsky@ya.ru>)
@@ -35,12 +35,12 @@ The minification techniques are described in detail in the [detailed description
 * japanese translation&nbsp;— Koji Ishimoto (<ijok.ijok@gmail.com>)
 * korean translation&nbsp;— Wankyu Kim (<wankyu19@gmail.com>)
 
-# Feedback
+## Feedback
 
 Please report issues on [Github](https://github.com/css/csso/issues).
 
 For feedback, suggestions, etc. write to <skryzhanovsky@ya.ru>.
 
-# License
+## License
 
 * CSSO is licensed under [MIT](https://github.com/css/csso/blob/master/MIT-LICENSE.txt)

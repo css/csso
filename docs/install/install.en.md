@@ -1,4 +1,6 @@
-# Install using npm
+# CSSO installation
+
+## Install using npm
 
 Prerequisites:
 
@@ -17,7 +19,7 @@ To uninstall:
 
 * run `npm uninstall csso`
 
-# Install using git
+## Install using git
 
 Prerequisites:
 
