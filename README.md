@@ -25,6 +25,12 @@ CSSO (CSS Optimizer) является минимизатором CSS, выпол
 
 Детальное описание смотри на [ru.bem.info/tools/optimizers/csso](https://ru.bem.info/tools/optimizers/csso/).
 
+# Українська
+
+CSSO (CSS Optimizer) є CSS-мінімізатор не схожий на інші. На додачу до звичайних технік мініфікації він може виконувати й структурну оптимізацію файлів CSS, що дозволяє отримати менший розмір файлу, в порівнянні з іншими мініфікаторами.
+
+Детальнішу інформацію шукайте на [bem.info/tools/optimizers/csso](https://bem.info/tools/optimizers/csso/).
+
 # 한국어
 
 CSSO (CSS Optimizer)는 다른 CSS압축툴과는 다릅니다. 일반적인 압축 기법에 더불어 CSS파일의 구조를 최적화하여 다른 툴에 비해 더 작은 파일로 만들 수 있습니다.
