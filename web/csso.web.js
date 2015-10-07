@@ -1,4 +1,3 @@
-var NON_LENGTH_UNIT = ['deg', 'grad', 'rad', 'turn', 's', 'ms', 'Hz', 'kHz', 'dpi', 'dpcm', 'dppx'];
 var $util = {};
 
 $util.cleanInfo = function(tree) {
@@ -2420,10 +2419,16 @@ TRBL.prototype.add = function(name, sValue, tValue, imp) {
 
 TRBL.prototype.isOkToMinimize = function() {
     var s = this.sides,
-        imp;
+        imp,
+        ieReg = /\\9$/;
 
     if (!!(s.top && s.right && s.bottom && s.left)) {
         imp = s.top.imp + s.right.imp + s.bottom.imp + s.left.imp;
+
+        if (ieReg.test(s.top.s) || ieReg.test(s.right.s) || ieReg.test(s.bottom.s) || ieReg.test(s.left.s)) {
+            return false;
+        }
+
         return (imp === 0 || imp === 4 || imp === this.imp);
     }
     return false;
@@ -2468,6 +2473,7 @@ TRBL.prototype.getString = function() {
 
     return r;
 };
+var NON_LENGTH_UNIT = ['deg', 'grad', 'rad', 'turn', 's', 'ms', 'Hz', 'kHz', 'dpi', 'dpcm', 'dppx'];
 
 function CSSOCompressor() {}
 
@@ -3009,7 +3015,7 @@ CSSOCompressor.prototype.cleanWhitespace = function(token, rule, container, i) {
 
     if (nr === 'unknown') token[2] = '\n';
     else {
-        if (!(container[1] === 'atrulerq' && !pr) && !this.issue16(container, i)) {
+        if (!(container[1] === 'atrulerq' && !pr) && !this.issue16(container, i) && !this.issue165(container, pr, nr) && !this.issue134(pr, nr)) {
             if (nr !== null && pr !== null) {
                 if (this._cleanWhitespace(nr, false) || this._cleanWhitespace(pr, true)) return null;
             } else return null;
@@ -3024,6 +3030,16 @@ CSSOCompressor.prototype.cleanWhitespace = function(token, rule, container, i) {
 // See https://github.com/afelix/csso/issues/16
 CSSOCompressor.prototype.issue16 = function(container, i) {
     return (i !== 2 && i !== container.length - 1 && container[i - 1][1] === 'uri');
+};
+
+//See https://github.com/css/csso/issues/165
+CSSOCompressor.prototype.issue165 = function(container, pr, nr) {
+    return container[1] === 'atrulerq' && pr === 'braces' && nr === 'ident';
+};
+
+//See https://github.com/css/csso/issues/134
+CSSOCompressor.prototype.issue134 = function(pr, nr) {
+    return pr === 'funktion' && (nr === 'funktion' || nr === 'vhash');
 };
 
 CSSOCompressor.prototype._cleanWhitespace = function(r, left) {
@@ -3146,11 +3162,26 @@ CSSOCompressor.prototype.compressFunctionColor = function(token) {
             if (t === 'number') v.push(body[i]);
             else if (t !== 'operator') { v = []; break }
         }
+
+        // check if color is followed by number
+        var parent = token[0].parent;
+        var parentIx = parent.indexOf(token);
+        var appendSpace = parent[parentIx + 1] && parent[parentIx + 1][1] != 's';
+
         if (v.length === 3) {
             h += (t = Number(v[0][2]).toString(16)).length === 1 ? '0' + t : t;
             h += (t = Number(v[1][2]).toString(16)).length === 1 ? '0' + t : t;
             h += (t = Number(v[2][2]).toString(16)).length === 1 ? '0' + t : t;
-            if (h.length === 6) return this._compressHashColor(h, {});
+            if (h.length === 6) {
+                var vhash = this._compressHashColor(h, {});
+                if (appendSpace) {
+                    // che: I guess this is not right: modify color token with
+                    // indentation, but I can't find any better solution right now
+                    vhash[2] += ' ';
+                }
+
+                return vhash;
+            }
         }
     }
 };

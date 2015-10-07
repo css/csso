@@ -116,10 +116,16 @@ TRBL.prototype.add = function(name, sValue, tValue, imp) {
 
 TRBL.prototype.isOkToMinimize = function() {
     var s = this.sides,
-        imp;
+        imp,
+        ieReg = /\\9$/;
 
     if (!!(s.top && s.right && s.bottom && s.left)) {
         imp = s.top.imp + s.right.imp + s.bottom.imp + s.left.imp;
+
+        if (ieReg.test(s.top.s) || ieReg.test(s.right.s) || ieReg.test(s.bottom.s) || ieReg.test(s.left.s)) {
+            return false;
+        }
+
         return (imp === 0 || imp === 4 || imp === this.imp);
     }
     return false;
