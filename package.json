@@ -17,10 +17,10 @@
   },
   "main": "./lib/cssoapi",
   "scripts": {
-    "test": "mocha ./test/test.js"
+    "test": "mocha --reporter dot"
   },
   "devDependencies": {
-    "mocha": "~1.16.2"
+    "mocha": "~2.3.3"
   },
   "engines": {
     "node": ">=0.8.0"
