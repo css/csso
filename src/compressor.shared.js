@@ -1,3 +1,4 @@
+var NON_LENGTH_UNIT = ['deg', 'grad', 'rad', 'turn', 's', 'ms', 'Hz', 'kHz', 'dpi', 'dpcm', 'dppx'];
 
 function CSSOCompressor() {}
 
@@ -687,7 +688,7 @@ CSSOCompressor.prototype.compressFunctionColor = function(token) {
 
 CSSOCompressor.prototype.compressDimension = function(token) {
     if (token[2][2] === '0') {
-      if (['deg','grad','rad','turn','s','ms','Hz','kHz','dpi','dpcm','dppx'].indexOf(token[3][2]) >= 0) {
+      if (NON_LENGTH_UNIT.indexOf(token[3][2]) >= 0) {
         return;
       }
 
