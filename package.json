@@ -5,10 +5,7 @@
   "homepage": "https://github.com/css/csso",
   "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (https://github.com/afelix)",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/css/csso.git"
-  },
+  "repository": "/css/csso",
   "bugs": {
     "url": "https://github.com/css/csso/issues"
   },
@@ -17,10 +14,13 @@
   },
   "main": "./lib/cssoapi",
   "scripts": {
-    "test": "mocha --reporter dot"
+    "test": "mocha --reporter dot",
+    "browserify": "browserify --standalone csso lib/cssoapi.js | uglifyjs --compress --mangle -o web/csso.web.js"
   },
   "devDependencies": {
-    "mocha": "~2.3.3"
+    "mocha": "~2.3.3",
+    "browserify": "11.x",
+    "uglify-js": ">= 2.4.24"
   },
   "engines": {
     "node": ">=0.8.0"

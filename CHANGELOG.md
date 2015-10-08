@@ -3,8 +3,8 @@
 - Case insensitive check for `!important` (issue #187)
 - Fix problems with using `csso` as cli command on Windows (issue #83, #136, #142 and others)
 - Remove byte order marker (the UTF-8 BOM) from input
-- Do not strip space between funktion-funktion and funktion-vhash (issue #134)
-- Do not merge TRBL values having \9 (hack for IE8 in bootstrap) (issues #159, #214, #230, #231 and others)
+- Don't strip space between funktion-funktion and funktion-vhash (issue #134)
+- Don't merge TRBL values having \9 (hack for IE8 in bootstrap) (issues #159, #214, #230, #231 and others)
 - Don't strip units off dimensions of non-length (issues #226, #229 and others)
 
 ## 1.3.7 (February 11, 2013)
