@@ -1,7 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var assert = require('assert');
-var csso = require('../lib/cssoapi.js');
+var csso = require('../lib/index.js');
 var utils = require('../lib/util.js');
 
 var funcs = {
