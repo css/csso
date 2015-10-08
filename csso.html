@@ -1,12 +1,12 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
+
 <html>
 <head>
     <title>CSS optimizer</title>
     <link rel="stylesheet" href="csso.css" type="text/css">
 </head>
 <body>
-    <script src="csso.web.js"></script>
+    <script src="csso.js"></script>
 
     <div class="stat">
         Src length: <span id="slength">0</span>, dst length: <span id="dlength">0</span>, compression: <span id="result">0</span>%.
@@ -31,9 +31,7 @@
         }
 
         document.getElementById('minimize').onclick = function() {
-            var compressor = new CSSOCompressor(),
-                translator = new CSSOTranslator();
-            cssdst.value = translator.translate(cleanInfo(compressor.compress(srcToCSSP(csssrc.value, 'stylesheet', true))));
+            cssdst.value = csso.justDoIt(csssrc.value);
             updateStat();
         };
     </script>
