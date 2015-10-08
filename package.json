@@ -18,6 +18,9 @@
     "browserify": "browserify --standalone csso lib/index.js | uglifyjs --compress --mangle -o dist/csso-browser.js",
     "gh-pages": "git clone -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages"
   },
+  "dependencies": {
+    "clap": "^1.0.8"
+  },
   "devDependencies": {
     "mocha": "~2.3.3",
     "browserify": "11.x",
@@ -32,7 +35,6 @@
     "lib",
     "HISTORY.md",
     "LICENSE",
-    "README.md",
-    "USAGE"
+    "README.md"
   ]
 }
