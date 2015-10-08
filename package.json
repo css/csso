@@ -15,7 +15,8 @@
   "main": "./lib/cssoapi",
   "scripts": {
     "test": "mocha --reporter dot",
-    "browserify": "browserify --standalone csso lib/cssoapi.js | uglifyjs --compress --mangle -o web/csso.web.js"
+    "browserify": "browserify --standalone csso lib/cssoapi.js | uglifyjs --compress --mangle -o dist/csso-browser.js",
+    "gh-pages": "git clone -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages"
   },
   "devDependencies": {
     "mocha": "~2.3.3",
