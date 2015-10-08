@@ -1,4 +1,4 @@
-## 1.3.11 (October 8, 2015)
+## 1.3.12 (October 8, 2015)
 
 - Case insensitive check for `!important` (issue #187)
 - Fix problems with using `csso` as cli command on Windows (issue #83, #136, #142 and others)
