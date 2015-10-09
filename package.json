@@ -5,7 +5,7 @@
   "homepage": "https://github.com/css/csso",
   "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (https://github.com/afelix)",
   "license": "MIT",
-  "repository": "/css/csso",
+  "repository": "css/csso",
   "bugs": {
     "url": "https://github.com/css/csso/issues"
   },
