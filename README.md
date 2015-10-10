@@ -1,5 +1,6 @@
 [![NPM version](https://img.shields.io/npm/v/csso.svg)](https://www.npmjs.com/package/csso)
 [![Build Status](https://travis-ci.org/css/csso.svg?branch=master)](https://travis-ci.org/css/csso)
+[![Dependency Status](https://img.shields.io/david/css/csso.svg)](https://david-dm.org/css/csso)
 [![devDependency Status](https://img.shields.io/david/dev/css/csso.svg?style=flat)](https://david-dm.org/css/csso#info=devDependencies)
 
 # English
