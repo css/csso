@@ -49,7 +49,7 @@ describe('csso', function() {
                     list[name] = {};
                 }
 
-                list[name][key] = fs.readFileSync(path.join(testDir, filename), 'utf8');
+                list[name][key] = fs.readFileSync(path.join(testDir, filename), 'utf8').trim();
             }
 
             return list;
