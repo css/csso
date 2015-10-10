@@ -2,81 +2,61 @@ var fs = require('fs');
 var path = require('path');
 var assert = require('assert');
 var csso = require('../lib/index.js');
-var utils = require('../lib/util.js');
 
-var funcs = {
-    'p': function parse(src, match) {
-        return csso.treeToString(clean(src, match));
-    },
-    'l': function translate(src, match) {
-        return csso.translate(clean(src, match));
-    },
-    'cl': function translate(src, match) {
-        return csso.translate(clean(src, match, true));
-    }
-};
+function createParseTest(name, test, scope) {
+    return it(name, function() {
+        var ast = csso.parse(test.source, scope);
 
-function parse(src, match) {
-    return csso.parse(src, match, true);
+        // AST should be equal
+        assert.equal(csso.treeToString(ast), csso.treeToString(test.ast));
+
+        // translated AST should be equal to original source
+        assert.equal(csso.translate(ast), test.source);
+    });
 }
 
-function clean(src, match, compress) {
-    var out = parse(src, match);
-    if (compress) {
-        out = csso.compress(out);
-    }
+function createCompressTest(name, test) {
+    return it(name, function() {
+        var compressed = csso.justDoIt(test.source);
 
-    return utils.cleanInfo(out);
+        assert.equal(compressed, test.compressed);
+    });
 }
 
-function readFile(path) {
-    return fs.readFileSync(path).toString().trim();
-}
+describe('csso', function() {
 
-function runTest(files, filePrefix, rule) {
-    var src = readFile(filePrefix + '.css');
-    var basename = path.relative(__dirname, filePrefix);
+    describe('parse', function() {
+        var testDir = path.join(__dirname, 'fixture/parse');
+        fs.readdirSync(testDir).forEach(function(rule) {
+            var tests = require(path.join(testDir, rule));
+            var scope = path.basename(rule, path.extname(rule));
 
-    var test = function(fn) {
-        it('in ' + basename, function() {
-            assert.equal(funcs[fn](src, rule), readFile(filePrefix + '.' + fn));
-        });
-    }
-    for (var fn in funcs) {
-        if (fn in files) {
-            test(fn);
-        }
-    }
-}
-
-function runTestsInDir(dir, rule) {
-    var files = {};
-    fs.readdirSync(dir).forEach(function(f) {
-        var ext = path.extname(f);
-        if (ext) {
-            var basename = path.basename(f, ext);
-            if (!files[basename]) {
-                files[basename] = {};
+            for (var name in tests) {
+                createParseTest(name, tests[name], scope);
             }
-
-            files[basename][ext.substring(1)] = 1;
-        }
+        });
     });
 
-    for (var k in files) {
-        runTest(files[k], path.join(dir, k), rule);
-    }
-}
+    describe('compress', function(){
+        var testDir = path.join(__dirname, 'fixture/compress');
+        var tests = fs.readdirSync(testDir).reduce(function(list, filename) {
+            var name = filename.replace(/(\.min)?\.css$/, '');
+            var key = /\.min\.css/.test(filename) ? 'compressed' : 'source';
 
-describe('CSSO', function() {
-    var testDir = path.join(__dirname, 'data');
-    fs.readdirSync(testDir).forEach(function(ruleDir) {
-        var dir = path.join(testDir, ruleDir);
-        var stat = fs.statSync(dir);
-        if (!stat.isDirectory()) {
-            return;
+            // in case there is a filename that doesn't ends with `.css` or `.min.css`
+            if (name !== filename) {
+                if (!list[name]) {
+                    list[name] = {};
+                }
+
+                list[name][key] = fs.readFileSync(path.join(testDir, filename), 'utf8');
+            }
+
+            return list;
+        }, {});
+
+        for (var name in tests) {
+            createCompressTest(name, tests[name]);
         }
-
-        runTestsInDir(dir, ruleDir.substring(5));
     });
 });

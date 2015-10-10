@@ -1,0 +1,10 @@
+{
+    "shash.0": {
+        "source": "#100",
+        "ast": ["shash", "100"]
+    },
+    "shash.1": {
+        "source": "#id",
+        "ast": ["shash", "id"]
+    }
+}

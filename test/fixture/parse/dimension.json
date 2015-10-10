@@ -1,0 +1,26 @@
+{
+    "dimension.0": {
+        "source": "10px",
+        "ast": [
+            "dimension",
+            ["number", "10"],
+            ["ident", "px"]
+        ]
+    },
+    "dimension.1": {
+        "source": ".10px",
+        "ast": [
+            "dimension",
+            ["number", ".10"],
+            ["ident", "px"]
+        ]
+    },
+    "dimension.2": {
+        "source": "12.34px",
+        "ast": [
+            "dimension",
+            ["number", "12.34"],
+            ["ident", "px"]
+        ]
+    }
+}

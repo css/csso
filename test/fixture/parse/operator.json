@@ -1,0 +1,18 @@
+{
+    "operator.0": {
+        "source": "/",
+        "ast": ["operator", "/"]
+    },
+    "operator.1": {
+        "source": ",",
+        "ast": ["operator", ","]
+    },
+    "operator.2": {
+        "source": ":",
+        "ast": ["operator", ":"]
+    },
+    "operator.3": {
+        "source": "=",
+        "ast": ["operator", "="]
+    }
+}

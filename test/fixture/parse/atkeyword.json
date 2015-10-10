@@ -1,0 +1,16 @@
+{
+    "atkeyword.0": {
+        "source": "@import",
+        "ast": [
+            "atkeyword",
+            ["ident", "import"]
+        ]
+    },
+    "atkeyword.1": {
+        "source": "@font-face",
+        "ast": [
+            "atkeyword",
+            ["ident", "font-face"]
+        ]
+    }
+}

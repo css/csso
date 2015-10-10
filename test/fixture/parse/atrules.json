@@ -1,0 +1,81 @@
+{
+    "atrules.0": {
+        "source": "@test;",
+        "ast": [
+            "atrules", [
+                "atkeyword",
+                ["ident", "test"]
+            ]
+        ]
+    },
+    "atrules.1": {
+        "source": "@test x y;",
+        "ast": [
+            "atrules", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["s", " "],
+            ["ident", "x"],
+            ["s", " "],
+            ["ident", "y"]
+        ]
+    },
+    "atrules.2": {
+        "source": "@test \"blah\";",
+        "ast": [
+            "atrules", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["s", " "],
+            ["string", "\"blah\""]
+        ]
+    },
+    "atrules.c.0": {
+        "source": "@test/*test*/;",
+        "ast": [
+            "atrules", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["comment", "test"]
+        ]
+    },
+    "atrules.c.1": {
+        "source": "@test/*test*/x/*test*/y;",
+        "ast": [
+            "atrules", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["comment", "test"],
+            ["ident", "x"],
+            ["comment", "test"],
+            ["ident", "y"]
+        ]
+    },
+    "atrules.s.0": {
+        "source": "@test  ;",
+        "ast": [
+            "atrules", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["s", "  "]
+        ]
+    },
+    "atrules.s.1": {
+        "source": "@test  x  y;",
+        "ast": [
+            "atrules", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["s", "  "],
+            ["ident", "x"],
+            ["s", "  "],
+            ["ident", "y"]
+        ]
+    }
+}

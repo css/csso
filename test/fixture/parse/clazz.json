@@ -1,0 +1,9 @@
+{
+    "clazz.0": {
+        "source": ".abc",
+        "ast": [
+            "clazz",
+            ["ident", "abc"]
+        ]
+    }
+}

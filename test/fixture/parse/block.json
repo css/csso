@@ -1,0 +1,228 @@
+{
+    "block.0": {
+        "source": "{}",
+        "ast": ["block"]
+    },
+    "block.1": {
+        "source": "{;}",
+        "ast": [
+            "block",
+            ["decldelim"]
+        ]
+    },
+    "block.2": {
+        "source": "{p:v}",
+        "ast": [
+            "block", [
+                "declaration", [
+                    "property",
+                    ["ident", "p"]
+                ], [
+                    "value",
+                    ["ident", "v"]
+                ]
+            ]
+        ]
+    },
+    "block.3": {
+        "source": "{p:v;}",
+        "ast": [
+            "block", [
+                "declaration", [
+                    "property",
+                    ["ident", "p"]
+                ], [
+                    "value",
+                    ["ident", "v"]
+                ]
+            ],
+            ["decldelim"]
+        ]
+    },
+    "block.4": {
+        "source": "{p0:v0;p1:v1}",
+        "ast": [
+            "block", [
+                "declaration", [
+                    "property",
+                    ["ident", "p0"]
+                ], [
+                    "value",
+                    ["ident", "v0"]
+                ]
+            ],
+            ["decldelim"],
+            [
+                "declaration", [
+                    "property",
+                    ["ident", "p1"]
+                ], [
+                    "value",
+                    ["ident", "v1"]
+                ]
+            ]
+        ]
+    },
+    "block.c.0": {
+        "source": "{/*test*/}",
+        "ast": [
+            "block",
+            ["comment", "test"]
+        ]
+    },
+    "block.c.1": {
+        "source": "{/*test*/;/*test*/}",
+        "ast": [
+            "block",
+            ["comment", "test"],
+            ["decldelim"],
+            ["comment", "test"]
+        ]
+    },
+    "block.c.2": {
+        "source": "{/*test*/p:v/*test*/}",
+        "ast": [
+            "block",
+            ["comment", "test"],
+            [
+                "declaration", [
+                    "property",
+                    ["ident", "p"]
+                ], [
+                    "value",
+                    ["ident", "v"],
+                    ["comment", "test"]
+                ]
+            ]
+        ]
+    },
+    "block.c.3": {
+        "source": "{/*test*/p:v/*test*/;/*test*/}",
+        "ast": [
+            "block",
+            ["comment", "test"],
+            [
+                "declaration", [
+                    "property",
+                    ["ident", "p"]
+                ], [
+                    "value",
+                    ["ident", "v"],
+                    ["comment", "test"]
+                ]
+            ],
+            ["decldelim"],
+            ["comment", "test"]
+        ]
+    },
+    "block.c.4": {
+        "source": "{/*test*/p0:v0/*test*/;/*test*/p1:v1/*test*/}",
+        "ast": [
+            "block",
+            ["comment", "test"],
+            [
+                "declaration", [
+                    "property",
+                    ["ident", "p0"]
+                ], [
+                    "value",
+                    ["ident", "v0"],
+                    ["comment", "test"]
+                ]
+            ],
+            ["decldelim"],
+            ["comment", "test"],
+            [
+                "declaration", [
+                    "property",
+                    ["ident", "p1"]
+                ], [
+                    "value",
+                    ["ident", "v1"],
+                    ["comment", "test"]
+                ]
+            ]
+        ]
+    },
+    "block.s.0": {
+        "source": "{  }",
+        "ast": [
+            "block",
+            ["s", "  "]
+        ]
+    },
+    "block.s.1": {
+        "source": "{  ;  }",
+        "ast": [
+            "block",
+            ["s", "  "],
+            ["decldelim"],
+            ["s", "  "]
+        ]
+    },
+    "block.s.2": {
+        "source": "{  p:v  }",
+        "ast": [
+            "block",
+            ["s", "  "],
+            [
+                "declaration", [
+                    "property",
+                    ["ident", "p"]
+                ], [
+                    "value",
+                    ["ident", "v"],
+                    ["s", "  "]
+                ]
+            ]
+        ]
+    },
+    "block.s.3": {
+        "source": "{  p:v  ;  }",
+        "ast": [
+            "block",
+            ["s", "  "],
+            [
+                "declaration", [
+                    "property",
+                    ["ident", "p"]
+                ], [
+                    "value",
+                    ["ident", "v"],
+                    ["s", "  "]
+                ]
+            ],
+            ["decldelim"],
+            ["s", "  "]
+        ]
+    },
+    "block.s.4": {
+        "source": "{  p0:v0  ;  p1:v1  }",
+        "ast": [
+            "block",
+            ["s", "  "],
+            [
+                "declaration", [
+                    "property",
+                    ["ident", "p0"]
+                ], [
+                    "value",
+                    ["ident", "v0"],
+                    ["s", "  "]
+                ]
+            ],
+            ["decldelim"],
+            ["s", "  "],
+            [
+                "declaration", [
+                    "property",
+                    ["ident", "p1"]
+                ], [
+                    "value",
+                    ["ident", "v1"],
+                    ["s", "  "]
+                ]
+            ]
+        ]
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "combinator.0": {
+        "source": "+",
+        "ast": ["combinator", "+"]
+    },
+    "combinator.1": {
+        "source": ">",
+        "ast": ["combinator", ">"]
+    },
+    "combinator.2": {
+        "source": "~",
+        "ast": ["combinator", "~"]
+    },
+    "combinator.3": {
+        "source": "/deep/",
+        "ast": ["combinator", "/deep/"]
+    }
+}

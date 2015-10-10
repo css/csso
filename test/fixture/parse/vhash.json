@@ -1,0 +1,10 @@
+{
+    "vhash.0": {
+        "source": "#100",
+        "ast": ["vhash", "100"]
+    },
+    "vhash.1": {
+        "source": "#id",
+        "ast": ["vhash", "id"]
+    }
+}

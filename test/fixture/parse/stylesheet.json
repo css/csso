@@ -1,0 +1,567 @@
+{
+    "issue111.test1": {
+        "source": "body:not([x|x]) {}",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "body"],
+                        [
+                            "pseudoc", [
+                                "funktion",
+                                ["ident", "not"],
+                                [
+                                    "functionBody", [
+                                        "simpleselector", [
+                                            "attrib",
+                                            ["ident", "x"],
+                                            ["attrselector", "|"],
+                                            ["ident", "x"]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ],
+                        ["s", " "]
+                    ]
+                ],
+                ["block"]
+            ]
+        ]
+    },
+    "issue86.test1": {
+        "source": ".ie-test\n{\n    filter: progid:DXImageTransform.Microsoft.gradient (startColorstr=#33CCCCCC, endColorstr=#33CCCCCC);\n}",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector", [
+                            "clazz",
+                            ["ident", "ie-test"]
+                        ],
+                        ["s", "\n"]
+                    ]
+                ], [
+                    "block",
+                    ["s", "\n    "],
+                    [
+                        "filter", [
+                            "property",
+                            ["ident", "filter"]
+                        ], [
+                            "filterv", [
+                                "progid",
+                                ["s", " "],
+                                ["raw", "progid:DXImageTransform.Microsoft.gradient (startColorstr=#33CCCCCC, endColorstr=#33CCCCCC)"]
+                            ]
+                        ]
+                    ],
+                    ["decldelim"],
+                    ["s", "\n"]
+                ]
+            ]
+        ]
+    },
+    "issue87.test1": {
+        "source": ".t\n{\n        filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=40) !important;\n}",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector", [
+                            "clazz",
+                            ["ident", "t"]
+                        ],
+                        ["s", "\n"]
+                    ]
+                ], [
+                    "block",
+                    ["s", "\n        "],
+                    [
+                        "filter", [
+                            "property",
+                            ["ident", "filter"]
+                        ], [
+                            "filterv", [
+                                "progid",
+                                ["raw", "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"],
+                                ["s", " "]
+                            ],
+                            ["important"]
+                        ]
+                    ],
+                    ["decldelim"],
+                    ["s", "\n"]
+                ]
+            ]
+        ]
+    },
+    "issue90.test1": {
+        "source": "@media test {\n    @page {\n        p: v;\n    }\n}",
+        "ast": [
+            "stylesheet", [
+                "atruler", [
+                    "atkeyword",
+                    ["ident", "media"]
+                ], [
+                    "atrulerq",
+                    ["s", " "],
+                    ["ident", "test"],
+                    ["s", " "]
+                ], [
+                    "atrulers",
+                    ["s", "\n    "],
+                    [
+                        "atruleb", [
+                            "atkeyword",
+                            ["ident", "page"]
+                        ],
+                        ["s", " "],
+                        [
+                            "block",
+                            ["s", "\n        "],
+                            [
+                                "declaration", [
+                                    "property",
+                                    ["ident", "p"]
+                                ], [
+                                    "value",
+                                    ["s", " "],
+                                    ["ident", "v"]
+                                ]
+                            ],
+                            ["decldelim"],
+                            ["s", "\n    "]
+                        ]
+                    ],
+                    ["s", "\n"]
+                ]
+            ]
+        ]
+    },
+    "issue90.test2": {
+        "source": "x {\n    p:v;\n}\n\n@media test {\n    a {\n        p:v;\n    }\n\n    /* comment */\n\n    @page {\n        p: v;\n    }\n\n    b {\n        p:v;\n    }\n}\n\ny {\n    p:v;\n}",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "x"],
+                        ["s", " "]
+                    ]
+                ], [
+                    "block",
+                    ["s", "\n    "],
+                    [
+                        "declaration", [
+                            "property",
+                            ["ident", "p"]
+                        ], [
+                            "value",
+                            ["ident", "v"]
+                        ]
+                    ],
+                    ["decldelim"],
+                    ["s", "\n"]
+                ]
+            ],
+            ["s", "\n\n"],
+            [
+                "atruler", [
+                    "atkeyword",
+                    ["ident", "media"]
+                ], [
+                    "atrulerq",
+                    ["s", " "],
+                    ["ident", "test"],
+                    ["s", " "]
+                ], [
+                    "atrulers",
+                    ["s", "\n    "],
+                    [
+                        "ruleset", [
+                            "selector", [
+                                "simpleselector",
+                                ["ident", "a"],
+                                ["s", " "]
+                            ]
+                        ], [
+                            "block",
+                            ["s", "\n        "],
+                            [
+                                "declaration", [
+                                    "property",
+                                    ["ident", "p"]
+                                ], [
+                                    "value",
+                                    ["ident", "v"]
+                                ]
+                            ],
+                            ["decldelim"],
+                            ["s", "\n    "]
+                        ]
+                    ],
+                    ["s", "\n\n    "],
+                    ["comment", " comment "],
+                    ["s", "\n\n    "],
+                    [
+                        "atruleb", [
+                            "atkeyword",
+                            ["ident", "page"]
+                        ],
+                        ["s", " "],
+                        [
+                            "block",
+                            ["s", "\n        "],
+                            [
+                                "declaration", [
+                                    "property",
+                                    ["ident", "p"]
+                                ], [
+                                    "value",
+                                    ["s", " "],
+                                    ["ident", "v"]
+                                ]
+                            ],
+                            ["decldelim"],
+                            ["s", "\n    "]
+                        ]
+                    ],
+                    ["s", "\n\n    "],
+                    [
+                        "ruleset", [
+                            "selector", [
+                                "simpleselector",
+                                ["ident", "b"],
+                                ["s", " "]
+                            ]
+                        ], [
+                            "block",
+                            ["s", "\n        "],
+                            [
+                                "declaration", [
+                                    "property",
+                                    ["ident", "p"]
+                                ], [
+                                    "value",
+                                    ["ident", "v"]
+                                ]
+                            ],
+                            ["decldelim"],
+                            ["s", "\n    "]
+                        ]
+                    ],
+                    ["s", "\n"]
+                ]
+            ],
+            ["s", "\n\n"],
+            [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "y"],
+                        ["s", " "]
+                    ]
+                ], [
+                    "block",
+                    ["s", "\n    "],
+                    [
+                        "declaration", [
+                            "property",
+                            ["ident", "p"]
+                        ], [
+                            "value",
+                            ["ident", "v"]
+                        ]
+                    ],
+                    ["decldelim"],
+                    ["s", "\n"]
+                ]
+            ]
+        ]
+    },
+    "stylesheet.0": {
+        "source": "s{p:v}",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "s"]
+                    ]
+                ], [
+                    "block", [
+                        "declaration", [
+                            "property",
+                            ["ident", "p"]
+                        ], [
+                            "value",
+                            ["ident", "v"]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "stylesheet.1": {
+        "source": "s0{p0:v0}s1{p1:v1}",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "s0"]
+                    ]
+                ], [
+                    "block", [
+                        "declaration", [
+                            "property",
+                            ["ident", "p0"]
+                        ], [
+                            "value",
+                            ["ident", "v0"]
+                        ]
+                    ]
+                ]
+            ], [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "s1"]
+                    ]
+                ], [
+                    "block", [
+                        "declaration", [
+                            "property",
+                            ["ident", "p1"]
+                        ], [
+                            "value",
+                            ["ident", "v1"]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "stylesheet.2": {
+        "source": "@test;",
+        "ast": [
+            "stylesheet", [
+                "atrules", [
+                    "atkeyword",
+                    ["ident", "test"]
+                ]
+            ]
+        ]
+    },
+    "stylesheet.3": {
+        "source": "@test0;@test1;",
+        "ast": [
+            "stylesheet", [
+                "atrules", [
+                    "atkeyword",
+                    ["ident", "test0"]
+                ]
+            ], [
+                "atrules", [
+                    "atkeyword",
+                    ["ident", "test1"]
+                ]
+            ]
+        ]
+    },
+    "stylesheet.4": {
+        "source": "s{p:v}@test;",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "s"]
+                    ]
+                ], [
+                    "block", [
+                        "declaration", [
+                            "property",
+                            ["ident", "p"]
+                        ], [
+                            "value",
+                            ["ident", "v"]
+                        ]
+                    ]
+                ]
+            ], [
+                "atrules", [
+                    "atkeyword",
+                    ["ident", "test"]
+                ]
+            ]
+        ]
+    },
+    "stylesheet.c.0": {
+        "source": "/* test */\ns {\n    p: v\n}\n/* test */",
+        "ast": [
+            "stylesheet",
+            ["comment", " test "],
+            ["s", "\n"],
+            [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "s"],
+                        ["s", " "]
+                    ]
+                ], [
+                    "block",
+                    ["s", "\n    "],
+                    [
+                        "declaration", [
+                            "property",
+                            ["ident", "p"]
+                        ], [
+                            "value",
+                            ["s", " "],
+                            ["ident", "v"],
+                            ["s", "\n"]
+                        ]
+                    ]
+                ]
+            ],
+            ["s", "\n"],
+            ["comment", " test "]
+        ]
+    },
+    "stylesheet.s.0": {
+        "source": "s {\n    p: v\n}",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "s"],
+                        ["s", " "]
+                    ]
+                ], [
+                    "block",
+                    ["s", "\n    "],
+                    [
+                        "declaration", [
+                            "property",
+                            ["ident", "p"]
+                        ], [
+                            "value",
+                            ["s", " "],
+                            ["ident", "v"],
+                            ["s", "\n"]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "stylesheet.s.1": {
+        "source": "s0 {\n    p0: v0\n}\n\ns1 {\n    p1: v1\n}",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "s0"],
+                        ["s", " "]
+                    ]
+                ], [
+                    "block",
+                    ["s", "\n    "],
+                    [
+                        "declaration", [
+                            "property",
+                            ["ident", "p0"]
+                        ], [
+                            "value",
+                            ["s", " "],
+                            ["ident", "v0"],
+                            ["s", "\n"]
+                        ]
+                    ]
+                ]
+            ],
+            ["s", "\n\n"],
+            [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "s1"],
+                        ["s", " "]
+                    ]
+                ], [
+                    "block",
+                    ["s", "\n    "],
+                    [
+                        "declaration", [
+                            "property",
+                            ["ident", "p1"]
+                        ], [
+                            "value",
+                            ["s", " "],
+                            ["ident", "v1"],
+                            ["s", "\n"]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "stylesheet.s.2": {
+        "source": "@test0;\n@test1;",
+        "ast": [
+            "stylesheet", [
+                "atrules", [
+                    "atkeyword",
+                    ["ident", "test0"]
+                ]
+            ],
+            ["s", "\n"],
+            [
+                "atrules", [
+                    "atkeyword",
+                    ["ident", "test1"]
+                ]
+            ]
+        ]
+    },
+    "stylesheet.s.3": {
+        "source": "s {\n    p:v\n}\n\n@test;",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "s"],
+                        ["s", " "]
+                    ]
+                ], [
+                    "block",
+                    ["s", "\n    "],
+                    [
+                        "declaration", [
+                            "property",
+                            ["ident", "p"]
+                        ], [
+                            "value",
+                            ["ident", "v"],
+                            ["s", "\n"]
+                        ]
+                    ]
+                ]
+            ],
+            ["s", "\n\n"],
+            [
+                "atrules", [
+                    "atkeyword",
+                    ["ident", "test"]
+                ]
+            ]
+        ]
+    }
+}

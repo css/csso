@@ -1,0 +1,217 @@
+{
+    "braces.0": {
+        "source": "()",
+        "ast": ["braces", "(", ")"]
+    },
+    "braces.1": {
+        "source": "(1)",
+        "ast": [
+            "braces", "(", ")",
+            ["number", "1"]
+        ]
+    },
+    "braces.2": {
+        "source": "(x)",
+        "ast": [
+            "braces", "(", ")",
+            ["ident", "x"]
+        ]
+    },
+    "braces.3": {
+        "source": "(x+1)",
+        "ast": [
+            "braces", "(", ")",
+            ["ident", "x"],
+            ["unary", "+"],
+            ["number", "1"]
+        ]
+    },
+    "braces.4": {
+        "source": "[]",
+        "ast": ["braces", "[", "]"]
+    },
+    "braces.5": {
+        "source": "[1]",
+        "ast": [
+            "braces", "[", "]",
+            ["number", "1"]
+        ]
+    },
+    "braces.6": {
+        "source": "[x]",
+        "ast": [
+            "braces", "[", "]",
+            ["ident", "x"]
+        ]
+    },
+    "braces.7": {
+        "source": "[x+1]",
+        "ast": [
+            "braces", "[", "]",
+            ["ident", "x"],
+            ["unary", "+"],
+            ["number", "1"]
+        ]
+    },
+    "braces.8": {
+        "source": "(test:0)",
+        "ast": [
+            "braces", "(", ")",
+            ["ident", "test"],
+            ["operator", ":"],
+            ["number", "0"]
+        ]
+    },
+    "braces.c.0": {
+        "source": "(/*test*/)",
+        "ast": [
+            "braces", "(", ")",
+            ["comment", "test"]
+        ]
+    },
+    "braces.c.1": {
+        "source": "(/*test*/1/*test*/)",
+        "ast": [
+            "braces", "(", ")",
+            ["comment", "test"],
+            ["number", "1"],
+            ["comment", "test"]
+        ]
+    },
+    "braces.c.2": {
+        "source": "(/*test*/x/*test*/)",
+        "ast": [
+            "braces", "(", ")",
+            ["comment", "test"],
+            ["ident", "x"],
+            ["comment", "test"]
+        ]
+    },
+    "braces.c.3": {
+        "source": "(/*test*/x/*test*/+/*test*/1/*test*/)",
+        "ast": [
+            "braces", "(", ")",
+            ["comment", "test"],
+            ["ident", "x"],
+            ["comment", "test"],
+            ["unary", "+"],
+            ["comment", "test"],
+            ["number", "1"],
+            ["comment", "test"]
+        ]
+    },
+    "braces.c.4": {
+        "source": "[/*test*/]",
+        "ast": [
+            "braces", "[", "]",
+            ["comment", "test"]
+        ]
+    },
+    "braces.c.5": {
+        "source": "[/*test*/1/*test*/]",
+        "ast": [
+            "braces", "[", "]",
+            ["comment", "test"],
+            ["number", "1"],
+            ["comment", "test"]
+        ]
+    },
+    "braces.c.6": {
+        "source": "[/*test*/x/*test*/]",
+        "ast": [
+            "braces", "[", "]",
+            ["comment", "test"],
+            ["ident", "x"],
+            ["comment", "test"]
+        ]
+    },
+    "braces.c.7": {
+        "source": "[/*test*/x/*test*/+/*test*/1/*test*/]",
+        "ast": [
+            "braces", "[", "]",
+            ["comment", "test"],
+            ["ident", "x"],
+            ["comment", "test"],
+            ["unary", "+"],
+            ["comment", "test"],
+            ["number", "1"],
+            ["comment", "test"]
+        ]
+    },
+    "braces.s.0": {
+        "source": "(  )",
+        "ast": [
+            "braces", "(", ")",
+            ["s", "  "]
+        ]
+    },
+    "braces.s.1": {
+        "source": "(  1  )",
+        "ast": [
+            "braces", "(", ")",
+            ["s", "  "],
+            ["number", "1"],
+            ["s", "  "]
+        ]
+    },
+    "braces.s.2": {
+        "source": "(  x  )",
+        "ast": [
+            "braces", "(", ")",
+            ["s", "  "],
+            ["ident", "x"],
+            ["s", "  "]
+        ]
+    },
+    "braces.s.3": {
+        "source": "(  x  +  1  )",
+        "ast": [
+            "braces", "(", ")",
+            ["s", "  "],
+            ["ident", "x"],
+            ["s", "  "],
+            ["unary", "+"],
+            ["s", "  "],
+            ["number", "1"],
+            ["s", "  "]
+        ]
+    },
+    "braces.s.4": {
+        "source": "[  ]",
+        "ast": [
+            "braces", "[", "]",
+            ["s", "  "]
+        ]
+    },
+    "braces.s.5": {
+        "source": "[  1  ]",
+        "ast": [
+            "braces", "[", "]",
+            ["s", "  "],
+            ["number", "1"],
+            ["s", "  "]
+        ]
+    },
+    "braces.s.6": {
+        "source": "[  x  ]",
+        "ast": [
+            "braces", "[", "]",
+            ["s", "  "],
+            ["ident", "x"],
+            ["s", "  "]
+        ]
+    },
+    "braces.s.7": {
+        "source": "[  x  +  1  ]",
+        "ast": [
+            "braces", "[", "]",
+            ["s", "  "],
+            ["ident", "x"],
+            ["s", "  "],
+            ["unary", "+"],
+            ["s", "  "],
+            ["number", "1"],
+            ["s", "  "]
+        ]
+    }
+}

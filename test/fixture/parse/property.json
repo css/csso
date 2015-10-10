@@ -1,0 +1,16 @@
+{
+    "property.0": {
+        "source": "color",
+        "ast": [
+            "property",
+            ["ident", "color"]
+        ]
+    },
+    "property.1": {
+        "source": "-my-color",
+        "ast": [
+            "property",
+            ["ident", "-my-color"]
+        ]
+    }
+}

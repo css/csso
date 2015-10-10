@@ -1,0 +1,23 @@
+{
+    "percentage.0": {
+        "source": "10%",
+        "ast": [
+            "percentage",
+            ["number", "10"]
+        ]
+    },
+    "percentage.1": {
+        "source": ".10%",
+        "ast": [
+            "percentage",
+            ["number", ".10"]
+        ]
+    },
+    "percentage.2": {
+        "source": "12.34%",
+        "ast": [
+            "percentage",
+            ["number", "12.34"]
+        ]
+    }
+}

@@ -1,0 +1,155 @@
+{
+    "filter.0": {
+        "source": "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "filter"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"]
+                ]
+            ]
+        ]
+    },
+    "filter.1": {
+        "source": "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='something')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "filter"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"]
+                ], [
+                    "progid",
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='something')"]
+                ]
+            ]
+        ]
+    },
+    "filter.2": {
+        "source": "*filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "*filter"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"]
+                ]
+            ]
+        ]
+    },
+    "filter.3": {
+        "source": "-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "-filter"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"]
+                ]
+            ]
+        ]
+    },
+    "filter.4": {
+        "source": "_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "_filter"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"]
+                ]
+            ]
+        ]
+    },
+    "filter.5": {
+        "source": "-ms-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "-ms-filter"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"]
+                ]
+            ]
+        ]
+    },
+    "filter.c.0": {
+        "source": "filter/*test*/:/*test*/progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "filter"],
+                ["comment", "test"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["comment", "test"],
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"]
+                ]
+            ]
+        ]
+    },
+    "filter.c.1": {
+        "source": "filter/*test*/:/*test*/progid:DXImageTransform.Microsoft.AlphaImageLoader(/*)*/src='images/transparent-border.png'/*)*/,/*)*/sizingMethod='scale')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "filter"],
+                ["comment", "test"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["comment", "test"],
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(/*)*/src='images/transparent-border.png'/*)*/,/*)*/sizingMethod='scale')"]
+                ]
+            ]
+        ]
+    },
+    "filter.s.0": {
+        "source": "filter  :  progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "filter"],
+                ["s", "  "]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["s", "  "],
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"]
+                ]
+            ]
+        ]
+    },
+    "filter.s.1": {
+        "source": "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')\n       progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='something')",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "filter"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"],
+                    ["s", "\n       "]
+                ], [
+                    "progid",
+                    ["raw", "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='something')"]
+                ]
+            ]
+        ]
+    }
+}

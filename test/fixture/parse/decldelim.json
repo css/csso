@@ -1,0 +1,6 @@
+{
+    "decldelim.0": {
+        "source": ";",
+        "ast": ["decldelim"]
+    }
+}

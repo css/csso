@@ -1,0 +1,10 @@
+{
+    "unary.0": {
+        "source": "-",
+        "ast": ["unary", "-"]
+    },
+    "unary.1": {
+        "source": "+",
+        "ast": ["unary", "+"]
+    }
+}

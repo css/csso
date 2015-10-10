@@ -1,0 +1,95 @@
+{
+    "attrib.0": {
+        "source": "[a=b]",
+        "ast": [
+            "attrib",
+            ["ident", "a"],
+            ["attrselector", "="],
+            ["ident", "b"]
+        ]
+    },
+    "attrib.1": {
+        "source": "[a='b']",
+        "ast": [
+            "attrib",
+            ["ident", "a"],
+            ["attrselector", "="],
+            ["string", "'b'"]
+        ]
+    },
+    "attrib.2": {
+        "source": "[b]",
+        "ast": [
+            "attrib",
+            ["ident", "b"]
+        ]
+    },
+    "attrib.3": {
+        "source": "[ng:cloak]",
+        "ast": [
+            "attrib",
+            ["ident", "ng:cloak"]
+        ]
+    },
+    "attrib.4": {
+        "source": "[ng:cloak=x]",
+        "ast": [
+            "attrib",
+            ["ident", "ng:cloak"],
+            ["attrselector", "="],
+            ["ident", "x"]
+        ]
+    },
+    "attrib.c.0": {
+        "source": "[/*test*/a/*test*/=/*test*/b/*test*/]",
+        "ast": [
+            "attrib",
+            ["comment", "test"],
+            ["ident", "a"],
+            ["comment", "test"],
+            ["attrselector", "="],
+            ["comment", "test"],
+            ["ident", "b"],
+            ["comment", "test"]
+        ]
+    },
+    "attrib.c.1": {
+        "source": "[/*test*/a/*test*/=/*test*/'b'/*test*/]",
+        "ast": [
+            "attrib",
+            ["comment", "test"],
+            ["ident", "a"],
+            ["comment", "test"],
+            ["attrselector", "="],
+            ["comment", "test"],
+            ["string", "'b'"],
+            ["comment", "test"]
+        ]
+    },
+    "attrib.s.0": {
+        "source": "[  a  =  b  ]",
+        "ast": [
+            "attrib",
+            ["s", "  "],
+            ["ident", "a"],
+            ["s", "  "],
+            ["attrselector", "="],
+            ["s", "  "],
+            ["ident", "b"],
+            ["s", "  "]
+        ]
+    },
+    "attrib.s.1": {
+        "source": "[  a  =  'b'  ]",
+        "ast": [
+            "attrib",
+            ["s", "  "],
+            ["ident", "a"],
+            ["s", "  "],
+            ["attrselector", "="],
+            ["s", "  "],
+            ["string", "'b'"],
+            ["s", "  "]
+        ]
+    }
+}

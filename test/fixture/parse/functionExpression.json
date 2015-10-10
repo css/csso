@@ -1,0 +1,34 @@
+{
+    "functionExpression.0": {
+        "source": "expression()",
+        "ast": ["functionExpression", ""]
+    },
+    "functionExpression.1": {
+        "source": "expression(())",
+        "ast": ["functionExpression", "()"]
+    },
+    "functionExpression.2": {
+        "source": "expression(expression())",
+        "ast": ["functionExpression", "expression()"]
+    },
+    "functionExpression.3": {
+        "source": "expression(/*)*/)",
+        "ast": ["functionExpression", "/*)*/"]
+    },
+    "functionExpression.4": {
+        "source": "expression(\")\")",
+        "ast": ["functionExpression", "\")\""]
+    },
+    "functionExpression.5": {
+        "source": "expression(')')",
+        "ast": ["functionExpression", "')'"]
+    },
+    "functionExpression.6": {
+        "source": "expression(()())",
+        "ast": ["functionExpression", "()()"]
+    },
+    "functionExpression.7": {
+        "source": "expression(\n// )\n)",
+        "ast": ["functionExpression", "\n// )\n"]
+    }
+}

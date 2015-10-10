@@ -1,0 +1,10 @@
+{
+    "unknown.0": {
+        "source": "//",
+        "ast": ["unknown", "//"]
+    },
+    "unknown.1": {
+        "source": "// invalid css",
+        "ast": ["unknown", "// invalid css"]
+    }
+}

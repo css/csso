@@ -1,0 +1,484 @@
+{
+    "atruler.0": {
+        "source": "@media {s{p:v}}",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["s", " "]
+            ], [
+                "atrulers", [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"]
+                        ]
+                    ], [
+                        "block", [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"]
+                            ], [
+                                "value",
+                                ["ident", "v"]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruler.1": {
+        "source": "@media x y {s{p:v}}",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["s", " "],
+                ["ident", "x"],
+                ["s", " "],
+                ["ident", "y"],
+                ["s", " "]
+            ], [
+                "atrulers", [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"]
+                        ]
+                    ], [
+                        "block", [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"]
+                            ], [
+                                "value",
+                                ["ident", "v"]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruler.2": {
+        "source": "@media x, y f(1+2) {s{p:v}}",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["s", " "],
+                ["ident", "x"],
+                ["operator", ","],
+                ["s", " "],
+                ["ident", "y"],
+                ["s", " "],
+                [
+                    "funktion",
+                    ["ident", "f"],
+                    [
+                        "functionBody",
+                        ["number", "1"],
+                        ["unary", "+"],
+                        ["number", "2"]
+                    ]
+                ],
+                ["s", " "]
+            ], [
+                "atrulers", [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"]
+                        ]
+                    ], [
+                        "block", [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"]
+                            ], [
+                                "value",
+                                ["ident", "v"]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruler.c.0": {
+        "source": "@media/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["comment", "test"]
+            ], [
+                "atrulers",
+                ["comment", "test"],
+                [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"],
+                            ["comment", "test"]
+                        ]
+                    ], [
+                        "block",
+                        ["comment", "test"],
+                        [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"],
+                                ["comment", "test"]
+                            ], [
+                                "value",
+                                ["comment", "test"],
+                                ["ident", "v"],
+                                ["comment", "test"]
+                            ]
+                        ]
+                    ]
+                ],
+                ["comment", "test"]
+            ]
+        ]
+    },
+    "atruler.c.1": {
+        "source": "@media/*test*/x/*test*/y/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["comment", "test"],
+                ["ident", "x"],
+                ["comment", "test"],
+                ["ident", "y"],
+                ["comment", "test"]
+            ], [
+                "atrulers",
+                ["comment", "test"],
+                [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"],
+                            ["comment", "test"]
+                        ]
+                    ], [
+                        "block",
+                        ["comment", "test"],
+                        [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"],
+                                ["comment", "test"]
+                            ], [
+                                "value",
+                                ["comment", "test"],
+                                ["ident", "v"],
+                                ["comment", "test"]
+                            ]
+                        ]
+                    ]
+                ],
+                ["comment", "test"]
+            ]
+        ]
+    },
+    "atruler.c.2": {
+        "source": "@media/*test*/x/*test*/,/*test*/y/*test*/f(/*test*/1/*test*/+/*test*/2/*test*/)/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["comment", "test"],
+                ["ident", "x"],
+                ["comment", "test"],
+                ["operator", ","],
+                ["comment", "test"],
+                ["ident", "y"],
+                ["comment", "test"],
+                [
+                    "funktion",
+                    ["ident", "f"],
+                    [
+                        "functionBody",
+                        ["comment", "test"],
+                        ["number", "1"],
+                        ["comment", "test"],
+                        ["unary", "+"],
+                        ["comment", "test"],
+                        ["number", "2"],
+                        ["comment", "test"]
+                    ]
+                ],
+                ["comment", "test"]
+            ], [
+                "atrulers",
+                ["comment", "test"],
+                [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"],
+                            ["comment", "test"]
+                        ]
+                    ], [
+                        "block",
+                        ["comment", "test"],
+                        [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"],
+                                ["comment", "test"]
+                            ], [
+                                "value",
+                                ["comment", "test"],
+                                ["ident", "v"],
+                                ["comment", "test"]
+                            ]
+                        ]
+                    ]
+                ],
+                ["comment", "test"]
+            ]
+        ]
+    },
+    "atruler.s.0": {
+        "source": "@media  {  s  {  p  :  v  }  }",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["s", "  "]
+            ], [
+                "atrulers",
+                ["s", "  "],
+                [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"],
+                            ["s", "  "]
+                        ]
+                    ], [
+                        "block",
+                        ["s", "  "],
+                        [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"],
+                                ["s", "  "]
+                            ], [
+                                "value",
+                                ["s", "  "],
+                                ["ident", "v"],
+                                ["s", "  "]
+                            ]
+                        ]
+                    ]
+                ],
+                ["s", "  "]
+            ]
+        ]
+    },
+    "atruler.s.1": {
+        "source": "@media  x  y  {  s  {  p  :  v  }  }",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["s", "  "],
+                ["ident", "x"],
+                ["s", "  "],
+                ["ident", "y"],
+                ["s", "  "]
+            ], [
+                "atrulers",
+                ["s", "  "],
+                [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"],
+                            ["s", "  "]
+                        ]
+                    ], [
+                        "block",
+                        ["s", "  "],
+                        [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"],
+                                ["s", "  "]
+                            ], [
+                                "value",
+                                ["s", "  "],
+                                ["ident", "v"],
+                                ["s", "  "]
+                            ]
+                        ]
+                    ]
+                ],
+                ["s", "  "]
+            ]
+        ]
+    },
+    "atruler.s.2": {
+        "source": "@media  x  ,  y  f(  1  +  2  )  {  s  {  p  :  v  }  }",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["s", "  "],
+                ["ident", "x"],
+                ["s", "  "],
+                ["operator", ","],
+                ["s", "  "],
+                ["ident", "y"],
+                ["s", "  "],
+                [
+                    "funktion",
+                    ["ident", "f"],
+                    [
+                        "functionBody",
+                        ["s", "  "],
+                        ["number", "1"],
+                        ["s", "  "],
+                        ["unary", "+"],
+                        ["s", "  "],
+                        ["number", "2"],
+                        ["s", "  "]
+                    ]
+                ],
+                ["s", "  "]
+            ], [
+                "atrulers",
+                ["s", "  "],
+                [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"],
+                            ["s", "  "]
+                        ]
+                    ], [
+                        "block",
+                        ["s", "  "],
+                        [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"],
+                                ["s", "  "]
+                            ], [
+                                "value",
+                                ["s", "  "],
+                                ["ident", "v"],
+                                ["s", "  "]
+                            ]
+                        ]
+                    ]
+                ],
+                ["s", "  "]
+            ]
+        ]
+    },
+    "webkit.keyfraymes.0": {
+        "source": "@-webkit-keyframes pulsate {0% {opacity: .5}50% {opacity: 1}100% {opacity: .5}}",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "-webkit-keyframes"]
+            ], [
+                "atrulerq",
+                ["s", " "],
+                ["ident", "pulsate"],
+                ["s", " "]
+            ], [
+                "atrulers", [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector", [
+                                "percentage",
+                                ["number", "0"]
+                            ],
+                            ["s", " "]
+                        ]
+                    ], [
+                        "block", [
+                            "declaration", [
+                                "property",
+                                ["ident", "opacity"]
+                            ], [
+                                "value",
+                                ["s", " "],
+                                ["number", ".5"]
+                            ]
+                        ]
+                    ]
+                ], [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector", [
+                                "percentage",
+                                ["number", "50"]
+                            ],
+                            ["s", " "]
+                        ]
+                    ], [
+                        "block", [
+                            "declaration", [
+                                "property",
+                                ["ident", "opacity"]
+                            ], [
+                                "value",
+                                ["s", " "],
+                                ["number", "1"]
+                            ]
+                        ]
+                    ]
+                ], [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector", [
+                                "percentage",
+                                ["number", "100"]
+                            ],
+                            ["s", " "]
+                        ]
+                    ], [
+                        "block", [
+                            "declaration", [
+                                "property",
+                                ["ident", "opacity"]
+                            ], [
+                                "value",
+                                ["s", " "],
+                                ["number", ".5"]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    }
+}

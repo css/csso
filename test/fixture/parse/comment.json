@@ -1,0 +1,6 @@
+{
+    "comment.0": {
+        "source": "/*test*/",
+        "ast": ["comment", "test"]
+    }
+}

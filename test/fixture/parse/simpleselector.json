@@ -1,0 +1,299 @@
+{
+    "simpleselector.0": {
+        "source": "test",
+        "ast": [
+            "simpleselector",
+            ["ident", "test"]
+        ]
+    },
+    "simpleselector.1": {
+        "source": ".test",
+        "ast": [
+            "simpleselector", [
+                "clazz",
+                ["ident", "test"]
+            ]
+        ]
+    },
+    "simpleselector.10": {
+        "source": "a|b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["namespace"],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.11": {
+        "source": "*|*:not(*)",
+        "ast": [
+            "simpleselector",
+            ["ident", "*"],
+            ["namespace"],
+            ["ident", "*"],
+            [
+                "pseudoc", [
+                    "funktion",
+                    ["ident", "not"],
+                    [
+                        "functionBody", [
+                            "simpleselector",
+                            ["ident", "*"]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "simpleselector.12": {
+        "source": "x:not([ABC])",
+        "ast": [
+            "simpleselector",
+            ["ident", "x"],
+            [
+                "pseudoc", [
+                    "funktion",
+                    ["ident", "not"],
+                    [
+                        "functionBody", [
+                            "simpleselector", [
+                                "attrib",
+                                ["ident", "ABC"]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "simpleselector.13": {
+        "source": ":not(el.class-postfix)",
+        "ast": [
+            "simpleselector", [
+                "pseudoc", [
+                    "funktion",
+                    ["ident", "not"],
+                    [
+                        "functionBody", [
+                            "simpleselector",
+                            ["ident", "el"],
+                            [
+                                "clazz",
+                                ["ident", "class-postfix"]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "simpleselector.2": {
+        "source": "#test",
+        "ast": [
+            "simpleselector",
+            ["shash", "test"]
+        ]
+    },
+    "simpleselector.3": {
+        "source": "[a=b]",
+        "ast": [
+            "simpleselector", [
+                "attrib",
+                ["ident", "a"],
+                ["attrselector", "="],
+                ["ident", "b"]
+            ]
+        ]
+    },
+    "simpleselector.4": {
+        "source": "[a=b][c='d']",
+        "ast": [
+            "simpleselector", [
+                "attrib",
+                ["ident", "a"],
+                ["attrselector", "="],
+                ["ident", "b"]
+            ], [
+                "attrib",
+                ["ident", "c"],
+                ["attrselector", "="],
+                ["string", "'d'"]
+            ]
+        ]
+    },
+    "simpleselector.5": {
+        "source": "a b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["s", " "],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.6": {
+        "source": "a+b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["combinator", "+"],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.7": {
+        "source": "a>b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["combinator", ">"],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.8": {
+        "source": "a~b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["combinator", "~"],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.9": {
+        "source": ":nth-child(+3n-2)",
+        "ast": [
+            "simpleselector", [
+                "nthselector",
+                ["ident", "nth-child"],
+                ["unary", "+"],
+                ["nth", "3n"],
+                ["unary", "-"],
+                ["nth", "2"]
+            ]
+        ]
+    },
+    "simpleselector.c.0": {
+        "source": "a/*test*/b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["comment", "test"],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.c.1": {
+        "source": "a/*test*/+/*test*/b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["comment", "test"],
+            ["combinator", "+"],
+            ["comment", "test"],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.c.2": {
+        "source": "a/*test*/>/*test*/b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["comment", "test"],
+            ["combinator", ">"],
+            ["comment", "test"],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.c.3": {
+        "source": "a/*test*/~/*test*/b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["comment", "test"],
+            ["combinator", "~"],
+            ["comment", "test"],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.c.4": {
+        "source": "a  b  +  c  >  d  ~  e",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["s", "  "],
+            ["ident", "b"],
+            ["s", "  "],
+            ["combinator", "+"],
+            ["s", "  "],
+            ["ident", "c"],
+            ["s", "  "],
+            ["combinator", ">"],
+            ["s", "  "],
+            ["ident", "d"],
+            ["s", "  "],
+            ["combinator", "~"],
+            ["s", "  "],
+            ["ident", "e"]
+        ]
+    },
+    "simpleselector.s.0": {
+        "source": "a    b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["s", "    "],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.s.1": {
+        "source": "a  +  b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["s", "  "],
+            ["combinator", "+"],
+            ["s", "  "],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.s.2": {
+        "source": "a  >  b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["s", "  "],
+            ["combinator", ">"],
+            ["s", "  "],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.s.3": {
+        "source": "a  ~  b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["s", "  "],
+            ["combinator", "~"],
+            ["s", "  "],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.s.4": {
+        "source": "a  b  +  c  >  d  ~  e",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["s", "  "],
+            ["ident", "b"],
+            ["s", "  "],
+            ["combinator", "+"],
+            ["s", "  "],
+            ["ident", "c"],
+            ["s", "  "],
+            ["combinator", ">"],
+            ["s", "  "],
+            ["ident", "d"],
+            ["s", "  "],
+            ["combinator", "~"],
+            ["s", "  "],
+            ["ident", "e"]
+        ]
+    }
+}

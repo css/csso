@@ -1,0 +1,20 @@
+{
+    "important.0": {
+        "source": "!important",
+        "ast": ["important"]
+    },
+    "important.c.0": {
+        "source": "!/*test*/important",
+        "ast": [
+            "important",
+            ["comment", "test"]
+        ]
+    },
+    "important.s.0": {
+        "source": "!  important",
+        "ast": [
+            "important",
+            ["s", "  "]
+        ]
+    }
+}

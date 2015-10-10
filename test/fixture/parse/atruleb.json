@@ -1,0 +1,289 @@
+{
+    "atruleb.0": {
+        "source": "@test{p:v}",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "test"]
+            ], [
+                "block", [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"]
+                    ], [
+                        "value",
+                        ["ident", "v"]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruleb.1": {
+        "source": "@test x y {p:v}",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["s", " "],
+            ["ident", "x"],
+            ["s", " "],
+            ["ident", "y"],
+            ["s", " "],
+            [
+                "block", [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"]
+                    ], [
+                        "value",
+                        ["ident", "v"]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruleb.2": {
+        "source": "@test x, y x(1+2) {p:v}",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["s", " "],
+            ["ident", "x"],
+            ["operator", ","],
+            ["s", " "],
+            ["ident", "y"],
+            ["s", " "],
+            [
+                "funktion",
+                ["ident", "x"],
+                [
+                    "functionBody",
+                    ["number", "1"],
+                    ["unary", "+"],
+                    ["number", "2"]
+                ]
+            ],
+            ["s", " "],
+            [
+                "block", [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"]
+                    ], [
+                        "value",
+                        ["ident", "v"]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruleb.c.0": {
+        "source": "@test/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["comment", "test"],
+            [
+                "block",
+                ["comment", "test"],
+                [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"],
+                        ["comment", "test"]
+                    ], [
+                        "value",
+                        ["comment", "test"],
+                        ["ident", "v"],
+                        ["comment", "test"]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruleb.c.1": {
+        "source": "@test/*test*/x/*test*/y/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["comment", "test"],
+            ["ident", "x"],
+            ["comment", "test"],
+            ["ident", "y"],
+            ["comment", "test"],
+            [
+                "block",
+                ["comment", "test"],
+                [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"],
+                        ["comment", "test"]
+                    ], [
+                        "value",
+                        ["comment", "test"],
+                        ["ident", "v"],
+                        ["comment", "test"]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruleb.c.2": {
+        "source": "@test/*test*/x/*test*/,/*test*/y/*test*/x(/*test*/1/*test*/+/*test*/2/*test*/)/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["comment", "test"],
+            ["ident", "x"],
+            ["comment", "test"],
+            ["operator", ","],
+            ["comment", "test"],
+            ["ident", "y"],
+            ["comment", "test"],
+            [
+                "funktion",
+                ["ident", "x"],
+                [
+                    "functionBody",
+                    ["comment", "test"],
+                    ["number", "1"],
+                    ["comment", "test"],
+                    ["unary", "+"],
+                    ["comment", "test"],
+                    ["number", "2"],
+                    ["comment", "test"]
+                ]
+            ],
+            ["comment", "test"],
+            [
+                "block",
+                ["comment", "test"],
+                [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"],
+                        ["comment", "test"]
+                    ], [
+                        "value",
+                        ["comment", "test"],
+                        ["ident", "v"],
+                        ["comment", "test"]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruleb.s.0": {
+        "source": "@test  {  p  :  v  }",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["s", "  "],
+            [
+                "block",
+                ["s", "  "],
+                [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"],
+                        ["s", "  "]
+                    ], [
+                        "value",
+                        ["s", "  "],
+                        ["ident", "v"],
+                        ["s", "  "]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruleb.s.1": {
+        "source": "@test  x  y  {  p  :  v  }",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["s", "  "],
+            ["ident", "x"],
+            ["s", "  "],
+            ["ident", "y"],
+            ["s", "  "],
+            [
+                "block",
+                ["s", "  "],
+                [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"],
+                        ["s", "  "]
+                    ], [
+                        "value",
+                        ["s", "  "],
+                        ["ident", "v"],
+                        ["s", "  "]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruleb.s.2": {
+        "source": "@test  x  ,  y  x(  1  +  2  )  {  p  :  v  }",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "test"]
+            ],
+            ["s", "  "],
+            ["ident", "x"],
+            ["s", "  "],
+            ["operator", ","],
+            ["s", "  "],
+            ["ident", "y"],
+            ["s", "  "],
+            [
+                "funktion",
+                ["ident", "x"],
+                [
+                    "functionBody",
+                    ["s", "  "],
+                    ["number", "1"],
+                    ["s", "  "],
+                    ["unary", "+"],
+                    ["s", "  "],
+                    ["number", "2"],
+                    ["s", "  "]
+                ]
+            ],
+            ["s", "  "],
+            [
+                "block",
+                ["s", "  "],
+                [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"],
+                        ["s", "  "]
+                    ], [
+                        "value",
+                        ["s", "  "],
+                        ["ident", "v"],
+                        ["s", "  "]
+                    ]
+                ]
+            ]
+        ]
+    }
+}
