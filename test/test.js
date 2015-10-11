@@ -17,7 +17,7 @@ function createParseTest(name, test, scope) {
 
 function createCompressTest(name, test) {
     return it(name, function() {
-        var compressed = csso.justDoIt(test.source);
+        var compressed = csso.minify(test.source);
 
         assert.equal(compressed, test.compressed);
     });
