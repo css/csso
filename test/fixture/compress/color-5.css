@@ -1,0 +1,6 @@
+/* issue #176: don't optimize multiple colors when one of them is converted to a keyword */
+
+a {
+  color: #00f;
+  color: #f00;
+}
