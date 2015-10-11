@@ -1,0 +1,14 @@
+/*
+  interpolate percentage values in rgb
+  http://www.w3.org/TR/css3-color/#rgb-color
+*/
+
+a {
+  color: rgb(100%, -10%, 0%);
+}
+b {
+  color: rgb(100%, +50%, 0%);
+}
+c {
+  color: rgb(100%, 110%, 120%);
+}
