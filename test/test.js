@@ -24,7 +24,6 @@ function createCompressTest(name, test) {
 }
 
 describe('csso', function() {
-
     describe('parse', function() {
         var testDir = path.join(__dirname, 'fixture/parse');
         fs.readdirSync(testDir).forEach(function(rule) {
@@ -37,7 +36,7 @@ describe('csso', function() {
         });
     });
 
-    describe('compress', function(){
+    describe('compress', function() {
         var testDir = path.join(__dirname, 'fixture/compress');
         var tests = fs.readdirSync(testDir).reduce(function(list, filename) {
             var name = filename.replace(/(\.min)?\.css$/, '');
