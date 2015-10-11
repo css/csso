@@ -1,0 +1,10 @@
+/*
+  percentage values in rgba should be interpolated
+*/
+
+a {
+  color: rgba(100%, 25%, 0%, .50);
+}
+b {
+  color: rgba(150%, -25%, 0%, 0.5);
+}
