@@ -1,0 +1,14 @@
+/*
+  issue #122: rgba with 1 as alpha value should be converted to rgb
+  http://www.w3.org/TR/css3-color/#rgba-color
+*/
+
+a {
+  color: rgba(100%, -10%, 0%, 1);
+}
+b {
+  color: rgba(255, 0, 0, 1);
+}
+c {
+  color: rgba(255, 0, 0, 3);
+}

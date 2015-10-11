@@ -1,8 +1,7 @@
 .a {
     color: #fff;
     color: rgb(100,100,100);
-    color: rgba(100,100,100,100);
+    color: rgba(100,100,100,.5);
     color: hsl(100,100,100);
-    color: hsla(100,100,100,100);
-    color: test;
+    color: hsla(100,100,100,.5);
 }
