@@ -1,0 +1,16 @@
+/*
+  convert hsla to rgba
+*/
+
+a {
+  color: hsla(0, 100%, 50%, .5);
+}
+b {
+  color: hsla(120, 100%, 50%, 1);
+}
+c {
+  color: hsla(120, 100%, 50%, .10);
+}
+d {
+  color: hsla(720, 150%, 50%, 1);
+}

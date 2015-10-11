@@ -1,0 +1,16 @@
+/*
+  convert hsl to rgb
+*/
+
+a {
+  color: hsl(0, 100%, 50%);
+}
+b {
+  color: hsl(120, 100%, 50%);
+}
+c {
+  color: hsl(210, 65%, 20%);
+}
+d {
+  color: hsl(720, 150%, 50%);
+}
