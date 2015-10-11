@@ -1,0 +1,5 @@
+a{color:red}
+/*! should not merge styles with different comments */
+b-1,b-2{color:red}
+/*! comment */
+c{color:red}
