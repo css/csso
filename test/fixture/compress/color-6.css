@@ -1,0 +1,14 @@
+/*
+  issue #181: rgb values should be clipped to 0..255 range
+  http://www.w3.org/TR/css3-color/#rgb-color
+*/
+
+a {
+  color: rgb(255, -10, 0);
+}
+b {
+  color: rgb(255, +17, 0);
+}
+c {
+  color: rgb(256, 256, 256);
+}
