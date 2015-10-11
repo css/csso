@@ -73,6 +73,9 @@ darkgoldenrod {
 darkgray {
   color: darkgray;
 }
+darkgrey {
+  color: darkgrey;
+}
 darkgreen {
   color: darkgreen;
 }
@@ -106,6 +109,9 @@ darkslateblue {
 darkslategray {
   color: darkslategray;
 }
+darkslategrey {
+  color: darkslategrey;
+}
 darkturquoise {
   color: darkturquoise;
 }
@@ -120,6 +126,9 @@ deepskyblue {
 }
 dimgray {
   color: dimgray;
+}
+dimgrey {
+  color: dimgrey;
 }
 dodgerblue {
   color: dodgerblue;
@@ -150,6 +159,9 @@ goldenrod {
 }
 gray {
   color: gray;
+}
+grey {
+  color: grey;
 }
 green {
   color: green;
@@ -202,6 +214,9 @@ lightgoldenrodyellow {
 lightgray {
   color: lightgray;
 }
+lightgrey {
+  color: lightgrey;
+}
 lightgreen {
   color: lightgreen;
 }
@@ -219,6 +234,9 @@ lightskyblue {
 }
 lightslategray {
   color: lightslategray;
+}
+lightslategrey {
+  color: lightslategrey;
 }
 lightsteelblue {
   color: lightsteelblue;
@@ -378,6 +396,9 @@ slateblue {
 }
 slategray {
   color: slategray;
+}
+slategrey {
+  color: slategrey;
 }
 snow {
   color: snow;
