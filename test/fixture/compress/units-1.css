@@ -1,0 +1,6 @@
+/*
+  issue 200: don't remove units in flex property as it could change value meaning
+*/
+a {
+  flex: 5 1 0px;
+}
