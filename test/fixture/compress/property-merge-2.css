@@ -1,0 +1,20 @@
+/*
+    issues #140, #161
+    shouldn't merge properties with new units with various support
+*/
+
+a {
+    padding: 20px;
+    padding: 1.25rem;
+    border-radius: 20px;
+    border-radius: 1.25rem;
+}
+b {
+    width: 10px;
+    width: 10vh;
+    width: 10vmax;
+    height: 10px;
+    height: 10vw;
+    height: 10vmin;
+    height: 10vm;
+}
