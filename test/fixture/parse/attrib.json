@@ -91,5 +91,93 @@
             ["string", "'b'"],
             ["s", "  "]
         ]
+    },
+    "namespace": {
+        "source": "[xlink|href=\"#test\"]",
+        "ast": [
+            "attrib",
+            ["ident", "xlink"],
+            ["namespace"],
+            ["ident", "href"],
+            ["attrselector", "="],
+            ["string", "\"#test\""]
+        ]
+    },
+    "namespace unversal": {
+        "source": "[*|href=\"#test\"]",
+        "ast": [
+            "attrib",
+            ["ident", "*"],
+            ["namespace"],
+            ["ident", "href"],
+            ["attrselector", "="],
+            ["string", "\"#test\""]
+        ]
+    },
+    "namespace w/o attrselector": {
+        "source": "[xlink|href]",
+        "ast": [
+            "attrib",
+            ["ident", "xlink"],
+            ["namespace"],
+            ["ident", "href"]
+        ]
+    },
+    "namespace unversal w/o attrselector": {
+        "source": "[*|href]",
+        "ast": [
+            "attrib",
+            ["ident", "*"],
+            ["namespace"],
+            ["ident", "href"]
+        ]
+    },
+    "attrib with dashmatch": {
+        "source": "[a|='b']",
+        "ast": [
+            "attrib",
+            ["ident", "a"],
+            ["attrselector", "|="],
+            ["string", "'b'"]
+        ]
+    },
+    "attrib with namespace and dashmatch": {
+        "source": "[a|b|='c']",
+        "ast": [
+            "attrib",
+            ["ident", "a"],
+            ["namespace"],
+            ["ident", "b"],
+            ["attrselector", "|="],
+            ["string", "'c'"]
+        ]
+    },
+    "attrib with dashmatch and spaces": {
+        "source": "[  a  |=  'b'  ]",
+        "ast": [
+            "attrib",
+            ["s", "  "],
+            ["ident", "a"],
+            ["s", "  "],
+            ["attrselector", "|="],
+            ["s", "  "],
+            ["string", "'b'"],
+            ["s", "  "]
+        ]
+    },
+    "attrib with namespace, dashmatch and spaces": {
+        "source": "[  a|b  |=  'c'  ]",
+        "ast": [
+            "attrib",
+            ["s", "  "],
+            ["ident", "a"],
+            ["namespace"],
+            ["ident", "b"],
+            ["s", "  "],
+            ["attrselector", "|="],
+            ["s", "  "],
+            ["string", "'c'"],
+            ["s", "  "]
+        ]
     }
 }

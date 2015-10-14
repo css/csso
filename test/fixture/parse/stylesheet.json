@@ -16,7 +16,7 @@
                                         "simpleselector", [
                                             "attrib",
                                             ["ident", "x"],
-                                            ["attrselector", "|"],
+                                            ["namespace"],
                                             ["ident", "x"]
                                         ]
                                     ]
