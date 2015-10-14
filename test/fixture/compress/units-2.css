@@ -1,0 +1,14 @@
+/*
+  issue #222: units for zero values shouldn't to be remove inside calc
+  TODO: better solution is to remove zero values entirely, but it's too complex for now
+*/
+
+a {
+  width: calc(100vw / 2 - 6px + 0px);
+}
+b {
+  width: calc((5% + 0px) - (2em - 0px));
+}
+c {
+  width: calc(10px + 0px);
+}
