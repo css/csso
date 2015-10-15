@@ -159,5 +159,26 @@
             "value",
             ["vhash", "AaBbCc"]
         ]
+    },
+    "unicode range one hex": {
+        "source": "U+0F00",
+        "ast": [
+            "value",
+            ["ident", "U+0F00"]
+        ]
+    },
+    "unicode range hex pair": {
+        "source": "U+0F00-0FFF",
+        "ast": [
+            "value",
+            ["ident", "U+0F00-0FFF"]
+        ]
+    },
+    "unicode range hex with ?": {
+        "source": "u+0F00??",
+        "ast": [
+            "value",
+            ["ident", "u+0F00??"]
+        ]
     }
 }
