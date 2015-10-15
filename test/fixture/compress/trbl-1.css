@@ -1,0 +1,23 @@
+/*
+  issue #175: wrong trbl merge
+*/
+
+.bar
+{
+    padding: 20px 0 10px 46px;
+}
+
+.bar
+{
+    padding-bottom: 15px;
+}
+
+.any-selector
+{
+    padding: 3px 5px;
+}
+
+.bar
+{
+    padding-top: 0;
+}
