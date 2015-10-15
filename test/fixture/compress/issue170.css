@@ -1,0 +1,9 @@
+/*
+  issue 170
+  wrong optimization in background value list
+*/
+
+.foo {
+    background: url(old.jpg);
+    background: none, url(hotness.svg);
+}
