@@ -1,0 +1,16 @@
+/*
+  issue #139
+*/
+
+#footer {
+  margin: 20px auto;
+  margin-top: 32px;
+}
+
+p {
+  padding: 0;
+}
+
+#footer {
+  margin-bottom: 11px;
+}
