@@ -8,7 +8,7 @@ function createParseTest(name, test, scope) {
         var ast = csso.parse(test.source, scope);
 
         // AST should be equal
-        assert.equal(csso.treeToString(ast), csso.treeToString(test.ast));
+        assert.equal(csso.stringify(ast), csso.stringify(test.ast));
 
         // translated AST should be equal to original source
         assert.equal(csso.translate(ast), test.source);
