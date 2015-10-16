@@ -3,42 +3,67 @@
 [![Dependency Status](https://img.shields.io/david/css/csso.svg)](https://david-dm.org/css/csso)
 [![devDependency Status](https://img.shields.io/david/dev/css/csso.svg?style=flat)](https://david-dm.org/css/csso#info=devDependencies)
 
-# English
-
 CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
 
-See detailed information on [bem.info/tools/optimizers/csso](https://bem.info/tools/optimizers/csso/).
+## Install
 
-# 中文
+```
+npm install -g csso
+```
 
-CSSO (CSS 优化器) 是一个与众不同的CSS代码压缩器。相比其他压缩器，除了常用的压缩技术外，它还会通过重建CSS代码结构信息的优化技术从而使文件压缩到更小的尺寸。
+## Usage
 
-访问[bem.info/tools/optimizers/csso](https://bem.info/tools/optimizers/csso/)获取更详细的信息。
+### Command line
 
-# 日本語
+```
+csso [input] [output] [options]
 
-CSSO (CSSオプティマイザー)は、他とは違ったCSS縮小化ツールです。 一般的な縮小化テクニックに加えてCSSファイルの構造的な最適化も行うので、 他の縮小化ツールと比べてより軽量にすることが可能です。
+Options:
 
-詳細な情報は[bem.info/tools/optimizers/csso](https://bem.info/tools/optimizers/csso/)を参照してください。
+      --debug              Output intermediate state of CSS during compression
+  -h, --help               Output usage information
+  -i, --input <filename>   Input file
+  -o, --output <filename>  Output file (result outputs to stdout if not set)
+      --restructure-off    Turns structure minimization off
+  -v, --version            Output the version
+```
 
-# Русский
+Some examples:
 
-CSSO (CSS Optimizer) является минимизатором CSS, выполняющим как минимизацию без изменения структуры, так и структурную минимизацию с целью получить как можно меньший текст.
+```
+> csso in.css out.css
 
-Детальное описание смотри на [ru.bem.info/tools/optimizers/csso](https://ru.bem.info/tools/optimizers/csso/).
+> csso in.css
+...output result in stdout...
 
-# Українська
+> echo ".test { color: #ff0000; }" | csso
+.test{color:red}
 
-CSSO (CSS Optimizer) є CSS-мінімізатор не схожий на інші. На додачу до звичайних технік мініфікації він може виконувати й структурну оптимізацію файлів CSS, що дозволяє отримати менший розмір файлу, в порівнянні з іншими мініфікаторами.
+> cat source1.css source2.css | csso | gzip -9 -c > production.css.gz
+```
 
-Детальнішу інформацію шукайте на [bem.info/tools/optimizers/csso](https://bem.info/tools/optimizers/csso/).
+### API
 
-# 한국어
+```js
+var csso = require('csso');
 
-CSSO (CSS Optimizer)는 다른 CSS압축툴과는 다릅니다. 일반적인 압축 기법에 더불어 CSS파일의 구조를 최적화하여 다른 툴에 비해 더 작은 파일로 만들 수 있습니다.
+var compressed = csso.minify('.test { color: #ff0000; }');
+console.log(compressed);
+// .test{color:red}
 
-상세한 정보는 [bem.info/tools/optimizers/csso](https://bem.info/tools/optimizers/csso/)를 참고바랍니다.
+// you may do it step by step
+var ast = csso.parse('.test { color: #ff0000; }');
+ast = csso.compress(ast);
+var compressed = csso.translate(ast, true);
+console.log(compressed);
+// .test{color:red}
+```
 
-<!-- Yandex.Metrika counter -->
-<img src="https://mc.yandex.ru/watch/12831025" style="position:absolute; left:-9999px;" alt="" />
-<!-- /Yandex.Metrika counter -->
+## Documentation
+
+> May be outdated
+
+- [English](https://github.com/css/csso/blob/master/docs/index/index.en.md)
+- [Русский](https://github.com/css/csso/blob/master/docs/index/index.ru.md)
+- [日本語](https://github.com/css/csso/blob/master/docs/index/index.ja.md)
+- [한국어](https://github.com/css/csso/blob/master/docs/index/index.ko.md)
