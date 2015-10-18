@@ -39,10 +39,9 @@
         "source": "-100%",
         "ast": [
             "value",
-            ["unary", "-"],
             [
                 "percentage",
-                ["number", "100"]
+                ["number", "-100"]
             ]
         ]
     },
