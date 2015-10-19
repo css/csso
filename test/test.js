@@ -37,25 +37,36 @@ describe('csso', function() {
     });
 
     describe('compress', function() {
-        var testDir = path.join(__dirname, 'fixture/compress');
-        var tests = fs.readdirSync(testDir).reduce(function(list, filename) {
-            var name = filename.replace(/(\.min)?\.css$/, '');
-            var key = /\.min\.css/.test(filename) ? 'compressed' : 'source';
+        function scan(dir) {
+            var tests = fs.readdirSync(dir).reduce(function(list, filename) {
+                var fullpath = path.join(dir, filename);
 
-            // in case there is a filename that doesn't ends with `.css` or `.min.css`
-            if (name !== filename) {
-                if (!list[name]) {
-                    list[name] = {};
+                // nested dir
+                if (fs.statSync(fullpath).isDirectory()) {
+                    scan(fullpath);
+                    return list;
                 }
 
-                list[name][key] = fs.readFileSync(path.join(testDir, filename), 'utf8').trim();
+                var name = filename.replace(/(\.min)?\.css$/, '');
+                var key = /\.min\.css/.test(filename) ? 'compressed' : 'source';
+
+                // in case there is a filename that doesn't ends with `.css` or `.min.css`
+                if (name !== filename) {
+                    if (!list[name]) {
+                        list[name] = {};
+                    }
+
+                    list[name][key] = fs.readFileSync(fullpath, 'utf8').trim();
+                }
+
+                return list;
+            }, {});
+
+            for (var name in tests) {
+                createCompressTest(name, tests[name]);
             }
-
-            return list;
-        }, {});
-
-        for (var name in tests) {
-            createCompressTest(name, tests[name]);
         }
+
+        scan(path.join(__dirname, 'fixture/compress'));
     });
 });
