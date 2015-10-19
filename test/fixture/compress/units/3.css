@@ -1,0 +1,17 @@
+/*
+  issue #244:
+  safe units should merge with keyword values
+*/
+
+.transfers.is-toggle-visible {
+  display: block;
+}
+
+.transfer {
+  display: inline-block;
+  width: 120px;
+  width: 134px;
+  width: 140px;
+  display: block;
+  width: auto;
+}
