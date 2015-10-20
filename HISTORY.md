@@ -1,3 +1,14 @@
+## 1.4.1 (October 20, 2015)
+
+- allow merge for `display` property (#167, #244)
+- more accurate `rect` (`clip` property value) merge
+- fix typo when specifying options in cli (thanks to @Taritsyn)
+- fix safe unit values merge with keyword values (#244)
+- fix wrong descendant combinator removal (#246)
+- build browser version on `prepublish` (thanks to @silentroach)
+- parser: store whitespaces as single token (performance and reduce memory consumption)
+- rearrange compress tests layout
+
 ## 1.4 (October 16, 2015)
 
 Bringing project back to life. Changed files structure, cleaned up and refactored most of sources.
