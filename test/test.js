@@ -63,7 +63,7 @@ describe('csso', function() {
             }, {});
 
             for (var name in tests) {
-                createCompressTest(name, tests[name]);
+                createCompressTest(path.relative(__dirname, dir) + '/' + name + '.css', tests[name]);
             }
         }
 
