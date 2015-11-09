@@ -20,7 +20,7 @@
     "prepublish": "npm run browserify"
   },
   "dependencies": {
-    "clap": "^1.0.8"
+    "clap": "^1.0.9"
   },
   "devDependencies": {
     "browserify": "11.x",
