@@ -1,3 +1,13 @@
+## 1.4.2 (November 9, 2015)
+
+- allow spaces between `progid:` and rest part of value for IE's `filter` property as `autoprefixer` generates this kind of code (#249)
+- fixes for Windows:
+  - correct processing new lines
+  - normalize file content in test suite
+- fixes to work in strict mode (#252)
+- init compressor dictionaries for every css block (#248, #251)
+- bump uglify-js version
+
 ## 1.4.1 (October 20, 2015)
 
 - allow merge for `display` property (#167, #244)
