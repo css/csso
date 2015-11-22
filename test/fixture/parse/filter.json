@@ -151,5 +151,20 @@
                 ]
             ]
         ]
+    },
+    "filter.s.2": {
+        "source": "filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='$start', endColorstr='$stop', GradientType=0)",
+        "ast": [
+            "filter", [
+                "property",
+                ["ident", "filter"]
+            ], [
+                "filterv", [
+                    "progid",
+                    ["s", " "],
+                    ["raw", "progid: DXImageTransform.Microsoft.gradient(startColorstr='$start', endColorstr='$stop', GradientType=0)"]
+                ]
+            ]
+        ]
     }
 }

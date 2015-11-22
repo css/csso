@@ -1,7 +1,7 @@
 {
   "name": "csso",
   "description": "CSSO — CSS optimizer",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "homepage": "https://github.com/css/csso",
   "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (https://github.com/afelix)",
   "license": "MIT",
@@ -20,13 +20,13 @@
     "prepublish": "npm run browserify"
   },
   "dependencies": {
-    "clap": "^1.0.8"
+    "clap": "^1.0.9"
   },
   "devDependencies": {
-    "browserify": "11.x",
-    "jscs": "^2.3.0",
+    "browserify": "^12.0.1",
+    "jscs": "^2.6.0",
     "mocha": "~2.3.3",
-    "uglify-js": ">= 2.4.24"
+    "uglify-js": "^2.6.1"
   },
   "engines": {
     "node": ">=0.12.0"

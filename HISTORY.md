@@ -1,3 +1,24 @@
+## 1.4.2 (November 9, 2015)
+
+- allow spaces between `progid:` and rest part of value for IE's `filter` property as `autoprefixer` generates this kind of code (#249)
+- fixes for Windows:
+  - correct processing new lines
+  - normalize file content in test suite
+- fixes to work in strict mode (#252)
+- init compressor dictionaries for every css block (#248, #251)
+- bump uglify-js version
+
+## 1.4.1 (October 20, 2015)
+
+- allow merge for `display` property (#167, #244)
+- more accurate `rect` (`clip` property value) merge
+- fix typo when specifying options in cli (thanks to @Taritsyn)
+- fix safe unit values merge with keyword values (#244)
+- fix wrong descendant combinator removal (#246)
+- build browser version on `prepublish` (thanks to @silentroach)
+- parser: store whitespaces as single token (performance and reduce memory consumption)
+- rearrange compress tests layout
+
 ## 1.4 (October 16, 2015)
 
 Bringing project back to life. Changed files structure, cleaned up and refactored most of sources.

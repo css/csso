@@ -1,0 +1,14 @@
+/*
+  issue #246:
+  shouldn't remove descendant combinator
+*/
+
+div.dropdown * {
+  color: #ff0000;
+}
+* div {
+  color: blue;
+}
+a  b {
+  color: green;
+}

@@ -15,11 +15,15 @@ function createParseTest(name, test, scope) {
     });
 }
 
+function normalize(str) {
+    return str.replace(/\n|\r\n?|\f/g, '\n');
+}
+
 function createCompressTest(name, test) {
     return it(name, function() {
         var compressed = csso.minify(test.source);
 
-        assert.equal(compressed, test.compressed);
+        assert.equal(normalize(compressed), normalize(test.compressed));
     });
 }
 
@@ -63,7 +67,7 @@ describe('csso', function() {
             }, {});
 
             for (var name in tests) {
-                createCompressTest(name, tests[name]);
+                createCompressTest(path.join(path.relative(__dirname, dir), name + '.css'), tests[name]);
             }
         }
 
