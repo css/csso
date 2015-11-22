@@ -1,1 +1,1 @@
-a{color:red;width:200px}foo{border:none}foo,b{color:#00f;width:200px;height:50px}@media (min-width:400px){a{color:red;width:200px}foo{border:none}foo,b{color:#00f;width:200px;height:50px}}
+a{color:red;width:200px}foo{border:none}b,foo{color:#00f;width:200px;height:50px}@media (min-width:400px){a{color:red;width:200px}foo{border:none}b,foo{color:#00f;width:200px;height:50px}}
