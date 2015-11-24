@@ -1,0 +1,14 @@
+/*
+  blocks could be merged as consequence block override common styles
+  .a, .b { color: red; width: 100px }
+  .b { color: green }
+*/
+
+.a {
+    color: red;
+    width: 100px;
+}
+.b {
+    width: 100px;
+    color: green;
+}
