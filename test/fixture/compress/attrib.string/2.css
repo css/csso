@@ -1,4 +1,6 @@
 [title='test'],
 [title='123'],
 [title='test test']
-{ p: v }
+{
+    p: v;
+}
