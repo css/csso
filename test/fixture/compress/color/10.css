@@ -2,15 +2,15 @@
   convert hsl to rgb
 */
 
-a {
+.a {
   color: hsl(0, 100%, 50%);
 }
-b {
+.b {
   color: hsl(120, 100%, 50%);
 }
-c {
+.c {
   color: hsl(210, 65%, 20%);
 }
-d {
+.d {
   color: hsl(720, 150%, 50%);
 }

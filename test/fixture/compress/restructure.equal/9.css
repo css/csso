@@ -1,0 +1,4 @@
+/* shouldn't join .a & .c since .b has the same specificity */
+.a { color: red; }
+.b { color: green; }
+.c { color: red; }
