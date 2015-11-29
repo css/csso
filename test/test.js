@@ -2,6 +2,8 @@ var fs = require('fs');
 var path = require('path');
 var assert = require('assert');
 var csso = require('../lib/index.js');
+var wrapAst = require('../lib/compressor/ast/index.js');
+var specificity = require('../lib/compressor/prepare/specificity.js');
 
 function createParseTest(name, test, scope) {
     return it(name, function() {
@@ -12,6 +14,14 @@ function createParseTest(name, test, scope) {
 
         // translated AST should be equal to original source
         assert.equal(csso.translate(ast), test.source);
+    });
+}
+
+function createSpecificityTest(test) {
+    return it(test.selector, function() {
+        var ast = wrapAst(csso.parse(test.selector, 'simpleselector', true));
+
+        assert.equal(String(specificity(ast)), test.expected);
     });
 }
 
@@ -38,6 +48,14 @@ describe('csso', function() {
                 createParseTest(name, tests[name], scope);
             }
         });
+    });
+
+    describe('specificity', function() {
+        var tests = fs
+            .readFileSync(__dirname + '/fixture/specificity.json', 'utf8')
+            .replace(/\/\/.+/g, '');
+
+        JSON.parse(tests).forEach(createSpecificityTest);
     });
 
     describe('compress', function() {
@@ -67,7 +85,7 @@ describe('csso', function() {
             }, {});
 
             for (var name in tests) {
-                createCompressTest(path.join(path.relative(__dirname, dir), name + '.css'), tests[name]);
+                createCompressTest(path.join(path.relative(__dirname + '/..', dir), name + '.css'), tests[name]);
             }
         }
 
