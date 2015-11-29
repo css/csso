@@ -3,6 +3,6 @@
     100% { color: green }
 }
 @keyframes test {
-    0% { color: red }
+    from { color: red }
     100% { color: green }
 }
