@@ -1,0 +1,7 @@
+@media (min-width: 100px) {
+    .a { color: red }
+}
+
+@media (max-width: 100px) {
+    .b { color: red }
+}
