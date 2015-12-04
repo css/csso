@@ -1,3 +1,7 @@
+## 1.4.3 (December 4, 2015)
+
+- fix unicode-range parsing that cause to wrong function detection (#250)
+
 ## 1.4.2 (November 9, 2015)
 
 - allow spaces between `progid:` and rest part of value for IE's `filter` property as `autoprefixer` generates this kind of code (#249)
