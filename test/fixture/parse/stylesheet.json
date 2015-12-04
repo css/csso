@@ -563,5 +563,73 @@
                 ]
             ]
         ]
+    },
+    "issue #250": {
+        "source": "@x {\n  unicode-range: U+2074, U+20AC, U+2212, U+2215, U+E0FF;\n}\n@x {\n  a: a();\n}",
+        "ast": [
+            "stylesheet", [
+                "atruleb", [
+                    "atkeyword",
+                    ["ident", "x"]
+                ],
+                ["s", " "],
+                [
+                    "block",
+                    ["s", "\n  "],
+                    [
+                        "declaration", [
+                            "property",
+                            ["ident", "unicode-range"]
+                        ], [
+                            "value",
+                            ["s", " "],
+                            ["ident", "U+2074"],
+                            ["operator", ","],
+                            ["s", " "],
+                            ["ident", "U+20AC"],
+                            ["operator", ","],
+                            ["s", " "],
+                            ["ident", "U+2212"],
+                            ["operator", ","],
+                            ["s", " "],
+                            ["ident", "U+2215"],
+                            ["operator", ","],
+                            ["s", " "],
+                            ["ident", "U+E0FF"]
+                        ]
+                    ],
+                    ["decldelim"],
+                    ["s", "\n"]
+                ]
+            ],
+            ["s", "\n"],
+            [
+                "atruleb", [
+                    "atkeyword",
+                    ["ident", "x"]
+                ],
+                ["s", " "],
+                [
+                    "block",
+                    ["s", "\n  "],
+                    [
+                        "declaration", [
+                            "property",
+                            ["ident", "a"]
+                        ], [
+                            "value",
+                            ["s", " "],
+                            [
+                                "funktion",
+                                ["ident", "a"],
+                                ["functionBody"]
+                            ]
+                        ]
+                    ],
+                    ["decldelim"],
+                    ["s", "\n"]
+                ]
+            ]
+        ]
     }
 }
