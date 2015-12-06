@@ -1,6 +1,7 @@
 {
     "nth.0": {
         "source": "10",
+        "translate": "10",
         "ast": {
             "type": "Nth",
             "value": "10"
@@ -8,6 +9,7 @@
     },
     "nth.1": {
         "source": "2n",
+        "translate": "2n",
         "ast": {
             "type": "Nth",
             "value": "2n"
@@ -15,6 +17,7 @@
     },
     "nth.2": {
         "source": "odd",
+        "translate": "odd",
         "ast": {
             "type": "Nth",
             "value": "odd"
@@ -22,6 +25,7 @@
     },
     "nth.3": {
         "source": "even",
+        "translate": "even",
         "ast": {
             "type": "Nth",
             "value": "even"
@@ -29,6 +33,7 @@
     },
     "nth.4": {
         "source": "n",
+        "translate": "n",
         "ast": {
             "type": "Nth",
             "value": "n"

@@ -1,6 +1,7 @@
 {
     "atrules.0": {
         "source": "@test;",
+        "translate": "@test;",
         "ast": {
             "type": "Atrule",
             "name": "test",
@@ -13,15 +14,24 @@
     },
     "atrules.1": {
         "source": "@test x y;",
+        "translate": "@test x y;",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Space" },
-                    { "type": "Identifier", "name": "y" }
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
                 ]
             },
             "block": null
@@ -29,13 +39,17 @@
     },
     "atrules.2": {
         "source": "@test \"blah\";",
+        "translate": "@test \"blah\";",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "String", "value": "\"blah\"" }
+                    {
+                        "type": "String",
+                        "value": "\"blah\""
+                    }
                 ]
             },
             "block": null
@@ -43,27 +57,34 @@
     },
     "atrules.c.0": {
         "source": "@test/*test*/;",
+        "translate": "@test;",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
-                "sequence": [
-                ]
+                "sequence": []
             },
             "block": null
         }
     },
     "atrules.c.1": {
         "source": "@test/*test*/x/*test*/y;",
+        "translate": "@test xy;",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Identifier", "name": "y" }
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
                 ]
             },
             "block": null
@@ -71,6 +92,7 @@
     },
     "atrules.s.0": {
         "source": "@test  ;",
+        "translate": "@test;",
         "ast": {
             "type": "Atrule",
             "name": "test",
@@ -83,15 +105,24 @@
     },
     "atrules.s.1": {
         "source": "@test  x  y;",
+        "translate": "@test x y;",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Space" },
-                    { "type": "Identifier", "name": "y" }
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
                 ]
             },
             "block": null

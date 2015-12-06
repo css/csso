@@ -1,6 +1,7 @@
 {
     "ruleset.0": {
         "source": "s{p:v}",
+        "translate": "s{p:v}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -16,7 +17,7 @@
                         ]
                     }
                 ]
-            }, 
+            },
             "block": {
                 "type": "Block",
                 "declarations": [
@@ -42,6 +43,7 @@
     },
     "ruleset.1": {
         "source": "s{p0:v0;p1:v1}",
+        "translate": "s{p0:v0;p1:v1}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -99,6 +101,7 @@
     },
     "ruleset.2": {
         "source": "s0,s1{p:v}",
+        "translate": "s0,s1{p:v}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -149,6 +152,7 @@
     },
     "ruleset.3": {
         "source": "s0,s1{p0:v0;p1:v1}",
+        "translate": "s0,s1{p0:v0;p1:v1}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -215,6 +219,7 @@
     },
     "ruleset.4": {
         "source": ".test{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale');color:red}",
+        "translate": ".test{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale');color:red}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -275,6 +280,7 @@
     },
     "ruleset.5": {
         "source": ".test{color:red;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')}",
+        "translate": ".test{color:red;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -319,8 +325,20 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Progid", "value": { "type": "Raw", "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')" } },
-                                { "type": "Progid", "value": { "type": "Raw", "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')" } }
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"
+                                    }
+                                },
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')"
+                                    }
+                                }
                             ]
                         }
                     }
@@ -330,6 +348,7 @@
     },
     "ruleset.c.0": {
         "source": "s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "translate": "s{p:v}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -371,6 +390,7 @@
     },
     "ruleset.c.1": {
         "source": "s/*test*/{/*test*/p0/*test*/:/*test*/v0/*test*/;/*test*/p1/*test*/:/*test*/v1/*test*/}",
+        "translate": "s{p0:v0;p1:v1}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -428,6 +448,7 @@
     },
     "ruleset.c.2": {
         "source": "s0/*test*/,/*test*/s1/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "translate": "s0,s1{p:v}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -478,6 +499,7 @@
     },
     "ruleset.c.3": {
         "source": "s0/*test*/,/*test*/s1/*test*/{/*test*/p0/*test*/:/*test*/v0/*test*/;/*test*/p1/*test*/:/*test*/v1/*test*/}",
+        "translate": "s0,s1{p0:v0;p1:v1}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -544,6 +566,7 @@
     },
     "ruleset.s.0": {
         "source": "s  {  p  :  v  }",
+        "translate": "s{p:v}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -585,6 +608,7 @@
     },
     "ruleset.s.1": {
         "source": "s  {  p0  :  v0  ;  p1  :  v1  }",
+        "translate": "s{p0:v0;p1:v1}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -642,6 +666,7 @@
     },
     "ruleset.s.2": {
         "source": "s0  ,  s1  {  p  :  v  }",
+        "translate": "s0,s1{p:v}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -692,6 +717,7 @@
     },
     "ruleset.s.3": {
         "source": "s0  ,  s1  {  p0  :  v0  ;  p1  :  v1  }",
+        "translate": "s0,s1{p0:v0;p1:v1}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -758,6 +784,7 @@
     },
     "ruleset.s.4": {
         "source": ".test {\n    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale');\n    color:red\n}",
+        "translate": ".test{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale');color:red}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -787,7 +814,7 @@
                             "type": "Value",
                             "sequence": [
                                 {
-                                    "type": "Progid", 
+                                    "type": "Progid",
                                     "value": {
                                         "type": "Raw",
                                         "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"
@@ -818,6 +845,7 @@
     },
     "ruleset.s.5": {
         "source": ".test {\n    color:red;\n    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')\n           progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')\n}",
+        "translate": ".test{color:red;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -862,8 +890,20 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Progid", "value": { "type": "Raw", "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')" } },
-                                { "type": "Progid", "value": { "type": "Raw", "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')" } }
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"
+                                    }
+                                },
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')"
+                                    }
+                                }
                             ]
                         }
                     }
@@ -873,6 +913,7 @@
     },
     "value.color.ident.0": {
         "source": "s{p:yellow}",
+        "translate": "s{p:yellow}",
         "ast": {
             "type": "Ruleset",
             "selector": {
@@ -914,6 +955,7 @@
     },
     "value.color.ident.1": {
         "source": "yellow{p:yellow}",
+        "translate": "yellow{p:yellow}",
         "ast": {
             "type": "Ruleset",
             "selector": {

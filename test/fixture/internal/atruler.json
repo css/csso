@@ -1,6 +1,7 @@
 {
     "atruler.0": {
         "source": "@media {s{p:v}}",
+        "translate": "@media{s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
@@ -26,7 +27,7 @@
                                     ]
                                 }
                             ]
-                        }, 
+                        },
                         "block": {
                             "type": "Block",
                             "declarations": [
@@ -55,15 +56,24 @@
     },
     "atruler.1": {
         "source": "@media x y {s{p:v}}",
+        "translate": "@media x y{s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Space" },
-                    { "type": "Identifier", "name": "y" }
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
                 ]
             },
             "block": {
@@ -84,7 +94,7 @@
                                     ]
                                 }
                             ]
-                        }, 
+                        },
                         "block": {
                             "type": "Block",
                             "declarations": [
@@ -113,6 +123,7 @@
     },
     "atruler.2": {
         "source": "@media x, y f(1+2) {s{p:v}}",
+        "translate": "@media x, y f(1+2){s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
@@ -180,7 +191,7 @@
                                     ]
                                 }
                             ]
-                        }, 
+                        },
                         "block": {
                             "type": "Block",
                             "declarations": [
@@ -209,6 +220,7 @@
     },
     "atruler.c.0": {
         "source": "@media/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
+        "translate": "@media{s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
@@ -234,7 +246,7 @@
                                     ]
                                 }
                             ]
-                        }, 
+                        },
                         "block": {
                             "type": "Block",
                             "declarations": [
@@ -263,14 +275,21 @@
     },
     "atruler.c.1": {
         "source": "@media/*test*/x/*test*/y/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
+        "translate": "@media xy{s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Identifier", "name": "y" }
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
                 ]
             },
             "block": {
@@ -291,7 +310,7 @@
                                     ]
                                 }
                             ]
-                        }, 
+                        },
                         "block": {
                             "type": "Block",
                             "declarations": [
@@ -320,6 +339,7 @@
     },
     "atruler.c.2": {
         "source": "@media/*test*/x/*test*/,/*test*/y/*test*/f(/*test*/1/*test*/+/*test*/2/*test*/)/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
+        "translate": "@media x,yf(1+2){s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
@@ -381,7 +401,7 @@
                                     ]
                                 }
                             ]
-                        }, 
+                        },
                         "block": {
                             "type": "Block",
                             "declarations": [
@@ -410,6 +430,7 @@
     },
     "atruler.s.0": {
         "source": "@media  {  s  {  p  :  v  }  }",
+        "translate": "@media{s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
@@ -435,7 +456,7 @@
                                     ]
                                 }
                             ]
-                        }, 
+                        },
                         "block": {
                             "type": "Block",
                             "declarations": [
@@ -464,15 +485,24 @@
     },
     "atruler.s.1": {
         "source": "@media  x  y  {  s  {  p  :  v  }  }",
+        "translate": "@media x y{s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Space" },
-                    { "type": "Identifier", "name": "y" }
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
                 ]
             },
             "block": {
@@ -493,7 +523,7 @@
                                     ]
                                 }
                             ]
-                        }, 
+                        },
                         "block": {
                             "type": "Block",
                             "declarations": [
@@ -522,6 +552,7 @@
     },
     "atruler.s.2": {
         "source": "@media  x  ,  y  f(  1  +  2  )  {  s  {  p  :  v  }  }",
+        "translate": "@media x , y f(1 + 2){s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
@@ -598,7 +629,7 @@
                                     ]
                                 }
                             ]
-                        }, 
+                        },
                         "block": {
                             "type": "Block",
                             "declarations": [
@@ -627,6 +658,7 @@
     },
     "webkit.keyfraymes.0": {
         "source": "@-webkit-keyframes pulsate {0% {opacity: .5}50% {opacity: 1}100% {opacity: .5}}",
+        "translate": "@-webkit-keyframes pulsate{0%{opacity:.5}50%{opacity:1}100%{opacity:.5}}",
         "ast": {
             "type": "Atrule",
             "name": "-webkit-keyframes",

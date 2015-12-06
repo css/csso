@@ -1,6 +1,7 @@
 {
     "uri.0": {
         "source": "url('http://test.com')",
+        "translate": "url('http://test.com')",
         "ast": {
             "type": "Url",
             "value": {
@@ -11,6 +12,7 @@
     },
     "uri.1": {
         "source": "url(http://test.com)",
+        "translate": "url(http://test.com)",
         "ast": {
             "type": "Url",
             "value": {
@@ -21,6 +23,7 @@
     },
     "uri.c.0": {
         "source": "url(/*test*/'http://test.com'/*test*/)",
+        "translate": "url('http://test.com')",
         "ast": {
             "type": "Url",
             "value": {
@@ -31,6 +34,7 @@
     },
     "uri.c.1": {
         "source": "url(/*test*/http://test.com/*test*/)",
+        "translate": "url(http://test.com/*test*/)",
         "ast": {
             "type": "Url",
             "value": {
@@ -41,6 +45,7 @@
     },
     "uri.s.0": {
         "source": "url(  'http://test.com'  )",
+        "translate": "url('http://test.com')",
         "ast": {
             "type": "Url",
             "value": {
@@ -51,6 +56,7 @@
     },
     "uri.s.1": {
         "source": "url(  http://test.com  )",
+        "translate": "url(http://test.com)",
         "ast": {
             "type": "Url",
             "value": {

@@ -1,6 +1,7 @@
 {
     "atruleb.0": {
         "source": "@test{p:v}",
+        "translate": "@test{p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
@@ -20,7 +21,10 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Identifier", "name": "v" }
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
                             ]
                         }
                     }
@@ -30,15 +34,24 @@
     },
     "atruleb.1": {
         "source": "@test x y {p:v}",
+        "translate": "@test x y{p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Space" },
-                    { "type": "Identifier", "name": "y" }
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
                 ]
             },
             "block": {
@@ -53,7 +66,10 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Identifier", "name": "v" }
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
                             ]
                         }
                     }
@@ -63,17 +79,31 @@
     },
     "atruleb.2": {
         "source": "@test x, y x(1+2) {p:v}",
+        "translate": "@test x, y x(1+2){p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Operator", "value": "," },
-                    { "type": "Space" },
-                    { "type": "Identifier", "name": "y" },
-                    { "type": "Space" },
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Operator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    },
+                    {
+                        "type": "Space"
+                    },
                     {
                         "type": "Function",
                         "name": "x",
@@ -81,9 +111,18 @@
                             {
                                 "type": "Argument",
                                 "sequence": [
-                                    { "type": "Number", "value": "1" },
-                                    { "type": "Operator", "value": "+" },
-                                    { "type": "Number", "value": "2" }
+                                    {
+                                        "type": "Number",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "type": "Operator",
+                                        "value": "+"
+                                    },
+                                    {
+                                        "type": "Number",
+                                        "value": "2"
+                                    }
                                 ]
                             }
                         ]
@@ -102,7 +141,10 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Identifier", "name": "v" }
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
                             ]
                         }
                     }
@@ -112,6 +154,7 @@
     },
     "atruleb.c.0": {
         "source": "@test/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "translate": "@test{p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
@@ -131,7 +174,10 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Identifier", "name": "v" }
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
                             ]
                         }
                     }
@@ -141,14 +187,21 @@
     },
     "atruleb.c.1": {
         "source": "@test/*test*/x/*test*/y/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "translate": "@test xy{p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Identifier", "name": "y" }
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
                 ]
             },
             "block": {
@@ -163,7 +216,10 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Identifier", "name": "v" }
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
                             ]
                         }
                     }
@@ -173,15 +229,25 @@
     },
     "atruleb.c.2": {
         "source": "@test/*test*/x/*test*/,/*test*/y/*test*/x(/*test*/1/*test*/+/*test*/2/*test*/)/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "translate": "@test x,yx(1+2){p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Operator", "value": "," },
-                    { "type": "Identifier", "name": "y" },
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Operator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    },
                     {
                         "type": "Function",
                         "name": "x",
@@ -189,9 +255,18 @@
                             {
                                 "type": "Argument",
                                 "sequence": [
-                                    { "type": "Number", "value": "1" },
-                                    { "type": "Operator", "value": "+" },
-                                    { "type": "Number", "value": "2" }
+                                    {
+                                        "type": "Number",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "type": "Operator",
+                                        "value": "+"
+                                    },
+                                    {
+                                        "type": "Number",
+                                        "value": "2"
+                                    }
                                 ]
                             }
                         ]
@@ -210,7 +285,10 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Identifier", "name": "v" }
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
                             ]
                         }
                     }
@@ -220,6 +298,7 @@
     },
     "atruleb.s.0": {
         "source": "@test  {  p  :  v  }",
+        "translate": "@test{p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
@@ -239,7 +318,10 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Identifier", "name": "v" }
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
                             ]
                         }
                     }
@@ -249,15 +331,24 @@
     },
     "atruleb.s.1": {
         "source": "@test  x  y  {  p  :  v  }",
+        "translate": "@test x y{p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Space" },
-                    { "type": "Identifier", "name": "y" }
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
                 ]
             },
             "block": {
@@ -272,7 +363,10 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Identifier", "name": "v" }
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
                             ]
                         }
                     }
@@ -282,18 +376,34 @@
     },
     "atruleb.s.2": {
         "source": "@test  x  ,  y  x(  1  +  2  )  {  p  :  v  }",
+        "translate": "@test x , y x(1 + 2){p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
             "expression": {
                 "type": "AtruleExpression",
                 "sequence": [
-                    { "type": "Identifier", "name": "x" },
-                    { "type": "Space" },
-                    { "type": "Operator", "value": "," },
-                    { "type": "Space" },
-                    { "type": "Identifier", "name": "y" },
-                    { "type": "Space" },
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Operator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    },
+                    {
+                        "type": "Space"
+                    },
                     {
                         "type": "Function",
                         "name": "x",
@@ -301,11 +411,24 @@
                             {
                                 "type": "Argument",
                                 "sequence": [
-                                    { "type": "Number", "value": "1" },
-                                    { "type": "Space" },
-                                    { "type": "Operator", "value": "+" },
-                                    { "type": "Space" },
-                                    { "type": "Number", "value": "2" }
+                                    {
+                                        "type": "Number",
+                                        "value": "1"
+                                    },
+                                    {
+                                        "type": "Space"
+                                    },
+                                    {
+                                        "type": "Operator",
+                                        "value": "+"
+                                    },
+                                    {
+                                        "type": "Space"
+                                    },
+                                    {
+                                        "type": "Number",
+                                        "value": "2"
+                                    }
                                 ]
                             }
                         ]
@@ -324,7 +447,10 @@
                         "value": {
                             "type": "Value",
                             "sequence": [
-                                { "type": "Identifier", "name": "v" }
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
                             ]
                         }
                     }

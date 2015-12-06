@@ -1,6 +1,7 @@
 {
     "dimension.0": {
         "source": "10px",
+        "translate": "10px",
         "ast": {
             "type": "Dimension",
             "value": "10",
@@ -9,6 +10,7 @@
     },
     "dimension.1": {
         "source": ".10px",
+        "translate": ".10px",
         "ast": {
             "type": "Dimension",
             "value": ".10",
@@ -17,6 +19,7 @@
     },
     "dimension.2": {
         "source": "12.34px",
+        "translate": "12.34px",
         "ast": {
             "type": "Dimension",
             "value": "12.34",

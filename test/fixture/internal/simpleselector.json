@@ -1,6 +1,7 @@
 {
     "simpleselector.0": {
         "source": "test",
+        "translate": "test",
         "ast": {
             "type": "SimpleSelector",
             "sequence": [
@@ -13,6 +14,7 @@
     },
     "simpleselector.1": {
         "source": ".test",
+        "translate": ".test",
         "ast": {
             "type": "SimpleSelector",
             "sequence": [
@@ -24,19 +26,53 @@
         }
     },
     "simpleselector.10": {
-        "source": "a|b",
+        "source": "a  b  +  c  >  d  ~  e",
+        "translate": "a b+c>d~e",
         "ast": {
             "type": "SimpleSelector",
             "sequence": [
                 {
                     "type": "Identifier",
-                    "name": "a|b"
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": " "
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                },
+                {
+                    "type": "Combinator",
+                    "name": "+"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "c"
+                },
+                {
+                    "type": "Combinator",
+                    "name": ">"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "d"
+                },
+                {
+                    "type": "Combinator",
+                    "name": "~"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "e"
                 }
             ]
         }
     },
     "simpleselector.11": {
         "source": "*|*:not(*)",
+        "translate": "*|*:not(*)",
         "ast": {
             "type": "SimpleSelector",
             "sequence": [
@@ -63,6 +99,7 @@
     },
     "simpleselector.12": {
         "source": "x:not([ABC])",
+        "translate": "x:not([ABC])",
         "ast": {
             "type": "SimpleSelector",
             "sequence": [
@@ -94,327 +131,384 @@
     },
     "simpleselector.13": {
         "source": ":not(el.class-postfix)",
+        "translate": ":not(el.class-postfix)",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Negation",
-                "sequence": [{
-                    "type": "SimpleSelector",
-                    "sequence": [{
-                        "type": "Identifier",
-                        "name": "el"
-                    }, {
-                        "type": "Class",
-                        "name": "class-postfix"
-                    }]
-                }]
-            }]
+            "sequence": [
+                {
+                    "type": "Negation",
+                    "sequence": [
+                        {
+                            "type": "SimpleSelector",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "el"
+                                },
+                                {
+                                    "type": "Class",
+                                    "name": "class-postfix"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     },
     "simpleselector.2": {
         "source": "#test",
+        "translate": "#test",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Id",
-                "name": "test"
-            }]
+            "sequence": [
+                {
+                    "type": "Id",
+                    "name": "test"
+                }
+            ]
         }
     },
     "simpleselector.3": {
         "source": "[a=b]",
+        "translate": "[a=b]",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Attribute",
-                "name": {
-                    "type": "Identifier",
-                    "name": "a"
-                },
-                "operator": "=",
-                "value": {
-                    "type": "Identifier",
-                    "name": "b"
+            "sequence": [
+                {
+                    "type": "Attribute",
+                    "name": {
+                        "type": "Identifier",
+                        "name": "a"
+                    },
+                    "operator": "=",
+                    "value": {
+                        "type": "Identifier",
+                        "name": "b"
+                    }
                 }
-            }]
+            ]
         }
     },
     "simpleselector.4": {
         "source": "[a=b][c='d']",
+        "translate": "[a=b][c='d']",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Attribute",
-                "name": {
-                    "type": "Identifier",
-                    "name": "a"
+            "sequence": [
+                {
+                    "type": "Attribute",
+                    "name": {
+                        "type": "Identifier",
+                        "name": "a"
+                    },
+                    "operator": "=",
+                    "value": {
+                        "type": "Identifier",
+                        "name": "b"
+                    }
                 },
-                "operator": "=",
-                "value": {
-                    "type": "Identifier",
-                    "name": "b"
+                {
+                    "type": "Attribute",
+                    "name": {
+                        "type": "Identifier",
+                        "name": "c"
+                    },
+                    "operator": "=",
+                    "value": {
+                        "type": "String",
+                        "value": "'d'"
+                    }
                 }
-            },{
-                "type": "Attribute",
-                "name": {
-                    "type": "Identifier",
-                    "name": "c"
-                },
-                "operator": "=",
-                "value": {
-                    "type": "String",
-                    "value": "'d'"
-                }
-            }]
+            ]
         }
     },
     "simpleselector.5": {
         "source": "a b",
+        "translate": "a b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": " "
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": " "
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.6": {
         "source": "a+b",
+        "translate": "a+b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": "+"
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": "+"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.7": {
         "source": "a>b",
+        "translate": "a>b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": ">"
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": ">"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.8": {
         "source": "a~b",
+        "translate": "a~b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": "~"
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": "~"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.9": {
         "source": ":nth-child(+3n-2)",
+        "translate": ":nth-child(+3n-2)",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "FunctionalPseudo",
-                "name": "nth-child",
-                "arguments": [{
-                    "type": "Operator",
-                    "value": "+"
-                }, {
-                    "type": "Nth",
-                    "value": "3n"
-                }, {
-                    "type": "Operator",
-                    "value": "-"
-                }, {
-                    "type": "Nth",
-                    "value": "2"
-                }]
-            }]
-        }
-    },
-    "simpleselector.10": {
-        "source": "a  b  +  c  >  d  ~  e",
-        "ast": {
-            "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": " "
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }, {
-                "type": "Combinator",
-                "name": "+"
-            }, {
-                "type": "Identifier",
-                "name": "c"
-            }, {
-                "type": "Combinator",
-                "name": ">"
-            }, {
-                "type": "Identifier",
-                "name": "d"
-            }, {
-                "type": "Combinator",
-                "name": "~"
-            }, {
-                "type": "Identifier",
-                "name": "e"
-            }]
+            "sequence": [
+                {
+                    "type": "FunctionalPseudo",
+                    "name": "nth-child",
+                    "arguments": [
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                {
+                                    "type": "Operator",
+                                    "value": "+"
+                                },
+                                {
+                                    "type": "Nth",
+                                    "value": "3n"
+                                },
+                                {
+                                    "type": "Operator",
+                                    "value": "-"
+                                },
+                                {
+                                    "type": "Nth",
+                                    "value": "2"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     },
     "simpleselector.c.0": {
         "source": "a/*test*/ /*test*/b",
+        "translate": "a b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": " "
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": " "
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.c.1": {
         "source": "a/*test*/+/*test*/b",
+        "translate": "a+b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": "+"
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": "+"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.c.2": {
         "source": "a/*test*/>/*test*/b",
+        "translate": "a>b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": ">"
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": ">"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.c.3": {
         "source": "a/*test*/~/*test*/b",
+        "translate": "a~b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": "~"
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": "~"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.s.0": {
         "source": "a    b",
+        "translate": "a b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": " "
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": " "
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.s.1": {
         "source": "a  +  b",
+        "translate": "a+b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": "+"
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": "+"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.s.2": {
         "source": "a  >  b",
+        "translate": "a>b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": ">"
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": ">"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     },
     "simpleselector.s.3": {
         "source": "a  ~  b",
+        "translate": "a~b",
         "ast": {
             "type": "SimpleSelector",
-            "sequence": [{
-                "type": "Identifier",
-                "name": "a"
-            }, {
-                "type": "Combinator",
-                "name": "~"
-            }, {
-                "type": "Identifier",
-                "name": "b"
-            }]
+            "sequence": [
+                {
+                    "type": "Identifier",
+                    "name": "a"
+                },
+                {
+                    "type": "Combinator",
+                    "name": "~"
+                },
+                {
+                    "type": "Identifier",
+                    "name": "b"
+                }
+            ]
         }
     }
 }

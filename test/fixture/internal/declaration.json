@@ -1,6 +1,7 @@
 {
     "declaration.0": {
         "source": "property:value",
+        "translate": "property:value",
         "ast": {
             "type": "Declaration",
             "property": {
@@ -20,6 +21,7 @@
     },
     "declaration.1": {
         "source": "-my-property:value",
+        "translate": "-my-property:value",
         "ast": {
             "type": "Declaration",
             "property": {
@@ -39,6 +41,7 @@
     },
     "declaration.c.0": {
         "source": "property/*test*/:value",
+        "translate": "property:value",
         "ast": {
             "type": "Declaration",
             "property": {
@@ -58,6 +61,7 @@
     },
     "declaration.c.1": {
         "source": "property:/*test*/value",
+        "translate": "property:value",
         "ast": {
             "type": "Declaration",
             "property": {
@@ -77,6 +81,7 @@
     },
     "declaration.c.2": {
         "source": "property/*test*/:/*test*/value",
+        "translate": "property:value",
         "ast": {
             "type": "Declaration",
             "property": {
@@ -96,6 +101,7 @@
     },
     "declaration.c.3": {
         "source": "property  /*test*/  :  /*test*/  value",
+        "translate": "property:value",
         "ast": {
             "type": "Declaration",
             "property": {
@@ -115,6 +121,7 @@
     },
     "declaration.s.0": {
         "source": "property :value",
+        "translate": "property:value",
         "ast": {
             "type": "Declaration",
             "property": {
@@ -134,6 +141,7 @@
     },
     "declaration.s.1": {
         "source": "property: value",
+        "translate": "property:value",
         "ast": {
             "type": "Declaration",
             "property": {
@@ -153,6 +161,7 @@
     },
     "declaration.s.2": {
         "source": "property : value",
+        "translate": "property:value",
         "ast": {
             "type": "Declaration",
             "property": {
@@ -172,6 +181,7 @@
     },
     "declaration.s.3": {
         "source": "property   :   value",
+        "translate": "property:value",
         "ast": {
             "type": "Declaration",
             "property": {

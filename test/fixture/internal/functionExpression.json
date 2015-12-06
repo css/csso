@@ -1,125 +1,173 @@
 {
     "functionExpression.0": {
         "source": "expression()",
+        "translate": "expression()",
         "ast": {
             "type": "Function",
             "name": "expression",
-            "arguments": [{
-                "type": "Argument",
-                "sequence": [{
-                    "type": "Raw",
-                    "value": ""
-                }]
-            }]
+            "arguments": [
+                {
+                    "type": "Argument",
+                    "sequence": [
+                        {
+                            "type": "Raw",
+                            "value": ""
+                        }
+                    ]
+                }
+            ]
         }
     },
     "functionExpression.1": {
         "source": "expression(())",
+        "translate": "expression(())",
         "ast": {
             "type": "Function",
             "name": "expression",
-            "arguments": [{
-                "type": "Argument",
-                "sequence": [{
-                    "type": "Raw",
-                    "value": "()"
-                }]
-            }]
+            "arguments": [
+                {
+                    "type": "Argument",
+                    "sequence": [
+                        {
+                            "type": "Raw",
+                            "value": "()"
+                        }
+                    ]
+                }
+            ]
         }
     },
     "functionExpression.2": {
         "source": "expression(expression())",
+        "translate": "expression(expression())",
         "ast": {
             "type": "Function",
             "name": "expression",
-            "arguments": [{
-                "type": "Argument",
-                "sequence": [{
-                    "type": "Raw",
-                    "value": "expression()"
-                }]
-            }]
+            "arguments": [
+                {
+                    "type": "Argument",
+                    "sequence": [
+                        {
+                            "type": "Raw",
+                            "value": "expression()"
+                        }
+                    ]
+                }
+            ]
         }
     },
     "functionExpression.3": {
         "source": "expression(/*)*/)",
+        "translate": "expression(/*)*/)",
         "ast": {
             "type": "Function",
             "name": "expression",
-            "arguments": [{
-                "type": "Argument",
-                "sequence": [{
-                    "type": "Raw",
-                    "value": "/*)*/"}]
-            }]
+            "arguments": [
+                {
+                    "type": "Argument",
+                    "sequence": [
+                        {
+                            "type": "Raw",
+                            "value": "/*)*/"
+                        }
+                    ]
+                }
+            ]
         }
     },
     "functionExpression.4": {
         "source": "expression(\")\")",
+        "translate": "expression(\")\")",
         "ast": {
             "type": "Function",
             "name": "expression",
-            "arguments": [{
-                "type": "Argument",
-                "sequence": [{
-                    "type": "Raw",
-                    "value": "\")\""}]
-            }]
+            "arguments": [
+                {
+                    "type": "Argument",
+                    "sequence": [
+                        {
+                            "type": "Raw",
+                            "value": "\")\""
+                        }
+                    ]
+                }
+            ]
         }
     },
     "functionExpression.5": {
         "source": "expression(')')",
+        "translate": "expression(')')",
         "ast": {
             "type": "Function",
             "name": "expression",
-            "arguments": [{
-                "type": "Argument",
-                "sequence": [{
-                "type": "Raw",
-                "value": "')'"}]
-            }]
+            "arguments": [
+                {
+                    "type": "Argument",
+                    "sequence": [
+                        {
+                            "type": "Raw",
+                            "value": "')'"
+                        }
+                    ]
+                }
+            ]
         }
     },
     "functionExpression.6": {
         "source": "expression(()())",
+        "translate": "expression(()())",
         "ast": {
             "type": "Function",
             "name": "expression",
-            "arguments": [{
-                "type": "Argument",
-                "sequence": [{
-                    "type": "Raw",
-                    "value": "()()"
-                }]
-            }]
+            "arguments": [
+                {
+                    "type": "Argument",
+                    "sequence": [
+                        {
+                            "type": "Raw",
+                            "value": "()()"
+                        }
+                    ]
+                }
+            ]
         }
     },
     "functionExpression.7": {
         "source": "expression(\n// )\n)",
+        "translate": "expression(\n// )\n)",
         "ast": {
             "type": "Function",
             "name": "expression",
-            "arguments": [{
-                "type": "Argument",
-                "sequence": [{
-                    "type": "Raw",
-                    "value": "\n// )\n"
-                }]
-            }]
+            "arguments": [
+                {
+                    "type": "Argument",
+                    "sequence": [
+                        {
+                            "type": "Raw",
+                            "value": "\n// )\n"
+                        }
+                    ]
+                }
+            ]
         }
     },
     "functionExpression.8": {
         "source": "expression(a = 5)",
+        "translate": "expression(a = 5)",
         "ast": {
             "type": "Function",
             "name": "expression",
-            "arguments": [{
-                "type": "Argument",
-                "sequence": [{
-                    "type": "Raw",
-                    "value": "a = 5"
-                }]
-            }]
+            "arguments": [
+                {
+                    "type": "Argument",
+                    "sequence": [
+                        {
+                            "type": "Raw",
+                            "value": "a = 5"
+                        }
+                    ]
+                }
+            ]
         }
     }
 }

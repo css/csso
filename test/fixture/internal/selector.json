@@ -1,19 +1,26 @@
 {
     "selector.0": {
         "source": "a,b",
+        "translate": "a,b",
         "ast": {
             "type": "Selector",
             "selectors": [
                 {
                     "type": "SimpleSelector",
                     "sequence": [
-                        { "type": "Identifier", "name": "a" }
+                        {
+                            "type": "Identifier",
+                            "name": "a"
+                        }
                     ]
                 },
                 {
                     "type": "SimpleSelector",
                     "sequence": [
-                        { "type": "Identifier", "name": "b" }
+                        {
+                            "type": "Identifier",
+                            "name": "b"
+                        }
                     ]
                 }
             ]
@@ -21,21 +28,34 @@
     },
     "selector.1": {
         "source": "a+b,c",
+        "translate": "a+b,c",
         "ast": {
             "type": "Selector",
             "selectors": [
                 {
                     "type": "SimpleSelector",
                     "sequence": [
-                        { "type": "Identifier", "name": "a" },
-                        { "type": "Combinator", "name": "+" },
-                        { "type": "Identifier", "name": "b" }
+                        {
+                            "type": "Identifier",
+                            "name": "a"
+                        },
+                        {
+                            "type": "Combinator",
+                            "name": "+"
+                        },
+                        {
+                            "type": "Identifier",
+                            "name": "b"
+                        }
                     ]
                 },
                 {
                     "type": "SimpleSelector",
                     "sequence": [
-                        { "type": "Identifier", "name": "c" }
+                        {
+                            "type": "Identifier",
+                            "name": "c"
+                        }
                     ]
                 }
             ]

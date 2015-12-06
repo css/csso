@@ -1,6 +1,7 @@
 {
     "percentage.0": {
         "source": "10%",
+        "translate": "10%",
         "ast": {
             "type": "Percentage",
             "value": "10"
@@ -8,6 +9,7 @@
     },
     "percentage.1": {
         "source": ".10%",
+        "translate": ".10%",
         "ast": {
             "type": "Percentage",
             "value": ".10"
@@ -15,6 +17,7 @@
     },
     "percentage.2": {
         "source": "12.34%",
+        "translate": "12.34%",
         "ast": {
             "type": "Percentage",
             "value": "12.34"

@@ -1,6 +1,7 @@
 {
     "vhash.0": {
         "source": "#100",
+        "translate": "#100",
         "ast": {
             "type": "Hash",
             "value": "100"
@@ -8,6 +9,7 @@
     },
     "vhash.1": {
         "source": "#id",
+        "translate": "#id",
         "ast": {
             "type": "Hash",
             "value": "id"

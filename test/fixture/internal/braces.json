@@ -1,6 +1,7 @@
 {
     "braces.0": {
         "source": "()",
+        "translate": "()",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -10,6 +11,7 @@
     },
     "braces.1": {
         "source": "(1)",
+        "translate": "(1)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -24,6 +26,7 @@
     },
     "braces.2": {
         "source": "(x)",
+        "translate": "(x)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -38,6 +41,7 @@
     },
     "braces.3": {
         "source": "(x+1)",
+        "translate": "(x+1)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -60,6 +64,7 @@
     },
     "braces.4": {
         "source": "[]",
+        "translate": "[]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -69,6 +74,7 @@
     },
     "braces.5": {
         "source": "[1]",
+        "translate": "[1]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -83,6 +89,7 @@
     },
     "braces.6": {
         "source": "[x]",
+        "translate": "[x]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -97,6 +104,7 @@
     },
     "braces.7": {
         "source": "[x+1]",
+        "translate": "[x+1]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -106,7 +114,10 @@
                     "type": "Identifier",
                     "name": "x"
                 },
-                { "type": "Operator", "value": "+" },
+                {
+                    "type": "Operator",
+                    "value": "+"
+                },
                 {
                     "type": "Number",
                     "value": "1"
@@ -116,6 +127,7 @@
     },
     "braces.8": {
         "source": "(test:0)",
+        "translate": "(test:0)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -138,6 +150,7 @@
     },
     "braces.c.0": {
         "source": "(/*test*/)",
+        "translate": "()",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -147,6 +160,7 @@
     },
     "braces.c.1": {
         "source": "(/*test*/1/*test*/)",
+        "translate": "(1)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -161,6 +175,7 @@
     },
     "braces.c.2": {
         "source": "(/*test*/x/*test*/)",
+        "translate": "(x)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -175,6 +190,7 @@
     },
     "braces.c.3": {
         "source": "(/*test*/x/*test*/+/*test*/1/*test*/)",
+        "translate": "(x+1)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -184,7 +200,10 @@
                     "type": "Identifier",
                     "name": "x"
                 },
-                { "type": "Operator", "value": "+" },
+                {
+                    "type": "Operator",
+                    "value": "+"
+                },
                 {
                     "type": "Number",
                     "value": "1"
@@ -194,6 +213,7 @@
     },
     "braces.c.4": {
         "source": "[/*test*/]",
+        "translate": "[]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -203,6 +223,7 @@
     },
     "braces.c.5": {
         "source": "[/*test*/1/*test*/]",
+        "translate": "[1]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -217,6 +238,7 @@
     },
     "braces.c.6": {
         "source": "[/*test*/x/*test*/]",
+        "translate": "[x]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -231,6 +253,7 @@
     },
     "braces.c.7": {
         "source": "[/*test*/x/*test*/+/*test*/1/*test*/]",
+        "translate": "[x+1]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -240,7 +263,10 @@
                     "type": "Identifier",
                     "name": "x"
                 },
-                { "type": "Operator", "value": "+" },
+                {
+                    "type": "Operator",
+                    "value": "+"
+                },
                 {
                     "type": "Number",
                     "value": "1"
@@ -250,6 +276,7 @@
     },
     "braces.s.0": {
         "source": "(  )",
+        "translate": "()",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -259,6 +286,7 @@
     },
     "braces.s.1": {
         "source": "(  1  )",
+        "translate": "(1)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -273,6 +301,7 @@
     },
     "braces.s.2": {
         "source": "(  x  )",
+        "translate": "(x)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -287,6 +316,7 @@
     },
     "braces.s.3": {
         "source": "(  x  +  1  )",
+        "translate": "(x + 1)",
         "ast": {
             "type": "Braces",
             "open": "(",
@@ -296,9 +326,16 @@
                     "type": "Identifier",
                     "name": "x"
                 },
-                { "type": "Space" },
-                { "type": "Operator", "value": "+" },
-                { "type": "Space" },
+                {
+                    "type": "Space"
+                },
+                {
+                    "type": "Operator",
+                    "value": "+"
+                },
+                {
+                    "type": "Space"
+                },
                 {
                     "type": "Number",
                     "value": "1"
@@ -308,6 +345,7 @@
     },
     "braces.s.4": {
         "source": "[  ]",
+        "translate": "[]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -317,6 +355,7 @@
     },
     "braces.s.5": {
         "source": "[  1  ]",
+        "translate": "[1]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -331,6 +370,7 @@
     },
     "braces.s.6": {
         "source": "[  x  ]",
+        "translate": "[x]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -345,6 +385,7 @@
     },
     "braces.s.7": {
         "source": "[  x  +  1  ]",
+        "translate": "[x + 1]",
         "ast": {
             "type": "Braces",
             "open": "[",
@@ -354,9 +395,16 @@
                     "type": "Identifier",
                     "name": "x"
                 },
-                { "type": "Space" },
-                { "type": "Operator", "value": "+" },
-                { "type": "Space" },
+                {
+                    "type": "Space"
+                },
+                {
+                    "type": "Operator",
+                    "value": "+"
+                },
+                {
+                    "type": "Space"
+                },
                 {
                     "type": "Number",
                     "value": "1"
