@@ -1,0 +1,44 @@
+{
+    "selector.0": {
+        "source": "a,b",
+        "ast": {
+            "type": "Selector",
+            "selectors": [
+                {
+                    "type": "SimpleSelector",
+                    "sequence": [
+                        { "type": "Identifier", "name": "a" }
+                    ]
+                },
+                {
+                    "type": "SimpleSelector",
+                    "sequence": [
+                        { "type": "Identifier", "name": "b" }
+                    ]
+                }
+            ]
+        }
+    },
+    "selector.1": {
+        "source": "a+b,c",
+        "ast": {
+            "type": "Selector",
+            "selectors": [
+                {
+                    "type": "SimpleSelector",
+                    "sequence": [
+                        { "type": "Identifier", "name": "a" },
+                        { "type": "Combinator", "name": "+" },
+                        { "type": "Identifier", "name": "b" }
+                    ]
+                },
+                {
+                    "type": "SimpleSelector",
+                    "sequence": [
+                        { "type": "Identifier", "name": "c" }
+                    ]
+                }
+            ]
+        }
+    }
+}

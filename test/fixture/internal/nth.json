@@ -1,0 +1,37 @@
+{
+    "nth.0": {
+        "source": "10",
+        "ast": {
+            "type": "Nth",
+            "value": "10"
+        }
+    },
+    "nth.1": {
+        "source": "2n",
+        "ast": {
+            "type": "Nth",
+            "value": "2n"
+        }
+    },
+    "nth.2": {
+        "source": "odd",
+        "ast": {
+            "type": "Nth",
+            "value": "odd"
+        }
+    },
+    "nth.3": {
+        "source": "even",
+        "ast": {
+            "type": "Nth",
+            "value": "even"
+        }
+    },
+    "nth.4": {
+        "source": "n",
+        "ast": {
+            "type": "Nth",
+            "value": "n"
+        }
+    }
+}

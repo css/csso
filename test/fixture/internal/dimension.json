@@ -1,0 +1,26 @@
+{
+    "dimension.0": {
+        "source": "10px",
+        "ast": {
+            "type": "Dimension",
+            "value": "10",
+            "unit": "px"
+        }
+    },
+    "dimension.1": {
+        "source": ".10px",
+        "ast": {
+            "type": "Dimension",
+            "value": ".10",
+            "unit": "px"
+        }
+    },
+    "dimension.2": {
+        "source": "12.34px",
+        "ast": {
+            "type": "Dimension",
+            "value": "12.34",
+            "unit": "px"
+        }
+    }
+}

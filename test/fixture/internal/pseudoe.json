@@ -1,0 +1,16 @@
+{
+    "pseudoe.0": {
+        "source": "::test",
+        "ast": {
+            "type": "PseudoElement",
+            "name": "test"
+        }
+    },
+    "pseudoe.1": {
+        "source": "::test-test",
+        "ast": {
+            "type": "PseudoElement",
+            "name": "test-test"
+        }
+    }
+}

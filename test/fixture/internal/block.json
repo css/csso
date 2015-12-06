@@ -1,0 +1,308 @@
+{
+    "block.0": {
+        "source": "{}",
+        "ast": {
+            "type": "Block",
+            "declarations": []
+        }
+    },
+    "block.1": {
+        "source": "{;}",
+        "ast": {
+            "type": "Block",
+            "declarations": []
+        }
+    },
+    "block.2": {
+        "source": "{p:v}",
+        "ast": {
+            "type": "Block",
+            "declarations": [
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "v"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "block.3": {
+        "source": "{p:v;}",
+        "ast": {
+            "type": "Block",
+            "declarations": [
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "v"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "block.4": {
+        "source": "{p0:v0;p1:v1}",
+        "ast": {
+            "type": "Block",
+            "declarations": [
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p0"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "v0"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p1"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "v1"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "block.c.0": {
+        "source": "{/*test*/}",
+        "ast": {
+            "type": "Block",
+            "declarations": []
+        }
+    },
+    "block.c.1": {
+        "source": "{/*test*/;/*test*/}",
+        "ast": {
+            "type": "Block",
+            "declarations": []
+        }
+    },
+    "block.c.2": {
+        "source": "{/*test*/p:v/*test*/}",
+        "ast": {
+            "type": "Block",
+            "declarations": [
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "v"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "block.c.3": {
+        "source": "{/*test*/p:v/*test*/;/*test*/}",
+        "ast": {
+            "type": "Block",
+            "declarations": [
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "v"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "block.c.4": {
+        "source": "{/*test*/p0:v0/*test*/;/*test*/p1:v1/*test*/}",
+        "ast": {
+            "type": "Block",
+            "declarations": [
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p0"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "v0"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p1"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                            "type": "Identifier",
+                            "name": "v1"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "block.s.0": {
+        "source": "{  }",
+        "ast": {
+            "type": "Block",
+            "declarations": []
+        }
+    },
+    "block.s.1": {
+        "source": "{  ;  }",
+        "ast": {
+            "type": "Block",
+            "declarations": []
+        }
+    },
+    "block.s.2": {
+        "source": "{  p:v  }",
+        "ast": {
+            "type": "Block",
+            "declarations": [
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                            "type": "Identifier",
+                            "name": "v"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "block.s.3": {
+        "source": "{  p:v  ;  }",
+        "ast": {
+            "type": "Block",
+            "declarations": [
+                {
+                    "type": "Declaration",
+                    "property": {
+                        "type": "Property",
+                        "name": "p"
+                    },
+                    "value": {
+                        "type": "Value",
+                        "sequence": [
+                            {
+                            "type": "Identifier",
+                            "name": "v"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "block.s.4": {
+        "source": "{  p0:v0  ;  p1:v1  }",
+        "ast": {
+            "type": "Block",
+            "declarations": [
+                {
+                    "type": "Declaration",
+                    "property": {
+                    "type": "Property",
+                    "name": "p0"
+                },
+                    "value": {
+                    "type": "Value",
+                    "sequence": [
+                        {
+                        "type": "Identifier",
+                        "name": "v0"
+                        }
+                    ]
+                }
+                },
+                {
+                    "type": "Declaration",
+                    "property": {
+                    "type": "Property",
+                    "name": "p1"
+                },
+                    "value": {
+                    "type": "Value",
+                    "sequence": [
+                        {
+                        "type": "Identifier",
+                        "name": "v1"
+                        }
+                    ]
+                }
+                }
+            ]
+        }
+    }
+}

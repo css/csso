@@ -1,0 +1,113 @@
+{
+    "nthselector.0": {
+        "source": ":nth-child(2n+1)",
+        "ast": {
+            "type": "FunctionalPseudo",
+            "name": "nth-child",
+            "arguments": [{
+                "type": "Nth",
+                "value": "2n"
+            }, {
+                "type": "Operator",
+                "value": "+"
+            }, {
+                "type": "Nth",
+                "value": "1"
+            }]
+        }
+    },
+    "nthselector.1": {
+        "source": ":nth-last-child(+3n-2)",
+        "ast": {
+            "type": "FunctionalPseudo",
+            "name": "nth-last-child",
+            "arguments": [{
+                "type": "Operator",
+                "value": "+"
+            }, {
+                "type": "Nth",
+                "value": "3n"
+            }, {
+                "type": "Operator",
+                "value": "-"
+            }, {
+                "type": "Nth",
+                "value": "2"
+            }]
+        }
+    },
+    "nthselector.c.0": {
+        "source": ":nth-child(/*test*/2n/*test*/+/*test*/1/*test*/)",
+        "ast": {
+            "type": "FunctionalPseudo",
+            "name": "nth-child",
+            "arguments": [{
+                "type": "Nth",
+                "value": "2n"
+            }, {
+                "type": "Operator",
+                "value": "+"
+            }, {
+                "type": "Nth",
+                "value": "1"
+            }]
+        }
+    },
+    "nthselector.c.1": {
+        "source": ":nth-last-child(/*test*/+/*test*/3n/*test*/-/*test*/2/*test*/)",
+        "ast": {
+            "type": "FunctionalPseudo",
+            "name": "nth-last-child",
+            "arguments": [{
+                "type": "Operator",
+                "value": "+"
+            }, {
+                "type": "Nth",
+                "value": "3n"
+            }, {
+                "type": "Operator",
+                "value": "-"
+            }, {
+                "type": "Nth",
+                "value": "2"
+            }]
+        }
+    },
+    "nthselector.s.0": {
+        "source": ":nth-child(  2n  +  1  )",
+        "ast": {
+            "type": "FunctionalPseudo",
+            "name": "nth-child",
+            "arguments": [{
+                "type": "Nth",
+                "value": "2n"
+            }, {
+                "type": "Operator",
+                "value": "+"
+            }, {
+                "type": "Nth",
+                "value": "1"
+            }]
+        }
+    },
+    "nthselector.s.1": {
+        "source": ":nth-last-child(  +  3n  -  2  )",
+        "ast": {
+            "type": "FunctionalPseudo",
+            "name": "nth-last-child",
+            "arguments": [{
+                "type": "Operator",
+                "value": "+"
+            }, {
+                "type": "Nth",
+                "value": "3n"
+            }, {
+                "type": "Operator",
+                "value": "-"
+            }, {
+                "type": "Nth",
+                "value": "2"
+            }]
+        }
+    }
+}

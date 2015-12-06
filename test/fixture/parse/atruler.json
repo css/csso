@@ -66,6 +66,53 @@
         ]
     },
     "atruler.2": {
+        "source": "@media screen and (max-width: 300px) {s{p:v}}",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["s", " "],
+                ["ident", "screen"],
+                ["s", " "],
+                ["ident", "and"],
+                ["s", " "],
+                [
+                    "braces", "(", ")",
+                    ["ident", "max-width"],
+                    ["operator", ":"],
+                    ["s", " "],
+                    [
+                        "dimension",
+                        ["number", "300"],
+                        ["ident", "px"]
+                    ]
+                ],
+                ["s", " "]
+            ], [
+                "atrulers", [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector",
+                            ["ident", "s"]
+                        ]
+                    ], [
+                        "block", [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"]
+                            ], [
+                                "value",
+                                ["ident", "v"]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "atruler.2": {
         "source": "@media x, y f(1+2) {s{p:v}}",
         "ast": [
             "atruler", [

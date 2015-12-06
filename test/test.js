@@ -3,7 +3,55 @@ var path = require('path');
 var assert = require('assert');
 var csso = require('../lib/index.js');
 var wrapAst = require('../lib/compressor/ast/index.js');
+var gonzalesToInternal = require('../lib/compressor/ast/gonzalesToInternal.js');
+var internalWalkAll = require('../lib/compressor/ast/walk.js').all;
+var internalWalkRuleset = require('../lib/compressor/ast/walk.js').ruleset;
 var specificity = require('../lib/compressor/prepare/specificity.js');
+
+function normalize(str) {
+    return str.replace(/\n|\r\n?|\f/g, '\n');
+}
+
+function stringifyInternalAST(ast) {
+    function clean(source) {
+        if (Array.isArray(source)) {
+            return source.map(clean);
+        }
+
+        if (source && typeof source === 'object') {
+            var result = {};
+            for (var key in source) {
+                if (key !== 'parent' && key !== 'info') {
+                    result[key] = clean(source[key]);
+                }
+            }
+            return result;
+        }
+
+        return source;
+    }
+
+    return JSON.stringify(clean(ast), null, 2);
+}
+
+function expectedInternalWalk(ast) {
+    function walk(node) {
+        result.push(node.type);
+        for (var key in node) {
+            if (key !== 'parent' && key !== 'info') {
+                if (Array.isArray(node[key])) {
+                    node[key].forEach(walk);
+                } else if (node[key] && typeof node[key] === 'object') {
+                    walk(node[key]);
+                }
+            }
+        }
+    }
+
+    var result = [];
+    walk(ast);
+    return result;
+}
 
 function createParseTest(name, test, scope) {
     return it(name, function() {
@@ -17,16 +65,57 @@ function createParseTest(name, test, scope) {
     });
 }
 
+function createInternalFormatTest(name, test, scope) {
+    return it(name, function() {
+        var ast = csso.parse(test.source, scope, true);
+        var internalAst = gonzalesToInternal(ast);
+
+        // AST should be equal
+        assert.equal(stringifyInternalAST(internalAst), stringifyInternalAST(test.ast));
+    });
+}
+
+function createInternalWalkAllTest(name, test, scope) {
+    return it(name, function() {
+        var ast = csso.parse(test.source, scope, true);
+        var internalAst = gonzalesToInternal(ast);
+        var actual = [];
+
+        internalWalkAll(internalAst, function(node) {
+            actual.push(node.type);
+        });
+
+        // AST should be equal
+        assert.equal(actual.sort().join(','), expectedInternalWalk(test.ast).sort().join(','));
+    });
+}
+
+function createInternalWalkRulesetTest(name, test, scope) {
+    return it(name, function() {
+        var ast = csso.parse(test.source, scope, true);
+        var internalAst = gonzalesToInternal(ast);
+        var actual = [];
+
+        internalWalkRuleset(internalAst, function(node) {
+            actual.push(node.type);
+        });
+
+        // AST should be equal
+        assert.equal(
+            actual.sort().join(','),
+            expectedInternalWalk(test.ast).filter(function(type) {
+                return type === 'Ruleset' || type === 'Atrule';
+            }).sort().join(',')
+        );
+    });
+}
+
 function createSpecificityTest(test) {
     return it(test.selector, function() {
         var ast = wrapAst(csso.parse(test.selector, 'simpleselector', true));
 
         assert.equal(String(specificity(ast)), test.expected);
     });
-}
-
-function normalize(str) {
-    return str.replace(/\n|\r\n?|\f/g, '\n');
 }
 
 function createCompressTest(name, test) {
@@ -46,6 +135,50 @@ describe('csso', function() {
 
             for (var name in tests) {
                 createParseTest(name, tests[name], scope);
+            }
+        });
+    });
+
+    describe('interval', function() {
+        var testDir = path.join(__dirname, 'fixture/internal');
+        fs.readdirSync(testDir).forEach(function(rule) {
+            var tests = require(path.join(testDir, rule));
+            var scope = path.basename(rule, path.extname(rule));
+
+            for (var name in tests) {
+                createInternalFormatTest(rule + '/' + name, tests[name], scope);
+            }
+        });
+    });
+
+    describe('interval - walk all', function() {
+        var testDir = path.join(__dirname, 'fixture/internal');
+        fs.readdirSync(testDir).forEach(function(rule) {
+            var tests = require(path.join(testDir, rule));
+            var scope = path.basename(rule, path.extname(rule));
+
+            for (var name in tests) {
+                createInternalWalkAllTest(rule + '/' + name, tests[name], scope);
+            }
+        });
+    });
+
+    describe('interval - walk ruleset', function() {
+        var testDir = path.join(__dirname, 'fixture/internal');
+        fs.readdirSync(testDir).forEach(function(rule) {
+            var tests = require(path.join(testDir, rule));
+            var scope = path.basename(rule, path.extname(rule));
+
+            if (rule !== 'atruleb.json' &&
+                rule !== 'atruler.json' &&
+                rule !== 'atrules.json' &&
+                rule !== 'stylesheet.json' &&
+                rule !== 'ruleset.json') {
+                return;
+            }
+
+            for (var name in tests) {
+                createInternalWalkRulesetTest(rule + '/' + name, tests[name], scope);
             }
         });
     });

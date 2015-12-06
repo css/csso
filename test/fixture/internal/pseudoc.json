@@ -1,0 +1,16 @@
+{
+    "pseudoc.0": {
+        "source": ":test",
+        "ast": {
+            "type": "PseudoClass",
+            "name": "test"
+        }
+    },
+    "pseudoc.1": {
+        "source": ":test-test",
+        "ast": {
+            "type": "PseudoClass",
+            "name": "test-test"
+        }
+    }
+}

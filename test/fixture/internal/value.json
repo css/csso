@@ -1,0 +1,261 @@
+{
+    "value.0": {
+        "source": "x",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Identifier", "name": "x" }
+            ]
+        }
+    },
+    "value.1": {
+        "source": "10",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Number", "value": "10" }
+            ]
+        }
+    },
+    "value.2": {
+        "source": "test(x)",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                {
+                    "type": "Function",
+                    "name": "test",
+                    "arguments": [
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Identifier", "name": "x" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "value.3": {
+        "source": "10 !important",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Number", "value": "10" },
+                { "type": "Space" },
+                { "type": "Important" }
+            ]
+        }
+    },
+    "value.4": {
+        "source": "-100%",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                {
+                    "type": "Percentage",
+                    "value": "-100"
+                }
+            ]
+        }
+    },
+    "value.dimension.0": {
+        "source": "0px",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                {
+                    "type": "Dimension",
+                    "value": "0",
+                    "unit": "px"
+                }
+            ]
+        }
+    },
+    "value.dimension.1": {
+        "source": ".0px",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                {
+                    "type": "Dimension",
+                    "value": ".0",
+                    "unit": "px"
+                }
+            ]
+        }
+    },
+    "value.dimension.2": {
+        "source": "0000.000px",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                {
+                    "type": "Dimension",
+                    "value": "0000.000",
+                    "unit": "px"
+                }
+            ]
+        }
+    },
+    "value.rgb.0": {
+        "source": "rgb(10, 10, 10)",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                {
+                    "type": "Function",
+                    "name": "rgb",
+                    "arguments": [
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Number", "value": "10" }
+                            ]
+                        },
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Number", "value": "10" }
+                            ]
+                        },
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Number", "value": "10" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "value.rgb.1": {
+        "source": "rgb(255,0,0)",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                {
+                    "type": "Function",
+                    "name": "rgb",
+                    "arguments": [
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Number", "value": "255" }
+                            ]
+                        },
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Number", "value": "0" }
+                            ]
+                        },
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Number", "value": "0" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "value.rgb.2": {
+        "source": "rgb(10.0,00.00,10%)",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                {
+                    "type": "Function",
+                    "name": "rgb",
+                    "arguments": [
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Number", "value": "10.0" }
+                            ]
+                        },
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Number", "value": "00.00" }
+                            ]
+                        },
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                { "type": "Percentage", "value": "10" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "value.vhash.0": {
+        "source": "#ffffff",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Hash", "value": "ffffff" }
+            ]
+        }
+    },
+    "value.vhash.1": {
+        "source": "#f00",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Hash", "value": "f00" }
+            ]
+        }
+    },
+    "value.vhash.2": {
+        "source": "#F0f0C0",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Hash", "value": "F0f0C0" }
+            ]
+        }
+    },
+    "value.vhash.3": {
+        "source": "#AaBbCc",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Hash", "value": "AaBbCc" }
+            ]
+        }
+    },
+    "unicode range one hex": {
+        "source": "U+0F00",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Identifier", "name": "U+0F00" }
+            ]
+        }
+    },
+    "unicode range hex pair": {
+        "source": "U+0F00-0FFF",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Identifier", "name": "U+0F00-0FFF" }
+            ]
+        }
+    },
+    "unicode range hex with ?": {
+        "source": "u+0F00??",
+        "ast": {
+            "type": "Value",
+            "sequence": [
+                { "type": "Identifier", "name": "u+0F00??" }
+            ]
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "string.0": {
+        "source": "'test'",
+        "ast": { "type": "String", "value": "'test'" }
+    },
+    "string.1": {
+        "source": "\"test\"",
+        "ast": { "type": "String", "value": "\"test\"" }
+    },
+    "string.2": {
+        "source": "'te\\'st'",
+        "ast": { "type": "String", "value": "'te\\'st'" }
+    },
+    "string.3": {
+        "source": "\"te\\\"st\"",
+        "ast": { "type": "String", "value": "\"te\\\"st\"" }
+    }
+}

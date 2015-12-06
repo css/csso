@@ -1,0 +1,14 @@
+{
+    "important.0": {
+        "source": "!important",
+        "ast": { "type": "Important" }
+    },
+    "important.c.0": {
+        "source": "!/*test*/important",
+        "ast": { "type": "Important" }
+    },
+    "important.s.0": {
+        "source": "!  important",
+        "ast": { "type": "Important" }
+    }
+}

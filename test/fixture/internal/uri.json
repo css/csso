@@ -1,0 +1,62 @@
+{
+    "uri.0": {
+        "source": "url('http://test.com')",
+        "ast": {
+            "type": "Url",
+            "value": {
+                "type": "String",
+                "value": "'http://test.com'"
+            }
+        }
+    },
+    "uri.1": {
+        "source": "url(http://test.com)",
+        "ast": {
+            "type": "Url",
+            "value": {
+                "type": "Raw",
+                "value": "http://test.com"
+            }
+        }
+    },
+    "uri.c.0": {
+        "source": "url(/*test*/'http://test.com'/*test*/)",
+        "ast": {
+            "type": "Url",
+            "value": {
+                "type": "String",
+                "value": "'http://test.com'"
+            }
+        }
+    },
+    "uri.c.1": {
+        "source": "url(/*test*/http://test.com/*test*/)",
+        "ast": {
+            "type": "Url",
+            "value": {
+                "type": "Raw",
+                "value": "http://test.com/*test*/"
+            }
+        }
+    },
+    "uri.s.0": {
+        "source": "url(  'http://test.com'  )",
+        "ast": {
+            "type": "Url",
+            "value": {
+                "type": "String",
+                "value": "'http://test.com'"
+            }
+        }
+    },
+    "uri.s.1": {
+        "source": "url(  http://test.com  )",
+        "ast": {
+            "type": "Url",
+            "value": {
+                "type": "Raw",
+                "value": "http://test.com"
+            }
+        }
+    }
+}

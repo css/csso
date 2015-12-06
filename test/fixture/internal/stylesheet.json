@@ -1,0 +1,898 @@
+{
+    "issue111.test1": {
+        "source": "body:not([x|x]) {}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "body"
+                                    },
+                                    {
+                                        "type": "Negation",
+                                        "sequence": [
+                                            {
+                                                "type": "SimpleSelector",
+                                                "sequence": [
+                                                    {
+                                                        "type": "Attribute",
+                                                        "name": {
+                                                            "type": "Identifier",
+                                                            "name": "x|x"
+                                                        },
+                                                        "operator": null,
+                                                        "value": null
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": []
+                    }
+                }
+            ]
+        }
+    },
+    "issue86.test1": {
+        "source": ".ie-test\n{\n    filter: progid:DXImageTransform.Microsoft.gradient (startColorstr=#33CCCCCC, endColorstr=#33CCCCCC);\n}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Class",
+                                        "name": "ie-test"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "filter"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Progid",
+                                            "value": {
+                                                "type": "Raw",
+                                                "value": "progid:DXImageTransform.Microsoft.gradient (startColorstr=#33CCCCCC, endColorstr=#33CCCCCC)"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "issue87.test1": {
+        "source": ".t\n{\n        filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=40) !important;\n}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Class",
+                                        "name": "t"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "filter"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Progid",
+                                            "value": {
+                                                "type": "Raw",
+                                                "value": "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"
+                                            }
+                                        },
+                                        {
+                                            "type": "Important"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "issue90.test1": {
+        "source": "@media test {\n    @page {\n        p: v;\n    }\n}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Atrule",
+                    "name": "media",
+                    "expression": {
+                        "type": "AtruleExpression",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "test"
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "StyleSheet",
+                        "rules": [
+                            {
+                                "type": "Atrule",
+                                "name": "page",
+                                "expression": {
+                                    "type": "AtruleExpression",
+                                    "sequence": []
+                                },
+                                "block": {
+                                    "type": "Block",
+                                    "declarations": [
+                                        {
+                                            "type": "Declaration",
+                                            "property": {
+                                                "type": "Property",
+                                                "name": "p"
+                                            },
+                                            "value": {
+                                                "type": "Value",
+                                                "sequence": [
+                                                    {
+                                                        "type": "Identifier",
+                                                        "name": "v"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "issue90.test2": {
+        "source": "x {\n    p:v;\n}\n\n@media test {\n    a {\n        p:v;\n    }\n\n    /* comment */\n\n    @page {\n        p: v;\n    }\n\n    b {\n        p:v;\n    }\n}\n\ny {\n    p:v;\n}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "x"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Atrule",
+                    "name": "media",
+                    "expression": {
+                        "type": "AtruleExpression",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "test"
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "StyleSheet",
+                        "rules": [
+                            {
+                                "type": "Ruleset",
+                                "selector": {
+                                    "type": "Selector",
+                                    "selectors": [
+                                        {
+                                            "type": "SimpleSelector",
+                                            "sequence": [
+                                                {
+                                                    "type": "Identifier",
+                                                    "name": "a"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "block": {
+                                    "type": "Block",
+                                    "declarations": [
+                                        {
+                                            "type": "Declaration",
+                                            "property": {
+                                                "type": "Property",
+                                                "name": "p"
+                                            },
+                                            "value": {
+                                                "type": "Value",
+                                                "sequence": [
+                                                    {
+                                                        "type": "Identifier",
+                                                        "name": "v"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Atrule",
+                                "name": "page",
+                                "expression": {
+                                    "type": "AtruleExpression",
+                                    "sequence": []
+                                },
+                                "block": {
+                                    "type": "Block",
+                                    "declarations": [
+                                        {
+                                            "type": "Declaration",
+                                            "property": {
+                                                "type": "Property",
+                                                "name": "p"
+                                            },
+                                            "value": {
+                                                "type": "Value",
+                                                "sequence": [
+                                                    {
+                                                        "type": "Identifier",
+                                                        "name": "v"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Ruleset",
+                                "selector": {
+                                    "type": "Selector",
+                                    "selectors": [
+                                        {
+                                            "type": "SimpleSelector",
+                                            "sequence": [
+                                                {
+                                                    "type": "Identifier",
+                                                    "name": "b"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "block": {
+                                    "type": "Block",
+                                    "declarations": [
+                                        {
+                                            "type": "Declaration",
+                                            "property": {
+                                                "type": "Property",
+                                                "name": "p"
+                                            },
+                                            "value": {
+                                                "type": "Value",
+                                                "sequence": [
+                                                    {
+                                                        "type": "Identifier",
+                                                        "name": "v"
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "y"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "stylesheet.0": {
+        "source": "s{p:v}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "s"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "stylesheet.1": {
+        "source": "s0{p0:v0}s1{p1:v1}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "s0"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p0"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v0"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "s1"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p1"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "stylesheet.2": {
+        "source": "@test;",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Atrule",
+                    "name": "test",
+                    "expression": {
+                        "type": "AtruleExpression",
+                        "sequence": []
+                    },
+                    "block": null
+                }
+            ]
+        }
+    },
+    "stylesheet.3": {
+        "source": "@test0;@test1;",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Atrule",
+                    "name": "test0",
+                    "expression": {
+                        "type": "AtruleExpression",
+                        "sequence": []
+                    },
+                    "block": null
+                },
+                {
+                    "type": "Atrule",
+                    "name": "test1",
+                    "expression": {
+                        "type": "AtruleExpression",
+                        "sequence": []
+                    },
+                    "block": null
+                }
+            ]
+        }
+    },
+    "stylesheet.4": {
+        "source": "s{p:v}@test;",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "s"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Atrule",
+                    "name": "test",
+                    "expression": {
+                        "type": "AtruleExpression",
+                        "sequence": []
+                    },
+                    "block": null
+                }
+            ]
+        }
+    },
+    "stylesheet.c.0": {
+        "source": "/* test */\ns {\n    p: v\n}\n/* test */",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "s"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "stylesheet.s.0": {
+        "source": "s {\n    p: v\n}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "s"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "stylesheet.s.1": {
+        "source": "s0 {\n    p0: v0\n}\n\ns1 {\n    p1: v1\n}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "s0"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p0"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v0"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "s1"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p1"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v1"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    "stylesheet.s.2": {
+        "source": "@test0;\n@test1;",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Atrule",
+                    "name": "test0",
+                    "expression": {
+                        "type": "AtruleExpression",
+                        "sequence": []
+                    },
+                    "block": null
+                },
+                {
+                    "type": "Atrule",
+                    "name": "test1",
+                    "expression": {
+                        "type": "AtruleExpression",
+                        "sequence": []
+                    },
+                    "block": null
+                }
+            ]
+        }
+    },
+    "stylesheet.s.3": {
+        "source": "s {\n    p:v\n}\n\n@test;",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": [
+                            {
+                                "type": "SimpleSelector",
+                                "sequence": [
+                                    {
+                                        "type": "Identifier",
+                                        "name": "s"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "block": {
+                        "type": "Block",
+                        "declarations": [
+                            {
+                                "type": "Declaration",
+                                "property": {
+                                    "type": "Property",
+                                    "name": "p"
+                                },
+                                "value": {
+                                    "type": "Value",
+                                    "sequence": [
+                                        {
+                                            "type": "Identifier",
+                                            "name": "v"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "Atrule",
+                    "name": "test",
+                    "expression": {
+                        "type": "AtruleExpression",
+                        "sequence": []
+                    },
+                    "block": null
+                }
+            ]
+        }
+    }
+}

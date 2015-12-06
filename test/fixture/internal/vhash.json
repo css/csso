@@ -1,0 +1,16 @@
+{
+    "vhash.0": {
+        "source": "#100",
+        "ast": {
+            "type": "Hash",
+            "value": "100"
+        }
+    },
+    "vhash.1": {
+        "source": "#id",
+        "ast": {
+            "type": "Hash",
+            "value": "id"
+        }
+    }
+}
