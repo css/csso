@@ -193,7 +193,7 @@ describe('csso', function() {
             });
         });
 
-        describe.only('translate', function() {
+        describe('translate', function() {
             var testDir = path.join(__dirname, 'fixture/internal');
             fs.readdirSync(testDir).forEach(function(rule) {
                 var tests = require(path.join(testDir, rule));
