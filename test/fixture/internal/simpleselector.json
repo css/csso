@@ -156,6 +156,30 @@
             ]
         }
     },
+    "simpleselector.14": {
+        "source": ":lang(nl-be)",
+        "translate": ":lang(nl-be)",
+        "ast": {
+            "type": "SimpleSelector",
+            "sequence": [
+                {
+                    "type": "FunctionalPseudo",
+                    "name": "lang",
+                    "arguments": [
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "nl-be"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
     "simpleselector.2": {
         "source": "#test",
         "translate": "#test",

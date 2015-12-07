@@ -909,5 +909,22 @@
                 }
             ]
         }
+    },
+    "empty selector ruleset": {
+        "source": "{}",
+        "translate": "{}",
+        "ast": {
+            "type": "StyleSheet",
+            "rules": [
+                {
+                    "type": "Ruleset",
+                    "selector": null,
+                    "block": {
+                        "type": "Block",
+                        "declarations": []
+                    }
+                }
+            ]
+        }
     }
 }

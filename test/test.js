@@ -5,7 +5,8 @@ var csso = require('../lib/index.js');
 var wrapAst = require('../lib/compressor/ast/index.js');
 var gonzalesToInternal = require('../lib/compressor/ast/gonzalesToInternal.js');
 var internalWalkAll = require('../lib/compressor/ast/walk.js').all;
-var internalWalkRuleset = require('../lib/compressor/ast/walk.js').ruleset;
+var internalWalkRules = require('../lib/compressor/ast/walk.js').rules;
+var internalWalkRulesRight = require('../lib/compressor/ast/walk.js').rulesRight;
 var internalTranslate = require('../lib/compressor/ast/translate.js');
 var specificity = require('../lib/compressor/prepare/specificity.js');
 
@@ -91,13 +92,13 @@ function createInternalWalkAllTest(name, test, scope) {
     });
 }
 
-function createInternalWalkRulesetTest(name, test, scope) {
+function createInternalWalkRulesTest(name, test, scope, walker) {
     return it(name, function() {
         var ast = csso.parse(test.source, scope, true);
         var internalAst = gonzalesToInternal(ast);
         var actual = [];
 
-        internalWalkRuleset(internalAst, function(node) {
+        walker(internalAst, function(node) {
             actual.push(node.type);
         });
 
@@ -123,18 +124,22 @@ function createInternalTranslateTest(name, test, scope) {
 
 function createSpecificityTest(test) {
     return it(test.selector, function() {
-        var ast = wrapAst(csso.parse(test.selector, 'simpleselector', true));
+        var ast = gonzalesToInternal(csso.parse(test.selector, 'simpleselector', true));
 
         assert.equal(String(specificity(ast)), test.expected);
     });
 }
 
 function createCompressTest(name, test) {
-    return it(name, function() {
+    var testFn = function() {
         var compressed = csso.minify(test.source);
 
         assert.equal(normalize(compressed), normalize(test.compressed));
-    });
+    };
+
+    return path.basename(name)[0] === '_'
+        ? it.skip(name, testFn)
+        : it(name, testFn);
 }
 
 describe('csso', function() {
@@ -187,7 +192,25 @@ describe('csso', function() {
                     rule === 'stylesheet.json' ||
                     rule === 'ruleset.json') {
                     for (var name in tests) {
-                        createInternalWalkRulesetTest(rule + '/' + name, tests[name], scope);
+                        createInternalWalkRulesTest(rule + '/' + name, tests[name], scope, internalWalkRules);
+                    }
+                }
+            });
+        });
+
+        describe('walk rulesetRight', function() {
+            var testDir = path.join(__dirname, 'fixture/internal');
+            fs.readdirSync(testDir).forEach(function(rule) {
+                var tests = require(path.join(testDir, rule));
+                var scope = path.basename(rule, path.extname(rule));
+
+                if (rule === 'atruleb.json' ||
+                    rule === 'atruler.json' ||
+                    rule === 'atrules.json' ||
+                    rule === 'stylesheet.json' ||
+                    rule === 'ruleset.json') {
+                    for (var name in tests) {
+                        createInternalWalkRulesTest(rule + '/' + name, tests[name], scope, internalWalkRulesRight);
                     }
                 }
             });
