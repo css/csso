@@ -1,2 +1,0 @@
-@keyframes test{60%,90%,to{-webkit-a:1;a:1}60%{b:1}90%,to{-webkit-c:5;c:5}to{-webkit-c:none;c:none}}
-/*! better solution @keyframes test{60%,90%,to{-webkit-a:1;a:1}60%{b:1}90%{-webkit-c:5;c:5}to{-webkit-c:none;c:none}} */

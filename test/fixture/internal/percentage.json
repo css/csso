@@ -22,5 +22,13 @@
             "type": "Percentage",
             "value": "12.34"
         }
+    },
+    "percentage.3": {
+        "source": "-50%",
+        "translate": "-50%",
+        "ast": {
+            "type": "Percentage",
+            "value": "-50"
+        }
     }
 }
