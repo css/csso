@@ -1,0 +1,6 @@
+@media screen {
+    a {
+        color: red;
+    }
+}
+@import 'foo.css';

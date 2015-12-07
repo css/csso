@@ -268,5 +268,36 @@ describe('csso', function() {
         }
 
         scan(path.join(__dirname, 'fixture/compress'));
+
+        it('restructuring option', function() {
+            var css = '.a{color:red}.b{color:red}';
+
+            assert.equal(csso.minify(css, { restructuring: false }), css);
+            assert.equal(csso.minify(css, { restructuring: true }), '.a,.b{color:red}');
+            assert.equal(csso.minify(css), '.a,.b{color:red}');
+        });
+
+        it('debug option', function() {
+            try {
+                var log = console.log;
+                var counter = 0;
+                console.log = function() {
+                    counter++;
+                };
+                csso.minify('', { debug: true });
+
+                // should output something
+                assert(counter > 0);
+            } finally {
+                console.log = log;
+            }
+        });
+
+        it('should compress ast w/o info', function() {
+            var ast = csso.parse('.foo{color:#FF0000}');
+
+            assert.equal(ast[0], 'stylesheet');
+            assert.equal(internalTranslate(csso.compress(ast)), '.foo{color:red}');
+        });
     });
 });

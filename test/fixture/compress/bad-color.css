@@ -1,0 +1,12 @@
+.a1 { color: rgb(1, 2); }
+.a2 { color: rgb(1, 2, bad); }
+.a3 { color: rgb(1, 2 2, 3); }
+.a4 { color: rgb(1, 2%, 3); }
+.a5 { color: rgb(1, +2+, 3); }
+.a6 { color: rgb(1, 2, 3, 4); }
+.a7 { color: rgba(1, 2, 3); }
+.a8 { color: rgba(1, 2, 3, 4%); }
+.a9 { color: rgba(1, 2, 3, 4, 5); }
+.a0 { color: hsl(1%, 2%, 3%); }
+.b1 { color: hsl(1, 2, 3); }
+.b2 { color: rgb(1, 2%3, 3); }
