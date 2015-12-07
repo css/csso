@@ -2,13 +2,12 @@ var fs = require('fs');
 var path = require('path');
 var assert = require('assert');
 var csso = require('../lib/index.js');
-var wrapAst = require('../lib/compressor/ast/index.js');
 var gonzalesToInternal = require('../lib/compressor/ast/gonzalesToInternal.js');
 var internalWalkAll = require('../lib/compressor/ast/walk.js').all;
 var internalWalkRules = require('../lib/compressor/ast/walk.js').rules;
 var internalWalkRulesRight = require('../lib/compressor/ast/walk.js').rulesRight;
 var internalTranslate = require('../lib/compressor/ast/translate.js');
-var specificity = require('../lib/compressor/prepare/specificity.js');
+var specificity = require('../lib/compressor/restructure/prepare/specificity.js');
 
 function normalize(str) {
     return str.replace(/\n|\r\n?|\f/g, '\n');
