@@ -279,17 +279,18 @@ describe('csso', function() {
 
         it('debug option', function() {
             try {
-                var log = console.log;
                 var counter = 0;
-                console.log = function() {
+                var tmp = console.error;
+                console.error = function() {
                     counter++;
                 };
+
                 csso.minify('', { debug: true });
 
                 // should output something
-                assert(counter > 0);
+                assert(counter > 0, 'should output info when debug is on');
             } finally {
-                console.log = log;
+                console.error = tmp;
             }
         });
 
