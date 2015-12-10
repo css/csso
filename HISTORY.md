@@ -1,3 +1,7 @@
+## 1.4.4 (December 10, 2015)
+
+- prevent removal of spaces after braces that before identifier that breaking at-rules expressions (#258)
+
 ## 1.4.3 (December 4, 2015)
 
 - fix unicode-range parsing that cause to wrong function detection (#250)
