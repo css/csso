@@ -1,0 +1,31 @@
+.a, .bb, .cc, .dd, .e {
+  -webkit-a: 1;
+  a: 1;
+}
+
+.a {
+  b: 0;
+  -webkit-c: 1;
+  c: 1;
+}
+
+.bb {
+  b: 1;
+  -webkit-c: 2;
+  c: 2;
+}
+
+.cc {
+  -webkit-c: 3;
+  c: 3;
+}
+
+.dd {
+  -webkit-c: 4;
+  c: 4;
+}
+
+.e {
+  -webkit-c: none;
+  c: none;
+}
