@@ -3,10 +3,12 @@ var path = require('path');
 var assert = require('assert');
 var csso = require('../lib/index.js');
 var gonzalesToInternal = require('../lib/compressor/ast/gonzalesToInternal.js');
+var internalToGonzales = require('../lib/compressor/ast/internalToGonzales.js');
 var internalWalkAll = require('../lib/compressor/ast/walk.js').all;
 var internalWalkRules = require('../lib/compressor/ast/walk.js').rules;
 var internalWalkRulesRight = require('../lib/compressor/ast/walk.js').rulesRight;
 var internalTranslate = require('../lib/compressor/ast/translate.js');
+var gonzalesTranslate = require('../lib/utils/translate.js');
 var specificity = require('../lib/compressor/restructure/prepare/specificity.js');
 
 function normalize(str) {
@@ -141,6 +143,18 @@ function createCompressTest(name, test) {
         : it(name, testFn);
 }
 
+function createIntenalToGonzalesTest(name, test) {
+    return it(name, function() {
+        var ast = csso.parse(test.source, 'stylesheet', true);
+        var compressed = csso.compress(ast);
+        var gonzalesAst = internalToGonzales(compressed);
+        var css = internalTranslate(compressed);
+
+        assert.equal(gonzalesTranslate(gonzalesAst, true), css);
+        assert.equal(JSON.stringify(csso.cleanInfo(gonzalesAst)), JSON.stringify(csso.parse(css)));
+    });
+};
+
 describe('csso', function() {
     describe('parse', function() {
         var testDir = path.join(__dirname, 'fixture/parse');
@@ -264,6 +278,7 @@ describe('csso', function() {
 
             for (var name in tests) {
                 createCompressTest(path.join(path.relative(__dirname + '/..', dir), name + '.css'), tests[name]);
+                createIntenalToGonzalesTest(path.join(path.relative(__dirname + '/..', dir), name + '.css'), tests[name]);
             }
         }
 
