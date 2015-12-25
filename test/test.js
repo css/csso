@@ -146,7 +146,7 @@ function createCompressTest(name, test) {
 function createIntenalToGonzalesTest(name, test) {
     return it(name, function() {
         var ast = csso.parse(test.source, 'stylesheet', true);
-        var compressed = csso.compress(ast);
+        var compressed = csso.compress(ast, { outputAst: 'internal' });
         var gonzalesAst = internalToGonzales(compressed);
         var css = internalTranslate(compressed);
 
@@ -309,11 +309,22 @@ describe('csso', function() {
             }
         });
 
-        it('should compress ast w/o info', function() {
+        it('compress should return gonzales AST by default', function() {
             var ast = csso.parse('.foo{color:#FF0000}');
 
-            assert.equal(ast[0], 'stylesheet');
-            assert.equal(internalTranslate(csso.compress(ast)), '.foo{color:red}');
+            assert.equal(gonzalesTranslate(csso.compress(ast), true), '.foo{color:red}');
+        });
+
+        it('compress should return gonzales AST when outputAst is `gonzales`', function() {
+            var ast = csso.parse('.foo{color:#FF0000}');
+
+            assert.equal(gonzalesTranslate(csso.compress(ast, { outputAst: 'gonzales' }), true), '.foo{color:red}');
+        });
+
+        it('compress should return internal when outputAst is not undefined or `gonzales`', function() {
+            var ast = csso.parse('.foo{color:#FF0000}');
+
+            assert.equal(internalTranslate(csso.compress(ast, { outputAst: 'internal' })), '.foo{color:red}');
         });
     });
 });
