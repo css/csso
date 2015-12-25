@@ -1,0 +1,6 @@
+@keyframes test {
+    0% { color: red }
+    50% { color: green }
+    60% { color: red }
+    100% { color: green }
+}

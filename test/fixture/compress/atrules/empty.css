@@ -1,0 +1,17 @@
+@charset;
+@font {
+    /* empty */
+}
+@font {
+    /* single bad declaration */
+    foo: ;
+}
+@media {
+    /* empty */
+}
+@media {
+    /* single bad ruleset */
+    a, {
+        test: 1;
+    }
+}

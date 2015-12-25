@@ -1,0 +1,22 @@
+@keyframes test {
+  60%, 90%, 100% {
+    -webkit-a: 1;
+    a: 1;
+  }
+
+  60% {
+    b: 1;
+    -webkit-c: 3;
+    c: 3;
+  }
+
+  90% {
+    -webkit-c: 5;
+    c: 5;
+  }
+
+  100% {
+    -webkit-c: none;
+    c: none;
+  }
+}

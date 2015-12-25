@@ -1,0 +1,10 @@
+{
+    "clazz.0": {
+        "source": ".abc",
+        "translate": ".abc",
+        "ast": {
+            "type": "Class",
+            "name": "abc"
+        }
+    }
+}

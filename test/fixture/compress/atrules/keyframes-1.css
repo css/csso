@@ -1,0 +1,8 @@
+@-webkit-keyframes test {
+    0% { color: red }
+    100% { color: green }
+}
+@keyframes test {
+    from { color: red }
+    100% { color: green }
+}

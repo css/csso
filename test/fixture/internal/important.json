@@ -1,0 +1,23 @@
+{
+    "important.0": {
+        "source": "!important",
+        "translate": "!important",
+        "ast": {
+            "type": "Important"
+        }
+    },
+    "important.c.0": {
+        "source": "!/*test*/important",
+        "translate": "!important",
+        "ast": {
+            "type": "Important"
+        }
+    },
+    "important.s.0": {
+        "source": "!  important",
+        "translate": "!important",
+        "ast": {
+            "type": "Important"
+        }
+    }
+}

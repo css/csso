@@ -1,0 +1,998 @@
+{
+    "ruleset.0": {
+        "source": "s{p:v}",
+        "translate": "s{p:v}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.1": {
+        "source": "s{p0:v0;p1:v1}",
+        "translate": "s{p0:v0;p1:v1}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p0"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v0"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p1"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v1"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.2": {
+        "source": "s0,s1{p:v}",
+        "translate": "s0,s1{p:v}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s0"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s1"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.3": {
+        "source": "s0,s1{p0:v0;p1:v1}",
+        "translate": "s0,s1{p0:v0;p1:v1}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s0"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s1"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p0"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v0"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p1"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v1"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.4": {
+        "source": ".test{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale');color:red}",
+        "translate": ".test{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale');color:red}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Class",
+                                "name": "test"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "filter"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "color"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "red"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.5": {
+        "source": ".test{color:red;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')}",
+        "translate": ".test{color:red;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Class",
+                                "name": "test"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "color"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "red"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "filter"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"
+                                    }
+                                },
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.c.0": {
+        "source": "s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "translate": "s{p:v}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.c.1": {
+        "source": "s/*test*/{/*test*/p0/*test*/:/*test*/v0/*test*/;/*test*/p1/*test*/:/*test*/v1/*test*/}",
+        "translate": "s{p0:v0;p1:v1}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p0"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v0"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p1"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v1"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.c.2": {
+        "source": "s0/*test*/,/*test*/s1/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "translate": "s0,s1{p:v}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s0"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s1"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.c.3": {
+        "source": "s0/*test*/,/*test*/s1/*test*/{/*test*/p0/*test*/:/*test*/v0/*test*/;/*test*/p1/*test*/:/*test*/v1/*test*/}",
+        "translate": "s0,s1{p0:v0;p1:v1}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s0"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s1"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p0"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v0"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p1"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v1"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.s.0": {
+        "source": "s  {  p  :  v  }",
+        "translate": "s{p:v}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.s.1": {
+        "source": "s  {  p0  :  v0  ;  p1  :  v1  }",
+        "translate": "s{p0:v0;p1:v1}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p0"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v0"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p1"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v1"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.s.2": {
+        "source": "s0  ,  s1  {  p  :  v  }",
+        "translate": "s0,s1{p:v}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s0"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s1"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.s.3": {
+        "source": "s0  ,  s1  {  p0  :  v0  ;  p1  :  v1  }",
+        "translate": "s0,s1{p0:v0;p1:v1}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s0"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s1"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p0"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v0"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p1"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "v1"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.s.4": {
+        "source": ".test {\n    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale');\n    color:red\n}",
+        "translate": ".test{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale');color:red}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Class",
+                                "name": "test"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "filter"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "color"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "red"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "ruleset.s.5": {
+        "source": ".test {\n    color:red;\n    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')\n           progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')\n}",
+        "translate": ".test{color:red;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Class",
+                                "name": "test"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "color"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "red"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "filter"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/transparent-border.png',sizingMethod='scale')"
+                                    }
+                                },
+                                {
+                                    "type": "Progid",
+                                    "value": {
+                                        "type": "Raw",
+                                        "value": "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='test.png',sizingMethod='test')"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "value.color.ident.0": {
+        "source": "s{p:yellow}",
+        "translate": "s{p:yellow}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "s"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "yellow"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "value.color.ident.1": {
+        "source": "yellow{p:yellow}",
+        "translate": "yellow{p:yellow}",
+        "ast": {
+            "type": "Ruleset",
+            "selector": {
+                "type": "Selector",
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "sequence": [
+                            {
+                                "type": "Identifier",
+                                "name": "yellow"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "property": {
+                            "type": "Property",
+                            "name": "p"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "yellow"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,66 @@
+{
+    "number.0": {
+        "source": "10",
+        "translate": "10",
+        "ast": {
+            "type": "Number",
+            "value": "10"
+        }
+    },
+    "number.1": {
+        "source": ".10",
+        "translate": ".10",
+        "ast": {
+            "type": "Number",
+            "value": ".10"
+        }
+    },
+    "number.2": {
+        "source": "12.34",
+        "translate": "12.34",
+        "ast": {
+            "type": "Number",
+            "value": "12.34"
+        }
+    },
+    "number.3": {
+        "source": "0.1",
+        "translate": "0.1",
+        "ast": {
+            "type": "Number",
+            "value": "0.1"
+        }
+    },
+    "number.4": {
+        "source": "1.0",
+        "translate": "1.0",
+        "ast": {
+            "type": "Number",
+            "value": "1.0"
+        }
+    },
+    "number.5": {
+        "source": "0.0",
+        "translate": "0.0",
+        "ast": {
+            "type": "Number",
+            "value": "0.0"
+        }
+    },
+    "number.6": {
+        "source": ".0",
+        "translate": ".0",
+        "ast": {
+            "type": "Number",
+            "value": ".0"
+        }
+    },
+    "number.7": {
+        "source": "1.200000",
+        "translate": "1.200000",
+        "ast": {
+            "type": "Number",
+            "value": "1.200000"
+        }
+    }
+}

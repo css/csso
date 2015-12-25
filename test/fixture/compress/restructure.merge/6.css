@@ -1,0 +1,12 @@
+/*
+  blocks couldn't be merged as in case #5, since values has various browser support
+*/
+
+.a {
+    color: red;
+    width: 100px;
+}
+.b {
+    width: 100px;
+    color: rgba(1, 2, 3, .5);
+}
