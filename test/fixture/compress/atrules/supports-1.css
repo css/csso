@@ -1,3 +1,5 @@
+/* issue #258 */
+
 @supports ((-webkit-filter: invert(1)) or (filter: invert(1))) {
   a:hover {
     -webkit-filter: invert(1);
