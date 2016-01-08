@@ -57,6 +57,12 @@ ast = csso.compress(ast);
 var compressed = csso.translate(ast, true);
 console.log(compressed);
 // .test{color:red}
+
+// There are two options you can pass
+var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
+    restructuring: false, // don't combine same selectors
+    debug: true // show additional debug information
+})
 ```
 
 ## Documentation
