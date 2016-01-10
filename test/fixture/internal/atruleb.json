@@ -186,8 +186,8 @@
         }
     },
     "atruleb.c.1": {
-        "source": "@test/*test*/x/*test*/y/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
-        "translate": "@test xy{p:v}",
+        "source": "@test/*test*/x/*test*/ y/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "translate": "@test x y{p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
@@ -197,6 +197,9 @@
                     {
                         "type": "Identifier",
                         "name": "x"
+                    },
+                    {
+                        "type": "Space"
                     },
                     {
                         "type": "Identifier",
@@ -228,8 +231,8 @@
         }
     },
     "atruleb.c.2": {
-        "source": "@test/*test*/x/*test*/,/*test*/y/*test*/x(/*test*/1/*test*/+/*test*/2/*test*/)/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
-        "translate": "@test x,yx(1+2){p:v}",
+        "source": "@test/*test*/x/*test*/,/*test*/y/*test*/ x(/*test*/1/*test*/+/*test*/2/*test*/)/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
+        "translate": "@test x,y x(1+2){p:v}",
         "ast": {
             "type": "Atrule",
             "name": "test",
@@ -247,6 +250,9 @@
                     {
                         "type": "Identifier",
                         "name": "y"
+                    },
+                    {
+                        "type": "Space"
                     },
                     {
                         "type": "Function",

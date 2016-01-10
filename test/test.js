@@ -68,13 +68,32 @@ function createParseTest(name, test, scope) {
     });
 }
 
-function createInternalFormatTest(name, test, scope) {
+function createGonzalesToInternalTest(name, test, scope) {
     return it(name, function() {
-        var ast = csso.parse(test.source, scope, true);
-        var internalAst = gonzalesToInternal(ast);
+        var gonzalesAst = csso.parse(test.source, scope, true);
+        var internalAst = gonzalesToInternal(gonzalesAst);
 
-        // AST should be equal
-        assert.equal(stringifyInternalAST(internalAst), stringifyInternalAST(test.ast));
+        assert.equal(
+            stringifyInternalAST(internalAst),
+            stringifyInternalAST(test.ast)
+        );
+    });
+}
+
+function createInternalToGonzalesTest(name, test, scope) {
+    return it(name, function() {
+        var gonzalesAst = csso.parse(test.source, scope, true);
+        var internalAst = gonzalesToInternal(gonzalesAst);
+        var restoredCSS = scope === 'block'
+            // gonzales parser requires curly braces to parse CSS block correctly
+            ? '{' + internalTranslate(internalAst) + '}'
+            : internalTranslate(internalAst);
+
+        // restored gonzales AST should be equal to AST from CSS parser
+        assert.equal(
+            JSON.stringify(csso.cleanInfo(internalToGonzales(internalAst))),
+            JSON.stringify(csso.parse(restoredCSS, scope))
+        );
     });
 }
 
@@ -169,14 +188,26 @@ describe('csso', function() {
     });
 
     describe('internal', function() {
-        describe('gonzalesToInternal', function() {
+        describe('convertation gonzales->internal', function() {
             var testDir = path.join(__dirname, 'fixture/internal');
             fs.readdirSync(testDir).forEach(function(rule) {
                 var tests = require(path.join(testDir, rule));
                 var scope = path.basename(rule, path.extname(rule));
 
                 for (var name in tests) {
-                    createInternalFormatTest(rule + '/' + name, tests[name], scope);
+                    createGonzalesToInternalTest(rule + '/' + name, tests[name], scope);
+                }
+            });
+        });
+
+        describe('convertation internal->gonzales', function() {
+            var testDir = path.join(__dirname, 'fixture/internal');
+            fs.readdirSync(testDir).forEach(function(rule) {
+                var tests = require(path.join(testDir, rule));
+                var scope = path.basename(rule, path.extname(rule));
+
+                for (var name in tests) {
+                    createInternalToGonzalesTest(rule + '/' + name, tests[name], scope);
                 }
             });
         });

@@ -69,8 +69,8 @@
         }
     },
     "atrules.c.1": {
-        "source": "@test/*test*/x/*test*/y;",
-        "translate": "@test xy;",
+        "source": "@test/*test*/x/*test*/ y;",
+        "translate": "@test x y;",
         "ast": {
             "type": "Atrule",
             "name": "test",
@@ -80,6 +80,9 @@
                     {
                         "type": "Identifier",
                         "name": "x"
+                    },
+                    {
+                        "type": "Space"
                     },
                     {
                         "type": "Identifier",

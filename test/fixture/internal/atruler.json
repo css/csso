@@ -274,8 +274,8 @@
         }
     },
     "atruler.c.1": {
-        "source": "@media/*test*/x/*test*/y/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
-        "translate": "@media xy{s{p:v}}",
+        "source": "@media/*test*/x/*test*/ y/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
+        "translate": "@media x y{s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
@@ -285,6 +285,9 @@
                     {
                         "type": "Identifier",
                         "name": "x"
+                    },
+                    {
+                        "type": "Space"
                     },
                     {
                         "type": "Identifier",
@@ -338,8 +341,8 @@
         }
     },
     "atruler.c.2": {
-        "source": "@media/*test*/x/*test*/,/*test*/y/*test*/f(/*test*/1/*test*/+/*test*/2/*test*/)/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
-        "translate": "@media x,yf(1+2){s{p:v}}",
+        "source": "@media/*test*/x/*test*/,/*test*/y/*test*/ f(/*test*/1/*test*/+/*test*/2/*test*/)/*test*/{/*test*/s/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}/*test*/}",
+        "translate": "@media x,y f(1+2){s{p:v}}",
         "ast": {
             "type": "Atrule",
             "name": "media",
@@ -357,6 +360,9 @@
                     {
                         "type": "Identifier",
                         "name": "y"
+                    },
+                    {
+                        "type": "Space"
                     },
                     {
                         "type": "Function",
