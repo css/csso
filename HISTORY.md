@@ -1,3 +1,34 @@
+## 1.5.0 (January 14, 2016)
+
+### Parser
+
+- attach minus to number
+
+### Compressor
+
+- split code base into small modules and related refactoring
+- introduce internal AST format for compressor (`gonzales`→`internal` and `internal`→`gonzales` convertors, walkers, translator)
+- various optimizations: no snapshots, using caches and indexes
+- sort selectors, merge selectors in alphabet order
+- compute selector's specificity
+- better ruleset restructuring, improve compression of partially equal blocks
+- better ruleset merge – not only closest but also disjoined by other rulesets when safe
+- join `@media` with same query
+- `outputAst` – new option to specify output AST format (`gonzales` by default for backward compatibility)
+- remove quotes surrounding attribute values in attribute selectors when possible (issue #73)
+- replace `from`→`0%` and `100%`→`to` at `@keyframes` (#205)
+- prevent partial merge of rulesets at `@keyframes` (#80, #197)
+- fix issue with wrong space removals (#258)
+
+### API
+
+- walker for `gonzales` AST was implemented
+
+### CLI
+
+- new option `--stat` (output stat in `stderr`)
+- new optional parameter `level` for `--debug` option
+
 ## 1.4.4 (December 10, 2015)
 
 - prevent removal of spaces after braces that before identifier that breaking at-rules expressions (#258)
