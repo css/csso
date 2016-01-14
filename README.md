@@ -53,7 +53,9 @@ Compressed: 16 bytes (64.00%)
 Saving:     9 bytes (36.00%)
 Time:       12 ms
 Memory:     0.346 MB
+```
 
+```
 > echo '.test { color: green; color: #ff0000 } .foo { color: red }' | node bin/csso --debug
 ## parsing done in 10 ms
 
@@ -74,7 +76,9 @@ Compress block #1
 ## compressing done in 9 ms
 
 .foo,.test{color:red}
+```
 
+```
 > echo '.test { color: green; color: #ff0000 } .foo { color: red }' | node bin/csso --debug 2
 ## parsing done in 8 ms
 
