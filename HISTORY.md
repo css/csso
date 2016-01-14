@@ -1,3 +1,9 @@
+## 1.5.1 (January 14, 2016)
+
+- ensure `-` is not used as an identifier in attribute selectors (thanks to @mathiasbynens)
+- fix broken `justDoIt()` function
+- various small fixes
+
 ## 1.5.0 (January 14, 2016)
 
 ### Parser
