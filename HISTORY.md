@@ -18,7 +18,6 @@
 - remove quotes surrounding attribute values in attribute selectors when possible (issue #73)
 - replace `from`→`0%` and `100%`→`to` at `@keyframes` (#205)
 - prevent partial merge of rulesets at `@keyframes` (#80, #197)
-- fix issue with wrong space removals (#258)
 
 ### API
 
