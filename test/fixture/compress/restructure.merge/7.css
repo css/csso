@@ -1,0 +1,15 @@
+/*
+  issue #264 don't merge rulesets if between there is a ruleset with same specificity
+*/
+
+.notification-banner.drop {
+    top: -50px
+}
+
+.notification-banner.drop.in {
+    top: 0
+}
+
+.notification-banner.drop.out {
+    top: -50px
+}
