@@ -1,0 +1,16 @@
+/*
+  issue #259 don't override values with different browser support
+*/
+
+.test {
+    display: inline-block;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: inline-block;
+    display: table-cell;
+    display: grid;
+    display: flex;
+}
