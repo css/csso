@@ -1,3 +1,7 @@
+## 1.5.2 (January 24, 2016)
+
+- don't merge rulesets if between them a ruleset with same specificity (#264)
+
 ## 1.5.1 (January 14, 2016)
 
 - ensure `-` is not used as an identifier in attribute selectors (thanks to @mathiasbynens)

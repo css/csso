@@ -1,5 +1,5 @@
 /*
-  issue #264 don't merge rulesets if between there is a ruleset with same specificity
+  issue #264 don't merge rulesets if between them a ruleset with the same specificity
 */
 
 .notification-banner.drop {
