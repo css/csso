@@ -1,5 +1,6 @@
 ## 1.5.3 (January 25, 2016)
 
+- don't override display values with different browser support (#259)
 - fix publish issue (one of modules leak in development state)
 
 ## 1.5.2 (January 24, 2016)
