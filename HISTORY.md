@@ -1,3 +1,7 @@
+## 1.5.3 (January 25, 2016)
+
+- fix publish issue (one of modules leak in development state)
+
 ## 1.5.2 (January 24, 2016)
 
 - don't merge rulesets if between them a ruleset with same specificity (#264)
