@@ -1,0 +1,16 @@
+/*
+  issue #264 don't merge rulesets if between them a ruleset with the same specificity
+*/
+
+.foo.bar {
+    top: -50px
+}
+
+.foo.bar.in,
+.baz.qux {
+    top: 0
+}
+
+.foo.bar.out {
+    top: -50px
+}

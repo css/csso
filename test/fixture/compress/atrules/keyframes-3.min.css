@@ -1,1 +1,4 @@
-@keyframes test{0%,50%{color:red}50%,to{width:100px}}
+@keyframes test{0%{color:red}50%{color:red;width:100px}to{width:100px}}
+/*! better, but not sure is correct (need to be checked):
+  @keyframes test{0%,50%{color:red}50%,to{width:100px}}
+*/

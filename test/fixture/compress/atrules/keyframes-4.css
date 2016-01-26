@@ -19,3 +19,7 @@
         opacity: 0;
         }
 }
+
+/*! better, but not sure is correct (need to be checked):
+  @keyframes fadein{0%{transform:scale(.95)}30%,70%,to{opacity:1;transform:scale(1)}0%,to{opacity:0}}
+*/
