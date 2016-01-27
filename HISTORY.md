@@ -1,3 +1,8 @@
+## 1.5.4 (January 27, 2016)
+
+- one more fix (in `restructRuleset` this time) with merge of rulesets when a ruleset with same specificity places between them (#264)
+- disable partitial merge of rulesets in `@keyframes` rulesets (until sure it's correct)
+
 ## 1.5.3 (January 25, 2016)
 
 - don't override display values with different browser support (#259)
