@@ -32,7 +32,7 @@
   "devDependencies": {
     "browserify": "^13.0.0",
     "jscs": "~2.9.0",
-    "mocha": "~2.3.3",
+    "mocha": "~2.4.2",
     "uglify-js": "^2.6.1"
   },
   "engines": {
