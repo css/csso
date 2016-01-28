@@ -141,11 +141,13 @@ BODY
     color: #D00;
     transition: all .15s;
     opacity: 0;
+    visibility: hidden;
 }
 #error.show
 {
     transition: all .35s;
     opacity: 1;
+    visibility: visible;
 }
 #error .header
 {
