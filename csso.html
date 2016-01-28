@@ -2,38 +2,126 @@
 
 <html>
 <head>
-    <title>CSS optimizer</title>
+    <title>CSSO – CSS optimizer</title>
     <link rel="stylesheet" href="csso.css" type="text/css">
 </head>
 <body>
     <script src="csso-browser.js"></script>
+    <script src="libs/cssbeautify.js"></script>
 
-    <div class="stat">
-        Src length: <span id="slength">0</span>, dst length: <span id="dlength">0</span>, compression: <span id="result">0</span>%.
+    <div class="layout">
+        <div class="toolbar">
+            toolbar
+        </div>
+        <div class="main">
+            <div class="main-section">
+                <div class="header">
+                    <span class="caption">Source</span>
+                    <button id="beautifySource">Beautify</button>
+                </div>
+                <textarea id="source" class="editor">.foo { color: #ff0000; }
+.bar { color: rgba(255, 0, 0, 1); }</textarea>
+            </div>
+            <div class="main-section" id="result">
+                <div class="header">
+                    <span class="caption">Result</span>
+                    <label for="restructure">
+                        <input type="checkbox" id="restructure" checked> Restructure
+                    </label>
+                    <label for="beautify">
+                        <input type="checkbox" id="beautify"> Beautify
+                    </label>
+                </div>
+                <div id="output" class="output"></div>
+                <div id="stat" class="stat"></div>
+                <div id="error">
+                    <div class="header">
+                        <span class="caption">Error</span>
+                    </div>
+                    <div id="errorMessage"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            Powered by <a href="https://github.com/css/csso">CSSO</a> <span id="version"></span>
+        </div>
     </div>
-    <textarea class="csstxt" id="csssrc"></textarea>
-    <span class="first">
-        <input type="button" value="minimize" id="minimize" />
-    </span>
-    <textarea class="csstxt" id="cssdst"></textarea>
 
     <script>
-        var csssrc = document.getElementById('csssrc'),
-            cssdst = document.getElementById('cssdst'),
-            slength = document.getElementById('slength'),
-            dlength = document.getElementById('dlength'),
-            result = document.getElementById('result');
+        var lastSource;
+        var lastResult;
 
-        function updateStat() {
-            slength.innerHTML = csssrc.value.length;
-            dlength.innerHTML = cssdst.value.length;
-            result.innerHTML = (100 * cssdst.value.length / csssrc.value.length).toFixed(2);
+        function beautifySourceCSS() {
+            source.value = cssbeautify(source.value);
         }
 
-        document.getElementById('minimize').onclick = function() {
-            cssdst.value = csso.minify(csssrc.value);
-            updateStat();
-        };
+        function setText(element, text) {
+            element.innerHTML = '';
+            element.appendChild(document.createTextNode(text));
+        }
+
+        function updateStat(originalSize, resultSize, time) {
+            function percent(value) {
+                return value ? ' (' + (100 * value).toFixed(2) + '%)' : '';
+            }
+
+            var delta = originalSize - resultSize;
+
+            stat.innerHTML =
+                'Original:   ' + originalSize + ' bytes\n' +
+                'Compressed: ' + resultSize + ' bytes' + percent(resultSize / originalSize) + '\n' +
+                'Saving:     ' + delta + ' bytes' + percent(delta / originalSize) + '\n' +
+                'Time:       ' + time + ' ms';
+        }
+
+        function setOutput() {
+            var css = lastResult;
+
+            if (beautify.checked) {
+                css = cssbeautify(css);
+            }
+
+            setText(output, css);
+        }
+
+        function process(force) {
+            var time;
+
+            if (force !== true && source.value === lastSource) {
+                return;
+            }
+
+            var time = (window.performance || Date).now();
+
+            try {
+                lastSource = source.value;
+                lastResult = csso.minify(source.value, {
+                    restructuring: restructure.checked
+                });
+                error.classList.remove('show');
+            } catch(e) {
+                setText(errorMessage, e.message);
+                error.classList.add('show');
+                return;
+            }
+
+            updateStat(
+                lastSource.length,
+                lastResult.length,
+                Math.round((window.performance || Date).now() - time)
+            );
+
+            setOutput();
+        }
+        
+        source.addEventListener('input', process, false);
+        source.addEventListener('keyup', process, false);
+        beautifySource.addEventListener('click', beautifySourceCSS, false);
+        beautify.addEventListener('change', setOutput, false);
+        restructure.addEventListener('change', process.bind(null, true), false);
+
+        document.getElementById('version').innerHTML = csso.version;
+        process();
     </script>
 
 </body>
