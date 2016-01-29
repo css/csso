@@ -56,6 +56,7 @@ BODY
 .header
 {
     display: flex;
+    flex: 0 0 auto;
     padding: 10px;
     background: #0381d3;
     color: white;
