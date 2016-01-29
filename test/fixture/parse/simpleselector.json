@@ -15,78 +15,6 @@
             ]
         ]
     },
-    "simpleselector.10": {
-        "source": "a|b",
-        "ast": [
-            "simpleselector",
-            ["ident", "a"],
-            ["namespace"],
-            ["ident", "b"]
-        ]
-    },
-    "simpleselector.11": {
-        "source": "*|*:not(*)",
-        "ast": [
-            "simpleselector",
-            ["ident", "*"],
-            ["namespace"],
-            ["ident", "*"],
-            [
-                "pseudoc", [
-                    "funktion",
-                    ["ident", "not"],
-                    [
-                        "functionBody", [
-                            "simpleselector",
-                            ["ident", "*"]
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    },
-    "simpleselector.12": {
-        "source": "x:not([ABC])",
-        "ast": [
-            "simpleselector",
-            ["ident", "x"],
-            [
-                "pseudoc", [
-                    "funktion",
-                    ["ident", "not"],
-                    [
-                        "functionBody", [
-                            "simpleselector", [
-                                "attrib",
-                                ["ident", "ABC"]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    },
-    "simpleselector.13": {
-        "source": ":not(el.class-postfix)",
-        "ast": [
-            "simpleselector", [
-                "pseudoc", [
-                    "funktion",
-                    ["ident", "not"],
-                    [
-                        "functionBody", [
-                            "simpleselector",
-                            ["ident", "el"],
-                            [
-                                "clazz",
-                                ["ident", "class-postfix"]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    },
     "simpleselector.2": {
         "source": "#test",
         "ast": [
@@ -167,6 +95,117 @@
                 ["nth", "3n"],
                 ["unary", "-"],
                 ["nth", "2"]
+            ]
+        ]
+    },
+    "simpleselector.10": {
+        "source": "a|b",
+        "ast": [
+            "simpleselector",
+            ["ident", "a"],
+            ["namespace"],
+            ["ident", "b"]
+        ]
+    },
+    "simpleselector.11": {
+        "source": "*|*:not(*)",
+        "ast": [
+            "simpleselector",
+            ["ident", "*"],
+            ["namespace"],
+            ["ident", "*"],
+            [
+                "pseudoc", [
+                    "funktion",
+                    ["ident", "not"],
+                    [
+                        "functionBody", [
+                            "simpleselector",
+                            ["ident", "*"]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "simpleselector.12": {
+        "source": "x:not([ABC])",
+        "ast": [
+            "simpleselector",
+            ["ident", "x"],
+            [
+                "pseudoc", [
+                    "funktion",
+                    ["ident", "not"],
+                    [
+                        "functionBody", [
+                            "simpleselector", [
+                                "attrib",
+                                ["ident", "ABC"]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "simpleselector.13": {
+        "source": ":not(el.class-postfix)",
+        "ast": [
+            "simpleselector", [
+                "pseudoc", [
+                    "funktion",
+                    ["ident", "not"],
+                    [
+                        "functionBody", [
+                            "simpleselector",
+                            ["ident", "el"],
+                            [
+                                "clazz",
+                                ["ident", "class-postfix"]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "simpleselector.14": {
+        "source": ".\\31 0\\+",
+        "ast": [
+            "simpleselector", [
+                "clazz",
+                ["ident", "\\31 0\\+"]
+            ]
+        ]
+    },
+    "simpleselector.15": {
+        "source": ".\\31 b",
+        "ast": [
+            "simpleselector", [
+                "clazz",
+                ["ident", "\\31 b"]
+            ]
+        ]
+    },
+    "simpleselector.16": {
+        "source": ".\\31  b",
+        "ast": [
+            "simpleselector",
+                [
+                    "clazz",
+                    ["ident", "\\31 "]
+                ], 
+                ["s", " "],
+                ["ident", "b"]
+        ]
+    },
+    "simpleselector.17": {
+        "source": ".\\31 \\ b",
+        "ast": [
+            "simpleselector", [
+                "clazz",
+                ["ident", "\\31 \\ b"]
             ]
         ]
     },

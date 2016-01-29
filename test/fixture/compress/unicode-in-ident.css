@@ -1,0 +1,9 @@
+/*
+  issue #191 should properly process unicode sequence in ident
+*/
+
+.\31 0\+,
+.\31 5\+,
+.\32 0\+ {
+  color: red;
+}
