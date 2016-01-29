@@ -315,12 +315,27 @@ describe('csso', function() {
 
         scan(path.join(__dirname, 'fixture/compress'));
 
-        it('restructuring option', function() {
+        describe('restructure option', function() {
             var css = '.a{color:red}.b{color:red}';
 
-            assert.equal(csso.minify(css, { restructuring: false }), css);
-            assert.equal(csso.minify(css, { restructuring: true }), '.a,.b{color:red}');
-            assert.equal(csso.minify(css), '.a,.b{color:red}');
+            it('should apply `restructure` option', function() {
+                assert.equal(csso.minify(css, { restructure: false }), css);
+                assert.equal(csso.minify(css, { restructure: true }), '.a,.b{color:red}');
+            });
+
+            it('`restructuring` is alias for `restructure`', function() {
+                assert.equal(csso.minify(css, { restructuring: false }), css);
+                assert.equal(csso.minify(css, { restructuring: true }), '.a,.b{color:red}');
+            });
+
+            it('`restructure` option should has higher priority', function() {
+                assert.equal(csso.minify(css, { restructure: false, restructuring: true }), css);
+                assert.equal(csso.minify(css, { restructure: true, restructuring: false }), '.a,.b{color:red}');
+            });
+
+            it('should restructure by default', function() {
+                assert.equal(csso.minify(css), '.a,.b{color:red}');
+            });
         });
 
         it('debug option', function() {
