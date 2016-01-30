@@ -1,0 +1,18 @@
+.should-unquote {
+    a: url('a\\b\\c');
+    b: url("a\\b\\c");
+    c: url('a/b/c');
+    d: url('data:image/png;base64,...');
+    e: url('!?#-s93');
+    f: url('\30 aa-asd\-');
+    g: url('asd\
+sdf');
+    h: url('a\"b');
+}
+.should-not-unquote {
+    a: url('a b');
+    b: url('a"b');
+    c: url("a'b");
+    d: url('asd\
+        sdf');
+}
