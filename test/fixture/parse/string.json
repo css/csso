@@ -14,5 +14,20 @@
     "string.3": {
         "source": "\"te\\\"st\"",
         "ast": ["string", "\"te\\\"st\""]
+    },
+    "string with escaped \\n": {
+        "source": "\"te\\\nst\"",
+        "restoredSource": "\"test\"",
+        "ast": ["string", "\"test\""]
+    },
+    "string with escaped \\r": {
+        "source": "\"te\\\rst\"",
+        "restoredSource": "\"test\"",
+        "ast": ["string", "\"test\""]
+    },
+    "string with escaped \\r\\n": {
+        "source": "\"te\\\r\nst\"",
+        "restoredSource": "\"test\"",
+        "ast": ["string", "\"test\""]
     }
 }

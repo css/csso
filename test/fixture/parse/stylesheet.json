@@ -1,4 +1,27 @@
 {
+    "empty": {
+        "source": "",
+        "ast": ["stylesheet"]
+    },
+    "BOM.1": {
+        "source": "\uFEFF",
+        "restoredSource": "",
+        "ast": ["stylesheet"]
+    },
+    "BOM.2": {
+        "source": "\uFEFFa{}",
+        "restoredSource": "a{}",
+        "ast": [
+            "stylesheet", [
+                "ruleset", [
+                    "selector", [
+                        "simpleselector",
+                        ["ident", "a"]
+                    ]
+                ], ["block"]
+            ]
+        ]
+    },
     "issue111.test1": {
         "source": "body:not([x|x]) {}",
         "ast": [

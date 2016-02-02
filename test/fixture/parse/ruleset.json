@@ -570,6 +570,34 @@
             ]
         ]
     },
+    "ruleset.s.6": {
+        "source": ".test\n{\rcolor:red;\r\n}",
+        "ast": [
+            "ruleset", [
+                "selector", [
+                    "simpleselector", [
+                        "clazz",
+                        ["ident", "test"]
+                    ],
+                    ["s", "\n"]
+                ]
+            ], [
+                "block",
+                ["s", "\r"],
+                [
+                    "declaration", [
+                        "property",
+                        ["ident", "color"]
+                    ], [
+                        "value",
+                        ["ident", "red"]
+                    ]
+                ],
+                ["decldelim"],
+                ["s", "\r\n"]
+            ]
+        ]
+    },
     "value.color.ident.0": {
         "source": "s{p:yellow}",
         "ast": [
@@ -607,6 +635,27 @@
                     ], [
                         "value",
                         ["ident", "yellow"]
+                    ]
+                ]
+            ]
+        ]
+    },
+    "declaration with //": {
+        "source": "test{//color:red}",
+        "ast": [
+            "ruleset", [
+                "selector", [
+                    "simpleselector",
+                    ["ident", "test"]
+                ]
+            ], [
+                "block", [
+                    "declaration", [
+                        "property",
+                        ["ident", "//color"]
+                    ], [
+                        "value",
+                        ["ident", "red"]
                     ]
                 ]
             ]

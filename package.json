@@ -21,7 +21,7 @@
   },
   "main": "./lib/index",
   "scripts": {
-    "test": "jscs . && mocha --reporter dot",
+    "test": "jscs lib && mocha --reporter dot",
     "coverage": "istanbul cover _mocha -- -R dot",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R dot && cat ./coverage/lcov.info | coveralls",
     "travis": "npm run test && npm run coveralls",

@@ -1,0 +1,98 @@
+[
+  {
+    "offset": 0,
+    "line": 1,
+    "column": 1
+  }, "stylesheet", [
+    {
+      "offset": 0,
+      "line": 1,
+      "column": 1
+    }, "ruleset", [
+      {
+        "offset": 0,
+        "line": 1,
+        "column": 1
+      }, "selector", [
+        {
+          "offset": 0,
+          "line": 1,
+          "column": 1
+        }, "simpleselector", [
+          {
+            "offset": 0,
+            "line": 1,
+            "column": 1
+          }, "clazz",
+          [
+            {
+              "offset": 0,
+              "line": 1,
+              "column": 2
+            }, "ident", "a"
+          ]
+        ],
+        [
+          {
+            "offset": 1,
+            "line": 1,
+            "column": 3
+          }, "s", "\n"
+        ]
+      ]
+    ], [
+      {
+        "offset": 2,
+        "line": 2,
+        "column": 1
+      }, "block",
+      [
+        {
+          "offset": 3,
+          "line": 2,
+          "column": 2
+        }, "s", "\r"
+      ],
+      [
+        {
+          "offset": 4,
+          "line": 3,
+          "column": 1
+        }, "declaration", [
+          {
+            "offset": 4,
+            "line": 3,
+            "column": 1
+          }, "property",
+          [
+            {
+              "offset": 4,
+              "line": 3,
+              "column": 1
+            }, "ident", "color"
+          ]
+        ], [
+          {
+            "offset": 10,
+            "line": 3,
+            "column": 7
+          }, "value",
+          [
+            {
+              "offset": 10,
+              "line": 3,
+              "column": 7
+            }, "s", "\r\n"
+          ],
+          [
+            {
+              "offset": 12,
+              "line": 4,
+              "column": 1
+            }, "ident", "red"
+          ]
+        ]
+      ]
+    ]
+  ]
+]

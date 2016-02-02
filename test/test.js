@@ -64,7 +64,7 @@ function createParseTest(name, test, scope) {
         assert.equal(csso.stringify(ast), csso.stringify(test.ast));
 
         // translated AST should be equal to original source
-        assert.equal(csso.translate(ast), test.source);
+        assert.equal(csso.translate(ast), 'restoredSource' in test ? test.restoredSource : test.source);
     });
 }
 
@@ -187,7 +187,7 @@ describe('csso', function() {
         });
     });
 
-    describe('internal', function() {
+    describe('internal AST', function() {
         describe('convertation gonzales->internal', function() {
             var testDir = path.join(__dirname, 'fixture/internal');
             fs.readdirSync(testDir).forEach(function(rule) {
@@ -338,39 +338,105 @@ describe('csso', function() {
             });
         });
 
-        it('debug option', function() {
-            try {
-                var counter = 0;
+        describe('debug option', function() {
+            function runDebug(css, options) {
+                var output = [];
                 var tmp = console.error;
-                console.error = function() {
-                    counter++;
-                };
 
-                csso.minify('', { debug: true });
+                try {
+                    console.error = function() {
+                        output.push(Array.prototype.slice.call(arguments).join(' '));
+                    };
 
-                // should output something
-                assert(counter > 0, 'should output info when debug is on');
-            } finally {
-                console.error = tmp;
+                    csso.minify(css || '', options);
+                } finally {
+                    console.error = tmp;
+                    return output;
+                }
             }
+
+            it('should output nothing to stderr if debug is not set', function() {
+                assert(runDebug('.foo { color: red }').length === 0);
+                assert(runDebug('.foo { color: red }', { debug: false }).length === 0);
+                assert(runDebug('.foo { color: red }', { debug: 0 }).length === 0);
+            });
+
+            it('level 1', function() {
+                var output = runDebug('.foo { color: red }', { debug: true });
+                assert(output.length > 0);
+                assert(output.join('').indexOf('.foo') === -1);
+
+                var output = runDebug('.foo { color: red }', { debug: 1 });
+                assert(output.length > 0);
+                assert(output.join('').indexOf('.foo') === -1);
+            });
+
+            it('level 2', function() {
+                // should truncate source to 256 chars
+                var output = runDebug(new Array(40).join('abcdefgh') + ' { color: red }', { debug: 2 });
+                assert(output.length > 0);
+                assert(output.join('').indexOf('abcdefgh...') !== -1);
+            });
+
+            it('level 3', function() {
+                // shouldn't truncate source
+                var output = runDebug(new Array(40).join('abcdefgh') + ' { color: red }', { debug: 3 });
+                assert(output.length > 0);
+                assert(output.join('').indexOf('abcdefgh...') === -1);
+            });
         });
 
-        it('compress should return gonzales AST by default', function() {
+        it('should not fail if no ast passed', function() {
+            assert.equal(gonzalesTranslate(csso.compress(), true), '');
+        });
+
+        it('should return gonzales AST by default', function() {
             var ast = csso.parse('.foo{color:#FF0000}');
 
             assert.equal(gonzalesTranslate(csso.compress(ast), true), '.foo{color:red}');
         });
 
-        it('compress should return gonzales AST when outputAst is `gonzales`', function() {
+        it('should return gonzales AST when outputAst is `gonzales`', function() {
             var ast = csso.parse('.foo{color:#FF0000}');
 
             assert.equal(gonzalesTranslate(csso.compress(ast, { outputAst: 'gonzales' }), true), '.foo{color:red}');
         });
 
-        it('compress should return internal when outputAst is not undefined or `gonzales`', function() {
+        it('should return internal when outputAst is not undefined or `gonzales`', function() {
             var ast = csso.parse('.foo{color:#FF0000}');
 
             assert.equal(internalTranslate(csso.compress(ast, { outputAst: 'internal' })), '.foo{color:red}');
         });
+    });
+
+    it('justDoIt() should works until removed', function() {
+        assert.equal(
+            csso.justDoIt('.foo { color: #ff0000 } .bar { color: rgb(255, 0, 0) }'),
+            '.bar,.foo{color:red}'
+        );
+    });
+
+    it('walk', function() {
+        function visit(withInfo) {
+            var visitedTypes = {};
+
+            csso.walk(csso.parse('@media (min-width: 200px) { .foo:nth-child(2n) { color: rgb(100%, 10%, 0%); width: calc(3px + 5%) } }', 'stylesheet', withInfo), function(node) {
+                visitedTypes[node[withInfo ? 1 : 0]] = true;
+            }, withInfo);
+
+            return Object.keys(visitedTypes).sort();
+        }
+
+        var shouldVisitTypes = ['stylesheet', 'atruler', 'atkeyword', 'ident', 'atrulerq', 's', 'braces', 'operator', 'dimension', 'number', 'atrulers', 'ruleset', 'selector', 'simpleselector', 'clazz', 'nthselector', 'nth', 'block', 'declaration', 'property', 'value', 'funktion', 'functionBody', 'percentage', 'decldelim', 'unary'].sort();
+
+        assert.deepEqual(visit(), shouldVisitTypes, 'w/o info');
+        assert.deepEqual(visit(true), shouldVisitTypes, 'with info');
+    });
+
+    it('strigify', function() {
+        assert.equal(
+            csso.stringify(csso.parse('.a\n{\rcolor:\r\nred}', 'stylesheet', true)),
+            fs.readFileSync(__dirname + '/fixture/stringify.txt', 'utf-8').trim()
+        );
     });
 });
