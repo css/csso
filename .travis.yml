@@ -1,5 +1,6 @@
 language: node_js
 sudo: false
+script: "npm run travis"
 node_js:
   - "0.12"
   - "node"
