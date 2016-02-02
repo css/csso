@@ -1,7 +1,8 @@
 [![NPM version](https://img.shields.io/npm/v/csso.svg)](https://www.npmjs.com/package/csso)
 [![Build Status](https://travis-ci.org/css/csso.svg?branch=master)](https://travis-ci.org/css/csso)
+[![Coverage Status](https://coveralls.io/repos/github/css/csso/badge.svg?branch=master)](https://coveralls.io/github/css/csso?branch=master)
 [![Dependency Status](https://img.shields.io/david/css/csso.svg)](https://david-dm.org/css/csso)
-[![devDependency Status](https://img.shields.io/david/dev/css/csso.svg?style=flat)](https://david-dm.org/css/csso#info=devDependencies)
+[![devDependency Status](https://img.shields.io/david/dev/css/csso.svg)](https://david-dm.org/css/csso#info=devDependencies)
 
 CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
 
