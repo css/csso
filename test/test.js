@@ -17,6 +17,10 @@ function normalize(str) {
 
 function stringifyInternalAST(ast) {
     function clean(source) {
+        if (source && typeof source.toJSON === 'function') {
+            source = source.toJSON();
+        }
+
         if (Array.isArray(source)) {
             return source.map(clean);
         }
