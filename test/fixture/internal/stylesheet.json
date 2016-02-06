@@ -81,6 +81,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Progid",
@@ -131,6 +132,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": true,
                                     "sequence": [
                                         {
                                             "type": "Progid",
@@ -138,9 +140,6 @@
                                                 "type": "Raw",
                                                 "value": "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"
                                             }
-                                        },
-                                        {
-                                            "type": "Important"
                                         }
                                     ]
                                 }
@@ -190,6 +189,7 @@
                                             },
                                             "value": {
                                                 "type": "Value",
+                                                "important": false,
                                                 "sequence": [
                                                     {
                                                         "type": "Identifier",
@@ -240,6 +240,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -293,6 +294,7 @@
                                             },
                                             "value": {
                                                 "type": "Value",
+                                                "important": false,
                                                 "sequence": [
                                                     {
                                                         "type": "Identifier",
@@ -322,6 +324,7 @@
                                             },
                                             "value": {
                                                 "type": "Value",
+                                                "important": false,
                                                 "sequence": [
                                                     {
                                                         "type": "Identifier",
@@ -360,6 +363,7 @@
                                             },
                                             "value": {
                                                 "type": "Value",
+                                                "important": false,
                                                 "sequence": [
                                                     {
                                                         "type": "Identifier",
@@ -401,6 +405,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -448,6 +453,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -495,6 +501,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -533,6 +540,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -625,6 +633,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -681,6 +690,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -728,6 +738,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -775,6 +786,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -813,6 +825,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
@@ -887,6 +900,7 @@
                                 },
                                 "value": {
                                     "type": "Value",
+                                    "important": false,
                                     "sequence": [
                                         {
                                             "type": "Identifier",
