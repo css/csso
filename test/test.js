@@ -169,11 +169,8 @@ function createIntenalToGonzalesTest(name, test) {
         var gonzalesAst = internalToGonzales(compressed);
         var css = internalTranslate(compressed);
 
-        assert.equal(gonzalesTranslate(gonzalesAst, true), css, 'css should be equal');
-        try { csso.parse(css) } catch(e) {
-            console.log(e, css);
-        }
-        assert.equal(JSON.stringify(csso.cleanInfo(gonzalesAst)), JSON.stringify(csso.parse(css)), 'ast should be equal');
+        assert.equal(gonzalesTranslate(gonzalesAst, true), css, 'CSS should be equal');
+        assert.equal(JSON.stringify(csso.cleanInfo(gonzalesAst)), JSON.stringify(csso.parse(css)), 'AST should be equal');
     });
 };
 
