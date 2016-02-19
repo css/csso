@@ -1,0 +1,7 @@
+/*
+  should merge rules because different tag names
+*/
+
+a.foo:foo { color: red }
+b.bar:foo { color: green }
+c.baz:foo { color: red }

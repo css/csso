@@ -17,6 +17,10 @@ function normalize(str) {
 
 function stringifyInternalAST(ast) {
     function clean(source) {
+        if (source && typeof source.toJSON === 'function') {
+            source = source.toJSON();
+        }
+
         if (Array.isArray(source)) {
             return source.map(clean);
         }
@@ -24,7 +28,9 @@ function stringifyInternalAST(ast) {
         if (source && typeof source === 'object') {
             var result = {};
             for (var key in source) {
-                if (key !== 'parent' && key !== 'info') {
+                if (key !== 'parent' && key !== 'info' &&
+                    key !== 'id' && key !== 'length' &&
+                    key !== 'fingerprint' && key !== 'compareMarker') {
                     result[key] = clean(source[key]);
                 }
             }

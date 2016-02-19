@@ -1,0 +1,8 @@
+.prevent, .class1, .class2 {
+  float: left;
+  margin-right: 10px;
+}
+
+.class1 {width: 30px;}
+
+.class2 {width: 950px; margin-right: 0;}
