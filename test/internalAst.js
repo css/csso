@@ -8,6 +8,7 @@ var internalWalkAll = require('../lib/compressor/ast/walk.js').all;
 var internalWalkRules = require('../lib/compressor/ast/walk.js').rules;
 var internalWalkRulesRight = require('../lib/compressor/ast/walk.js').rulesRight;
 var internalTranslate = require('../lib/compressor/ast/translate.js');
+var internalTranslateWithSourceMap = require('../lib/compressor/ast/translateWithSourceMap.js');
 var JsonLocator = require('./helpers/JsonLocator.js');
 
 function stringifyInternalAST(ast) {
@@ -131,6 +132,16 @@ function createInternalTranslateTest(name, test, scope) {
     });
 }
 
+function createInternalTranslateWidthSourceMapTest(name, test, scope) {
+    it(name, function() {
+        var ast = csso.parse(test.source, scope, true);
+        var internalAst = gonzalesToInternal(ast);
+
+        // strings should be equal
+        assert.equal(internalTranslateWithSourceMap(internalAst).css, test.translate);
+    });
+}
+
 function forEachTest(factory) {
     for (var filename in testFiles) {
         var file = testFiles[filename];
@@ -206,5 +217,9 @@ describe('internal AST', function() {
 
     describe('translate', function() {
         forEachTest(createInternalTranslateTest);
+    });
+
+    describe('translateWithSourceMap', function() {
+        forEachTest(createInternalTranslateWidthSourceMapTest);
     });
 });

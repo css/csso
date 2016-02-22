@@ -1,31 +1,37 @@
 [
   {
+    "source": "<unknown>",
     "offset": 0,
     "line": 1,
     "column": 1
   }, "stylesheet", [
     {
+      "source": "<unknown>",
       "offset": 0,
       "line": 1,
       "column": 1
     }, "ruleset", [
       {
+        "source": "<unknown>",
         "offset": 0,
         "line": 1,
         "column": 1
       }, "selector", [
         {
+          "source": "<unknown>",
           "offset": 0,
           "line": 1,
           "column": 1
         }, "simpleselector", [
           {
+            "source": "<unknown>",
             "offset": 0,
             "line": 1,
             "column": 1
           }, "clazz",
           [
             {
+              "source": "<unknown>",
               "offset": 0,
               "line": 1,
               "column": 2
@@ -34,6 +40,7 @@
         ],
         [
           {
+            "source": "<unknown>",
             "offset": 1,
             "line": 1,
             "column": 3
@@ -42,12 +49,14 @@
       ]
     ], [
       {
+        "source": "<unknown>",
         "offset": 2,
         "line": 2,
         "column": 1
       }, "block",
       [
         {
+          "source": "<unknown>",
           "offset": 3,
           "line": 2,
           "column": 2
@@ -55,17 +64,20 @@
       ],
       [
         {
+          "source": "<unknown>",
           "offset": 4,
           "line": 3,
           "column": 1
         }, "declaration", [
           {
+            "source": "<unknown>",
             "offset": 4,
             "line": 3,
             "column": 1
           }, "property",
           [
             {
+              "source": "<unknown>",
               "offset": 4,
               "line": 3,
               "column": 1
@@ -73,12 +85,14 @@
           ]
         ], [
           {
+            "source": "<unknown>",
             "offset": 10,
             "line": 3,
             "column": 7
           }, "value",
           [
             {
+              "source": "<unknown>",
               "offset": 10,
               "line": 3,
               "column": 7
@@ -86,6 +100,7 @@
           ],
           [
             {
+              "source": "<unknown>",
               "offset": 12,
               "line": 4,
               "column": 1

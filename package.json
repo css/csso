@@ -42,7 +42,8 @@
     "prepublish": "npm run browserify"
   },
   "dependencies": {
-    "clap": "^1.0.9"
+    "clap": "^1.0.9",
+    "source-map": "^0.5.3"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
