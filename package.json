@@ -23,6 +23,7 @@
   "eslintConfig": {
     "env": {
       "node": true,
+      "mocha": true,
       "es6": true
     },
     "rules": {
@@ -31,7 +32,7 @@
     }
   },
   "scripts": {
-    "test": "jscs lib && eslint lib && mocha --reporter dot",
+    "test": "jscs lib && eslint lib test && mocha --reporter dot",
     "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
     "coverage": "istanbul cover _mocha -- -R dot",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R dot && cat ./coverage/lcov.info | coveralls",
@@ -48,7 +49,7 @@
     "coveralls": "^2.11.6",
     "eslint": "^2.2.0",
     "istanbul": "^0.4.2",
-    "jscs": "~2.9.0",
+    "jscs": "~2.10.0",
     "mocha": "~2.4.2",
     "uglify-js": "^2.6.1"
   },
