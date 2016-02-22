@@ -14,5 +14,9 @@
     "operator.3": {
         "source": "=",
         "ast": ["operator", "="]
+    },
+    "operator.4": {
+        "source": "*",
+        "ast": ["operator", "*"]
     }
 }

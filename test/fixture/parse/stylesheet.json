@@ -38,9 +38,7 @@
                                     "functionBody", [
                                         "simpleselector", [
                                             "attrib",
-                                            ["ident", "x"],
-                                            ["namespace"],
-                                            ["ident", "x"]
+                                            ["ident", "x|x"]
                                         ]
                                     ]
                                 ]

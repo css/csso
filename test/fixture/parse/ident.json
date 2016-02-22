@@ -3,10 +3,6 @@
         "source": "x",
         "ast": ["ident", "x"]
     },
-    "ident.1": {
-        "source": "*",
-        "ast": ["ident", "*"]
-    },
     "ident.2": {
         "source": "-x",
         "ast": ["ident", "-x"]
@@ -18,10 +14,6 @@
     "ident.4": {
         "source": "x\\:y",
         "ast": ["ident", "x\\:y"]
-    },
-    "ident.5": {
-        "source": "$x",
-        "ast": ["ident", "$x"]
     },
     "ident.6": {
         "source": "_0",

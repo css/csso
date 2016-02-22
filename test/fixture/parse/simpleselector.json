@@ -102,18 +102,14 @@
         "source": "a|b",
         "ast": [
             "simpleselector",
-            ["ident", "a"],
-            ["namespace"],
-            ["ident", "b"]
+            ["ident", "a|b"]
         ]
     },
     "simpleselector.11": {
         "source": "*|*:not(*)",
         "ast": [
             "simpleselector",
-            ["ident", "*"],
-            ["namespace"],
-            ["ident", "*"],
+            ["ident", "*|*"],
             [
                 "pseudoc", [
                     "funktion",
