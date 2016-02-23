@@ -153,7 +153,7 @@ describe('sourceMaps', function() {
         });
     });
 
-    describe.only('input source map', function() {
+    describe('input source map', function() {
         var filename = __dirname + '/fixture/sourceMaps/autoprefixer.css';
         var source = fs.readFileSync(filename, 'utf8');
         var sourceMap = JSON.parse(extractSourceMap(source));
