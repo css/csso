@@ -1,3 +1,4 @@
+var fs = require('fs');
 var assert = require('assert');
 var csso = require('../lib/index.js');
 var SourceMapConsumer = require('source-map').SourceMapConsumer;
@@ -11,20 +12,38 @@ var filenameMap = defineSourceMap('test.css');
 var points = ['.a', 'color', '.b', 'display', 'float'];
 
 function getOriginalPosition(str, source, filename) {
-    var lines = source.substr(0, source.indexOf(str)).split('\n');
+    var index = source.indexOf(str);
+    var line = null;
+    var column = null;
+
+    if (index !== -1) {
+        var lines = source.substr(0, index).split('\n');
+        line = lines.length;
+        column = lines.pop().length;
+    }
+
     return {
-        line: lines.length,
-        column: lines.pop().length,
-        name: null,
-        source: filename || '<unknown>'
+        source: filename || '<unknown>',
+        line: line,
+        column: column,
+        name: null
     };
 }
 
 function getGeneratedPosition(str, source) {
-    var lines = source.substr(0, source.indexOf(str)).split('\n');
+    var index = source.indexOf(str);
+    var line = null;
+    var column = null;
+
+    if (index !== -1) {
+        var lines = source.substr(0, index).split('\n');
+        line = lines.length;
+        column = lines.pop().length;
+    }
+
     return {
-        line: lines.length,
-        column: lines.pop().length,
+        line: line,
+        column: column,
         lastColumn: null
     };
 }
@@ -39,6 +58,14 @@ function defineSourceMap(filename) {
         base64: base64,
         inline: inline
     };
+}
+
+function extractSourceMap(source) {
+    var m = source.match(/\/\*# sourceMappingURL=data:application\/json;base64,(.+) \*\//);
+
+    if (m) {
+        return new Buffer(m[1], 'base64').toString();
+    }
 }
 
 function createInternalTranslateWidthSourceMapTest(name, test, scope) {
@@ -121,6 +148,46 @@ describe('sourceMaps', function() {
                 });
                 it('original->generated', function() {
                     assert.deepEqual(consumer.generatedPositionFor(original), generated);
+                });
+            });
+        });
+    });
+
+    describe.only('input source map', function() {
+        var filename = __dirname + '/fixture/sourceMaps/autoprefixer.css';
+        var source = fs.readFileSync(filename, 'utf8');
+        var sourceMap = JSON.parse(extractSourceMap(source));
+        var sourceContent = sourceMap.sourcesContent[0];
+        var result = csso.minify(source, {
+            filename: filename,
+            inputSourceMap: sourceMap,
+            sourceMap: true
+        });
+        var consumer = new SourceMapConsumer(result.map.toString());
+
+        // generated -> original
+        var mapping = {
+            '.a': '.a',
+            '-webkit-fi1ter': 'filter',
+            'filter': 'filter',
+            '.b': '.b',
+            '-webkit-padding-before': 'padding-block-start',
+            'padding-block-start': 'padding-block-start'
+        };
+
+        Object.keys(mapping).forEach(function(generatedKey) {
+            describe(generatedKey, function() {
+                var original = getOriginalPosition(mapping[generatedKey], sourceContent, 'source.css');
+                var generated = getGeneratedPosition(generatedKey, result.css);
+
+                it('generated->original', function() {
+                    assert.deepEqual(consumer.originalPositionFor(generated), original);
+                });
+                it('original->generated', function() {
+                    assert(consumer.allGeneratedPositionsFor(original).some(function(position) {
+                        return position.line === generated.line &&
+                               position.column === generated.column;
+                    }), 'generated position should in generated positions list');
                 });
             });
         });

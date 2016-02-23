@@ -1,0 +1,10 @@
+.a {
+    -webkit-fi1ter: blur(5px);
+            filter: blur(5px);
+}
+.b {
+    -webkit-padding-before: 10px;
+            padding-block-start: 10px;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNvdXJjZS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSwwQkFBa0I7WUFBbEIsa0JBQWtCO0NBQ3JCO0FBQ0Q7SUFDSSw2QkFBMEI7WUFBMUIsMEJBQTBCO0NBQzdCIiwiZmlsZSI6InNvdXJjZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYSB7XG4gICAgZmlsdGVyOiBibHVyKDVweCk7XG59XG4uYiB7XG4gICAgcGFkZGluZy1ibG9jay1zdGFydDogMTBweDtcbn1cbiJdfQ== */
