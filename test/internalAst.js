@@ -22,9 +22,10 @@ function stringifyInternalAST(ast) {
         if (source && typeof source === 'object') {
             var result = {};
             for (var key in source) {
-                if (key !== 'parent' && key !== 'info' &&
+                if (key !== 'info' &&
                     key !== 'id' && key !== 'length' &&
-                    key !== 'fingerprint' && key !== 'compareMarker') {
+                    key !== 'fingerprint' && key !== 'compareMarker' &&
+                    key !== 'pseudoSignature' && key !== 'avoidRulesMerge') {
                     result[key] = clean(source[key]);
                 }
             }
