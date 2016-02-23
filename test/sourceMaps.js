@@ -64,6 +64,14 @@ describe('sourceMaps', function() {
         assert('map' in result, 'should has `map` property');
     });
 
+    it('should return object if sourceMap is truly value', function() {
+        var result = csso.minify(css, { sourceMap: 'anything' });
+
+        assert(typeof result === 'object');
+        assert('css' in result, 'should has `css` property');
+        assert('map' in result, 'should has `map` property');
+    });
+
     it('should return object if sourceMap is `inline`', function() {
         var result = csso.minify(css, { sourceMap: 'inline' });
 
