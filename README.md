@@ -50,8 +50,6 @@ Some examples:
 > cat source1.css source2.css | csso | gzip -9 -c > production.css.gz
 ```
 
-Debug and statistics:
-
 ```
 > echo '.test { color: #ff0000 }' | node bin/csso --stat >/dev/null
 File:       <stdin>
@@ -61,6 +59,76 @@ Saving:     9 bytes (36.00%)
 Time:       12 ms
 Memory:     0.346 MB
 ```
+
+### Source maps
+
+Source map doesn't generate by default. To generate map use `--map` CLI option, that can be:
+
+- `none` (default) – don't generate source map
+- `inline` – generate map add it into result content (via `/*# sourceMappingURL=application/json;base64,...base64 encoded map... */`)
+- `file` – generate map and write it into file with same name as output file, but with `.map` extension; in this case `--output` option is required
+- any other values treat as filename for generated source map
+
+Examples:
+
+```
+> csso my.css --map inline
+> csso my.css --map file --output my.min.css
+> csso my.css -o my.min.css -m maps/my.min.map
+```
+
+Input can has a source map. Use `--input-map` option to specify input source if needed. Possible values for option:
+
+- `auto` (auto) - attempt to fetch input source map by follow steps:
+  - try to fetch inline map from source
+  - try to fetch map filename from source and read its content
+  - (when `--input` is specified) check for file with same name as input but with `.map` extension exists and read its content
+- `none` - don't use input source map; actually it's using to disable `auto`-fetching
+- any other values as filename for input source map
+
+> NOTE: Input source map is using only if source map is generating.
+
+### API
+
+```js
+var csso = require('csso');
+
+var compressedCss = csso.minify('.test { color: #ff0000; }');
+
+console.log(compressedCss);
+// .test{color:red}
+
+
+var css = fs.readFileSync('path/to/my.css', 'utf8');
+var inputSourceMap = fs.readFileSync('path/to/my.map.css', 'utf8');
+var result = csso.minify(css, {
+  inputSourceMap: inputSourceMap,
+  sourceMap: true         // possible values:
+                          // - false or falsy - don't generate source map (`--map none`)
+                          // - true or truly - generate source map
+});
+
+console.log(result);
+// { css: '...minified...', map: '{ ...source map... }' }
+
+
+// there are some options you can pass
+var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
+    restructuring: false, // don't change css structure, i.e. don't merge declarations, rulesets etc
+    debug: true           // show additional debug information:
+                          // true or number from 1 to 3 (greater number - more details)
+});
+
+// you may do it step by step
+var ast = csso.parse('.test { color: #ff0000; }');
+var compressAst = csso.compress(ast);
+var compressedCss = csso.translate(compressAst, true);
+
+console.log(compressedCss);
+// .test{color:red}
+```
+
+### Debugging
 
 ```
 > echo '.test { color: green; color: #ff0000 } .foo { color: red }' | node bin/csso --debug
@@ -115,35 +183,6 @@ Compress block #1
 .foo,.test{color:red}
 ```
 
-### API
+## License
 
-```js
-var csso = require('csso');
-
-var compressed = csso.minify('.test { color: #ff0000; }');
-console.log(compressed);
-// .test{color:red}
-
-// there are some options you can pass
-var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
-    restructuring: false, // don't change css structure, i.e. don't merge declarations, rulesets etc
-    debug: true           // show additional debug information:
-                          // true or number from 1 to 3 (greater number - more details)
-});
-
-// you may do it step by step
-var ast = csso.parse('.test { color: #ff0000; }');
-ast = csso.compress(ast);
-var compressed = csso.translate(ast, true);
-console.log(compressed);
-// .test{color:red}
-```
-
-## Documentation
-
-> May be outdated
-
-- [English](https://github.com/css/csso/blob/master/docs/index/index.en.md)
-- [Русский](https://github.com/css/csso/blob/master/docs/index/index.ru.md)
-- [日本語](https://github.com/css/csso/blob/master/docs/index/index.ja.md)
-- [한국어](https://github.com/css/csso/blob/master/docs/index/index.ko.md)
+MIT
