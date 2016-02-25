@@ -113,23 +113,17 @@ describe('sourceMaps', function() {
         });
 
         assert.equal(result.css, minifiedCss);
-    });
-
-    it('should add inline map when sourceMap is `inline` and no filename', function() {
-        var result = csso.minify(css, {
-            sourceMap: 'inline'
-        });
-
-        assert.equal(result.css, minifiedCss + '\n' + anonymousMap.inline);
+        assert.equal(result.map, anonymousMap.string);
     });
 
     it('should add inline map when sourceMap is `inline` and filename', function() {
         var result = csso.minify(css, {
-            sourceMap: 'inline',
+            sourceMap: true,
             filename: 'test.css'
         });
 
-        assert.equal(result.css, minifiedCss + '\n' + filenameMap.inline);
+        assert.equal(result.css, minifiedCss);
+        assert.equal(result.map, filenameMap.string);
     });
 
     describe('check positions', function() {
