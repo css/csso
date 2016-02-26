@@ -27,13 +27,15 @@ csso [input] [output] [options]
 
 Options:
 
-      --debug [level]      Output intermediate state of CSS during compression
-  -h, --help               Output usage information
-  -i, --input <filename>   Input file
-  -o, --output <filename>  Output file (result outputs to stdout if not set)
-      --restructure-off    Turns structure minimization off
-      --stat               Output statistics in stderr
-  -v, --version            Output version
+      --debug [level]       Output intermediate state of CSS during compression
+  -h, --help                Output usage information
+  -i, --input <filename>    Input file
+      --input-map <source>  Input source map. Possible values: none, auto (default) or <filename>
+  -m, --map <destination>   Generate source map. Possible values: none (default), inline, file or <filename>
+  -o, --output <filename>   Output file (result outputs to stdout if not set)
+      --restructure-off     Turns structure minimization off
+      --stat                Output statistics in stderr
+  -v, --version             Output version
 ```
 
 Some examples:
@@ -99,19 +101,6 @@ console.log(compressedCss);
 // .test{color:red}
 
 
-var css = fs.readFileSync('path/to/my.css', 'utf8');
-var inputSourceMap = fs.readFileSync('path/to/my.map.css', 'utf8');
-var result = csso.minify(css, {
-  inputSourceMap: inputSourceMap,
-  sourceMap: true         // possible values:
-                          // - false or falsy - don't generate source map (`--map none`)
-                          // - true or truly - generate source map
-});
-
-console.log(result);
-// { css: '...minified...', map: '{ ...source map... }' }
-
-
 // there are some options you can pass
 var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
     restructuring: false, // don't change css structure, i.e. don't merge declarations, rulesets etc
@@ -121,11 +110,39 @@ var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
 
 // you may do it step by step
 var ast = csso.parse('.test { color: #ff0000; }');
-var compressAst = csso.compress(ast);
-var compressedCss = csso.translate(compressAst, true);
+var compressedAst = csso.compress(ast);
+var compressedCss = csso.translate(compressedAst, true);
 
 console.log(compressedCss);
 // .test{color:red}
+```
+
+Working with source maps:
+
+```js
+var css = fs.readFileSync('path/to/my.css', 'utf8');
+var result = csso.minify(css, {
+  filename: 'path/to/my.css', // will be added to source map as reference to file
+  sourceMap: true             // generate source map
+});
+
+console.log(result);
+// { css: '...minified...', map: SourceMapGenerator {} }
+
+console.log(result.map.toString());
+// '{ .. source map content .. }'
+
+// apply input source map
+var SourceMapConsumer = require('source-map').SourceMapConsumer;
+var inputSourceMap = fs.readFileSync('path/to/my.map.css', 'utf8');
+
+result.map.applySourceMap(
+  new SourceMapConsumer(inputSourceMap),
+  'path/to/my.css'  // should be the same as passed to csso.minify()
+);
+
+// if no input source map you may add source content
+result.map.setContent('path/to/my.css', setSourceContent);
 ```
 
 ### Debugging
@@ -152,6 +169,8 @@ Compress block #1
 
 .foo,.test{color:red}
 ```
+
+More details are provided when `--debug` flag has a number greater than `1`:
 
 ```
 > echo '.test { color: green; color: #ff0000 } .foo { color: red }' | node bin/csso --debug 2

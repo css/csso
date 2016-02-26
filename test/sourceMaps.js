@@ -49,7 +49,7 @@ function getGeneratedPosition(str, source) {
 }
 
 function defineSourceMap(filename) {
-    var string = '{"version":3,"sources":["' + filename + '"],"names":[],"mappings":"AAAA,E,CAAK,S,CACL,E,CAAK,a,CAAgB,U","sourcesContent":[' + JSON.stringify(css) + ']}';
+    var string = '{"version":3,"sources":["' + filename + '"],"names":[],"mappings":"AAAA,E,CAAK,S,CACL,E,CAAK,a,CAAgB,U"}'; // ,"sourcesContent":[' + JSON.stringify(css) + ']}';
     var base64 = new Buffer(string, 'utf8').toString('base64');
     var inline = '/*# sourceMappingURL=data:application/json;base64,' + base64 + ' */';
 
@@ -83,47 +83,37 @@ describe('sourceMaps', function() {
         forEachTest(createInternalTranslateWidthSourceMapTest);
     });
 
-    it('should return object if sourceMap is true', function() {
+    it('should return object when sourceMap is true', function() {
         var result = csso.minify(css, { sourceMap: true });
 
         assert(typeof result === 'object');
         assert('css' in result, 'should has `css` property');
         assert('map' in result, 'should has `map` property');
-    });
-
-    it('should return object if sourceMap is truly value', function() {
-        var result = csso.minify(css, { sourceMap: 'anything' });
-
-        assert(typeof result === 'object');
-        assert('css' in result, 'should has `css` property');
-        assert('map' in result, 'should has `map` property');
-    });
-
-    it('should return object if sourceMap is `inline`', function() {
-        var result = csso.minify(css, { sourceMap: 'inline' });
-
-        assert(typeof result === 'object');
-        assert('css' in result, 'should has `css` property');
-        assert('map' in result, 'should has `map` property');
-    });
-
-    it('should not add inline map when sourceMap is not `inline`', function() {
-        var result = csso.minify(css, {
-            sourceMap: true
-        });
-
         assert.equal(result.css, minifiedCss);
-        assert.equal(result.map, anonymousMap.string);
+        assert.equal(result.map.toString(), anonymousMap.string);
     });
 
-    it('should add inline map when sourceMap is `inline` and filename', function() {
+    it('should use passed filename in map', function() {
         var result = csso.minify(css, {
             sourceMap: true,
             filename: 'test.css'
         });
 
         assert.equal(result.css, minifiedCss);
-        assert.equal(result.map, filenameMap.string);
+        assert.equal(result.map.toString(), filenameMap.string);
+    });
+
+    it('should store both position on block merge', function() {
+        var result = csso.minify(
+            '/*! check location merge */.a {a:1;a:2} .a {b:2}' +
+            '/*! several exlamation comments */.foo { color: red }', {
+            sourceMap: true
+        });
+
+        assert.equal(result.css,
+            '/*! check location merge */\n.a{a:2;b:2}\n' +
+            '/*! several exlamation comments */\n.foo{color:red}');
+        assert.equal(result.map.toString(), '{"version":3,"sources":["<unknown>"],"names":[],"mappings":";AAA2B,E,CAAQ,G,CAAS,G;;AAAsC,I,CAAO,S"}');
     });
 
     describe('check positions', function() {
@@ -150,16 +140,18 @@ describe('sourceMaps', function() {
     describe('input source map', function() {
         var filename = __dirname + '/fixture/sourceMaps/autoprefixer.css';
         var source = fs.readFileSync(filename, 'utf8');
-        var sourceMap = JSON.parse(extractSourceMap(source));
-        var sourceContent = sourceMap.sourcesContent[0];
+        var inputSourceMap = JSON.parse(extractSourceMap(source));
+        var sourceContent = inputSourceMap.sourcesContent[0];
         var result = csso.minify(source, {
             filename: filename,
-            inputSourceMap: sourceMap,
             sourceMap: true
         });
-        var consumer = new SourceMapConsumer(result.map.toString());
+
+        // apply input map
+        result.map.applySourceMap(new SourceMapConsumer(inputSourceMap), filename);
 
         // generated -> original
+        var consumer = new SourceMapConsumer(result.map.toJSON());
         var mapping = {
             '.a': '.a',
             '-webkit-fi1ter': 'filter',
