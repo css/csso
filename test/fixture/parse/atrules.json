@@ -32,6 +32,21 @@
             ["string", "\"blah\""]
         ]
     },
+    "atrules.3": {
+        "source": "@import url(http://example.com)",
+        "restoredSource": "@import url(http://example.com);",
+        "ast": [
+            "atrules", [
+                "atkeyword",
+                ["ident", "import"]
+            ],
+            ["s", " "],
+            [
+                "uri",
+                ["raw", "http://example.com"]
+            ]
+        ]
+    },
     "atrules.c.0": {
         "source": "@test/*test*/;",
         "ast": [

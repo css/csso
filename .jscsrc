@@ -1,9 +1,9 @@
 {
     "excludeFiles": [
+        "./coverage",
         "./docs",
         "./dist",
-        "./node_modules",
-        "./lib/parser"
+        "./node_modules"
     ],
 
     "disallowEmptyBlocks": true,

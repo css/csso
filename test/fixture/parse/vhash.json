@@ -6,5 +6,17 @@
     "vhash.1": {
         "source": "#id",
         "ast": ["vhash", "id"]
+    },
+    "vhash.2": {
+        "source": "#123abc",
+        "ast": ["vhash", "123abc"]
+    },
+    "vhash.3": {
+        "source": "#abc123",
+        "ast": ["vhash", "abc123"]
+    },
+    "vhash.4": {
+        "source": "#a1b2c3d4",
+        "ast": ["vhash", "a1b2c3d4"]
     }
 }

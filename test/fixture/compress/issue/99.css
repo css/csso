@@ -1,6 +1,0 @@
-/*
-  issue 99
-  class names can't start with digits, but should be left as is in this case
-*/
-.0px { color: #f00; }
-.1px { color: green; }

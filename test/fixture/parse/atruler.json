@@ -112,7 +112,7 @@
             ]
         ]
     },
-    "atruler.2": {
+    "atruler.3": {
         "source": "@media x, y f(1+2) {s{p:v}}",
         "ast": [
             "atruler", [
@@ -156,6 +156,74 @@
                         ]
                     ]
                 ]
+            ]
+        ]
+    },
+    "atruler.4": {
+        "source": "@media { .a { p: v; } .b { p: v } }",
+        "ast": [
+            "atruler", [
+                "atkeyword",
+                ["ident", "media"]
+            ], [
+                "atrulerq",
+                ["s", " "]
+            ], [
+                "atrulers",
+                ["s", " "],
+                [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector", [
+                                "clazz",
+                                ["ident", "a"]
+                            ],
+                            ["s", " "]
+                        ]
+                    ], [
+                        "block",
+                        ["s", " "],
+                        [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"]
+                            ], [
+                                "value",
+                                ["s", " "],
+                                ["ident", "v"]
+                            ]
+                        ],
+                        ["decldelim"],
+                        ["s", " "]
+                    ]
+                ],
+                ["s", " "],
+                [
+                    "ruleset", [
+                        "selector", [
+                            "simpleselector", [
+                                "clazz",
+                                ["ident", "b"]
+                            ],
+                            ["s", " "]
+                        ]
+                    ], [
+                        "block",
+                        ["s", " "],
+                        [
+                            "declaration", [
+                                "property",
+                                ["ident", "p"]
+                            ], [
+                                "value",
+                                ["s", " "],
+                                ["ident", "v"],
+                                ["s", " "]
+                            ]
+                        ]
+                    ]
+                ],
+                ["s", " "]
             ]
         ]
     },

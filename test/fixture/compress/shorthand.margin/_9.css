@@ -1,0 +1,40 @@
+/*
+  issue #255 collapse margin when every component has the same CSS-wide keyword
+  https://www.w3.org/TR/css3-values/#common-keywords
+  https://www.w3.org/TR/css-cascade-4/#defaulting-keywords
+*/
+
+.a {
+    margin-top: inherit;
+    margin-right: inherit;
+    margin-bottom: inherit;
+    margin-left: inherit;
+}
+
+.b {
+    margin-top: initial;
+    margin-right: initial;
+    margin-bottom: initial;
+    margin-left: initial;
+}
+
+.c {
+    margin-top: unset;
+    margin-right: unset;
+    margin-bottom: unset;
+    margin-left: unset;
+}
+
+.d {
+    margin-top: revert;
+    margin-right: revert;
+    margin-bottom: revert;
+    margin-left: revert;
+}
+
+.e {
+    margin-top: inherit;
+    margin-right: initial;
+    margin-bottom: unset;
+    margin-left: revert;
+}

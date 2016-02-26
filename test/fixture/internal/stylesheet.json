@@ -932,7 +932,10 @@
             "rules": [
                 {
                     "type": "Ruleset",
-                    "selector": null,
+                    "selector": {
+                        "type": "Selector",
+                        "selectors": []
+                    },
                     "block": {
                         "type": "Block",
                         "declarations": []
