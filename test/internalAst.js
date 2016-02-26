@@ -138,6 +138,14 @@ describe('internal AST', function() {
 
     describe('transform internal->gonzales', function() {
         forEachTest(createInternalToGonzalesTest);
+
+        it('should throw error on wrong ast node', function() {
+            assert.throws(function() {
+                internalToGonzales({
+                    type: 'xxx'
+                });
+            }, /Unknown node type/);
+        });
     });
 
     describe('walk all', function() {
@@ -178,5 +186,11 @@ describe('internal AST', function() {
 
     describe('translate', function() {
         forEachTest(createInternalTranslateTest);
+
+        assert.throws(function() {
+            internalTranslate({
+                type: 'xxx'
+            });
+        }, /Unknown node type/);
     });
 });
