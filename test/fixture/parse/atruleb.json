@@ -80,6 +80,31 @@
             ]
         ]
     },
+    "": {
+        "source": "@page :left {p:v}",
+        "ast": [
+            "atruleb", [
+                "atkeyword",
+                ["ident", "page"]
+            ],
+            ["s", " "],
+            ["pseudoc",
+                ["ident", "left"]
+            ],
+            ["s", " "],
+            [
+                "block", [
+                    "declaration", [
+                        "property",
+                        ["ident", "p"]
+                    ], [
+                        "value",
+                        ["ident", "v"]
+                    ]
+                ]
+            ]
+        ]
+    },
     "atruleb.c.0": {
         "source": "@test/*test*/{/*test*/p/*test*/:/*test*/v/*test*/}",
         "ast": [

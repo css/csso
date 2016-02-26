@@ -179,5 +179,19 @@
             "value",
             ["ident", "u+0F00??"]
         ]
+    },
+    "ident name starts with minus": {
+        "source": "-moz-flex",
+        "ast": [
+            "value",
+            ["ident", "-moz-flex"]
+        ]
+    },
+    "expression": {
+        "source": "expression(a=1)",
+        "ast": [
+            "value",
+            ["functionExpression", "a=1"]
+        ]
     }
 }
