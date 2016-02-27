@@ -30,7 +30,8 @@
                                                             "name": "x|x"
                                                         },
                                                         "operator": null,
-                                                        "value": null
+                                                        "value": null,
+                                                        "flags": null
                                                     }
                                                 ]
                                             }

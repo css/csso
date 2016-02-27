@@ -17,6 +17,16 @@
             ["string", "'b'"]
         ]
     },
+    "attrib with flags": {
+        "source": "[a='b'i]",
+        "ast": [
+            "attrib",
+            ["ident", "a"],
+            ["attrselector", "="],
+            ["string", "'b'"],
+            ["attribFlags", "i"]
+        ]
+    },
     "attrib.2": {
         "source": "[b]",
         "ast": [
@@ -90,6 +100,36 @@
             ["s", "  "],
             ["string", "'b'"],
             ["s", "  "]
+        ]
+    },
+    "attrib with flags and spaces": {
+        "source": "[  a  =  'b'  i  ]",
+        "ast": [
+            "attrib",
+            ["s", "  "],
+            ["ident", "a"],
+            ["s", "  "],
+            ["attrselector", "="],
+            ["s", "  "],
+            ["string", "'b'"],
+            ["s", "  "],
+            ["attribFlags", "i"],
+            ["s", "  "]
+        ]
+    },
+    "attrib with flags and comments": {
+        "source": "[/*1*/a/*2*/=/*3*/'b'/*4*/i/*5*/]",
+        "ast": [
+            "attrib",
+            ["comment", "1"],
+            ["ident", "a"],
+            ["comment", "2"],
+            ["attrselector", "="],
+            ["comment", "3"],
+            ["string", "'b'"],
+            ["comment", "4"],
+            ["attribFlags", "i"],
+            ["comment", "5"]
         ]
     },
     "namespace": {

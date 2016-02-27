@@ -12,7 +12,8 @@
             "value": {
                 "type": "Identifier",
                 "name": "b"
-            }
+            },
+            "flags": null
         }
     },
     "attrib.1": {
@@ -28,7 +29,25 @@
             "value": {
                 "type": "String",
                 "value": "'b'"
-            }
+            },
+            "flags": null
+        }
+    },
+    "attrib.1 with flags": {
+        "source": "[a='b'i]",
+        "translate": "[a='b'i]",
+        "ast": {
+            "type": "Attribute",
+            "name": {
+                "type": "Identifier",
+                "name": "a"
+            },
+            "operator": "=",
+            "value": {
+                "type": "String",
+                "value": "'b'"
+            },
+            "flags": "i"
         }
     },
     "attrib.2": {
@@ -41,7 +60,8 @@
                 "name": "b"
             },
             "operator": null,
-            "value": null
+            "value": null,
+            "flags": null
         }
     },
     "attrib.3": {
@@ -54,7 +74,8 @@
                 "name": "ng:cloak"
             },
             "operator": null,
-            "value": null
+            "value": null,
+            "flags": null
         }
     },
     "attrib.4": {
@@ -70,39 +91,8 @@
             "value": {
                 "type": "Identifier",
                 "name": "x"
-            }
-        }
-    },
-    "attrib.c.0": {
-        "source": "[/*test*/a/*test*/=/*test*/b/*test*/]",
-        "translate": "[a=b]",
-        "ast": {
-            "type": "Attribute",
-            "name": {
-                "type": "Identifier",
-                "name": "a"
             },
-            "operator": "=",
-            "value": {
-                "type": "Identifier",
-                "name": "b"
-            }
-        }
-    },
-    "attrib.c.1": {
-        "source": "[/*test*/a/*test*/=/*test*/'b'/*test*/]",
-        "translate": "[a='b']",
-        "ast": {
-            "type": "Attribute",
-            "name": {
-                "type": "Identifier",
-                "name": "a"
-            },
-            "operator": "=",
-            "value": {
-                "type": "String",
-                "value": "'b'"
-            }
+            "flags": null
         }
     },
     "attrib.s.0": {
@@ -118,7 +108,8 @@
             "value": {
                 "type": "Identifier",
                 "name": "b"
-            }
+            },
+            "flags": null
         }
     },
     "attrib.s.1": {
@@ -134,7 +125,76 @@
             "value": {
                 "type": "String",
                 "value": "'b'"
-            }
+            },
+            "flags": null
+        }
+    },
+    "attrib.1 with flags and spaces": {
+        "source": "[  a  =  'b'  i  ]",
+        "translate": "[a='b'i]",
+        "ast": {
+            "type": "Attribute",
+            "name": {
+                "type": "Identifier",
+                "name": "a"
+            },
+            "operator": "=",
+            "value": {
+                "type": "String",
+                "value": "'b'"
+            },
+            "flags": "i"
+        }
+    },
+    "attrib.c.0": {
+        "source": "[/*test*/a/*test*/=/*test*/b/*test*/]",
+        "translate": "[a=b]",
+        "ast": {
+            "type": "Attribute",
+            "name": {
+                "type": "Identifier",
+                "name": "a"
+            },
+            "operator": "=",
+            "value": {
+                "type": "Identifier",
+                "name": "b"
+            },
+            "flags": null
+        }
+    },
+    "attrib.c.1": {
+        "source": "[/*test*/a/*test*/=/*test*/'b'/*test*/]",
+        "translate": "[a='b']",
+        "ast": {
+            "type": "Attribute",
+            "name": {
+                "type": "Identifier",
+                "name": "a"
+            },
+            "operator": "=",
+            "value": {
+                "type": "String",
+                "value": "'b'"
+            },
+            "flags": null
+        }
+    },
+    "attrib.c.1 with flags and comments": {
+        "source": "[/*test*/a/*test*/=/*test*/'b'/*test*/i/*test*/]",
+        "translate": "[a='b'i]",
+        "ast": {
+            "type": "Attribute",
+            "name": {
+                "type": "Identifier",
+                "name": "a"
+            },
+            "operator": "=",
+            "value": {
+                "type": "String",
+                "value": "'b'"
+            },
+            "flags": "i"
         }
     },
     "namespace": {
@@ -150,7 +210,8 @@
             "value": {
                 "type": "String",
                 "value": "\"#test\""
-            }
+            },
+            "flags": null
         }
     },
     "namespace unversal": {
@@ -166,7 +227,8 @@
             "value": {
                 "type": "String",
                 "value": "\"#test\""
-            }
+            },
+            "flags": null
         }
     },
     "namespace w/o attrselector": {
@@ -179,7 +241,8 @@
                 "name": "xlink|href"
             },
             "operator": null,
-            "value": null
+            "value": null,
+            "flags": null
         }
     },
     "namespace unversal w/o attrselector": {
@@ -192,7 +255,8 @@
                 "name": "*|href"
             },
             "operator": null,
-            "value": null
+            "value": null,
+            "flags": null
         }
     },
     "attrib with dashmatch": {
@@ -208,7 +272,8 @@
             "value": {
                 "type": "String",
                 "value": "'b'"
-            }
+            },
+            "flags": null
         }
     },
     "attrib with namespace and dashmatch": {
@@ -224,7 +289,8 @@
             "value": {
                 "type": "String",
                 "value": "'c'"
-            }
+            },
+            "flags": null
         }
     },
     "attrib with dashmatch and spaces": {
@@ -240,7 +306,8 @@
             "value": {
                 "type": "String",
                 "value": "'b'"
-            }
+            },
+            "flags": null
         }
     },
     "attrib with namespace, dashmatch and spaces": {
@@ -256,7 +323,8 @@
             "value": {
                 "type": "String",
                 "value": "'c'"
-            }
+            },
+            "flags": null
         }
     }
 }
