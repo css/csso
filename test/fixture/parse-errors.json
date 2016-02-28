@@ -55,6 +55,20 @@
         "column": 2
     }
 }, {
+    "css": "a { color: #}",
+    "error": "Number or identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 13
+    }
+}, {
+    "css": "a { color: # }",
+    "error": "Number or identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 13
+    }
+}, {
     "css": ": {}",
     "error": "Identifier is expected",
     "position": {
@@ -102,6 +116,41 @@
     "position": {
         "line": 1,
         "column": 12
+    }
+}, {
+    "css": ":not(.a{)",
+    "error": "Unexpected input",
+    "position": {
+        "line": 1,
+        "column": 8
+    }
+}, {
+    "css": ":not(,.b)",
+    "error": "Simple selector expected",
+    "position": {
+        "line": 1,
+        "column": 6
+    }
+}, {
+    "css": ":not(.a,)",
+    "error": "Simple selector expected",
+    "position": {
+        "line": 1,
+        "column": 9
+    }
+}, {
+    "css": ":not(.a,,)",
+    "error": "Simple selector expected",
+    "position": {
+        "line": 1,
+        "column": 9
+    }
+}, {
+    "css": ":not(.a,.b{)",
+    "error": "Unexpected input",
+    "position": {
+        "line": 1,
+        "column": 11
     }
 }, {
     "css": "[a+=1]{}",

@@ -371,6 +371,38 @@
             ]
         }
     },
+    "simpleselector.15": {
+        "source": ":not(.a,.b)",
+        "translate": ":not(.a,.b)",
+        "ast": {
+            "type": "SimpleSelector",
+            "sequence": [
+                {
+                    "type": "Negation",
+                    "sequence": [
+                        {
+                            "type": "SimpleSelector",
+                            "sequence": [
+                                {
+                                    "type": "Class",
+                                    "name": "a"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "SimpleSelector",
+                            "sequence": [
+                                {
+                                    "type": "Class",
+                                    "name": "b"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
     "simpleselector.c.0": {
         "source": "a/*test*/ /*test*/b",
         "translate": "a b",
@@ -535,6 +567,38 @@
                 {
                     "type": "Identifier",
                     "name": "b"
+                }
+            ]
+        }
+    },
+    "simpleselector.s.15": {
+        "source": ":not(  .a  ,  .b  )",
+        "translate": ":not(.a,.b)",
+        "ast": {
+            "type": "SimpleSelector",
+            "sequence": [
+                {
+                    "type": "Negation",
+                    "sequence": [
+                        {
+                            "type": "SimpleSelector",
+                            "sequence": [
+                                {
+                                    "type": "Class",
+                                    "name": "a"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "SimpleSelector",
+                            "sequence": [
+                                {
+                                    "type": "Class",
+                                    "name": "b"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
