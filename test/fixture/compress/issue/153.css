@@ -13,3 +13,7 @@ c {
 d {
 	background: linear-gradient(bottom, rgb(209,209,209) 10%, rgb(250,250,250) 55%);
 }
+
+e {
+    background-image: linear-gradient(black, rgb(148, 34, 34) 52%, white);
+}
