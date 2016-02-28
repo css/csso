@@ -1,5 +1,5 @@
 /*
-    issue #273 should compress length dimension outside block
+    issue #273 shouldn't compress length dimension outside declaration
 */
 @supports (width: 0px) and (test: 0deg) {
     .test {

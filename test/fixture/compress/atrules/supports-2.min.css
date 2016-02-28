@@ -1,1 +1,1 @@
-@supports (width:0) and (test:0deg){.test{foo:1}}
+@supports (width:0px) and (test:0deg){.test{foo:1}}
