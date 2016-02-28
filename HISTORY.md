@@ -1,16 +1,20 @@
+## 1.6.1 (February 28, 2016)
+
+- fix exception on zero length dimension compress outside declaration (#273)
+
 ## 1.6.0 (February 27, 2016)
 
 - **source maps support**
 - parser remake:
     - various parsing issues fixed
-    - fix unicode sequence processing in ident (fixes #191)
-    - support for flags in attribute selector (fixes #270)
-    - position (line and column) of parse error (fixes #109)
+    - fix unicode sequence processing in ident (#191)
+    - support for flags in attribute selector (#270)
+    - position (line and column) of parse error (#109)
     - 4x performance boost, less memory consumption
 - compressor refactoring
     - internal AST is using doubly linked lists (with safe transformation support during iteration) instead of arrays
     - rename `restructuring` to `restructure` option for `minify()`/`compress()` (`restructuring` is alias for `restructure` now, with lower priority)
-    - unquote urls when possible (fixes #141, #60)
+    - unquote urls when possible (#141, #60)
 - setup code coverage and a number of related fixes
 - add eslint to check unused things
 
