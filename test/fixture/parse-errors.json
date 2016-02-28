@@ -20,6 +20,13 @@
         "column": 2
     }
 }, {
+    "css": ".",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 2
+    }
+}, {
     "css": ".1px {}",
     "error": "Identifier is expected",
     "position": {
@@ -41,6 +48,13 @@
         "column": 2
     }
 }, {
+    "css": "#",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 2
+    }
+}, {
     "css": ": {}",
     "error": "Identifier is expected",
     "position": {
@@ -49,6 +63,27 @@
     }
 }, {
     "css": ":{}",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 2
+    }
+}, {
+    "css": ":",
+    "error": "Colon or identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 2
+    }
+}, {
+    "css": "::",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 3
+    }
+}, {
+    "css": ": ",
     "error": "Identifier is expected",
     "position": {
         "line": 1,

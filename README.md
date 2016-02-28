@@ -178,9 +178,6 @@ More details are provided when `--debug` flag has a number greater than `1`:
 ## parsing done in 8 ms
 
 Compress block #1
-(0.002ms) convertToInternal
-  .test{color:green;color:#ff0000}.foo{color:red}
-
 (0.000ms) clean
   .test{color:green;color:#ff0000}.foo{color:red}
 
@@ -195,12 +192,31 @@ Compress block #1
 (0.001ms) rejoinRuleset
   .foo,.test{color:red}
 
-(0.000ms) restructRuleset
-  .foo,.test{color:red}
-
 ## compressing done in 13 ms
 
 .foo,.test{color:red}
+```
+
+Using `--debug` option adds stack trace to CSS parse error output. That can help to find out problem in parser.
+
+```
+> echo '.a { color }' | csso --debug
+
+Parse error <stdin>: Colon is expected
+    1 |.a { color }
+------------------^
+    2 |
+
+/Users/rdvornov/git/csso/lib/cli.js:243
+                throw e;
+                ^
+
+CssSyntaxError: Colon is expected
+    at parseError (/Users/rdvornov/git/csso/lib/parser/index.js:54:17)
+    at eat (/Users/rdvornov/git/csso/lib/parser/index.js:89:5)
+    at getDeclaration (/Users/rdvornov/git/csso/lib/parser/index.js:395:5)
+    at getBlock (/Users/rdvornov/git/csso/lib/parser/index.js:381:27)
+    ...
 ```
 
 ## License
