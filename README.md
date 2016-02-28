@@ -3,6 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/css/csso/badge.svg?branch=master)](https://coveralls.io/github/css/csso?branch=master)
 [![Dependency Status](https://img.shields.io/david/css/csso.svg)](https://david-dm.org/css/csso)
 [![devDependency Status](https://img.shields.io/david/dev/css/csso.svg)](https://david-dm.org/css/csso#info=devDependencies)
+[![Twitter](https://img.shields.io/badge/Twitter-@cssoptimizer-blue.svg)](https://twitter.com/cssoptimizer)
 
 CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
 
@@ -103,7 +104,7 @@ console.log(compressedCss);
 
 // there are some options you can pass
 var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
-    restructuring: false, // don't change css structure, i.e. don't merge declarations, rulesets etc
+    restructure: false,   // don't change css structure, i.e. don't merge declarations, rulesets etc
     debug: true           // show additional debug information:
                           // true or number from 1 to 3 (greater number - more details)
 });
