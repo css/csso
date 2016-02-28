@@ -8,6 +8,7 @@
 <body>
     <script src="csso-browser.js"></script>
     <script src="libs/cssbeautify.js"></script>
+    <script src="libs/base64.js"></script>
 
     <div class="layout">
         <div class="toolbar">
@@ -25,6 +26,9 @@
             <div class="main-section" id="result">
                 <div class="header">
                     <span class="caption">Result</span>
+                    <label for="sourceMap">
+                        <input type="checkbox" id="sourceMap" checked> Source map
+                    </label>
                     <label for="restructure">
                         <input type="checkbox" id="restructure" checked> Restructure
                     </label>
@@ -50,6 +54,7 @@
     <script>
         var lastSource;
         var lastResult;
+        var lastResultMap;
 
         function beautifySourceCSS() {
             source.value = cssbeautify(source.value);
@@ -58,6 +63,34 @@
         function setText(element, text) {
             element.innerHTML = '';
             element.appendChild(document.createTextNode(text));
+        }
+
+        function processParseError(source, details, message) {
+            function formatLines(start, end) {
+                return lines.slice(start, end).map(function(line, idx) {
+                    var num = String(start + idx + 1);
+
+                    while (num.length < maxNumLength) {
+                        num = ' ' + num;
+                    }
+
+                    return num + ' |' + line;
+                }).join('\n');
+            }
+
+            var lines = source.split(/\n|\r\n?|\f/);
+            var column = details.column;
+            var line = details.line;
+            var startLine = Math.max(1, line - 3);
+            var endLine = Math.min(line + 3, lines.length + 1);
+            var maxNumLength = Math.max(4, String(endLine).length) + 1;
+
+            return [
+                'CSS parse error: ' + message + '\n',
+                formatLines(startLine - 1, line),
+                new Array(column + maxNumLength + 2).join('-') + '^',
+                formatLines(line, endLine)
+            ].join('\n');
         }
 
         function updateStat(originalSize, resultSize, time) {
@@ -77,9 +110,12 @@
         function setOutput() {
             var css = lastResult;
 
-            if (beautify.checked) {
+            if (sourceMap.checked && lastResultMap) {
+                css += '\n/*# sourceMappingURL=application/json;base64,' + Base64.encode(lastResultMap) + ' */';
+            } else if (beautify.checked) {
                 css = cssbeautify(css);
             }
+
 
             setText(output, css);
         }
@@ -91,16 +127,31 @@
                 return;
             }
 
+            beautify.disabled = sourceMap.checked;
+
             var time = (window.performance || Date).now();
 
             try {
                 lastSource = source.value;
                 lastResult = csso.minify(source.value, {
-                    restructuring: restructure.checked
+                    restructure: restructure.checked,
+                    sourceMap: sourceMap.checked
                 });
+
+                if (typeof lastResult !== 'string') {
+                    lastResultMap = lastResult.map.toString();
+                    lastResult = lastResult.css;
+                } else {
+                    lastResultMap = null;
+                }
+
                 error.classList.remove('show');
             } catch(e) {
-                setText(errorMessage, e.message);
+                if (e.parseError) {
+                    setText(errorMessage, processParseError(source.value, e.parseError, e.message));
+                } else {
+                    setText(errorMessage, e.message);
+                }
                 error.classList.add('show');
                 return;
             }
@@ -119,6 +170,7 @@
         beautifySource.addEventListener('click', beautifySourceCSS, false);
         beautify.addEventListener('change', setOutput, false);
         restructure.addEventListener('change', process.bind(null, true), false);
+        sourceMap.addEventListener('change', process.bind(null, true), false);
 
         document.getElementById('version').innerHTML = csso.version;
         process();
