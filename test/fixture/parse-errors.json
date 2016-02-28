@@ -126,21 +126,21 @@
     }
 }, {
     "css": ":not(,.b)",
-    "error": "Simple selector expected",
+    "error": "Simple selector is expected",
     "position": {
         "line": 1,
         "column": 6
     }
 }, {
     "css": ":not(.a,)",
-    "error": "Simple selector expected",
+    "error": "Simple selector is expected",
     "position": {
         "line": 1,
         "column": 9
     }
 }, {
     "css": ":not(.a,,)",
-    "error": "Simple selector expected",
+    "error": "Simple selector is expected",
     "position": {
         "line": 1,
         "column": 9
