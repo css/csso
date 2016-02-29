@@ -1,3 +1,12 @@
+## 1.6.2 (February 29, 2016)
+
+- tweak some parse error messages and their positions
+- fix `:not()` parsing and selector groups in `:not()` is supported now (#215)
+- `needPosition` parser option is deprecated, `positions` option should be used instead (`needPosition` is used still if `positions` option omitted)
+- expose internal AST API as `csso.internal.*`
+- `minify()` adds `sourcesContent` by default when source map is generated
+- bring back support for node.js `0.10` until major release (#275)
+
 ## 1.6.1 (February 28, 2016)
 
 - fix exception on zero length dimension compress outside declaration (#273)
