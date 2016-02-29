@@ -47,14 +47,12 @@ Some examples:
 > csso in.css
 ...output result in stdout...
 
-> echo ".test { color: #ff0000; }" | csso
+> echo '.test { color: #ff0000; }' | csso
 .test{color:red}
 
 > cat source1.css source2.css | csso | gzip -9 -c > production.css.gz
-```
 
-```
-> echo '.test { color: #ff0000 }' | node bin/csso --stat >/dev/null
+> echo '.test { color: #ff0000 }' | csso --stat >/dev/null
 File:       <stdin>
 Original:   25 bytes
 Compressed: 16 bytes (64.00%)
@@ -146,7 +144,7 @@ result.map.applySourceMap(
 ### Debugging
 
 ```
-> echo '.test { color: green; color: #ff0000 } .foo { color: red }' | node bin/csso --debug
+> echo '.test { color: green; color: #ff0000 } .foo { color: red }' | csso --debug
 ## parsing done in 10 ms
 
 Compress block #1
@@ -171,7 +169,7 @@ Compress block #1
 More details are provided when `--debug` flag has a number greater than `1`:
 
 ```
-> echo '.test { color: green; color: #ff0000 } .foo { color: red }' | node bin/csso --debug 2
+> echo '.test { color: green; color: #ff0000 } .foo { color: red }' | csso --debug 2
 ## parsing done in 8 ms
 
 Compress block #1
