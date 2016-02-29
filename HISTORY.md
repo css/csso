@@ -1,3 +1,7 @@
+## 1.6.3 (February 29, 2016)
+
+- add `file` to generated source map since other tools can relay on it in source map transform chain
+
 ## 1.6.2 (February 29, 2016)
 
 - tweak some parse error messages and their positions
