@@ -135,15 +135,12 @@ console.log(result.map.toString());
 
 // apply input source map
 var SourceMapConsumer = require('source-map').SourceMapConsumer;
-var inputSourceMap = fs.readFileSync('path/to/my.map.css', 'utf8');
+var inputSourceMap = fs.readFileSync('path/to/my.css.map', 'utf8');
 
 result.map.applySourceMap(
   new SourceMapConsumer(inputSourceMap),
   'path/to/my.css'  // should be the same as passed to csso.minify()
 );
-
-// if no input source map you may add source content
-result.map.setContent('path/to/my.css', setSourceContent);
 ```
 
 ### Debugging
