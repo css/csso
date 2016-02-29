@@ -27,8 +27,8 @@
       "es6": true
     },
     "rules": {
-      "no-undef": 1,
-      "no-unused-vars": [1, {"vars": "all", "args": "after-used"}]
+      "no-undef": 2,
+      "no-unused-vars": [2, {"vars": "all", "args": "after-used"}]
     }
   },
   "scripts": {
