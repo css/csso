@@ -207,15 +207,15 @@ Parse error <stdin>: Colon is expected
 ------------------^
     2 |
 
-/Users/rdvornov/git/csso/lib/cli.js:243
+/usr/local/lib/node_modules/csso/lib/cli.js:243
                 throw e;
                 ^
 
-CssSyntaxError: Colon is expected
-    at parseError (/Users/rdvornov/git/csso/lib/parser/index.js:54:17)
-    at eat (/Users/rdvornov/git/csso/lib/parser/index.js:89:5)
-    at getDeclaration (/Users/rdvornov/git/csso/lib/parser/index.js:395:5)
-    at getBlock (/Users/rdvornov/git/csso/lib/parser/index.js:381:27)
+Error: Colon is expected
+    at parseError (/usr/local/lib/node_modules/csso/lib/parser/index.js:54:17)
+    at eat (/usr/local/lib/node_modules/csso/lib/parser/index.js:88:5)
+    at getDeclaration (/usr/local/lib/node_modules/csso/lib/parser/index.js:394:5)
+    at getBlock (/usr/local/lib/node_modules/csso/lib/parser/index.js:380:27)
     ...
 ```
 
