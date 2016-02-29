@@ -1,6 +1,7 @@
 var fs = require('fs');
 var assert = require('assert');
 var csso = require('../lib/index.js');
+var cli = require('../lib/cli.js');
 var SourceMapConsumer = require('source-map').SourceMapConsumer;
 var gonzalesToInternal = require('../lib/compressor/ast/gonzalesToInternal.js');
 var internalTranslateWithSourceMap = require('../lib/compressor/ast/translateWithSourceMap.js');
@@ -49,7 +50,7 @@ function getGeneratedPosition(str, source) {
 }
 
 function defineSourceMap(filename) {
-    var string = '{"version":3,"sources":["' + filename + '"],"names":[],"mappings":"AAAA,E,CAAK,S,CACL,E,CAAK,a,CAAgB,U"}'; // ,"sourcesContent":[' + JSON.stringify(css) + ']}';
+    var string = '{"version":3,"sources":["' + filename + '"],"names":[],"mappings":"AAAA,E,CAAK,S,CACL,E,CAAK,a,CAAgB,U","sourcesContent":[' + JSON.stringify(css) + ']}';
     var base64 = new Buffer(string, 'utf8').toString('base64');
     var inline = '/*# sourceMappingURL=data:application/json;base64,' + base64 + ' */';
 
@@ -84,7 +85,9 @@ describe('sourceMaps', function() {
     });
 
     it('should return object when sourceMap is true', function() {
-        var result = csso.minify(css, { sourceMap: true });
+        var result = csso.minify(css, {
+            sourceMap: true
+        });
 
         assert(typeof result === 'object');
         assert('css' in result, 'should has `css` property');
@@ -104,23 +107,24 @@ describe('sourceMaps', function() {
     });
 
     it('should store both position on block merge', function() {
-        var result = csso.minify(
+        var css =
             '/*! check location merge */.a {a:1;a:2} .a {b:2}' +
-            '/*! several exlamation comments */.foo { color: red }', {
+            '/*! several exlamation comments */.foo { color: red }';
+        var result = csso.minify(css, {
             sourceMap: true
         });
 
         assert.equal(result.css,
             '/*! check location merge */\n.a{a:2;b:2}\n' +
             '/*! several exlamation comments */\n.foo{color:red}');
-        assert.equal(result.map.toString(), '{"version":3,"sources":["<unknown>"],"names":[],"mappings":";AAA2B,E,CAAQ,G,CAAS,G;;AAAsC,I,CAAO,S"}');
+        assert.equal(result.map.toString(), '{"version":3,"sources":["<unknown>"],"names":[],"mappings":";AAA2B,E,CAAQ,G,CAAS,G;;AAAsC,I,CAAO,S","sourcesContent":[' + JSON.stringify(css) + ']}');
     });
 
     describe('check positions', function() {
         var result = csso.minify(css, {
             sourceMap: true
         });
-        var consumer = new SourceMapConsumer(result.map.toString());
+        var consumer = new SourceMapConsumer(result.map.toJSON());
 
         points.forEach(function(str) {
             describe(str, function() {
