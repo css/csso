@@ -1,7 +1,6 @@
 var fs = require('fs');
 var assert = require('assert');
 var csso = require('../lib/index.js');
-var cli = require('../lib/cli.js');
 var SourceMapConsumer = require('source-map').SourceMapConsumer;
 var gonzalesToInternal = require('../lib/compressor/ast/gonzalesToInternal.js');
 var internalTranslateWithSourceMap = require('../lib/compressor/ast/translateWithSourceMap.js');
