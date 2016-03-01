@@ -1,3 +1,7 @@
+## 1.6.4 (March 1, 2016)
+
+- `npm` publish issue (#276)
+
 ## 1.6.3 (February 29, 2016)
 
 - add `file` to generated source map since other tools can relay on it in source map transform chain
