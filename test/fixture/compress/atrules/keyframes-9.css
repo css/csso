@@ -1,0 +1,25 @@
+/*
+    should not merge keyframes's rulesets until we sure this merge is safe
+*/
+
+@-webkit-keyframes test {
+    0% {
+        color: red;
+        width: 100px;
+    }
+    100% {
+        color: green;
+        width: 100px;
+    }
+}
+
+@keyframes test {
+    0% {
+        color: red;
+        width: 100px;
+    }
+    100% {
+        color: green;
+        width: 100px;
+    }
+}

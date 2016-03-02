@@ -7,3 +7,6 @@
 .c {
     background: url("test.png") transparent none repeat scroll
 }
+.d {
+    *background: url("test2.png") transparent none repeat scroll
+}
