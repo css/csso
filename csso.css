@@ -116,6 +116,8 @@ BODY
     font-family: Consolas, Monaco, Courier New, monospace;
     font-size: 14px;
     line-height: 1.5;
+
+    transition: all .100s;
 }
 .stat
 {
@@ -160,4 +162,89 @@ BODY
     font-size: 120%;
     white-space: pre-wrap;
     font-family: Consolas, Monaco, Courier New, monospace;
+}
+
+#change-log
+{
+    transition: all .100s;
+    display: flex;
+    flex-direction: column;
+    flex: 0;
+}
+#change-log .header
+{
+    display: block;
+    font-size: 10px;
+    padding: 4px 10px;
+    background: #ABC;
+    text-align: center;
+    cursor: pointer;
+}
+#change-log .content
+{
+    overflow: auto;
+    background: #F4F4FA;
+    transition: .100s;
+    transition-property: padding, height;
+    padding: 10px;
+}
+#result.show-transformations #change-log .content
+{
+    flex: 1;
+    padding: 10px;
+}
+#change-log H2
+{
+    display: inline-block;
+    padding: 2px 5px 1px;
+    position: relative;
+    left: -5px;
+    color: #AAA;
+    background: rgba(255, 255, 255, .65);
+    margin: 0 0 .5em;
+    font-size: 14px;
+    font-weight: normal;
+}
+#change-log .delta + H2
+{
+    margin-top: 1.25em;
+}
+#change-log .empty-delta
+{
+    color: #CCC;
+    font-size: 12px;
+}
+#change-log .delta
+{
+    font-family: Consolas, Monaco, Courier New, monospace;
+    line-height: 1.5;
+}
+#change-log .delta .added
+{
+    padding: 2px 0;
+    background: #595;
+    color: white;
+}
+#change-log .delta .removed
+{
+    padding: 2px 0;
+    background: #A66;
+    color: white;
+}
+#change-log .header:hover
+{
+    background: #9AB;
+}
+
+#change-log .content,
+#result.show-transformations .output
+{
+    flex: 0;
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+#result.show-transformations #change-log
+{
+    flex: 1;
 }

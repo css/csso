@@ -9,6 +9,7 @@
     <script src="csso-browser.js"></script>
     <script src="libs/cssbeautify.js"></script>
     <script src="libs/base64.js"></script>
+    <script src="libs/diff.js"></script>
 
     <div class="layout">
         <div class="toolbar">
@@ -23,7 +24,7 @@
                 <textarea id="source" class="editor">.foo { color: #ff0000; }
 .bar { color: rgba(255, 0, 0, 1); }</textarea>
             </div>
-            <div class="main-section" id="result">
+            <div class="main-section show-transformations" id="result">
                 <div class="header">
                     <span class="caption">Result</span>
                     <label for="sourceMap">
@@ -37,6 +38,10 @@
                     </label>
                 </div>
                 <div id="output" class="output"></div>
+                <div id="change-log">
+                    <div class="header" onclick="document.getElementById('result').classList.toggle('show-transformations')">Show transformations</div>
+                    <div id="transformations" class="content"></div>
+                </div>
                 <div id="stat" class="stat"></div>
                 <div id="error">
                     <div class="header">
@@ -120,6 +125,50 @@
             setText(output, css);
         }
 
+        function outputChanges(steps) {
+            var lastStep = '';
+            var transformations = '';
+
+            steps.forEach(function(item) {
+                if (item.css !== lastStep && lastStep) {
+                    // transformations += '<span class="delta empty-delta">(no transformations)</span><br/>';
+                    transformations += '<h2>' + item.name + '</h2>';
+                    transformations +=
+                        '<div class="delta">' +
+                        JsDiff.diffCss(lastStep, item.css).map(function(chunk) {
+                            if (chunk.removed) {
+                                return '<span class="removed">' + chunk.value + '</span>';
+                            } else if (chunk.added) {
+                                return '<span class="added">' + chunk.value + '</span>';
+                            } else {
+                                return chunk.value;
+                            }
+                        }).join('') +
+                        // '</div><div class="delta">' +
+                        // JsDiff.diffCss(lastStep, item.css).map(function(chunk) {
+                        //     if (chunk.removed) {
+                        //         return;
+                        //     }
+
+                        //     if (chunk.added) {
+                        //         return '<span class="added">' + chunk.value + '</span>';
+                        //     } else {
+                        //         return chunk.value;
+                        //     }
+                        // }).join('') +
+                        '</div>';
+                }
+
+                lastStep = item.css;
+            });
+
+            document.getElementById('transformations').innerHTML =
+                transformations +
+                '<h2>result</h2><div class="delta">' + 
+                lastStep +
+                '</div>';
+        }
+
         function process(force) {
             var time;
 
@@ -130,12 +179,21 @@
             beautify.disabled = sourceMap.checked;
 
             var time = (window.performance || Date).now();
+            var steps = [];
 
             try {
                 lastSource = source.value;
                 lastResult = csso.minify(source.value, {
                     restructure: restructure.checked,
-                    sourceMap: sourceMap.checked
+                    sourceMap: sourceMap.checked,
+                    logger: function(name, ast) {
+                        if (ast) {
+                            steps.push({
+                                name: name,
+                                css: csso.internal.translate(ast)
+                            });
+                        }
+                    }
                 });
 
                 if (typeof lastResult !== 'string') {
@@ -163,6 +221,7 @@
             );
 
             setOutput();
+            outputChanges(steps);
         }
         
         source.addEventListener('input', process, false);
