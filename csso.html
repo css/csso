@@ -24,7 +24,7 @@
                 <textarea id="source" class="editor">.foo { color: #ff0000; }
 .bar { color: rgba(255, 0, 0, 1); }</textarea>
             </div>
-            <div class="main-section show-transformations" id="result">
+            <div class="main-section" id="result">
                 <div class="header">
                     <span class="caption">Result</span>
                     <label for="sourceMap">
@@ -39,7 +39,7 @@
                 </div>
                 <div id="output" class="output"></div>
                 <div id="change-log">
-                    <div class="header" onclick="document.getElementById('result').classList.toggle('show-transformations')">Show transformations</div>
+                    <div class="header">Show transformations</div>
                     <div id="transformations" class="content"></div>
                 </div>
                 <div id="stat" class="stat"></div>
@@ -129,38 +129,28 @@
             var lastStep = '';
             var transformations = '';
 
-            steps.forEach(function(item) {
-                if (item.css !== lastStep && lastStep) {
-                    // transformations += '<span class="delta empty-delta">(no transformations)</span><br/>';
-                    transformations += '<h2>' + item.name + '</h2>';
-                    transformations +=
-                        '<div class="delta">' +
-                        JsDiff.diffCss(lastStep, item.css).map(function(chunk) {
-                            if (chunk.removed) {
-                                return '<span class="removed">' + chunk.value + '</span>';
-                            } else if (chunk.added) {
-                                return '<span class="added">' + chunk.value + '</span>';
-                            } else {
-                                return chunk.value;
-                            }
-                        }).join('') +
-                        // '</div><div class="delta">' +
-                        // JsDiff.diffCss(lastStep, item.css).map(function(chunk) {
-                        //     if (chunk.removed) {
-                        //         return;
-                        //     }
+            if (result.classList.contains('show-transformations')) {
+                steps.forEach(function(item) {
+                    if (item.css !== lastStep && lastStep) {
+                        // transformations += '<span class="delta empty-delta">(no transformations)</span><br/>';
+                        transformations += '<h2>' + item.name + '</h2>';
+                        transformations +=
+                            '<div class="delta">' +
+                            JsDiff.diffCss(lastStep, item.css).map(function(chunk) {
+                                if (chunk.removed) {
+                                    return '<span class="removed">' + chunk.value + '</span>';
+                                } else if (chunk.added) {
+                                    return '<span class="added">' + chunk.value + '</span>';
+                                } else {
+                                    return chunk.value;
+                                }
+                            }).join('') +
+                            '</div>';
+                    }
 
-                        //     if (chunk.added) {
-                        //         return '<span class="added">' + chunk.value + '</span>';
-                        //     } else {
-                        //         return chunk.value;
-                        //     }
-                        // }).join('') +
-                        '</div>';
-                }
-
-                lastStep = item.css;
-            });
+                    lastStep = item.css;
+                });
+            }
 
             document.getElementById('transformations').innerHTML =
                 transformations +
@@ -230,6 +220,12 @@
         beautify.addEventListener('change', setOutput, false);
         restructure.addEventListener('change', process.bind(null, true), false);
         sourceMap.addEventListener('change', process.bind(null, true), false);
+        document.querySelector('#change-log .header').addEventListener('click', function() {
+            result.classList.toggle('show-transformations');
+            if (result.classList.contains('show-transformations')) {
+                process(true);
+            }
+        }, false);
 
         document.getElementById('version').innerHTML = csso.version;
         process();
