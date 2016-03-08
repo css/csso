@@ -79,14 +79,14 @@ Examples:
 > csso my.css -o my.min.css -m maps/my.min.map
 ```
 
-Input can has a source map. Use `--input-map` option to specify input source if needed. Possible values for option:
+Input can has a source map. Use `--input-map` option to specify input source map if needed. Possible values for option:
 
 - `auto` (auto) - attempt to fetch input source map by follow steps:
   - try to fetch inline map from source
   - try to fetch map filename from source and read its content
   - (when `--input` is specified) check for file with same name as input but with `.map` extension exists and read its content
 - `none` - don't use input source map; actually it's using to disable `auto`-fetching
-- any other values as filename for input source map
+- any other values treat as filename for input source map
 
 > NOTE: Input source map is using only if source map is generating.
 
