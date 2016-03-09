@@ -352,6 +352,46 @@
             ]
         }
     },
+    "css variables": {
+        "source": "var(--foo, blue)",
+        "translate": "var(--foo,blue)",
+        "ast": {
+            "type": "Value",
+            "important": false,
+            "sequence": [
+                {
+                    "type": "Function",
+                    "name": "var",
+                    "arguments": [
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "name": "--foo"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Argument",
+                            "sequence": [
+                                {
+                                    "type": "Value",
+                                    "important": false,
+                                    "sequence": [
+                                      {
+                                        "type": "Identifier",
+                                        "name": "blue"
+                                      }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
     "important.0": {
         "source": "#123456 !important",
         "translate": "#123456!important",
