@@ -1,11 +1,11 @@
-CSSO (CSS Otimizador) é um otimizador de CSS diferente dos outros. Além das técnicas de minimização habituais ele pode executar a otimização estrutural de arquivos CSS, resultando em arquivos menores se comparado com outros minificadores.
+CSSO (CSS Otimizador) é um otimizador de CSS diferente dos outros. Além das técnicas de minificação habituais ele pode executar a otimização estrutural de arquivos CSS, resultando em arquivos menores se comparado com outros minificadores.
 
 ## Minificação
 
 Minificação é um processo de transformação de um documento CSS em um documento menor sem perdas. As estratégias típicas para alcançar estes objetivos são:
 
 * transformações básicas, tais como remoção de elementos desnecessários (ex. ponto e vírgulas) ou transformação de valores em sua representação mais compacta (ex. `0px` para `0`);
-* otimizações estruturais, tais como a remoção de propriedades substituídas ou méscla de blocos.
+* otimizações estruturais, tais como a remoção de propriedades sobrescritas ou méscla de blocos.
 
 ### Transformações básicas
 
@@ -189,7 +189,7 @@ Strings de multiplas linhas são minificadas de acordo com \[[CSS 2.1 / 4.3.7 St
 
 #### Minificação da propriedade font-weight
 
-Os valores `bold` e `normal` da propriedade `font-weight` são minifcados de acordo com \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
+Os valores `bold` e `normal` da propriedade `font-weight` são minificados de acordo com \[[CSS 2.1 / 15.6 Font boldness: the 'font-weight' property](http://www.w3.org/TR/CSS21/fonts.html#font-boldness)\].
 
 * Antes:
 ```css
@@ -213,7 +213,7 @@ Os valores `bold` e `normal` da propriedade `font-weight` são minifcados de aco
         }
 ```
 
-### Structural optimizations
+### Otimizações estruturais
 
 #### Mesclando blocos com seletores idênticos
 
@@ -254,7 +254,7 @@ Blocos adjacentes com seletores idênticos são mesclados.
         }
 ```
 
-#### Mesclando blocos com propriedades idênticos
+#### Mesclando blocos com propriedades idênticas
 
 Blocos adjacentes com propriedades idênticas são mesclados.
 
@@ -292,7 +292,7 @@ Blocos adjacentes com propriedades idênticas são mesclados.
         }
 ```
 
-#### Remoção de propriedades substituídas
+#### Remoção de propriedades sobrescritas
 
 Propriedades ignoradas pelo navegador podem ser removidas usando as seguintes regras:
 
@@ -318,7 +318,7 @@ Propriedades ignoradas pelo navegador podem ser removidas usando as seguintes re
         }
 ```
 
-##### Remoção de propriedades abreviadas substituídas
+##### Remoção de propriedades abreviadas sobrescritas
 
 No caso das propriedades `border`, `margin`, `padding`, `font` and `list-style`, a seguinte regra de remoção será aplicada: se a última propriedade é um 'geral' (por exemplo, `border`), então todas as propriedades anteriores sobrescritas serão removidas (por exemplo, `border-top-width` or `border-style`).
 
@@ -391,7 +391,7 @@ As minificações terão lugar se a contagem de caracteres das propriedades a se
         }
 ```
 
-As minificações não ocorrerão se a contagem de caracteres das propriedades a serem copiadas foir maior do que a contagem de caracteres das propriedades que se sobrepõem.
+As minificações não ocorrerão se a contagem de caracteres das propriedades a serem copiadas for maior do que a contagem de caracteres das propriedades que se sobrepõem.
 
 * Antes:
 ```css
@@ -429,7 +429,7 @@ As minificações não ocorrerão se a contagem de caracteres das propriedades a
 
 Se dois blocos adjacentes contêm propriedades de intersecção a seguinte optimização é possível:
 
-* propriedades de intersecção é determinada;
+* propriedades de intersecção são determinadas;
 * um novo bloco contendo a intersecção é criado entre os dois blocos.
 
 A minificação ocorrerá se houver ganho na contagem de caracteres.
@@ -527,7 +527,7 @@ O conjunto de regras vazias e regras at-rule serão removidos.
 
 #### Minificação das pripriedades margin e padding
 
-As propriedades `margin` e `padding` são minifcados de acordo com \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] and \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
+As propriedades `margin` e `padding` são minifcados de acordo com \[[CSS 2.1 / 8.3 Margin properties](http://www.w3.org/TR/CSS21/box.html#margin-properties)\] e \[[CSS 2.1 / 8.4 Padding properties](http://www.w3.org/TR/CSS21/box.html#padding-properties)\].
 
 * Antes:
 ```css
@@ -580,7 +580,7 @@ As propriedades `margin` e `padding` são minifcados de acordo com \[[CSS 2.1 / 
 
 ## Recomendações
 
-Alguns compreensores de folhas de estilo são melhores que os outros. As vezes, um caracter diferente pode tornar uma folha de estilo bem-compressível em uma muito inconveniente.
+Alguns compreensores de folhas de estilo são melhores que os outros. Às vezes, um caracter diferente pode tornar uma folha de estilo bem compreensível em uma muito inconveniente.
 
 Você pode ajudar o minificador seguindo estas recomendações.
 
@@ -642,7 +642,7 @@ Bom:
 
 ### Usando !important
 
-Deve ir sem dizer que o uso da declaração `!important` prejudica o desempenho minification.
+Não é preciso dizer que o uso da declaração `!important` prejudica o desempenho da minificação.
 
 Mau:
 

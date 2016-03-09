@@ -2,7 +2,7 @@
 
 Use a [versão online do CSSO](http://css.github.com/csso/csso.html) para minimizar seu código.
 
-**CSSO não é garantido que funcione em navegadores. É preferivel usar essa ferramenta é executá-lo a partir da linha de comando ou através de módulos NPM.**
+**CSSO não é garantido que funcione em navegadores. É preferível usar essa ferramenta é executando-a a partir da linha de comando ou através de módulos NPM.**
 
 ## A partir da linha de comando
 
