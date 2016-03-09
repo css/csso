@@ -55,6 +55,13 @@
         "column": 2
     }
 }, {
+    "css": "a { color }",
+    "error": "Colon is expected",
+    "position": {
+        "line": 1,
+        "column": 11
+    }
+}, {
     "css": "a { color: #}",
     "error": "Number or identifier is expected",
     "position": {
@@ -111,7 +118,35 @@
         "column": 9
     }
 }, {
+    "css": ":pseudo(--test) {}",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 10
+    }
+}, {
+    "css": ":pseudo(var(--test)) {}",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 14
+    }
+}, {
     "css": ":nth-child(xxx)",
+    "error": "Unexpected identifier",
+    "position": {
+        "line": 1,
+        "column": 12
+    }
+}, {
+    "css": ":nth-child(--test) {}",
+    "error": "Unexpected identifier",
+    "position": {
+        "line": 1,
+        "column": 14
+    }
+}, {
+    "css": ":nth-child(var(--test)) {}",
     "error": "Unexpected identifier",
     "position": {
         "line": 1,
@@ -153,11 +188,60 @@
         "column": 11
     }
 }, {
+    "css": ":not(--test) {}",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 7
+    }
+}, {
+    "css": ":not(var(--test)) {}",
+    "error": "Unexpected input",
+    "position": {
+        "line": 1,
+        "column": 9
+    }
+}, {
     "css": "[a+=1]{}",
     "error": "Attribute selector (=, ~=, ^=, $=, *=, |=) is expected",
     "position": {
         "line": 1,
         "column": 3
+    }
+}, {
+    "css": "[var(--test)=1]{}",
+    "error": "Attribute selector (=, ~=, ^=, $=, *=, |=) is expected",
+    "position": {
+        "line": 1,
+        "column": 5
+    }
+}, {
+    "css": "[--test=1]{}",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 3
+    }
+}, {
+    "css": "[--test:=1]{}",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 3
+    }
+}, {
+    "css": "[:--test=1]{}",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 2
+    }
+}, {
+    "css": "[foo:--test=1]{}",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 7
     }
 }, {
     "css": "[",
@@ -228,5 +312,19 @@
     "position": {
         "line": 1,
         "column": 3
+    }
+}, {
+    "css": ".foo { var(--side): 20px }",
+    "error": "Colon is expected",
+    "position": {
+        "line": 1,
+        "column": 11
+    }
+}, {
+    "css": "--test { padding: 20px }",
+    "error": "Identifier is expected",
+    "position": {
+        "line": 1,
+        "column": 2
     }
 }]
