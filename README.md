@@ -107,8 +107,11 @@ var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
     debug: true           // show additional debug information:
                           // true or number from 1 to 3 (greater number - more details)
 });
+```
 
-// you may do it step by step
+You may minify CSS by yourself step by step:
+
+```js
 var ast = csso.parse('.test { color: #ff0000; }');
 var compressedAst = csso.compress(ast);
 var compressedCss = csso.translate(compressedAst, true);
@@ -122,7 +125,7 @@ Working with source maps:
 ```js
 var css = fs.readFileSync('path/to/my.css', 'utf8');
 var result = csso.minify(css, {
-  filename: 'path/to/my.css', // will be added to source map as reference to file
+  filename: 'path/to/my.css', // will be added to source map as reference to source file
   sourceMap: true             // generate source map
 });
 
@@ -131,15 +134,6 @@ console.log(result);
 
 console.log(result.map.toString());
 // '{ .. source map content .. }'
-
-// apply input source map
-var SourceMapConsumer = require('source-map').SourceMapConsumer;
-var inputSourceMap = fs.readFileSync('path/to/my.css.map', 'utf8');
-
-result.map.applySourceMap(
-  new SourceMapConsumer(inputSourceMap),
-  'path/to/my.css'  // should be the same as passed to csso.minify()
-);
 ```
 
 ### Debugging
