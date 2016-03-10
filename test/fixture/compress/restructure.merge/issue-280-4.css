@@ -1,0 +1,13 @@
+/*
+    issue 280 !important and !important
+*/
+
+.foo {
+    foo: a !important;
+    bar: c;
+}
+
+.bar {
+    foo: b !important;
+    bar: c;
+}

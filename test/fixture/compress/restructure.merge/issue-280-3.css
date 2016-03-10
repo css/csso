@@ -1,0 +1,13 @@
+/*
+    issue 280 regular and !important
+*/
+
+.foo {
+    foo: a;
+    bar: c;
+}
+
+.bar {
+    foo: b !important;
+    bar: c;
+}
