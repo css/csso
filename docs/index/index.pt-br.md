@@ -5,7 +5,7 @@ CSSO (CSS Otimizador) é um otimizador de CSS diferente dos outros. Além das t�
 Transformações seguras:
 
 * Remoção de espaços em branco
-* Remoção de ponto e vírgulas `;`
+* Remoção de ponto e vírgulas `;` ao final do conjunto de regras
 * Remoção de comentários
 * Remoção de declarações de `@charset` e `@import` inválidas
 * Minificação de propriedades de cores
@@ -20,9 +20,9 @@ Otimizações estruturais:
 * Remoção de propriedades sobrescritas
 * Remoção de propriedades abreviadas sobrescritas
 * Remoção de seletores repetidos
-* Méscla parcial de blocos
+* Mescla parcial de blocos
 * Divisão parcial de blocos
-* Remoção do conjunto de regras vazias e regras at-rule
+* Remoção do conjunto de regras e [@regras](https://developer.mozilla.org/pt-BR/docs/Web/CSS/At-rule) vazias
 * Minificação das propriedades `margin` e `padding`
 
 As técnicas de minificação são descritas em detalhes em [descrição detalhada](../description/description.pt-br.md).

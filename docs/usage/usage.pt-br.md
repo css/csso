@@ -2,7 +2,7 @@
 
 Use a [versão online do CSSO](http://css.github.com/csso/csso.html) para minimizar seu código.
 
-**CSSO não é garantido que funcione em navegadores. É preferível usar essa ferramenta é executando-a a partir da linha de comando ou através de módulos NPM.**
+**Não há garantias de que o CSSO funcione em navegadores. É preferível usar essa ferramenta executando-a a partir da linha de comando ou através de módulos npm.**
 
 ## A partir da linha de comando
 
@@ -14,12 +14,12 @@ Uso:
 
     csso
         exibe informações de uso
-    csso <filename>
-        minimiza o CSS em <filename> e gera o resultado no stdout (saída padrão)
+    csso <arquivo>
+        minifica o CSS em <arquivo> e gera o resultado no stdout (saída padrão)
     csso <in_filename> <out_filename>
     csso -i <in_filename> -o <out_filename>
     csso --input <in_filename> --output <out_filename>
-        minimiza o CSS de entrada <in_filename> e exibe o resultado em <out_filename>
+        minifica o CSS de entrada <in_filename> e exibe o resultado em <out_filename>
     csso -off
     csso --restructure-off
         desliga a opção de minificação estrutural

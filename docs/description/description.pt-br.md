@@ -5,13 +5,13 @@ CSSO (CSS Otimizador) é um otimizador de CSS diferente dos outros. Além das t�
 Minificação é um processo de transformação de um documento CSS em um documento menor sem perdas. As estratégias típicas para alcançar estes objetivos são:
 
 * transformações básicas, tais como remoção de elementos desnecessários (ex. ponto e vírgulas) ou transformação de valores em sua representação mais compacta (ex. `0px` para `0`);
-* otimizações estruturais, tais como a remoção de propriedades sobrescritas ou méscla de blocos.
+* otimizações estruturais, tais como a remoção de propriedades sobrescritas ou mescla de blocos.
 
 ### Transformações básicas
 
 #### Remoção de espaço em branco
 
-Em alguns casos, espaços em branco (` `, `\n`, `\r`, `\t`, `\f`) são desnecessário e não afetam a renderização.
+Em alguns casos, espaços em branco (` `, `\n`, `\r`, `\t`, `\f`) são desnecessários e não afetam a renderização.
 
 * Antes:
 ```css
@@ -355,14 +355,14 @@ Seletores repetidos podem ser removidos.
         }
 ```
 
-#### Méscla parcial de blocos
+#### Mescla parcial de blocos
 
-Dados dois blocos adjacentes em que um dos blocos é um subconjunto do outro, a seguinte optimização é possível:
+Dados dois blocos adjacentes em que um dos blocos é um subconjunto do outro, a seguinte otimização é possível:
 
 * Propriedades sobrepostas são removidas do bloco de origem;
 * as propriedades restantes do bloco de origem são copiadas para um bloco de recepção.
 
-As minificações terão lugar se a contagem de caracteres das propriedades a serem copiadas for menor do que a contagem de caracteres das propriedades que se sobrepõem.
+As minificações acontecerão se a quantidade de caracteres das propriedades que serão copiadas for menor do que a de caracteres das propriedades que se sobrepõem.
 
 * Antes:
 ```css
@@ -427,9 +427,9 @@ As minificações não ocorrerão se a contagem de caracteres das propriedades a
 
 #### Divisão parcial de blocos
 
-Se dois blocos adjacentes contêm propriedades de intersecção a seguinte optimização é possível:
+Se dois blocos adjacentes contêm propriedades de intersecção a seguinte otimização é possível:
 
-* propriedades de intersecção são determinadas;
+* a intersecção de propriedade é determinada;
 * um novo bloco contendo a intersecção é criado entre os dois blocos.
 
 A minificação ocorrerá se houver ganho na contagem de caracteres.
@@ -497,7 +497,7 @@ A minificação não ocorrerá se não houver ganho na contagem de caracteres.
         }
 ```
 
-#### Remoção do conjunto de regras vazias e regras at-rule
+#### Remoção do conjunto de regras e [@regras](https://developer.mozilla.org/pt-BR/docs/Web/CSS/At-rule) vazias.
 
 O conjunto de regras vazias e regras at-rule serão removidos.
 
@@ -580,7 +580,7 @@ As propriedades `margin` e `padding` são minifcados de acordo com \[[CSS 2.1 / 
 
 ## Recomendações
 
-Alguns compreensores de folhas de estilo são melhores que os outros. Às vezes, um caracter diferente pode tornar uma folha de estilo bem compreensível em uma muito inconveniente.
+Algumas folhas de estilos comprimem melhor do que outras. Às vezes uma diferença de caracter pode tornar uma folha de estilo bem compreensível em uma muito inconveniente.
 
 Você pode ajudar o minificador seguindo estas recomendações.
 
@@ -590,11 +590,11 @@ Seletores mais curtos são mais fáceis de reagrupar.
 
 ### Ordem das propriedades
 
-Atenha-se a mesma ordem de propriedades em toda a folha de estilo - isso permitirá que você para não usar os guards. Quanto menos intervenção manual existir, mais fácil será para o minificador trabalhar de forma otimizada.
+Atenha-se a mesma ordem de propriedades em toda a folha de estilo - isso permitirá que você não use as expressões. Quanto menos intervenção manual existir, mais fácil será para o minificador trabalhar de forma otimizada.
 
 ### Posicionamento de blocos semelhantes
 
-Manter blocos com conjunto de propriedades similares próximas umas das outras.
+Manter blocos com conjuntos de propriedades similares próximos uns dos outros.
 
 Mau:
 
