@@ -2,11 +2,12 @@
 [![Build Status](https://travis-ci.org/css/csso.svg?branch=master)](https://travis-ci.org/css/csso)
 [![Coverage Status](https://coveralls.io/repos/github/css/csso/badge.svg?branch=master)](https://coveralls.io/github/css/csso?branch=master)
 [![NPM Downloads](https://img.shields.io/npm/dm/csso.svg)](https://www.npmjs.com/package/csso)
-[![Dependency Status](https://img.shields.io/david/css/csso.svg)](https://david-dm.org/css/csso)
-[![devDependency Status](https://img.shields.io/david/dev/css/csso.svg)](https://david-dm.org/css/csso#info=devDependencies)
 [![Twitter](https://img.shields.io/badge/Twitter-@cssoptimizer-blue.svg)](https://twitter.com/cssoptimizer)
 
 CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
+
+[![Originated by Yandex](https://github.com/css/csso/blob/master/docs/yandex.png)](https://www.yandex.com/)
+[![Sponsored by Avito](https://github.com/css/csso/blob/master/docs/avito.png)](https://www.avito.ru/)
 
 ## Install
 
