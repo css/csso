@@ -12,5 +12,12 @@
             "property",
             ["ident", "-my-color"]
         ]
+    },
+    "property.1": {
+        "source": "//hack",
+        "ast": [
+            "property",
+            ["ident", "//hack"]
+        ]
     }
 }
