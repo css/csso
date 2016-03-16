@@ -1,3 +1,8 @@
+## 1.7.1 (March 16, 2016)
+
+- pass block mode to tokenizer for correct parsing of declarations properties with `//` hack
+- fix wrongly `@import` and `@charset` removal on double exclamation comment
+
 ## 1.7.0 (March 10, 2016)
 
 - support for [CSS Custom Properties](https://www.w3.org/TR/css-variables/) (#279)
