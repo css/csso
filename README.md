@@ -6,8 +6,8 @@
 
 CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformations: cleaning (removing redundant), compression (replacement for shorter form) and restructuring (merge of declarations, rulesets and so on). As a result your CSS becomes much smaller.
 
-[![Originated by Yandex](https://cdn.rawgit.com/css/csso/master/docs/yandex.svg)](https://www.yandex.com/)
-[![Sponsored by Avito](https://cdn.rawgit.com/css/csso/master/docs/avito.svg)](https://www.avito.ru/)
+[![Originated by Yandex](https://cdn.rawgit.com/css/csso/8d1b89211ac425909f735e7d5df87ee16c2feec6/docs/yandex.svg)](https://www.yandex.com/)
+[![Sponsored by Avito](https://cdn.rawgit.com/css/csso/8d1b89211ac425909f735e7d5df87ee16c2feec6/docs/avito.svg)](https://www.avito.ru/)
 
 ## Usage
 
