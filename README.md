@@ -69,28 +69,30 @@ Memory:     0.346 MB
 Source map doesn't generate by default. To generate map use `--map` CLI option, that can be:
 
 - `none` (default) – don't generate source map
-- `inline` – generate map add it into result content (via `/*# sourceMappingURL=application/json;base64,...base64 encoded map... */`)
-- `file` – generate map and write it into file with same name as output file, but with `.map` extension; in this case `--output` option is required
+- `inline` – add source map into result CSS (via `/*# sourceMappingURL=application/json;base64,... */`)
+- `file` – write source map into file with same name as output file, but with `.map` extension (in this case `--output` option is required)
 - any other values treat as filename for generated source map
 
 Examples:
 
 ```
 > csso my.css --map inline
-> csso my.css --map file --output my.min.css
-> csso my.css -o my.min.css -m maps/my.min.map
+> csso my.css --output my.min.css --map file
+> csso my.css --output my.min.css --map maps/my.min.map
 ```
 
-Input can has a source map. Use `--input-map` option to specify input source map if needed. Possible values for option:
+Use `--input-map` option to specify input source map if needed. Possible values for option:
 
-- `auto` (auto) - attempt to fetch input source map by follow steps:
-  - try to fetch inline map from source
-  - try to fetch map filename from source and read its content
-  - (when `--input` is specified) check for file with same name as input but with `.map` extension exists and read its content
+- `auto` (default) - attempt to fetch input source map by follow steps:
+  - try to fetch inline map from input
+  - try to fetch source map filename from input and read its content
+  - (when `--input` is specified) check file with same name as input file but with `.map` extension exists and read its content
 - `none` - don't use input source map; actually it's using to disable `auto`-fetching
 - any other values treat as filename for input source map
 
-> NOTE: Input source map is using only if source map is generating.
+Generally you shouldn't care about input source map since defaults behaviour (`auto`) covers most use cases.
+
+> NOTE: Input source map is using only if output source map is generating.
 
 ### API
 
