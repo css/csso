@@ -23,6 +23,18 @@
             ]
         ]
     },
+    "declaration.2": {
+        "source": "//hack:value",
+        "ast": [
+            "declaration", [
+                "property",
+                ["ident", "//hack"]
+            ], [
+                "value",
+                ["ident", "value"]
+            ]
+        ]
+    },
     "declaration.c.0": {
         "source": "property/*test*/:value",
         "ast": [

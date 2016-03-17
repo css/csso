@@ -1,3 +1,21 @@
+## 1.7.1 (March 16, 2016)
+
+- pass block mode to tokenizer for correct parsing of declarations properties with `//` hack
+- fix wrongly `@import` and `@charset` removal on double exclamation comment
+
+## 1.7.0 (March 10, 2016)
+
+- support for [CSS Custom Properties](https://www.w3.org/TR/css-variables/) (#279)
+- rework RTBL properties merge – better merge for values with special units and don't merge values with CSS-wide keywords (#255)
+- remove redundant universal selectors (#178)
+- take in account `!important` when check for property overriding (#280)
+- don't merge `text-align` declarations with some values (#281)
+- add spaces around `/deep/` combinator on translate, since it together with universal selector can produce a comment
+- better keyword and property name resolving (tolerant to hacks and so on)
+- integration improvements
+    - compression log function could be customized by `logger` option for `compress()` and `minify()`
+    - make possible to set initial line and column for parser
+
 ## 1.6.4 (March 1, 2016)
 
 - `npm` publish issue (#276)

@@ -1,25 +1,28 @@
 [![NPM version](https://img.shields.io/npm/v/csso.svg)](https://www.npmjs.com/package/csso)
 [![Build Status](https://travis-ci.org/css/csso.svg?branch=master)](https://travis-ci.org/css/csso)
 [![Coverage Status](https://coveralls.io/repos/github/css/csso/badge.svg?branch=master)](https://coveralls.io/github/css/csso?branch=master)
-[![Dependency Status](https://img.shields.io/david/css/csso.svg)](https://david-dm.org/css/csso)
-[![devDependency Status](https://img.shields.io/david/dev/css/csso.svg)](https://david-dm.org/css/csso#info=devDependencies)
+[![NPM Downloads](https://img.shields.io/npm/dm/csso.svg)](https://www.npmjs.com/package/csso)
 [![Twitter](https://img.shields.io/badge/Twitter-@cssoptimizer-blue.svg)](https://twitter.com/cssoptimizer)
 
-CSSO (CSS Optimizer) is a CSS minimizer unlike others. In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
+CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformations: cleaning (removing redundant), compression (replacement for shorter form) and restructuring (merge of declarations, rulesets and so on). As a result your CSS becomes much smaller.
 
-## Install
+[![Originated by Yandex](https://cdn.rawgit.com/css/csso/8d1b89211ac425909f735e7d5df87ee16c2feec6/docs/yandex.svg)](https://www.yandex.com/)
+[![Sponsored by Avito](https://cdn.rawgit.com/css/csso/8d1b89211ac425909f735e7d5df87ee16c2feec6/docs/avito.svg)](https://www.avito.ru/)
+
+## Usage
 
 ```
 npm install -g csso
 ```
 
-## Usage
+Or try out CSSO [right in your browser](http://css.github.io/csso/csso.html) (web interface).
 
 ### Runners
 
 - Gulp: [gulp-csso](https://github.com/ben-eb/gulp-csso)
 - Grunt: [grunt-csso](https://github.com/t32k/grunt-csso)
 - Broccoli: [broccoli-csso](https://github.com/sindresorhus/broccoli-csso)
+- PostCSS: [postcss-csso](https://github.com/lahmatiy/postcss-csso)
 
 ### Command line
 
@@ -78,14 +81,14 @@ Examples:
 > csso my.css -o my.min.css -m maps/my.min.map
 ```
 
-Input can has a source map. Use `--input-map` option to specify input source if needed. Possible values for option:
+Input can has a source map. Use `--input-map` option to specify input source map if needed. Possible values for option:
 
 - `auto` (auto) - attempt to fetch input source map by follow steps:
   - try to fetch inline map from source
   - try to fetch map filename from source and read its content
   - (when `--input` is specified) check for file with same name as input but with `.map` extension exists and read its content
 - `none` - don't use input source map; actually it's using to disable `auto`-fetching
-- any other values as filename for input source map
+- any other values treat as filename for input source map
 
 > NOTE: Input source map is using only if source map is generating.
 
@@ -106,8 +109,11 @@ var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
     debug: true           // show additional debug information:
                           // true or number from 1 to 3 (greater number - more details)
 });
+```
 
-// you may do it step by step
+You may minify CSS by yourself step by step:
+
+```js
 var ast = csso.parse('.test { color: #ff0000; }');
 var compressedAst = csso.compress(ast);
 var compressedCss = csso.translate(compressedAst, true);
@@ -121,7 +127,7 @@ Working with source maps:
 ```js
 var css = fs.readFileSync('path/to/my.css', 'utf8');
 var result = csso.minify(css, {
-  filename: 'path/to/my.css', // will be added to source map as reference to file
+  filename: 'path/to/my.css', // will be added to source map as reference to source file
   sourceMap: true             // generate source map
 });
 
@@ -130,15 +136,6 @@ console.log(result);
 
 console.log(result.map.toString());
 // '{ .. source map content .. }'
-
-// apply input source map
-var SourceMapConsumer = require('source-map').SourceMapConsumer;
-var inputSourceMap = fs.readFileSync('path/to/my.css.map', 'utf8');
-
-result.map.applySourceMap(
-  new SourceMapConsumer(inputSourceMap),
-  'path/to/my.css'  // should be the same as passed to csso.minify()
-);
 ```
 
 ### Debugging

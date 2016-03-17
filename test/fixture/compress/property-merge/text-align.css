@@ -1,0 +1,15 @@
+/*
+    issue 281 start/end/match-parent/justify-all values has different browser support
+*/
+
+.test {
+    text-align: left;
+    text-align: right;
+    text-align: center;
+    text-align: justify;
+    text-align: start;
+    text-align: end;
+    text-align: match-parent;
+    text-align: justify-all;
+    text-align: start;
+}

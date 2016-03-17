@@ -1,0 +1,4 @@
+.foo{foo:a!important;bar:c}.bar{foo:b;bar:c}
+/*! better solution
+    .foo{foo:a!important}.bar,.foo{foo:b;bar:c}
+*/

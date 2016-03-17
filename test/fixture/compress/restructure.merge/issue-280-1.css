@@ -1,0 +1,13 @@
+/*
+    issue 280 regual and regular
+*/
+
+.foo {
+    foo: a;
+    bar: c;
+}
+
+.bar {
+    foo: b;
+    bar: c;
+}
