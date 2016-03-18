@@ -1,0 +1,14 @@
+div { p: 1 }
+span { p: 2 }
+remove { p: 3 }
+div.class { p: 4 }
+div.class > remove { p: 5 }
+remove div.class { p: 6 }
+div.class > span { p: 7 }
+.class { p: 8 }
+#id { p: 9 }
+.div span { p: 10 }
+:not(div) { p: 11 }
+:not(remove) { p: 12 }
+* { p: 13 }
+*.class2 { p: 14 }
