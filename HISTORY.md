@@ -90,7 +90,7 @@
 - better ruleset merge – not only closest but also disjoined by other rulesets when safe
 - join `@media` with same query
 - `outputAst` – new option to specify output AST format (`gonzales` by default for backward compatibility)
-- remove quotes surrounding attribute values in attribute selectors when possible (issue #73)
+- remove quotes surrounding attribute values in attribute selectors when possible (#73)
 - replace `from`→`0%` and `100%`→`to` at `@keyframes` (#205)
 - prevent partial merge of rulesets at `@keyframes` (#80, #197)
 
@@ -205,12 +205,12 @@ Bringing project back to life. Changed files structure, cleaned up and refactore
 
 ## 1.3.12 (October 8, 2015)
 
-- Case insensitive check for `!important` (issue #187)
-- Fix problems with using `csso` as cli command on Windows (issue #83, #136, #142 and others)
+- Case insensitive check for `!important` (#187)
+- Fix problems with using `csso` as cli command on Windows (#83, #136, #142 and others)
 - Remove byte order marker (the UTF-8 BOM) from input
-- Don't strip space between funktion-funktion and funktion-vhash (issue #134)
-- Don't merge TRBL values having \9 (hack for IE8 in bootstrap) (issues #159, #214, #230, #231 and others)
-- Don't strip units off dimensions of non-length (issues #226, #229 and others)
+- Don't strip space between funktion-funktion and funktion-vhash (#134)
+- Don't merge TRBL values having \9 (hack for IE8 in bootstrap) (#159, #214, #230, #231 and others)
+- Don't strip units off dimensions of non-length (#226, #229 and others)
 
 ## 1.3.7 (February 11, 2013)
 
