@@ -1,0 +1,7 @@
+{
+    "scopes": [
+        ["scope1-a", "scope1-a:hover", "scope1-a__mod"],
+        ["scope2-a", "scope2-a:hover", "scope2-a__mod"],
+        ["scope3-a", "scope3-a:hover", "scope3-a__mod"]
+    ]
+}
