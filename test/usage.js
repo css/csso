@@ -21,6 +21,18 @@ describe('compress with usage', function() {
         createCompressWithUsageTest(name, tests[name]);
     }
 
+    it('should remove selectors with unused things but not an entire rule', function() {
+        var compressed = csso.minify('*, .a, #a, a { p: 1 } .b { p: 2 }', {
+            usage: {
+                tags: [],
+                ids: [],
+                classes: []
+            }
+        });
+
+        assert.equal(compressed, '*{p:1}');
+    });
+
     it('should throw exception when selector has classes from different scopes', function() {
         assert.throws(function() {
             csso.minify('.a.b { p: 1 }', {
