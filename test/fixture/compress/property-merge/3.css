@@ -1,0 +1,11 @@
+/*
+    should check nested parts of value when compute compatibility
+*/
+
+.test {
+    width: calc(3em - 3px);
+    width: calc(3rem - 3px);
+    width: calc((1vh + 3px) - 3rem);
+    color: var(--foo, red);
+    color: var(--foo, rgba(255, 0, 0, .5));
+}
