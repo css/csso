@@ -20,4 +20,16 @@ describe('compress with usage', function() {
     for (var name in tests) {
         createCompressWithUsageTest(name, tests[name]);
     }
+
+    it('should throw exception when selector has classes from different scopes', function() {
+        assert.throws(function() {
+            csso.minify('.a.b { p: 1 }', {
+                usage: {
+                    scopes: [['a'], ['b']]
+                }
+            });
+        }, function(e) {
+            return e.message === 'Selector can\'t has classes from different scopes: .a.b';
+        });
+    });
 });
