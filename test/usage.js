@@ -33,6 +33,29 @@ describe('compress with usage', function() {
         assert.equal(compressed, '*{p:1}');
     });
 
+    describe('shouldn\'t affect classes whitelist', function() {
+        it('when "classes" is defined', function() {
+            var compressed = csso.minify('.a, .b { p: 1 }', {
+                usage: {
+                    classes: ['a'],
+                    scopes: [['a'], ['b']]
+                }
+            });
+
+            assert.equal(compressed, '.a{p:1}');
+        });
+
+        it('when "classes" isn\'t defined', function() {
+            var compressed = csso.minify('.a, .b { p: 1 }', {
+                usage: {
+                    scopes: [['a'], ['b']]
+                }
+            });
+
+            assert.equal(compressed, '.a,.b{p:1}');
+        });
+    });
+
     it('should throw exception when selector has classes from different scopes', function() {
         assert.throws(function() {
             csso.minify('.a.b { p: 1 }', {
