@@ -49,6 +49,30 @@ describe('compress', function() {
         }
     });
 
+    describe('block context', function() {
+        it('should works correctly by csso.minify()', function() {
+            var compressed = csso.minify('color: rgba(255, 0, 0, 1); width: 0px; color: #ff0000', {
+                context: 'block'
+            });
+
+            assert.equal(compressed, 'width:0;color:red');
+        });
+
+        it('should works correctly by csso.minifyBlock()', function() {
+            var compressed = csso.minifyBlock('color: rgba(255, 0, 0, 1); width: 0px; color: #ff0000');
+
+            assert.equal(compressed, 'width:0;color:red');
+        });
+
+        it('csso.minifyBlock() should not affect options', function() {
+            var options = { foo: 1 };
+
+            csso.minifyBlock('', options);
+
+            assert.deepEqual(options, { foo: 1 });
+        });
+    });
+
     describe('restructure option', function() {
         var css = '.a{color:red}.b{color:red}';
 
