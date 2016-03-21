@@ -89,6 +89,18 @@ describe('compress with usage', function() {
         });
     });
 
+    it('should throw exception when class name specified in several scopes', function() {
+        assert.throws(function() {
+            csso.minify('.foo { p: 1 }', {
+                usage: {
+                    scopes: [['foo'], ['foo']]
+                }
+            });
+        }, function(e) {
+            return e.message === 'Class can\'t be used for several scopes: foo';
+        });
+    });
+
     it('should throw exception when selector has classes from different scopes', function() {
         assert.throws(function() {
             csso.minify('.a.b { p: 1 }', {
