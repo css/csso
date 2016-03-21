@@ -39,6 +39,7 @@ Options:
   -o, --output <filename>   Output file (result outputs to stdout if not set)
       --restructure-off     Turns structure minimization off
       --stat                Output statistics in stderr
+  -u, --usage <filenane>    Usage data file
   -v, --version             Output version
 ```
 
@@ -93,6 +94,86 @@ Use `--input-map` option to specify input source map if needed. Possible values 
 Generally you shouldn't care about input source map since defaults behaviour (`auto`) covers most use cases.
 
 > NOTE: Input source map is using only if output source map is generating.
+
+### Usage data
+
+`CSSO` can use data about how `CSS` is using for better compression. File with this data (`JSON` format) can be set using `--usage` option. Usage data may contain follow sections:
+
+- `tags` – white list of tags
+- `ids` – white list of ids
+- `classes` – white list of classes
+- `scopes` – groups of classes which never used with classes from other groups on single element
+
+All sections are optional. Value of `tags`, `ids` and `classes` should be array of strings, value of `scopes` should be an array of arrays of strings. Other values are ignoring.
+
+#### Selector filtering
+
+`tags`, `ids` and `classes` are using on clean stage to filter selectors that contains something that not in list. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if selector hasn't any type selector (or even any type selector) it isn't filter.
+
+> `ids` and `classes` comparison is case sensetive, `tags` – is not.
+
+Input CSS:
+
+```css
+* { color: green; }
+ul, ol, li { color: blue; }
+UL.foo, span.bar { color: red; }
+```
+
+Usage data:
+
+```json
+{
+    "tags": ["ul", "LI"]
+}
+```
+
+Result CSS:
+
+```css
+*{color:green}ul,li{color:blue}ul.foo{color:red}
+```
+
+#### Scopes
+
+`scopes` is using on restructing stage for more agressive rule moving. It can be used for isolated CSS "modules" which classes exclusively used on some markup.
+
+Suppose we have a file:
+
+```css
+.module1-foo { color: red; }
+.module1-bar { font-size: 1.5em; background: yellow; }
+
+.module2-baz { color: red; }
+.module2-qux { font-size: 1.5em; background: yellow; width: 50px; }
+```
+
+It can be assumed that first two rules never used with second two on the same markup. But trully speaking we cann't know that for sure without markup. The optimizer doesn't know it eather and will perform safe transformations only. The result will be the same as input but with no spaces and some semicolons:
+
+```css
+.module1-foo{color:red}.module1-bar{font-size:1.5em;background:#ff0}.module2-baz{color:red}.module2-qux{font-size:1.5em;background:#ff0;width:50px}
+```
+
+But with usage data `CSSO` can get better output. If follow usage data is provided:
+
+```json
+{
+    "scopes": [
+        ["module1-foo", "module1-bar"],
+        ["module2-bar", "module2-baz"]
+    ]
+}
+```
+
+New result (29 bytes extra saving):
+
+```css
+.module1-foo,.module2-baz{color:red}.module1-bar,.module2-qux{font-size:1.5em;background:#ff0}.module2-qux{width:50px}
+```
+
+If class name doesn't specified in `scopes` it's considered that it belongs to default "scope". `scopes` doesn't affect `classes`. If class name present in `scopes` but missed in `classes` (both sections specified) it will be filtered.
+
+Note that class name can't be specified in several scopes. Also selector can't has classes from different scopes. In both cases an exception throws.
 
 ### API
 

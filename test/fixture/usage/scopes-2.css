@@ -1,0 +1,12 @@
+.scope1-a { color: red }
+.scope1-a:hover { color: blue }
+.scope1-a__mod { color: green }
+.something { color: black }
+.else { color: white }
+.scope2-a { color: red }
+.scope2-a:hover { color: blue }
+.scope2-a__mod { color: green }
+.foo { color: gray }
+.scope3-a { color: red }
+.scope3-a:hover { color: blue }
+.scope3-a__mod { color: green }

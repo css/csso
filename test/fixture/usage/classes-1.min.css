@@ -1,0 +1,1 @@
+div{p:1}.foo{p:2}.bar{p:3}div.foo>*{p:4}:not(.foo){p:7}:not(.remove){p:8}#id{p:9}*{p:10}
