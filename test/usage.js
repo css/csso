@@ -33,6 +33,39 @@ describe('compress with usage', function() {
         assert.equal(compressed, '*{p:1}');
     });
 
+    it('should ignore wrong values', function() {
+        var compressed = csso.minify('#a, .a, a { p: 1 }', {
+            usage: {
+                tags: true,
+                ids: {},
+                classes: 'bad value'
+            }
+        });
+
+        assert.equal(compressed, '#a,.a,a{p:1}');
+    });
+
+    it('should be case insensitive for tag names', function() {
+        var compressed = csso.minify('A, b, c, D { p: 1 }', {
+            usage: {
+                tags: ['a', 'B']
+            }
+        });
+
+        assert.equal(compressed, 'A,b{p:1}');
+    });
+
+    it('should be case sensitive for classes and ids', function() {
+        var compressed = csso.minify('.a, .A, #a, #A { p: 1 }', {
+            usage: {
+                ids: ['a'],
+                classes: ['A']
+            }
+        });
+
+        assert.equal(compressed, '#a,.A{p:1}');
+    });
+
     describe('shouldn\'t affect classes whitelist', function() {
         it('when "classes" is defined', function() {
             var compressed = csso.minify('.a, .b { p: 1 }', {
