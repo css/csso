@@ -40,12 +40,12 @@
   },
   "scripts": {
     "test": "mocha --reporter dot",
-    "test-code": "jscs lib && eslint lib test",
-    "test-all": "npm run test-code && npm test",
+    "codestyle": "jscs lib && eslint lib test",
+    "codestyle-and-test": "npm run codestyle && npm test",
     "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
     "coverage": "istanbul cover _mocha -- -R dot",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R dot && cat ./coverage/lcov.info | coveralls",
-    "travis": "npm run test-all && npm run coveralls",
+    "travis": "npm run codestyle-and-test && npm run coveralls",
     "browserify": "browserify --standalone csso lib/index.js | uglifyjs --compress --mangle -o dist/csso-browser.js",
     "gh-pages": "git clone -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
     "prepublish": "npm run browserify"
