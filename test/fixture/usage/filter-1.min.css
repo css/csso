@@ -1,0 +1,1 @@
+@media a{.foo{p:1}.bar{p:2}}@supports (a:1){.foo{p:1}.bar{p:2}}

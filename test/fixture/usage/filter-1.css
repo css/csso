@@ -1,0 +1,23 @@
+/*
+  should remove empty at-rules after filter
+*/
+
+@media a {
+    .remove, .foo { p: 1 }
+    .bar { p: 2 }
+    .remove { p: 3 }
+}
+
+@media b {
+    .remove { p: 4 }
+}
+
+@supports (a: 1) {
+    .remove, .foo { p: 1 }
+    .bar { p: 2 }
+    .remove { p: 3 }
+}
+
+@supports (b: 2) {
+    .remove { p: 4 }
+}
