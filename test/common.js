@@ -2,6 +2,10 @@ var fs = require('fs');
 var assert = require('assert');
 var csso = require('../lib/index.js');
 
+function normalize(str) {
+    return str.replace(/\n|\r\n?|\f/g, '\n');
+}
+
 describe('csso', function() {
     it('justDoIt() should works until removed', function() {
         var output = [];
@@ -44,7 +48,7 @@ describe('csso', function() {
     it('strigify', function() {
         assert.equal(
             csso.stringify(csso.parse('.a\n{\rcolor:\r\nred}', 'stylesheet', true)),
-            fs.readFileSync(__dirname + '/fixture/stringify.txt', 'utf-8').trim()
+            normalize(fs.readFileSync(__dirname + '/fixture/stringify.txt', 'utf-8').trim())
         );
     });
 });
