@@ -101,6 +101,16 @@ describe('compress with usage', function() {
         });
     });
 
+    it('should not throw exception when several class names from one scope in single selector', function() {
+        var compressed = csso.minify('.foo .bar { p: 1 }', {
+            usage: {
+                scopes: [['foo', 'bar']]
+            }
+        });
+
+        assert.equal(compressed, '.foo .bar{p:1}');
+    });
+
     it('should throw exception when selector has classes from different scopes', function() {
         assert.throws(function() {
             csso.minify('.a.b { p: 1 }', {
