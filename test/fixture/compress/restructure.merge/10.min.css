@@ -1,0 +1,1 @@
+.a,.b{color:red}@media foo{a{color:#00f}}@supports (a:1){a{color:#00f}}

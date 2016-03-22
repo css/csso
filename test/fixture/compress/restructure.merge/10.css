@@ -1,0 +1,23 @@
+/*
+    should skip at-rules that doesn't contain rulesets with the same specificity
+*/
+
+.a {
+    color: red;
+}
+
+@media foo {
+    a {
+        color: blue;
+    }
+}
+
+@supports (a: 1) {
+    a {
+        color: blue;
+    }
+}
+
+.b {
+    color: red;
+}
