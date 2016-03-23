@@ -1,0 +1,31 @@
+/*
+    should not skip at-rules that contains rules with same specificity
+*/
+
+.a {
+    color: red;
+}
+
+@media foo {
+    @supports (a: 1) {
+        .b {
+            color: blue;
+        }
+    }
+}
+
+.c {
+    color: red;
+}
+
+@supports (b: 1) {
+    @media bar {
+        .d {
+            color: blue;
+        }
+    }
+}
+
+.e {
+    color: red;
+}

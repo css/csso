@@ -1,1 +1,1 @@
-.a,.b{color:red}@media foo{a{color:#00f}}@supports (a:1){a{color:#00f}}
+.a,.b{color:red}@media foo{a{color:#00f}.c.d{padding:1px}@supports (a:1){.c.d{a:1}}}@supports (a:1){a{color:#00f}.c.d{padding:1px}@media bar{.c.d{a:1}}}

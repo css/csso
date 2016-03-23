@@ -10,11 +10,27 @@
     a {
         color: blue;
     }
+    .c.d{
+        padding: 1px;
+    }
+    @supports (a: 1) {
+        .c.d {
+            a: 1;
+        }
+    }
 }
 
 @supports (a: 1) {
     a {
         color: blue;
+    }
+    .c.d {
+        padding: 1px;
+    }
+    @media bar {
+        .c.d {
+            a: 1;
+        }
     }
 }
 
