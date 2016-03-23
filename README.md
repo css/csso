@@ -34,8 +34,8 @@ Options:
       --debug [level]       Output intermediate state of CSS during compression
   -h, --help                Output usage information
   -i, --input <filename>    Input file
-      --input-map <source>  Input source map. Possible values: none, auto (default) or <filename>
-  -m, --map <destination>   Generate source map. Possible values: none (default), inline, file or <filename>
+      --input-map <source>  Input source map: none, auto (default) or <filename>
+  -m, --map <destination>   Generate source map: none (default), inline, file or <filename>
   -o, --output <filename>   Output file (result outputs to stdout if not set)
       --restructure-off     Turns structure minimization off
       --stat                Output statistics in stderr
