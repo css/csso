@@ -1,0 +1,15 @@
+/*
+    should skip non-stylesheet block at-rules
+*/
+
+.a {
+    color: red;
+}
+
+@font-family {
+    test: 1;
+}
+
+.b {
+    color: red;
+}
