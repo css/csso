@@ -1,0 +1,16 @@
+/*
+    should skip @keyframes
+*/
+
+.a {
+    color: red;
+}
+
+@keyframes foo {
+    0% { frame: 1 }
+    100% { frame: 2 }
+}
+
+.b {
+    color: red;
+}
