@@ -1,3 +1,18 @@
+## 1.8.0 (March 24, 2016)
+
+- Usage data support:
+    - Filter rulesets by tag names, class names and ids white lists.
+    - More aggressive ruleset moving using class name scopes information.
+    - New CLI option `--usage` to pass usage data file.
+- Improve initial ruleset merge
+    - Change order of ruleset processing, now it's left to right. Previously unmerged rulesets may prevent lookup and other rulesets merge.
+    - Difference in pseudo signature just prevents ruleset merging, but don't stop lookup.
+    - Simplify block comparison (performance).
+- New method `csso.minifyBlock()` for css block compression (e.g. `style` attribute content).
+- Ruleset merge improvement: at-rules with block (like `@media` or `@supports`) now can be skipped during ruleset merge lookup if doesn't contain something prevents it.
+- FIX: Add negation (`:not()`) to pseudo signature to avoid unsafe merge (old browsers doesn't support it).
+- FIX: Check nested parts of value when compute compatibility. It fixes unsafe property merging.
+
 ## 1.7.1 (March 16, 2016)
 
 - pass block mode to tokenizer for correct parsing of declarations properties with `//` hack
