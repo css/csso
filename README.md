@@ -136,7 +136,7 @@ Result CSS:
 
 #### Scopes
 
-`scopes` is using on restructing stage for more agressive rule moving. It can be used for isolated CSS "modules" which classes exclusively used on some markup.
+Scopes is designed for CSS scope isolation solutions such as [css-modules](https://github.com/css-modules/css-modules). Scopes are similar to namespaces and defines lists of class names that exclusively used on some markup. This information allows the optimizer to move rulesets more agressive. Since it assumes selectors from different scopes can't to be matched on the same element. That leads to better ruleset merging.
 
 Suppose we have a file:
 
@@ -174,6 +174,8 @@ New result (29 bytes extra saving):
 If class name doesn't specified in `scopes` it's considered that it belongs to default "scope". `scopes` doesn't affect `classes`. If class name present in `scopes` but missed in `classes` (both sections specified) it will be filtered.
 
 Note that class name can't be specified in several scopes. Also selector can't has classes from different scopes. In both cases an exception throws.
+
+Currently the optimizer doesn't care about out-of-bounds selectors order changing safety (i.e. selectors that may be matched to elements with no class name of scope, e.g. `.scope div` or `.scope ~ :last-child`) since assumes scoped CSS modules doesn't relay on it's order. It may be fix in future if to be an issue.
 
 ### API
 
