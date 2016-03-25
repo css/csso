@@ -160,7 +160,7 @@ But with usage data `CSSO` can get better output. If follow usage data is provid
 {
     "scopes": [
         ["module1-foo", "module1-bar"],
-        ["module2-bar", "module2-baz"]
+        ["module2-baz", "module2-qux"]
     ]
 }
 ```
