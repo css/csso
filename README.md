@@ -148,7 +148,7 @@ Suppose we have a file:
 .module2-qux { font-size: 1.5em; background: yellow; width: 50px; }
 ```
 
-It can be assumed that first two rules never used with second two on the same markup. But trully speaking we cann't know that for sure without markup. The optimizer doesn't know it eather and will perform safe transformations only. The result will be the same as input but with no spaces and some semicolons:
+It can be assumed that first two rules never used with second two on the same markup. But we can't know that for sure without markup. The optimizer doesn't know it eather and will perform safe transformations only. The result will be the same as input but with no spaces and some semicolons:
 
 ```css
 .module1-foo{color:red}.module1-bar{font-size:1.5em;background:#ff0}.module2-baz{color:red}.module2-qux{font-size:1.5em;background:#ff0;width:50px}
@@ -171,7 +171,7 @@ New result (29 bytes extra saving):
 .module1-foo,.module2-baz{color:red}.module1-bar,.module2-qux{font-size:1.5em;background:#ff0}.module2-qux{width:50px}
 ```
 
-If class name doesn't specified in `scopes` it's considered that it belongs to default "scope". `scopes` doesn't affect `classes`. If class name present in `scopes` but missed in `classes` (both sections specified) it will be filtered.
+If class name doesn't specified in `scopes` it belongs to default "scope". `scopes` doesn't affect `classes`. If class name presents in `scopes` but missed in `classes` (both sections specified) it will be filtered.
 
 Note that class name can't be specified in several scopes. Also selector can't has classes from different scopes. In both cases an exception throws.
 
