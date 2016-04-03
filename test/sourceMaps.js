@@ -2,7 +2,7 @@ var fs = require('fs');
 var assert = require('assert');
 var csso = require('../lib/index.js');
 var SourceMapConsumer = require('source-map').SourceMapConsumer;
-var internalTranslateWithSourceMap = require('../lib/utils/translateWithSourceMap.js');
+var translateWithSourceMap = require('../lib/utils/translateWithSourceMap.js');
 var forEachTest = require('./fixture/parse').forEachTest;
 var css = '.a { color: #ff0000; }\n.b { display: block; float: left; }';
 var minifiedCss = '.a{color:red}.b{display:block;float:left}';
@@ -67,18 +67,18 @@ function extractSourceMap(source) {
     }
 }
 
-function createInternalTranslateWidthSourceMapTest(name, test, scope) {
+function createTranslateWidthSourceMapTest(name, test, scope) {
     it(name, function() {
         var ast = csso.parse(test.source, scope, true);
 
         // strings should be equal
-        assert.equal(internalTranslateWithSourceMap(ast).css, 'translate' in test ? test.translate : test.source);
+        assert.equal(translateWithSourceMap(ast).css, 'translate' in test ? test.translate : test.source);
     });
 }
 
 describe('sourceMaps', function() {
     describe('translateWithSourceMap', function() {
-        forEachTest(createInternalTranslateWidthSourceMapTest);
+        forEachTest(createTranslateWidthSourceMapTest);
     });
 
     it('should return object when sourceMap is true', function() {

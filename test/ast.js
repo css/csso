@@ -1,13 +1,13 @@
 var assert = require('assert');
 var csso = require('../lib/index.js');
-var internalWalkAll = require('../lib/utils/walk.js').all;
-var internalWalkRules = require('../lib/utils/walk.js').rules;
-var internalWalkRulesRight = require('../lib/utils/walk.js').rulesRight;
-var internalTranslate = require('../lib/utils/translate.js');
+var walkAll = require('../lib/utils/walk.js').all;
+var walkRules = require('../lib/utils/walk.js').rules;
+var walkRulesRight = require('../lib/utils/walk.js').rulesRight;
+var translate = require('../lib/utils/translate.js');
 var testFiles = require('./fixture/parse').tests;
 var forEachTest = require('./fixture/parse').forEachTest;
 
-function expectedInternalWalk(ast) {
+function expectedWalk(ast) {
     function walk(node) {
         result.push(node.type);
         for (var key in node) {
@@ -26,21 +26,21 @@ function expectedInternalWalk(ast) {
     return result;
 }
 
-function createInternalWalkAllTest(name, test, scope) {
+function createWalkAllTest(name, test, scope) {
     it(name, function() {
-        var internalAst = csso.parse(test.source, scope, true);
+        var ast = csso.parse(test.source, scope, true);
         var actual = [];
 
-        internalWalkAll(internalAst, function(node) {
+        walkAll(ast, function(node) {
             actual.push(node.type);
         });
 
         // type arrays should be equal
-        assert.equal(actual.sort().join(','), expectedInternalWalk(test.ast).sort().join(','));
+        assert.equal(actual.sort().join(','), expectedWalk(test.ast).sort().join(','));
     });
 }
 
-function createInternalWalkRulesTest(name, test, scope, walker) {
+function createWalkRulesTest(name, test, scope, walker) {
     it(name, function() {
         var ast = csso.parse(test.source, scope, true);
         var actual = [];
@@ -52,25 +52,25 @@ function createInternalWalkRulesTest(name, test, scope, walker) {
         // type arrays should be equal
         assert.equal(
             actual.sort().join(','),
-            expectedInternalWalk(test.ast).filter(function(type) {
+            expectedWalk(test.ast).filter(function(type) {
                 return type === 'Ruleset' || type === 'Atrule';
             }).sort().join(',')
         );
     });
 }
 
-function createInternalTranslateTest(name, test, scope) {
+function createTranslateTest(name, test, scope) {
     it(name, function() {
         var ast = csso.parse(test.source, scope, true);
 
         // strings should be equal
-        assert.equal(internalTranslate(ast), 'translate' in test ? test.translate : test.source);
+        assert.equal(translate(ast), 'translate' in test ? test.translate : test.source);
     });
 }
 
 describe('AST', function() {
     describe('walk all', function() {
-        forEachTest(createInternalWalkAllTest);
+        forEachTest(createWalkAllTest);
     });
 
     describe('walk ruleset', function() {
@@ -83,7 +83,7 @@ describe('AST', function() {
                 filename === 'stylesheet.json' ||
                 filename === 'ruleset.json') {
                 for (var name in file.tests) {
-                    createInternalWalkRulesTest(file.locator.get(name), file.tests[name], file.scope, internalWalkRules);
+                    createWalkRulesTest(file.locator.get(name), file.tests[name], file.scope, walkRules);
                 }
             }
         };
@@ -99,17 +99,17 @@ describe('AST', function() {
                 filename === 'stylesheet.json' ||
                 filename === 'ruleset.json') {
                 for (var name in file.tests) {
-                    createInternalWalkRulesTest(file.locator.get(name), file.tests[name], file.scope, internalWalkRulesRight);
+                    createWalkRulesTest(file.locator.get(name), file.tests[name], file.scope, walkRulesRight);
                 }
             }
         };
     });
 
     describe('translate', function() {
-        forEachTest(createInternalTranslateTest);
+        forEachTest(createTranslateTest);
 
         assert.throws(function() {
-            internalTranslate({
+            translate({
                 type: 'xxx'
             });
         }, /Unknown node type/);

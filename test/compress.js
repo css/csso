@@ -1,7 +1,7 @@
 var path = require('path');
 var assert = require('assert');
 var csso = require('../lib/index.js');
-var internalTranslate = require('../lib/utils/translate.js');
+var translate = require('../lib/utils/translate.js');
 var tests = require('./fixture/compress');
 
 function normalize(str) {
@@ -12,7 +12,7 @@ function createMinifyTest(name, test) {
     var testFn = function() {
         var compressed = csso.minify(test.source);
 
-        assert.equal(normalize(compressed), normalize(test.compressed));
+        assert.equal(normalize(compressed.css), normalize(test.compressed));
     };
 
     if (path.basename(name)[0] === '_') {
@@ -26,7 +26,7 @@ function createCompressTest(name, test) {
     var testFn = function() {
         var ast = csso.parse(test.source, 'stylesheet', true);
         var compressedAst = csso.compress(ast);
-        var css = internalTranslate(compressedAst);
+        var css = translate(compressedAst);
 
         assert.equal(normalize(css), normalize(test.compressed));
     };
@@ -55,7 +55,7 @@ describe('compress', function() {
         it('should compress block', function() {
             var compressed = csso.minifyBlock('color: rgba(255, 0, 0, 1); width: 0px; color: #ff0000');
 
-            assert.equal(compressed, 'width:0;color:red');
+            assert.equal(compressed.css, 'width:0;color:red');
         });
 
         it('should not affect options', function() {
@@ -71,22 +71,22 @@ describe('compress', function() {
         var css = '.a{color:red}.b{color:red}';
 
         it('should apply `restructure` option', function() {
-            assert.equal(csso.minify(css, { restructure: false }), css);
-            assert.equal(csso.minify(css, { restructure: true }), '.a,.b{color:red}');
+            assert.equal(csso.minify(css, { restructure: false }).css, css);
+            assert.equal(csso.minify(css, { restructure: true }).css, '.a,.b{color:red}');
         });
 
         it('`restructuring` is alias for `restructure`', function() {
-            assert.equal(csso.minify(css, { restructuring: false }), css);
-            assert.equal(csso.minify(css, { restructuring: true }), '.a,.b{color:red}');
+            assert.equal(csso.minify(css, { restructuring: false }).css, css);
+            assert.equal(csso.minify(css, { restructuring: true }).css, '.a,.b{color:red}');
         });
 
         it('`restructure` option should has higher priority', function() {
-            assert.equal(csso.minify(css, { restructure: false, restructuring: true }), css);
-            assert.equal(csso.minify(css, { restructure: true, restructuring: false }), '.a,.b{color:red}');
+            assert.equal(csso.minify(css, { restructure: false, restructuring: true }).css, css);
+            assert.equal(csso.minify(css, { restructure: true, restructuring: false }).css, '.a,.b{color:red}');
         });
 
         it('should restructure by default', function() {
-            assert.equal(csso.minify(css), '.a,.b{color:red}');
+            assert.equal(csso.minify(css).css, '.a,.b{color:red}');
         });
     });
 
@@ -139,6 +139,6 @@ describe('compress', function() {
     });
 
     it('should not fail if no ast passed', function() {
-        assert.equal(internalTranslate(csso.compress(), true), '');
+        assert.equal(translate(csso.compress(), true), '');
     });
 });
