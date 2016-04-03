@@ -1,6 +1,7 @@
 var fs = require('fs');
 var assert = require('assert');
 var csso = require('../lib/index.js');
+var stringify = require('./helpers/stringify.js');
 
 function normalize(str) {
     return str.replace(/\n|\r\n?|\f/g, '\n');
@@ -32,22 +33,43 @@ describe('csso', function() {
         function visit(withInfo) {
             var visitedTypes = {};
 
-            csso.walk(csso.parse('@media (min-width: 200px) { .foo:nth-child(2n) { color: rgb(100%, 10%, 0%); width: calc(3px + 5%) } }', 'stylesheet', withInfo), function(node) {
-                visitedTypes[node[withInfo ? 1 : 0]] = true;
+            csso.internal.walk(csso.parse('@media (min-width: 200px) { .foo:nth-child(2n) { color: rgb(100%, 10%, 0%); width: calc(3px + 5%) } }', 'stylesheet', withInfo), function(node) {
+                visitedTypes[node.type] = true;
             }, withInfo);
 
             return Object.keys(visitedTypes).sort();
         }
 
-        var shouldVisitTypes = ['stylesheet', 'atruler', 'atkeyword', 'ident', 'atrulerq', 's', 'braces', 'operator', 'dimension', 'number', 'atrulers', 'ruleset', 'selector', 'simpleselector', 'clazz', 'nthselector', 'nth', 'block', 'declaration', 'property', 'value', 'funktion', 'functionBody', 'percentage', 'decldelim', 'unary'].sort();
+        var shouldVisitTypes = [
+            'Argument',
+            'Atrule',
+            'AtruleExpression',
+            'Block',
+            'Braces',
+            'Class',
+            'Declaration',
+            'Dimension',
+            'Function',
+            'FunctionalPseudo',
+            'Identifier',
+            'Nth',
+            'Operator',
+            'Percentage',
+            'Property',
+            'Ruleset',
+            'Selector',
+            'SimpleSelector',
+            'Space',
+            'StyleSheet',
+            'Value'
+        ];
 
-        assert.deepEqual(visit(), shouldVisitTypes, 'w/o info');
-        assert.deepEqual(visit(true), shouldVisitTypes, 'with info');
+        assert.deepEqual(visit(), shouldVisitTypes);
     });
 
-    it('strigify', function() {
+    it('JSON.strigify()', function() {
         assert.equal(
-            csso.stringify(csso.parse('.a\n{\rcolor:\r\nred}', 'stylesheet', true)),
+            stringify(csso.parse('.a\n{\rcolor:\r\nred}', 'stylesheet', true), true),
             normalize(fs.readFileSync(__dirname + '/fixture/stringify.txt', 'utf-8').trim())
         );
     });

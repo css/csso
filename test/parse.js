@@ -1,8 +1,9 @@
 var path = require('path');
 var assert = require('assert');
-var csso = require('../lib/index.js');
-var JsonLocator = require('./helpers/JsonLocator.js');
+var csso = require('../lib/index');
+var JsonLocator = require('./helpers/JsonLocator');
 var forEachParseTest = require('./fixture/parse').forEachTest;
+var stringify = require('./helpers/stringify');
 
 function createParseErrorTest(location, test, options) {
     it(location + ' ' + JSON.stringify(test.css), function() {
@@ -28,10 +29,10 @@ describe('parse', function() {
             var ast = csso.parse(test.source, scope);
 
             // AST should be equal
-            assert.equal(csso.stringify(ast), csso.stringify(test.ast));
+            assert.equal(stringify(ast), stringify(test.ast));
 
             // translated AST should be equal to original source
-            assert.equal(csso.translate(ast), 'restoredSource' in test ? test.restoredSource : test.source);
+            assert.equal(csso.internal.translate(ast), 'translate' in test ? test.translate : test.source);
         });
     });
 });
@@ -58,30 +59,22 @@ describe('positions', function() {
         var ast = csso.parse('.foo.bar {\n  property: value;\n}', null, true);
         var positions = [];
 
-        csso.walk(ast, function(node) {
-            positions.push([node[0].line, node[0].column, node[1]]);
+        csso.internal.walk(ast, function(node) {
+            positions.unshift([node.info.line, node.info.column, node.type]);
         }, true);
 
         assert.deepEqual(positions, [
-            [1, 1, 'stylesheet'],
-            [1, 1, 'ruleset'],
-            [1, 1, 'selector'],
-            [1, 1, 'simpleselector'],
-            [1, 1, 'clazz'],
-            [1, 2, 'ident'],
-            [1, 5, 'clazz'],
-            [1, 6, 'ident'],
-            [1, 9, 's'],
-            [1, 10, 'block'],
-            [1, 11, 's'],
-            [2, 3, 'declaration'],
-            [2, 3, 'property'],
-            [2, 3, 'ident'],
-            [2, 12, 'value'],
-            [2, 12, 's'],
-            [2, 13, 'ident'],
-            [2, 18, 'decldelim'],
-            [2, 19, 's']
+            [1, 1, 'StyleSheet'],
+            [1, 1, 'Ruleset'],
+            [1, 10, 'Block'],
+            [2, 3, 'Declaration'],
+            [2, 12, 'Value'],
+            [2, 13, 'Identifier'],
+            [2, 3, 'Property'],
+            [1, 1, 'Selector'],
+            [1, 1, 'SimpleSelector'],
+            [1, 5, 'Class'],
+            [1, 1, 'Class']
         ]);
     });
 
@@ -94,30 +87,22 @@ describe('positions', function() {
         });
         var positions = [];
 
-        csso.walk(ast, function(node) {
-            positions.push([node[0].line, node[0].column, node[1]]);
+        csso.internal.walk(ast, function(node) {
+            positions.unshift([node.info.line, node.info.column, node.type]);
         }, true);
 
         assert.deepEqual(positions, [
-            [3, 5, 'stylesheet'],
-            [3, 5, 'ruleset'],
-            [3, 5, 'selector'],
-            [3, 5, 'simpleselector'],
-            [3, 5, 'clazz'],
-            [3, 6, 'ident'],
-            [3, 9, 'clazz'],
-            [3, 10, 'ident'],
-            [3, 13, 's'],
-            [3, 14, 'block'],
-            [3, 15, 's'],
-            [4, 3, 'declaration'],
-            [4, 3, 'property'],
-            [4, 3, 'ident'],
-            [4, 12, 'value'],
-            [4, 12, 's'],
-            [4, 13, 'ident'],
-            [4, 18, 'decldelim'],
-            [4, 19, 's']
+            [3, 5, 'StyleSheet'],
+            [3, 5, 'Ruleset'],
+            [3, 14, 'Block'],
+            [4, 3, 'Declaration'],
+            [4, 12, 'Value'],
+            [4, 13, 'Identifier'],
+            [4, 3, 'Property'],
+            [3, 5, 'Selector'],
+            [3, 5, 'SimpleSelector'],
+            [3, 9, 'Class'],
+            [3, 5, 'Class']
         ]);
     });
 });

@@ -1,16 +1,14 @@
 var path = require('path');
 var assert = require('assert');
 var csso = require('../lib/index.js');
-var internalToGonzales = require('../lib/compressor/ast/internalToGonzales.js');
 var internalTranslate = require('../lib/compressor/ast/translate.js');
-var gonzalesTranslate = require('../lib/utils/translate.js');
 var tests = require('./fixture/compress');
 
 function normalize(str) {
     return str.replace(/\n|\r\n?|\f/g, '\n');
 }
 
-function createCompressTest(name, test) {
+function createMinifyTest(name, test) {
     var testFn = function() {
         var compressed = csso.minify(test.source);
 
@@ -24,28 +22,32 @@ function createCompressTest(name, test) {
     }
 }
 
-function createAfterCompressionTest(name, test) {
-    it(name, function() {
+function createCompressTest(name, test) {
+    var testFn = function() {
         var ast = csso.parse(test.source, 'stylesheet', true);
-        var compressed = csso.compress(ast, { outputAst: 'internal' });
-        var gonzalesAst = internalToGonzales(compressed);
-        var css = internalTranslate(compressed);
+        var compressedAst = csso.compress(ast);
+        var css = internalTranslate(compressedAst);
 
-        assert.equal(gonzalesTranslate(gonzalesAst, true), css, 'CSS should be equal');
-        assert.equal(JSON.stringify(csso.cleanInfo(gonzalesAst)), JSON.stringify(csso.parse(css)), 'AST should be equal');
-    });
+        assert.equal(normalize(css), normalize(test.compressed));
+    };
+
+    if (path.basename(name)[0] === '_') {
+        it.skip(name, testFn);
+    } else {
+        it(name, testFn);
+    }
 };
 
 describe('compress', function() {
     describe('by csso.minify()', function() {
         for (var name in tests) {
-            createCompressTest(name, tests[name]);
+            createMinifyTest(name, tests[name]);
         }
     });
 
     describe('step by step', function() {
         for (var name in tests) {
-            createAfterCompressionTest(name, tests[name]);
+            createCompressTest(name, tests[name]);
         }
     });
 
@@ -137,24 +139,6 @@ describe('compress', function() {
     });
 
     it('should not fail if no ast passed', function() {
-        assert.equal(gonzalesTranslate(csso.compress(), true), '');
-    });
-
-    it('should return gonzales AST by default', function() {
-        var ast = csso.parse('.foo{color:#FF0000}');
-
-        assert.equal(gonzalesTranslate(csso.compress(ast), true), '.foo{color:red}');
-    });
-
-    it('should return gonzales AST when outputAst is `gonzales`', function() {
-        var ast = csso.parse('.foo{color:#FF0000}');
-
-        assert.equal(gonzalesTranslate(csso.compress(ast, { outputAst: 'gonzales' }), true), '.foo{color:red}');
-    });
-
-    it('should return internal when outputAst is not undefined or `gonzales`', function() {
-        var ast = csso.parse('.foo{color:#FF0000}');
-
-        assert.equal(internalTranslate(csso.compress(ast, { outputAst: 'internal' })), '.foo{color:red}');
+        assert.equal(internalTranslate(csso.compress(), true), '');
     });
 });

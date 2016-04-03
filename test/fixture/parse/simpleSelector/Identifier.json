@@ -1,0 +1,156 @@
+{
+    "ident.0": {
+        "source": "x",
+        "ast": {
+            "type": "Identifier",
+            "name": "x"
+        }
+    },
+    "ident.2": {
+        "source": "-x",
+        "ast": {
+            "type": "Identifier",
+            "name": "-x"
+        }
+    },
+    "ident.3": {
+        "source": "-x-test",
+        "ast": {
+            "type": "Identifier",
+            "name": "-x-test"
+        }
+    },
+    "ident.4": {
+        "source": "x\\:y",
+        "ast": {
+            "type": "Identifier",
+            "name": "x\\:y"
+        }
+    },
+    "ident.6": {
+        "source": "_0",
+        "ast": {
+            "type": "Identifier",
+            "name": "_0"
+        }
+    },
+    "ident.7": {
+        "source": "\\1 ",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\1 "
+        }
+    },
+    "ident.8": {
+        "source": "\\a ",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\a "
+        }
+    },
+    "ident.9": {
+        "source": "\\d ",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\d "
+        }
+    },
+    "ident.10": {
+        "source": "\\7f ",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\7f "
+        }
+    },
+    "ident.11": {
+        "source": "\\30 ",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\30 "
+        }
+    },
+    "ident.12": {
+        "source": "\\35 ",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\35 "
+        }
+    },
+    "ident.13": {
+        "source": "\\39 ",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\39 "
+        }
+    },
+    "ident.14": {
+        "source": "\\-",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\-"
+        }
+    },
+    "ident.15": {
+        "source": "\\-\\30 ",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\-\\30 "
+        }
+    },
+    "ident.16": {
+        "source": "\\-\\30 -",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\-\\30 -"
+        }
+    },
+    "ident.17": {
+        "source": "\\30 123",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\30 123"
+        }
+    },
+    "ident.18": {
+        "source": "\\--\\+\\a \\d \\30 asd",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\--\\+\\a \\d \\30 asd"
+        }
+    },
+    "ident.19": {
+        "source": "\uFFFDasd",
+        "ast": {
+            "type": "Identifier",
+            "name": "\uFFFDasd"
+        }
+    },
+    "ident.20": {
+        "source": "asd\\30 \\a -asd",
+        "ast": {
+            "type": "Identifier",
+            "name": "asd\\30 \\a -asd"
+        }
+    },
+    "ident.21": {
+        "source": "\\20 123",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\20 123"
+        }
+    },
+    "ident.22": {
+        "source": "\\123456 123",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\123456 123"
+        }
+    },
+    "ident.23": {
+        "source": "\\123456zzz",
+        "ast": {
+            "type": "Identifier",
+            "name": "\\123456zzz"
+        }
+    }
+}

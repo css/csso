@@ -2,9 +2,8 @@ var fs = require('fs');
 var assert = require('assert');
 var csso = require('../lib/index.js');
 var SourceMapConsumer = require('source-map').SourceMapConsumer;
-var gonzalesToInternal = require('../lib/compressor/ast/gonzalesToInternal.js');
 var internalTranslateWithSourceMap = require('../lib/compressor/ast/translateWithSourceMap.js');
-var forEachTest = require('./fixture/internal').forEachTest;
+var forEachTest = require('./fixture/parse').forEachTest;
 var css = '.a { color: #ff0000; }\n.b { display: block; float: left; }';
 var minifiedCss = '.a{color:red}.b{display:block;float:left}';
 var anonymousMap = defineSourceMap('<unknown>');
@@ -71,10 +70,9 @@ function extractSourceMap(source) {
 function createInternalTranslateWidthSourceMapTest(name, test, scope) {
     it(name, function() {
         var ast = csso.parse(test.source, scope, true);
-        var internalAst = gonzalesToInternal(ast);
 
         // strings should be equal
-        assert.equal(internalTranslateWithSourceMap(internalAst).css, test.translate);
+        assert.equal(internalTranslateWithSourceMap(ast).css, 'translate' in test ? test.translate : test.source);
     });
 }
 

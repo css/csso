@@ -1,113 +1,104 @@
-[
-  {
-    "source": "<unknown>",
-    "offset": 0,
-    "line": 1,
-    "column": 1
-  }, "stylesheet", [
-    {
-      "source": "<unknown>",
-      "offset": 0,
-      "line": 1,
-      "column": 1
-    }, "ruleset", [
-      {
+{
+    "type": "StyleSheet",
+    "info": {
         "source": "<unknown>",
         "offset": 0,
         "line": 1,
         "column": 1
-      }, "selector", [
+    },
+    "rules": [
         {
-          "source": "<unknown>",
-          "offset": 0,
-          "line": 1,
-          "column": 1
-        }, "simpleselector", [
-          {
-            "source": "<unknown>",
-            "offset": 0,
-            "line": 1,
-            "column": 1
-          }, "clazz",
-          [
-            {
-              "source": "<unknown>",
-              "offset": 0,
-              "line": 1,
-              "column": 2
-            }, "ident", "a"
-          ]
-        ],
-        [
-          {
-            "source": "<unknown>",
-            "offset": 1,
-            "line": 1,
-            "column": 3
-          }, "s", "\n"
-        ]
-      ]
-    ], [
-      {
-        "source": "<unknown>",
-        "offset": 2,
-        "line": 2,
-        "column": 1
-      }, "block",
-      [
-        {
-          "source": "<unknown>",
-          "offset": 3,
-          "line": 2,
-          "column": 2
-        }, "s", "\r"
-      ],
-      [
-        {
-          "source": "<unknown>",
-          "offset": 4,
-          "line": 3,
-          "column": 1
-        }, "declaration", [
-          {
-            "source": "<unknown>",
-            "offset": 4,
-            "line": 3,
-            "column": 1
-          }, "property",
-          [
-            {
-              "source": "<unknown>",
-              "offset": 4,
-              "line": 3,
-              "column": 1
-            }, "ident", "color"
-          ]
-        ], [
-          {
-            "source": "<unknown>",
-            "offset": 10,
-            "line": 3,
-            "column": 7
-          }, "value",
-          [
-            {
-              "source": "<unknown>",
-              "offset": 10,
-              "line": 3,
-              "column": 7
-            }, "s", "\r\n"
-          ],
-          [
-            {
-              "source": "<unknown>",
-              "offset": 12,
-              "line": 4,
-              "column": 1
-            }, "ident", "red"
-          ]
-        ]
-      ]
+            "type": "Ruleset",
+            "info": {
+                "source": "<unknown>",
+                "offset": 0,
+                "line": 1,
+                "column": 1
+            },
+            "selector": {
+                "type": "Selector",
+                "info": {
+                    "source": "<unknown>",
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                },
+                "selectors": [
+                    {
+                        "type": "SimpleSelector",
+                        "info": {
+                            "source": "<unknown>",
+                            "offset": 0,
+                            "line": 1,
+                            "column": 1
+                        },
+                        "sequence": [
+                            {
+                                "type": "Class",
+                                "info": {
+                                    "source": "<unknown>",
+                                    "offset": 0,
+                                    "line": 1,
+                                    "column": 1
+                                },
+                                "name": "a"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "block": {
+                "type": "Block",
+                "info": {
+                    "source": "<unknown>",
+                    "offset": 2,
+                    "line": 2,
+                    "column": 1
+                },
+                "declarations": [
+                    {
+                        "type": "Declaration",
+                        "info": {
+                            "source": "<unknown>",
+                            "offset": 4,
+                            "line": 3,
+                            "column": 1
+                        },
+                        "property": {
+                            "type": "Property",
+                            "info": {
+                                "source": "<unknown>",
+                                "offset": 4,
+                                "line": 3,
+                                "column": 1
+                            },
+                            "name": "color"
+                        },
+                        "value": {
+                            "type": "Value",
+                            "info": {
+                                "source": "<unknown>",
+                                "offset": 10,
+                                "line": 3,
+                                "column": 7
+                            },
+                            "important": false,
+                            "sequence": [
+                                {
+                                    "type": "Identifier",
+                                    "info": {
+                                        "source": "<unknown>",
+                                        "offset": 12,
+                                        "line": 4,
+                                        "column": 1
+                                    },
+                                    "name": "red"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
     ]
-  ]
-]
+}
