@@ -32,7 +32,7 @@ describe('parse', function() {
             assert.equal(stringify(ast), stringify(test.ast));
 
             // translated AST should be equal to original source
-            assert.equal(csso.internal.translate(ast), 'translate' in test ? test.translate : test.source);
+            assert.equal(csso.translate(ast), 'translate' in test ? test.translate : test.source);
         });
     });
 });
@@ -59,7 +59,7 @@ describe('positions', function() {
         var ast = csso.parse('.foo.bar {\n  property: value;\n}', null, true);
         var positions = [];
 
-        csso.internal.walk(ast, function(node) {
+        csso.walk(ast, function(node) {
             positions.unshift([node.info.line, node.info.column, node.type]);
         }, true);
 
@@ -87,7 +87,7 @@ describe('positions', function() {
         });
         var positions = [];
 
-        csso.internal.walk(ast, function(node) {
+        csso.walk(ast, function(node) {
             positions.unshift([node.info.line, node.info.column, node.type]);
         }, true);
 

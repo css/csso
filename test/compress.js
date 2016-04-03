@@ -1,7 +1,7 @@
 var path = require('path');
 var assert = require('assert');
 var csso = require('../lib/index.js');
-var internalTranslate = require('../lib/compressor/ast/translate.js');
+var internalTranslate = require('../lib/utils/translate.js');
 var tests = require('./fixture/compress');
 
 function normalize(str) {

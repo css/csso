@@ -1,12 +1,11 @@
 var assert = require('assert');
 var csso = require('../lib/index.js');
-var internalWalkAll = require('../lib/compressor/ast/walk.js').all;
-var internalWalkRules = require('../lib/compressor/ast/walk.js').rules;
-var internalWalkRulesRight = require('../lib/compressor/ast/walk.js').rulesRight;
-var internalTranslate = require('../lib/compressor/ast/translate.js');
+var internalWalkAll = require('../lib/utils/walk.js').all;
+var internalWalkRules = require('../lib/utils/walk.js').rules;
+var internalWalkRulesRight = require('../lib/utils/walk.js').rulesRight;
+var internalTranslate = require('../lib/utils/translate.js');
 var testFiles = require('./fixture/parse').tests;
 var forEachTest = require('./fixture/parse').forEachTest;
-var stringifyInternalAST = require('./helpers/stringify');
 
 function expectedInternalWalk(ast) {
     function walk(node) {
