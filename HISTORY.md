@@ -1,3 +1,7 @@
+## 1.8.1 (March 30, 2016)
+
+- Don't remove spaces after function/braces/urls since unsafe (#289)
+
 ## 1.8.0 (March 24, 2016)
 
 - Usage data support:
