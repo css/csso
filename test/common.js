@@ -8,27 +8,6 @@ function normalize(str) {
 }
 
 describe('csso', function() {
-    it('justDoIt() should works until removed', function() {
-        var output = [];
-        var tmp = console.warn;
-
-        try {
-            console.warn = function() {
-                output.push(Array.prototype.slice.call(arguments).join(' '));
-            };
-
-            assert.equal(
-                csso.justDoIt('.foo { color: #ff0000 } .bar { color: rgb(255, 0, 0) }'),
-                '.bar,.foo{color:red}'
-            );
-        } finally {
-            console.warn = tmp;
-        }
-
-        assert.equal(output.length, 1);
-        assert(/method is deprecated/.test(String(output[0])), 'should contains `method is deprecated`');
-    });
-
     it('walk', function() {
         function visit(withInfo) {
             var visitedTypes = {};
