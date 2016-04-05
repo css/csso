@@ -50,13 +50,17 @@ describe('parse error', function() {
 
     tests.forEach(function(test) {
         createParseErrorTest(filename, test);
-        createParseErrorTest(filename + ' (with positions)', test, { needPositions: true });
+        createParseErrorTest(filename + ' (with positions)', test, {
+            positions: true
+        });
     });
 });
 
 describe('positions', function() {
     it('should start with line 1 column 1 by default', function() {
-        var ast = csso.parse('.foo.bar {\n  property: value;\n}', null, true);
+        var ast = csso.parse('.foo.bar {\n  property: value;\n}', null, {
+            positions: true
+        });
         var positions = [];
 
         csso.walk(ast, function(node) {
@@ -81,7 +85,6 @@ describe('positions', function() {
     it('should start with specified line and column', function() {
         var ast = csso.parse('.foo.bar {\n  property: value;\n}', null, {
             positions: true,
-            needInfo: true,
             line: 3,
             column: 5
         });

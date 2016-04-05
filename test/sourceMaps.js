@@ -69,7 +69,9 @@ function extractSourceMap(source) {
 
 function createTranslateWidthSourceMapTest(name, test, scope) {
     it(name, function() {
-        var ast = csso.parse(test.source, scope, true);
+        var ast = csso.parse(test.source, scope, {
+            positions: true
+        });
 
         // strings should be equal
         assert.equal(translateWithSourceMap(ast).css, 'translate' in test ? test.translate : test.source);

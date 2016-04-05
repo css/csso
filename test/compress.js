@@ -24,7 +24,7 @@ function createMinifyTest(name, test) {
 
 function createCompressTest(name, test) {
     var testFn = function() {
-        var ast = csso.parse(test.source, 'stylesheet', true);
+        var ast = csso.parse(test.source);
         var compressedAst = csso.compress(ast).ast;
         var css = translate(compressedAst);
 

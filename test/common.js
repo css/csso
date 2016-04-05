@@ -12,7 +12,7 @@ describe('csso', function() {
         function visit() {
             var visitedTypes = {};
 
-            csso.walk(csso.parse('@media (min-width: 200px) { .foo:nth-child(2n) { color: rgb(100%, 10%, 0%); width: calc(3px + 5%) } }', 'stylesheet'), function(node) {
+            csso.walk(csso.parse('@media (min-width: 200px) { .foo:nth-child(2n) { color: rgb(100%, 10%, 0%); width: calc(3px + 5%) } }'), function(node) {
                 visitedTypes[node.type] = true;
             });
 
@@ -48,7 +48,9 @@ describe('csso', function() {
 
     it('JSON.strigify()', function() {
         assert.equal(
-            stringify(csso.parse('.a\n{\rcolor:\r\nred}', 'stylesheet', true), true),
+            stringify(csso.parse('.a\n{\rcolor:\r\nred}', 'stylesheet', {
+                positions: true
+            }), true),
             normalize(fs.readFileSync(__dirname + '/fixture/stringify.txt', 'utf-8').trim())
         );
     });

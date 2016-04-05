@@ -28,7 +28,7 @@ function expectedWalk(ast) {
 
 function createWalkAllTest(name, test, scope) {
     it(name, function() {
-        var ast = csso.parse(test.source, scope, true);
+        var ast = csso.parse(test.source, scope);
         var actual = [];
 
         walkAll(ast, function(node) {
@@ -42,7 +42,7 @@ function createWalkAllTest(name, test, scope) {
 
 function createWalkRulesTest(name, test, scope, walker) {
     it(name, function() {
-        var ast = csso.parse(test.source, scope, true);
+        var ast = csso.parse(test.source, scope);
         var actual = [];
 
         walker(ast, function(node) {
@@ -61,7 +61,7 @@ function createWalkRulesTest(name, test, scope, walker) {
 
 function createTranslateTest(name, test, scope) {
     it(name, function() {
-        var ast = csso.parse(test.source, scope, true);
+        var ast = csso.parse(test.source, scope);
 
         // strings should be equal
         assert.equal(translate(ast), 'translate' in test ? test.translate : test.source);
