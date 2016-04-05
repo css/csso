@@ -9,12 +9,12 @@ function normalize(str) {
 
 describe('csso', function() {
     it('walk', function() {
-        function visit(withInfo) {
+        function visit() {
             var visitedTypes = {};
 
-            csso.walk(csso.parse('@media (min-width: 200px) { .foo:nth-child(2n) { color: rgb(100%, 10%, 0%); width: calc(3px + 5%) } }', 'stylesheet', withInfo), function(node) {
+            csso.walk(csso.parse('@media (min-width: 200px) { .foo:nth-child(2n) { color: rgb(100%, 10%, 0%); width: calc(3px + 5%) } }', 'stylesheet'), function(node) {
                 visitedTypes[node.type] = true;
-            }, withInfo);
+            });
 
             return Object.keys(visitedTypes).sort();
         }

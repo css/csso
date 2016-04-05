@@ -61,7 +61,7 @@ describe('positions', function() {
 
         csso.walk(ast, function(node) {
             positions.unshift([node.info.line, node.info.column, node.type]);
-        }, true);
+        });
 
         assert.deepEqual(positions, [
             [1, 1, 'StyleSheet'],
@@ -89,7 +89,7 @@ describe('positions', function() {
 
         csso.walk(ast, function(node) {
             positions.unshift([node.info.line, node.info.column, node.type]);
-        }, true);
+        });
 
         assert.deepEqual(positions, [
             [3, 5, 'StyleSheet'],
