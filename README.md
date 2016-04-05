@@ -102,7 +102,7 @@ All sections are optional. Value of `tags`, `ids` and `classes` should be array 
 
 `tags`, `ids` and `classes` are using on clean stage to filter selectors that contains something that not in list. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if selector hasn't any type selector (or even any type selector) it isn't filter.
 
-> `ids` and `classes` comparison is case sensetive, `tags` – is not.
+> `ids` and `classes` names are case sensitive, `tags` – is not.
 
 Input CSS:
 
