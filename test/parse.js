@@ -10,7 +10,7 @@ function createParseErrorTest(location, test, options) {
         var error;
 
         assert.throws(function() {
-            csso.parse(test.css, null, options);
+            csso.parse(test.css, options);
         }, function(e) {
             error = e;
             if (e.parseError) {
@@ -24,9 +24,11 @@ function createParseErrorTest(location, test, options) {
 }
 
 describe('parse', function() {
-    forEachParseTest(function createParseTest(name, test, scope) {
+    forEachParseTest(function createParseTest(name, test, context) {
         it(name, function() {
-            var ast = csso.parse(test.source, scope);
+            var ast = csso.parse(test.source, {
+                context: context
+            });
 
             // AST should be equal
             assert.equal(stringify(ast), stringify(test.ast));
@@ -58,7 +60,7 @@ describe('parse error', function() {
 
 describe('positions', function() {
     it('should start with line 1 column 1 by default', function() {
-        var ast = csso.parse('.foo.bar {\n  property: value;\n}', null, {
+        var ast = csso.parse('.foo.bar {\n  property: value;\n}', {
             positions: true
         });
         var positions = [];
@@ -83,7 +85,7 @@ describe('positions', function() {
     });
 
     it('should start with specified line and column', function() {
-        var ast = csso.parse('.foo.bar {\n  property: value;\n}', null, {
+        var ast = csso.parse('.foo.bar {\n  property: value;\n}', {
             positions: true,
             line: 3,
             column: 5

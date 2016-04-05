@@ -48,7 +48,7 @@ describe('csso', function() {
 
     it('JSON.strigify()', function() {
         assert.equal(
-            stringify(csso.parse('.a\n{\rcolor:\r\nred}', 'stylesheet', {
+            stringify(csso.parse('.a\n{\rcolor:\r\nred}', {
                 positions: true
             }), true),
             normalize(fs.readFileSync(__dirname + '/fixture/stringify.txt', 'utf-8').trim())
