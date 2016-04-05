@@ -25,7 +25,7 @@ function createMinifyTest(name, test) {
 function createCompressTest(name, test) {
     var testFn = function() {
         var ast = csso.parse(test.source, 'stylesheet', true);
-        var compressedAst = csso.compress(ast);
+        var compressedAst = csso.compress(ast).ast;
         var css = translate(compressedAst);
 
         assert.equal(normalize(css), normalize(test.compressed));
@@ -139,6 +139,6 @@ describe('compress', function() {
     });
 
     it('should not fail if no ast passed', function() {
-        assert.equal(translate(csso.compress(), true), '');
+        assert.equal(translate(csso.compress().ast, true), '');
     });
 });
