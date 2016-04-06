@@ -249,13 +249,15 @@ console.log(result.css);
 
 Parse CSS to AST.
 
-> NOTE: Currenly parser omit redundant separators, spaces and comments (except exlamation comments, i.e. `/*! comment */`) on AST build, since those things are removing by compressor anyway.
+> NOTE: Currenly parser omit redundant separators, spaces and comments (except exclamation comments, i.e. `/*! comment */`) on AST build, since those things are removing by compressor anyway.
 
 Options:
 
 - context `String` – parsing context, useful when some part of CSS is parsing (see below)
 - positions `Boolean` – should AST contains node position or not, store data in `info` property of nodes (`false` by default)
 - filename `String` – filename of source that adds to info when `positions` is true, uses for source map generation (`<unknown>` by default)
+- line `Number` – initial line number, useful when parse fragment of CSS to compute correct positions
+- column `Number` – initial column number, useful when parse fragment of CSS to compute correct positions
 
 Contexts:
 
@@ -268,6 +270,17 @@ Contexts:
 - `block` – block content w/o curly braces (`color: red; border: 1px solid black;` for ruleset example)
 - `declaration` – declaration (`color: red` or `border: 1px solid black` for ruleset example)
 - `value` – declaration value (`red` or `1px solid black` for ruleset example)
+
+```js
+// simple parsing with no options
+var ast = csso.parse('.example { color: red }');
+
+// parse with options
+var ast = csso.parse('.foo.bar', {
+    context: 'simpleSelector',
+    positions: true
+});
+```
 
 #### compress(ast[, options])
 
@@ -304,9 +317,55 @@ console.log(csso.translateWithSourceMap(ast));
 
 #### walk(ast, handler)
 
+Visit all nodes of AST and call handler for each one. `handler` receives three arguments:
+
+- node – current AST node
+- item – node wrapper when node is a list member; this wrapper contains references to `prev` and `next` nodes in list
+- list – reference to list when node is a list member; it's useful for operations on list like `remove()` or `insert()`
+
+Context for handler an object, that contains references to some parent nodes:
+
+- root – refers to `ast` or root node
+- stylesheet – refers to closest `StyleSheet` node, it may be a top-level or at-rule block stylesheet
+- atruleExpression – refers to `AtruleExpression` node if current node inside at-rule expression
+- ruleset – refers to `Ruleset` node if current node inside a ruleset
+- selector – refers to `Selector` node if current node inside a selector
+- declaration – refers to `Declaration` node if current node inside a declaration
+- function – refers to closest `Function` or `FunctionalPseudo` node if current node inside one of them
+
+```js
+// collect all urls in declarations
+var csso = require('./lib/index.js');
+var urls = [];
+var ast = csso.parse(`
+  @import url(import.css);
+  .foo { background: url('foo.jpg'); }
+  .bar { background-image: url(bar.png); }
+`);
+
+csso.walk(ast, function(node) {
+    if (this.declaration !== null && node.type === 'Url') {
+        var value = node.value;
+
+        if (value.type === 'Raw') {
+            urls.push(value.value);
+        } else {
+            urls.push(value.value.substr(1, value.value.length - 2));
+        }
+    }
+});
+
+console.log(urls);
+// [ 'foo.jpg', 'bar.png' ]
+```
+
 #### walkRules(ast, handler)
 
+Same as `walk()` but visits `Ruleset` and `Atrule` nodes only.
+
 #### walkRulesRight(ast, handler)
+
+Same as `walkRules()` but visits nodes in reverse order (from last to first).
 
 ## More reading
 
