@@ -267,8 +267,7 @@
                             }
                         ]
                     }
-                ],
-                "id": null
+                ]
             },
             "block": {
                 "type": "StyleSheet",
@@ -285,9 +284,7 @@
                                             "type": "Identifier",
                                             "name": "s"
                                         }
-                                    ],
-                                    "id": null,
-                                    "compareMarker": null
+                                    ]
                                 }
                             ]
                         },
@@ -326,8 +323,7 @@
             "name": "media",
             "expression": {
                 "type": "AtruleExpression",
-                "sequence": [],
-                "id": null
+                "sequence": []
             },
             "block": {
                 "type": "StyleSheet",
