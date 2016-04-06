@@ -182,18 +182,14 @@
                         if (ast) {
                             steps.push({
                                 name: name,
-                                css: csso.internal.translate(ast)
+                                css: csso.translate(ast)
                             });
                         }
                     }
                 });
 
-                if (typeof lastResult !== 'string') {
-                    lastResultMap = lastResult.map.toString();
-                    lastResult = lastResult.css;
-                } else {
-                    lastResultMap = null;
-                }
+                lastResultMap = lastResult.map ? lastResult.map.toString() : null;
+                lastResult = lastResult.css;
 
                 error.classList.remove('show');
             } catch(e) {
