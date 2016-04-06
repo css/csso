@@ -1,3 +1,22 @@
+## 2.0.0 (April 5, 2016)
+
+- No more `gonzales` AST format and related code
+- `minify()` and `minifyBlock()` is always return an object as result now (i.e. `{ css: String, map: SourceMapGenerator or null }`)
+- `parse()`
+    - Returns AST in new format (so called `internal`)
+    - Dynamic scanner implemented
+    - New AST format + dynamic scanner = performance boost and less memory consumption
+    - No more `context` argument, context should be specified via `options`
+    - Supported contexts now: `stylesheet`, `atrule`, `atruleExpression`, `ruleset`, `selector`, `simpleSelector`, `block`, `declaration` and `value` 
+    - Drop `needPositions` option, `positions` option should be used instead
+    - Drop `needInfo` option, `info` object is attaching to nodes when some information is requested by `options`
+    - `options` should be an object, otherwise it treats as empty object
+- `compress()`
+    - No more AST converting (performance boost and less memory consumption)
+    - Drop `outputAst` option
+    - Returns an object as result instead of AST (i.e. `{ ast: Object }`)
+- Drop methods: `justDoIt()`, `stringify()`, `cleanInfo()`
+
 ## 1.8.1 (March 30, 2016)
 
 - Don't remove spaces after function/braces/urls since unsafe (#289)
