@@ -1,0 +1,39 @@
+{
+    "vhash.0": {
+        "source": "#100",
+        "translate": "#100",
+        "ast": {
+            "type": "Hash",
+            "value": "100"
+        }
+    },
+    "vhash.1": {
+        "source": "#id",
+        "translate": "#id",
+        "ast": {
+            "type": "Hash",
+            "value": "id"
+        }
+    },
+    "vhash.2": {
+        "source": "#123abc",
+        "ast": {
+            "type": "Hash",
+            "value": "123abc"
+        }
+    },
+    "vhash.3": {
+        "source": "#abc123",
+        "ast": {
+            "type": "Hash",
+            "value": "abc123"
+        }
+    },
+    "vhash.4": {
+        "source": "#a1b2c3d4",
+        "ast": {
+            "type": "Hash",
+            "value": "a1b2c3d4"
+        }
+    }
+}

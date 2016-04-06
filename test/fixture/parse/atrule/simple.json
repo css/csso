@@ -1,0 +1,168 @@
+{
+    "atrules.0": {
+        "source": "@test;",
+        "translate": "@test;",
+        "ast": {
+            "type": "Atrule",
+            "name": "test",
+            "expression": {
+                "type": "AtruleExpression",
+                "sequence": []
+            },
+            "block": null
+        }
+    },
+    "atrules.1": {
+        "source": "@test x y;",
+        "translate": "@test x y;",
+        "ast": {
+            "type": "Atrule",
+            "name": "test",
+            "expression": {
+                "type": "AtruleExpression",
+                "sequence": [
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
+                ]
+            },
+            "block": null
+        }
+    },
+    "atrules.2": {
+        "source": "@test \"blah\";",
+        "translate": "@test \"blah\";",
+        "ast": {
+            "type": "Atrule",
+            "name": "test",
+            "expression": {
+                "type": "AtruleExpression",
+                "sequence": [
+                    {
+                        "type": "String",
+                        "value": "\"blah\""
+                    }
+                ]
+            },
+            "block": null
+        }
+    },
+    "atrules.3": {
+        "source": "@import url(http://example.com)",
+        "translate": "@import url(http://example.com);",
+        "ast": {
+            "type": "Atrule",
+            "name": "import",
+            "expression": {
+                "type": "AtruleExpression",
+                "sequence": [
+                    {
+                        "type": "Url",
+                        "value": {
+                            "type": "Raw",
+                            "value": "http://example.com"
+                        }
+                    }
+                ]
+            },
+            "block": null
+        }
+    },
+    "atrules.c.0": {
+        "source": "@test/*test*/;",
+        "translate": "@test;",
+        "ast": {
+            "type": "Atrule",
+            "name": "test",
+            "expression": {
+                "type": "AtruleExpression",
+                "sequence": []
+            },
+            "block": null
+        }
+    },
+    "atrules.c.1": {
+        "source": "@test/*test*/x/*test*/ y;",
+        "translate": "@test x y;",
+        "ast": {
+            "type": "Atrule",
+            "name": "test",
+            "expression": {
+                "type": "AtruleExpression",
+                "sequence": [
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
+                ]
+            },
+            "block": null
+        }
+    },
+    "atrules.s.0": {
+        "source": "@test  ;",
+        "translate": "@test;",
+        "ast": {
+            "type": "Atrule",
+            "name": "test",
+            "expression": {
+                "type": "AtruleExpression",
+                "sequence": []
+            },
+            "block": null
+        }
+    },
+    "atrules.s.1": {
+        "source": "@test  x  y;",
+        "translate": "@test x y;",
+        "ast": {
+            "type": "Atrule",
+            "name": "test",
+            "expression": {
+                "type": "AtruleExpression",
+                "sequence": [
+                    {
+                        "type": "Identifier",
+                        "name": "x"
+                    },
+                    {
+                        "type": "Space"
+                    },
+                    {
+                        "type": "Identifier",
+                        "name": "y"
+                    }
+                ]
+            },
+            "block": null
+        }
+    },
+    "atkeyword.1": {
+        "source": "@font-face",
+        "translate": "@font-face;",
+        "ast": {
+            "type": "Atrule",
+            "name": "font-face",
+            "expression": {
+                "type": "AtruleExpression",
+                "sequence": []
+            },
+            "block": null
+        }
+    }
+}

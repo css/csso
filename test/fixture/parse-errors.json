@@ -314,6 +314,20 @@
         "column": 3
     }
 }, {
+    "css": ".a \n    ",
+    "error": "LeftCurlyBracket is expected",
+    "position": {
+        "line": 1,
+        "column": 3
+    }
+}, {
+    "css": "  \n   \n.a \n    ",
+    "error": "LeftCurlyBracket is expected",
+    "position": {
+        "line": 3,
+        "column": 3
+    }
+}, {
     "css": ".foo { var(--side): 20px }",
     "error": "Colon is expected",
     "position": {

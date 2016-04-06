@@ -46,23 +46,15 @@ Options:
 Some examples:
 
 ```
-> csso in.css out.css
-
 > csso in.css
 ...output result in stdout...
+
+> csso in.css --output out.css
 
 > echo '.test { color: #ff0000; }' | csso
 .test{color:red}
 
 > cat source1.css source2.css | csso | gzip -9 -c > production.css.gz
-
-> echo '.test { color: #ff0000 }' | csso --stat >/dev/null
-File:       <stdin>
-Original:   25 bytes
-Compressed: 16 bytes (64.00%)
-Saving:     9 bytes (36.00%)
-Time:       12 ms
-Memory:     0.346 MB
 ```
 
 ### Source maps
@@ -110,7 +102,7 @@ All sections are optional. Value of `tags`, `ids` and `classes` should be array 
 
 `tags`, `ids` and `classes` are using on clean stage to filter selectors that contains something that not in list. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if selector hasn't any type selector (or even any type selector) it isn't filter.
 
-> `ids` and `classes` comparison is case sensetive, `tags` – is not.
+> `ids` and `classes` names are case sensitive, `tags` – is not.
 
 Input CSS:
 
@@ -182,26 +174,18 @@ Currently the optimizer doesn't care about out-of-bounds selectors order changin
 ```js
 var csso = require('csso');
 
-var compressedCss = csso.minify('.test { color: #ff0000; }');
+var compressedCss = csso.minify('.test { color: #ff0000; }').css;
 
 console.log(compressedCss);
 // .test{color:red}
-
-
-// there are some options you can pass
-var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
-    restructure: false,   // don't change css structure, i.e. don't merge declarations, rulesets etc
-    debug: true           // show additional debug information:
-                          // true or number from 1 to 3 (greater number - more details)
-});
 ```
 
 You may minify CSS by yourself step by step:
 
 ```js
 var ast = csso.parse('.test { color: #ff0000; }');
-var compressedAst = csso.compress(ast);
-var compressedCss = csso.translate(compressedAst, true);
+var compressResult = csso.compress(ast);
+var compressedCss = csso.translate(compressResult.ast);
 
 console.log(compressedCss);
 // .test{color:red}
@@ -223,78 +207,169 @@ console.log(result.map.toString());
 // '{ .. source map content .. }'
 ```
 
-### Debugging
+#### minify(source[, options])
 
-```
-> echo '.test { color: green; color: #ff0000 } .foo { color: red }' | csso --debug
-## parsing done in 10 ms
+Minify `source` CSS passed as `String`.
 
-Compress block #1
-(0.002ms) convertToInternal
-(0.000ms) clean
-(0.001ms) compress
-(0.002ms) prepare
-(0.000ms) initialRejoinRuleset
-(0.000ms) rejoinAtrule
-(0.000ms) disjoin
-(0.000ms) buildMaps
-(0.000ms) markShorthands
-(0.000ms) processShorthand
-(0.001ms) restructBlock
-(0.000ms) rejoinRuleset
-(0.000ms) restructRuleset
-## compressing done in 9 ms
+Options:
 
-.foo,.test{color:red}
-```
+- sourceMap `Boolean` - generate source map if `true`
+- filename `String` - filename of input, uses for source map
+- debug `Boolean` - output debug information to `stderr`
+- other options are the same as for `compress()`
 
-More details are provided when `--debug` flag has a number greater than `1`:
+Returns an object with properties:
 
-```
-> echo '.test { color: green; color: #ff0000 } .foo { color: red }' | csso --debug 2
-## parsing done in 8 ms
+- css `String` – resulting CSS
+- map `Object` – instance of `SourceMapGenerator` or `null`
 
-Compress block #1
-(0.000ms) clean
-  .test{color:green;color:#ff0000}.foo{color:red}
+```js
+var result = csso.minify('.test { color: #ff0000; }', {
+    restructure: false,   // don't change CSS structure, i.e. don't merge declarations, rulesets etc
+    debug: true           // show additional debug information:
+                          // true or number from 1 to 3 (greater number - more details)
+});
 
-(0.001ms) compress
-  .test{color:green;color:red}.foo{color:red}
-
-...
-
-(0.002ms) restructBlock
-  .test{color:red}.foo{color:red}
-
-(0.001ms) rejoinRuleset
-  .foo,.test{color:red}
-
-## compressing done in 13 ms
-
-.foo,.test{color:red}
+console.log(result.css);
+// > .test{color:red}
 ```
 
-Using `--debug` option adds stack trace to CSS parse error output. That can help to find out problem in parser.
+#### minifyBlock(source[, options])
 
+The same as `minify()` but for style block. Usualy it's a `style` attribute content.
+
+```js
+var result = csso.minifyBlock('color: rgba(255, 0, 0, 1); color: #ff0000').css;
+
+console.log(result.css);
+// > color:red
 ```
-> echo '.a { color }' | csso --debug
 
-Parse error <stdin>: Colon is expected
-    1 |.a { color }
-------------------^
-    2 |
+#### parse(source[, options])
 
-/usr/local/lib/node_modules/csso/lib/cli.js:243
-                throw e;
-                ^
+Parse CSS to AST.
 
-Error: Colon is expected
-    at parseError (/usr/local/lib/node_modules/csso/lib/parser/index.js:54:17)
-    at eat (/usr/local/lib/node_modules/csso/lib/parser/index.js:88:5)
-    at getDeclaration (/usr/local/lib/node_modules/csso/lib/parser/index.js:394:5)
-    at getBlock (/usr/local/lib/node_modules/csso/lib/parser/index.js:380:27)
-    ...
+> NOTE: Currenly parser omit redundant separators, spaces and comments (except exclamation comments, i.e. `/*! comment */`) on AST build, since those things are removing by compressor anyway.
+
+Options:
+
+- context `String` – parsing context, useful when some part of CSS is parsing (see below)
+- positions `Boolean` – should AST contains node position or not, store data in `info` property of nodes (`false` by default)
+- filename `String` – filename of source that adds to info when `positions` is true, uses for source map generation (`<unknown>` by default)
+- line `Number` – initial line number, useful when parse fragment of CSS to compute correct positions
+- column `Number` – initial column number, useful when parse fragment of CSS to compute correct positions
+
+Contexts:
+
+- `stylesheet` (default) – regular stylesheet, should be suitable in most cases
+- `atrule` – at-rule (e.g. `@media screen, print { ... }`)
+- `atruleExpression` – at-rule expression (`screen, print` for example above)
+- `ruleset` – rule (e.g. `.foo, .bar:hover { color: red; border: 1px solid black; }`)
+- `selector` – selector group (`.foo, .bar:hover` for ruleset example)
+- `simpleSelector` – selector (`.foo` or `.bar:hover` for ruleset example)
+- `block` – block content w/o curly braces (`color: red; border: 1px solid black;` for ruleset example)
+- `declaration` – declaration (`color: red` or `border: 1px solid black` for ruleset example)
+- `value` – declaration value (`red` or `1px solid black` for ruleset example)
+
+```js
+// simple parsing with no options
+var ast = csso.parse('.example { color: red }');
+
+// parse with options
+var ast = csso.parse('.foo.bar', {
+    context: 'simpleSelector',
+    positions: true
+});
 ```
+
+#### compress(ast[, options])
+
+Do the main task – compress AST.
+
+Options:
+
+- restructure `Boolean` – do the structure optimisations or not (`true` by default)
+- usage `Object` - usage data for advanced optimisations (see [Usage data](#usage-data) for details)
+- logger `Function` - function to track every step of transformations
+
+#### translate(ast)
+
+Converts AST to string.
+
+```js
+var ast = csso.parse('.test { color: red }');
+console.log(csso.translate(ast));
+// > .test{color:red}
+```
+
+#### translateWithSourceMap(ast)
+
+The same as `translate()` but also generates source map (nodes should contain positions in `info` property).
+
+```js
+var ast = csso.parse('.test { color: red }', {
+    filename: 'my.css',
+    positions: true
+});
+console.log(csso.translateWithSourceMap(ast));
+// { css: '.test{color:red}', map: SourceMapGenerator {} }
+```
+
+#### walk(ast, handler)
+
+Visit all nodes of AST and call handler for each one. `handler` receives three arguments:
+
+- node – current AST node
+- item – node wrapper when node is a list member; this wrapper contains references to `prev` and `next` nodes in list
+- list – reference to list when node is a list member; it's useful for operations on list like `remove()` or `insert()`
+
+Context for handler an object, that contains references to some parent nodes:
+
+- root – refers to `ast` or root node
+- stylesheet – refers to closest `StyleSheet` node, it may be a top-level or at-rule block stylesheet
+- atruleExpression – refers to `AtruleExpression` node if current node inside at-rule expression
+- ruleset – refers to `Ruleset` node if current node inside a ruleset
+- selector – refers to `Selector` node if current node inside a selector
+- declaration – refers to `Declaration` node if current node inside a declaration
+- function – refers to closest `Function` or `FunctionalPseudo` node if current node inside one of them
+
+```js
+// collect all urls in declarations
+var csso = require('./lib/index.js');
+var urls = [];
+var ast = csso.parse(`
+  @import url(import.css);
+  .foo { background: url('foo.jpg'); }
+  .bar { background-image: url(bar.png); }
+`);
+
+csso.walk(ast, function(node) {
+    if (this.declaration !== null && node.type === 'Url') {
+        var value = node.value;
+
+        if (value.type === 'Raw') {
+            urls.push(value.value);
+        } else {
+            urls.push(value.value.substr(1, value.value.length - 2));
+        }
+    }
+});
+
+console.log(urls);
+// [ 'foo.jpg', 'bar.png' ]
+```
+
+#### walkRules(ast, handler)
+
+Same as `walk()` but visits `Ruleset` and `Atrule` nodes only.
+
+#### walkRulesRight(ast, handler)
+
+Same as `walkRules()` but visits nodes in reverse order (from last to first).
+
+## More reading
+
+- [Debugging](docs/debugging.md)
 
 ## License
 
