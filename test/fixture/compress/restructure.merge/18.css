@@ -1,0 +1,12 @@
+.a {
+    foo: 1;
+    padding-bottom: 2;
+}
+.b {
+    padding: 3;
+}
+.c {
+    foo: 1;
+    padding-top: 1;
+    padding-bottom: 2;
+}
