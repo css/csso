@@ -1,9 +1,27 @@
-.a12345678, .b {
+/*
+    should not skip at-rules that contains rules with same specificity
+*/
+
+.a {
     color: red;
 }
-.a12345678 {
-    padding: 1px;
+
+@media foo {
+    .b {
+        color: blue;
+    }
 }
-.b {
-    margin: 1px;
+
+.c {
+    color: red;
+}
+
+@supports (a: 1) {
+    .d {
+        color: blue;
+    }
+}
+
+.e {
+    color: red;
 }

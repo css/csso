@@ -1,0 +1,46 @@
+{
+    "important.0": {
+        "source": "!important",
+        "ast": {
+            "type": "Value",
+            "important": true,
+            "sequence": []
+        }
+    },
+    "important.1": {
+        "source": "!ImpoRtant",
+        "translate": "!important",
+        "ast": {
+            "type": "Value",
+            "important": true,
+            "sequence": []
+        }
+    },
+    "important.2": {
+        "source": "!IMPORTANT",
+        "translate": "!important",
+        "ast": {
+            "type": "Value",
+            "important": true,
+            "sequence": []
+        }
+    },
+    "important.c.0": {
+        "source": "!/*test*/important",
+        "translate": "!important",
+        "ast": {
+            "type": "Value",
+            "important": true,
+            "sequence": []
+        }
+    },
+    "important.s.0": {
+        "source": "!  important",
+        "translate": "!important",
+        "ast": {
+            "type": "Value",
+            "important": true,
+            "sequence": []
+        }
+    }
+}

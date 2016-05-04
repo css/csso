@@ -1,0 +1,19 @@
+/*
+    should not mix :not() with other signatures
+*/
+
+a {
+    color: red;
+}
+
+a:not(b) {
+    color: red;
+}
+
+.a:not(.b) {
+    color: #123;
+}
+
+.c:not(.d) {
+    color: #123;
+}

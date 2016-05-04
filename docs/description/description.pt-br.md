@@ -580,7 +580,7 @@ As propriedades `margin` e `padding` são minifcados de acordo com \[[CSS 2.1 / 
 
 ## Recomendações
 
-Algumas folhas de estilos comprimem melhor do que outras. Às vezes uma diferença de caracter pode tornar uma folha de estilo bem compreensível em uma muito inconveniente.
+Algumas folhas de estilos comprimem melhor do que outras. Às vezes uma diferença de caractere pode tornar uma folha de estilo bem compreensível em uma muito inconveniente.
 
 Você pode ajudar o minificador seguindo estas recomendações.
 

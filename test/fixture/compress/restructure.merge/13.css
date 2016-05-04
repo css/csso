@@ -1,9 +1,15 @@
-.a, .b {
+/*
+    should skip non-stylesheet block at-rules
+*/
+
+.a {
     color: red;
 }
-.a {
-    padding: 1px;
+
+@font-family {
+    test: 1;
 }
+
 .b {
-    margin: 1px;
+    color: red;
 }

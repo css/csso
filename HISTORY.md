@@ -1,3 +1,41 @@
+## 2.0.0 (April 5, 2016)
+
+- No more `gonzales` AST format and related code
+- `minify()` and `minifyBlock()` is always return an object as result now (i.e. `{ css: String, map: SourceMapGenerator or null }`)
+- `parse()`
+    - Returns AST in new format (so called `internal`)
+    - Dynamic scanner implemented
+    - New AST format + dynamic scanner = performance boost and less memory consumption
+    - No more `context` argument, context should be specified via `options`
+    - Supported contexts now: `stylesheet`, `atrule`, `atruleExpression`, `ruleset`, `selector`, `simpleSelector`, `block`, `declaration` and `value` 
+    - Drop `needPositions` option, `positions` option should be used instead
+    - Drop `needInfo` option, `info` object is attaching to nodes when some information is requested by `options`
+    - `options` should be an object, otherwise it treats as empty object
+- `compress()`
+    - No more AST converting (performance boost and less memory consumption)
+    - Drop `outputAst` option
+    - Returns an object as result instead of AST (i.e. `{ ast: Object }`)
+- Drop methods: `justDoIt()`, `stringify()`, `cleanInfo()`
+
+## 1.8.1 (March 30, 2016)
+
+- Don't remove spaces after function/braces/urls since unsafe (#289)
+
+## 1.8.0 (March 24, 2016)
+
+- Usage data support:
+    - Filter rulesets by tag names, class names and ids white lists.
+    - More aggressive ruleset moving using class name scopes information.
+    - New CLI option `--usage` to pass usage data file.
+- Improve initial ruleset merge
+    - Change order of ruleset processing, now it's left to right. Previously unmerged rulesets may prevent lookup and other rulesets merge.
+    - Difference in pseudo signature just prevents ruleset merging, but don't stop lookup.
+    - Simplify block comparison (performance).
+- New method `csso.minifyBlock()` for css block compression (e.g. `style` attribute content).
+- Ruleset merge improvement: at-rules with block (like `@media` or `@supports`) now can be skipped during ruleset merge lookup if doesn't contain something prevents it.
+- FIX: Add negation (`:not()`) to pseudo signature to avoid unsafe merge (old browsers doesn't support it).
+- FIX: Check nested parts of value when compute compatibility. It fixes unsafe property merging.
+
 ## 1.7.1 (March 16, 2016)
 
 - pass block mode to tokenizer for correct parsing of declarations properties with `//` hack
@@ -90,7 +128,7 @@
 - better ruleset merge – not only closest but also disjoined by other rulesets when safe
 - join `@media` with same query
 - `outputAst` – new option to specify output AST format (`gonzales` by default for backward compatibility)
-- remove quotes surrounding attribute values in attribute selectors when possible (issue #73)
+- remove quotes surrounding attribute values in attribute selectors when possible (#73)
 - replace `from`→`0%` and `100%`→`to` at `@keyframes` (#205)
 - prevent partial merge of rulesets at `@keyframes` (#80, #197)
 
@@ -205,12 +243,12 @@ Bringing project back to life. Changed files structure, cleaned up and refactore
 
 ## 1.3.12 (October 8, 2015)
 
-- Case insensitive check for `!important` (issue #187)
-- Fix problems with using `csso` as cli command on Windows (issue #83, #136, #142 and others)
+- Case insensitive check for `!important` (#187)
+- Fix problems with using `csso` as cli command on Windows (#83, #136, #142 and others)
 - Remove byte order marker (the UTF-8 BOM) from input
-- Don't strip space between funktion-funktion and funktion-vhash (issue #134)
-- Don't merge TRBL values having \9 (hack for IE8 in bootstrap) (issues #159, #214, #230, #231 and others)
-- Don't strip units off dimensions of non-length (issues #226, #229 and others)
+- Don't strip space between funktion-funktion and funktion-vhash (#134)
+- Don't merge TRBL values having \9 (hack for IE8 in bootstrap) (#159, #214, #230, #231 and others)
+- Don't strip units off dimensions of non-length (#226, #229 and others)
 
 ## 1.3.7 (February 11, 2013)
 
