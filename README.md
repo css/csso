@@ -23,6 +23,7 @@ Or try out CSSO [right in your browser](http://css.github.io/csso/csso.html) (we
 - Grunt: [grunt-csso](https://github.com/t32k/grunt-csso)
 - Broccoli: [broccoli-csso](https://github.com/sindresorhus/broccoli-csso)
 - PostCSS: [postcss-csso](https://github.com/lahmatiy/postcss-csso)
+- Webpack: [csso-loader](https://github.com/sandark7/csso-loader)
 
 ### Command line
 
