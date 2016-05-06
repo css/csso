@@ -51,7 +51,7 @@
                 "type": "Block",
                 "info": {
                     "source": "<unknown>",
-                    "offset": 2,
+                    "offset": 3,
                     "line": 2,
                     "column": 1
                 },
@@ -60,7 +60,7 @@
                         "type": "Declaration",
                         "info": {
                             "source": "<unknown>",
-                            "offset": 4,
+                            "offset": 5,
                             "line": 3,
                             "column": 1
                         },
@@ -68,7 +68,7 @@
                             "type": "Property",
                             "info": {
                                 "source": "<unknown>",
-                                "offset": 4,
+                                "offset": 5,
                                 "line": 3,
                                 "column": 1
                             },
@@ -78,7 +78,7 @@
                             "type": "Value",
                             "info": {
                                 "source": "<unknown>",
-                                "offset": 10,
+                                "offset": 11,
                                 "line": 3,
                                 "column": 7
                             },
@@ -88,7 +88,7 @@
                                     "type": "Identifier",
                                     "info": {
                                         "source": "<unknown>",
-                                        "offset": 12,
+                                        "offset": 13,
                                         "line": 4,
                                         "column": 1
                                     },
