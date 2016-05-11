@@ -8,27 +8,17 @@ function normalize(str) {
     return str.replace(/\n|\r\n?|\f/g, '\n');
 }
 
-function createMinifyTest(name, test) {
+function createCompressTest(name, test) {
     var testFn = function() {
         var compressed = csso.minify(test.source);
 
-        assert.equal(normalize(compressed.css), normalize(test.compressed));
-    };
+        assert.equal(normalize(compressed.css), normalize(test.compressed), 'compress by minify()');
 
-    if (path.basename(name)[0] === '_') {
-        it.skip(name, testFn);
-    } else {
-        it(name, testFn);
-    }
-}
-
-function createCompressTest(name, test) {
-    var testFn = function() {
         var ast = csso.parse(test.source);
         var compressedAst = csso.compress(ast).ast;
         var css = translate(compressedAst);
 
-        assert.equal(normalize(css), normalize(test.compressed));
+        assert.equal(normalize(css), normalize(test.compressed), 'compress step by step');
     };
 
     if (path.basename(name)[0] === '_') {
@@ -39,17 +29,9 @@ function createCompressTest(name, test) {
 };
 
 describe('compress', function() {
-    describe('by csso.minify()', function() {
-        for (var name in tests) {
-            createMinifyTest(name, tests[name]);
-        }
-    });
-
-    describe('step by step', function() {
-        for (var name in tests) {
-            createCompressTest(name, tests[name]);
-        }
-    });
+    for (var name in tests) {
+        createCompressTest(name, tests[name]);
+    }
 
     describe('csso.minifyBlock()', function() {
         it('should compress block', function() {
