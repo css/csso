@@ -1,3 +1,13 @@
+## 2.1.1 (May 11, 2016)
+
+- Fix wrong declaration with `\9` hack merge (#295)
+
+## 2.1.0 (May 8, 2016)
+
+- New option `comments` to specify what comments to left: `exclamation`, `first-exclamation` and `none`
+- Add `offset` to CSS parse error details
+- Fix token `offset` computation
+
 ## 2.0.0 (April 5, 2016)
 
 - No more `gonzales` AST format and related code

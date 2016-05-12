@@ -8,27 +8,17 @@ function normalize(str) {
     return str.replace(/\n|\r\n?|\f/g, '\n');
 }
 
-function createMinifyTest(name, test) {
+function createCompressTest(name, test) {
     var testFn = function() {
         var compressed = csso.minify(test.source);
 
-        assert.equal(normalize(compressed.css), normalize(test.compressed));
-    };
+        assert.equal(normalize(compressed.css), normalize(test.compressed), 'compress by minify()');
 
-    if (path.basename(name)[0] === '_') {
-        it.skip(name, testFn);
-    } else {
-        it(name, testFn);
-    }
-}
-
-function createCompressTest(name, test) {
-    var testFn = function() {
         var ast = csso.parse(test.source);
         var compressedAst = csso.compress(ast).ast;
         var css = translate(compressedAst);
 
-        assert.equal(normalize(css), normalize(test.compressed));
+        assert.equal(normalize(css), normalize(test.compressed), 'compress step by step');
     };
 
     if (path.basename(name)[0] === '_') {
@@ -39,17 +29,9 @@ function createCompressTest(name, test) {
 };
 
 describe('compress', function() {
-    describe('by csso.minify()', function() {
-        for (var name in tests) {
-            createMinifyTest(name, tests[name]);
-        }
-    });
-
-    describe('step by step', function() {
-        for (var name in tests) {
-            createCompressTest(name, tests[name]);
-        }
-    });
+    for (var name in tests) {
+        createCompressTest(name, tests[name]);
+    }
 
     describe('csso.minifyBlock()', function() {
         it('should compress block', function() {
@@ -90,7 +72,7 @@ describe('compress', function() {
         });
     });
 
-    describe('specialComments option', function() {
+    describe('comments option', function() {
         var css = '/*! first *//*! second *//*! third */';
         var all = '/*! first */\n/*! second */\n/*! third */';
 
@@ -98,24 +80,28 @@ describe('compress', function() {
             assert.equal(csso.minify(css).css, all);
         });
 
-        it('shouldn\'t remove exclamation comments when specialComments is true', function() {
-            assert.equal(csso.minify(css, { specialComments: true }).css, all);
+        it('shouldn\'t remove exclamation comments when comments is true', function() {
+            assert.equal(csso.minify(css, { comments: true }).css, all);
         });
 
-        it('shouldn\'t remove exclamation comments when specialComments is "all"', function() {
-            assert.equal(csso.minify(css, { specialComments: 'all' }).css, all);
+        it('shouldn\'t remove exclamation comments when comments is "exclamation"', function() {
+            assert.equal(csso.minify(css, { comments: 'exclamation' }).css, all);
         });
 
-        it('should remove every exclamation comment when specialComments is false', function() {
-            assert.equal(csso.minify(css, { specialComments: false }).css, '');
+        it('should remove every exclamation comment when comments is false', function() {
+            assert.equal(csso.minify(css, { comments: false }).css, '');
         });
 
-        it('should remove every exclamation comment when specialComments has wrong value', function() {
-            assert.equal(csso.minify(css, { specialComments: 'foo' }).css, '');
+        it('should remove every exclamation comment when comments is "none"', function() {
+            assert.equal(csso.minify(css, { comments: 'none' }).css, '');
         });
 
-        it('should remove every exclamation comment except first when specialComments is "first-only"', function() {
-            assert.equal(csso.minify(css, { specialComments: 'first-only' }).css, '/*! first */');
+        it('should remove every exclamation comment when comments has wrong value', function() {
+            assert.equal(csso.minify(css, { comments: 'foo' }).css, '');
+        });
+
+        it('should remove every exclamation comment except first when comments is "first-exclamation"', function() {
+            assert.equal(csso.minify(css, { comments: 'first-exclamation' }).css, '/*! first */');
         });
     });
 

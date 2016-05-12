@@ -23,6 +23,7 @@ Or try out CSSO [right in your browser](http://css.github.io/csso/csso.html) (we
 - Grunt: [grunt-csso](https://github.com/t32k/grunt-csso)
 - Broccoli: [broccoli-csso](https://github.com/sindresorhus/broccoli-csso)
 - PostCSS: [postcss-csso](https://github.com/lahmatiy/postcss-csso)
+- Webpack: [csso-loader](https://github.com/sandark7/csso-loader)
 
 ### Command line
 
@@ -31,6 +32,7 @@ csso [input] [output] [options]
 
 Options:
 
+      --comments <value>    Comments to keep: exclamation (default), first-exclamation or none
       --debug [level]       Output intermediate state of CSS during compression
   -h, --help                Output usage information
   -i, --input <filename>    Input file
@@ -289,6 +291,10 @@ Do the main task – compress AST.
 Options:
 
 - restructure `Boolean` – do the structure optimisations or not (`true` by default)
+- comments `String` or `Boolean` – specify what comments to left
+    - `'exclamation'` or `true` (default) – left all exclamation comments (i.e. `/*! .. */`)
+    - `'first-exclamation'` – remove every comments except first one
+    - `false` – remove every comments
 - usage `Object` - usage data for advanced optimisations (see [Usage data](#usage-data) for details)
 - logger `Function` - function to track every step of transformations
 
