@@ -33,6 +33,23 @@ describe('compress', function() {
         createCompressTest(name, tests[name]);
     }
 
+    describe('should return the same ast as input by default', function() {
+        it('compress stylesheet', function() {
+            var ast = csso.parse('.test{color:red}');
+            var resultAst = csso.compress(ast).ast;
+
+            assert(ast === resultAst);
+        });
+
+        it('compress block', function() {
+            var ast = csso.parse('color:#ff0000;width:1px', { context: 'block' });
+            var resultAst = csso.compress(ast).ast;
+
+            assert(ast === resultAst);
+            assert.equal(translate(ast), 'color:red;width:1px');
+        });
+    });
+
     describe('csso.minifyBlock()', function() {
         it('should compress block', function() {
             var compressed = csso.minifyBlock('color: rgba(255, 0, 0, 1); width: 0px; color: #ff0000');
