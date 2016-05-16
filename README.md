@@ -286,11 +286,14 @@ var ast = csso.parse('.foo.bar', {
 
 #### compress(ast[, options])
 
-Do the main task – compress AST.
+Does the main task – compress AST.
+
+> NOTE: `compress` performs AST compression by transforming input AST by default (since AST cloning is expensive and needed in rare cases). Use `clone` option with truthy value in case you want to keep input AST untouched.
 
 Options:
 
 - restructure `Boolean` – do the structure optimisations or not (`true` by default)
+- clone `Boolean` - transform a copy of input AST if `true`, useful in case of AST reuse (`false` by default)
 - comments `String` or `Boolean` – specify what comments to left
     - `'exclamation'` or `true` (default) – left all exclamation comments (i.e. `/*! .. */`)
     - `'first-exclamation'` – remove every comments except first one
