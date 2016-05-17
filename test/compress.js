@@ -1,9 +1,7 @@
 var path = require('path');
 var assert = require('assert');
 var csso = require('../lib/index.js');
-var internalToGonzales = require('../lib/compressor/ast/internalToGonzales.js');
-var internalTranslate = require('../lib/compressor/ast/translate.js');
-var gonzalesTranslate = require('../lib/utils/translate.js');
+var translate = require('../lib/utils/translate.js');
 var tests = require('./fixture/compress');
 
 function normalize(str) {
@@ -14,7 +12,13 @@ function createCompressTest(name, test) {
     var testFn = function() {
         var compressed = csso.minify(test.source);
 
-        assert.equal(normalize(compressed), normalize(test.compressed));
+        assert.equal(normalize(compressed.css), normalize(test.compressed), 'compress by minify()');
+
+        var ast = csso.parse(test.source);
+        var compressedAst = csso.compress(ast).ast;
+        var css = translate(compressedAst);
+
+        assert.equal(normalize(css), normalize(test.compressed), 'compress step by step');
     };
 
     if (path.basename(name)[0] === '_') {
@@ -22,38 +26,35 @@ function createCompressTest(name, test) {
     } else {
         it(name, testFn);
     }
-}
-
-function createAfterCompressionTest(name, test) {
-    it(name, function() {
-        var ast = csso.parse(test.source, 'stylesheet', true);
-        var compressed = csso.compress(ast, { outputAst: 'internal' });
-        var gonzalesAst = internalToGonzales(compressed);
-        var css = internalTranslate(compressed);
-
-        assert.equal(gonzalesTranslate(gonzalesAst, true), css, 'CSS should be equal');
-        assert.equal(JSON.stringify(csso.cleanInfo(gonzalesAst)), JSON.stringify(csso.parse(css)), 'AST should be equal');
-    });
 };
 
 describe('compress', function() {
-    describe('by csso.minify()', function() {
-        for (var name in tests) {
-            createCompressTest(name, tests[name]);
-        }
-    });
+    for (var name in tests) {
+        createCompressTest(name, tests[name]);
+    }
 
-    describe('step by step', function() {
-        for (var name in tests) {
-            createAfterCompressionTest(name, tests[name]);
-        }
+    describe('should return the same ast as input by default', function() {
+        it('compress stylesheet', function() {
+            var ast = csso.parse('.test{color:red}');
+            var resultAst = csso.compress(ast).ast;
+
+            assert(ast === resultAst);
+        });
+
+        it('compress block', function() {
+            var ast = csso.parse('color:#ff0000;width:1px', { context: 'block' });
+            var resultAst = csso.compress(ast).ast;
+
+            assert(ast === resultAst);
+            assert.equal(translate(ast), 'color:red;width:1px');
+        });
     });
 
     describe('csso.minifyBlock()', function() {
         it('should compress block', function() {
             var compressed = csso.minifyBlock('color: rgba(255, 0, 0, 1); width: 0px; color: #ff0000');
 
-            assert.equal(compressed, 'width:0;color:red');
+            assert.equal(compressed.css, 'width:0;color:red');
         });
 
         it('should not affect options', function() {
@@ -69,22 +70,55 @@ describe('compress', function() {
         var css = '.a{color:red}.b{color:red}';
 
         it('should apply `restructure` option', function() {
-            assert.equal(csso.minify(css, { restructure: false }), css);
-            assert.equal(csso.minify(css, { restructure: true }), '.a,.b{color:red}');
+            assert.equal(csso.minify(css, { restructure: false }).css, css);
+            assert.equal(csso.minify(css, { restructure: true }).css, '.a,.b{color:red}');
         });
 
         it('`restructuring` is alias for `restructure`', function() {
-            assert.equal(csso.minify(css, { restructuring: false }), css);
-            assert.equal(csso.minify(css, { restructuring: true }), '.a,.b{color:red}');
+            assert.equal(csso.minify(css, { restructuring: false }).css, css);
+            assert.equal(csso.minify(css, { restructuring: true }).css, '.a,.b{color:red}');
         });
 
         it('`restructure` option should has higher priority', function() {
-            assert.equal(csso.minify(css, { restructure: false, restructuring: true }), css);
-            assert.equal(csso.minify(css, { restructure: true, restructuring: false }), '.a,.b{color:red}');
+            assert.equal(csso.minify(css, { restructure: false, restructuring: true }).css, css);
+            assert.equal(csso.minify(css, { restructure: true, restructuring: false }).css, '.a,.b{color:red}');
         });
 
         it('should restructure by default', function() {
-            assert.equal(csso.minify(css), '.a,.b{color:red}');
+            assert.equal(csso.minify(css).css, '.a,.b{color:red}');
+        });
+    });
+
+    describe('comments option', function() {
+        var css = '/*! first *//*! second *//*! third */';
+        var all = '/*! first */\n/*! second */\n/*! third */';
+
+        it('shouldn\'t remove exclamation comments by default', function() {
+            assert.equal(csso.minify(css).css, all);
+        });
+
+        it('shouldn\'t remove exclamation comments when comments is true', function() {
+            assert.equal(csso.minify(css, { comments: true }).css, all);
+        });
+
+        it('shouldn\'t remove exclamation comments when comments is "exclamation"', function() {
+            assert.equal(csso.minify(css, { comments: 'exclamation' }).css, all);
+        });
+
+        it('should remove every exclamation comment when comments is false', function() {
+            assert.equal(csso.minify(css, { comments: false }).css, '');
+        });
+
+        it('should remove every exclamation comment when comments is "none"', function() {
+            assert.equal(csso.minify(css, { comments: 'none' }).css, '');
+        });
+
+        it('should remove every exclamation comment when comments has wrong value', function() {
+            assert.equal(csso.minify(css, { comments: 'foo' }).css, '');
+        });
+
+        it('should remove every exclamation comment except first when comments is "first-exclamation"', function() {
+            assert.equal(csso.minify(css, { comments: 'first-exclamation' }).css, '/*! first */');
         });
     });
 
@@ -137,24 +171,6 @@ describe('compress', function() {
     });
 
     it('should not fail if no ast passed', function() {
-        assert.equal(gonzalesTranslate(csso.compress(), true), '');
-    });
-
-    it('should return gonzales AST by default', function() {
-        var ast = csso.parse('.foo{color:#FF0000}');
-
-        assert.equal(gonzalesTranslate(csso.compress(ast), true), '.foo{color:red}');
-    });
-
-    it('should return gonzales AST when outputAst is `gonzales`', function() {
-        var ast = csso.parse('.foo{color:#FF0000}');
-
-        assert.equal(gonzalesTranslate(csso.compress(ast, { outputAst: 'gonzales' }), true), '.foo{color:red}');
-    });
-
-    it('should return internal when outputAst is not undefined or `gonzales`', function() {
-        var ast = csso.parse('.foo{color:#FF0000}');
-
-        assert.equal(internalTranslate(csso.compress(ast, { outputAst: 'internal' })), '.foo{color:red}');
+        assert.equal(translate(csso.compress().ast, true), '');
     });
 });

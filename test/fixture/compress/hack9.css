@@ -7,6 +7,10 @@
   border-top: 4px dashed;
   border-top: 4px solid \9;
 }
+.a-2 {
+  border-top: 5px dashed;
+  border-top: 5px solid\9;
+}
 .b {
   margin: 5px;
   margin: 4px \9;

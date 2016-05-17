@@ -2,6 +2,7 @@
     "css": "100 {}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 3,
         "line": 1,
         "column": 4
     }
@@ -9,6 +10,7 @@
     "css": ". {}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -16,6 +18,7 @@
     "css": ".{}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -23,6 +26,7 @@
     "css": ".",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -30,6 +34,7 @@
     "css": ".1px {}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -37,6 +42,7 @@
     "css": "# {}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -44,6 +50,7 @@
     "css": "#{}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -51,6 +58,7 @@
     "css": "#",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -58,6 +66,7 @@
     "css": "a { color }",
     "error": "Colon is expected",
     "position": {
+        "offset": 10,
         "line": 1,
         "column": 11
     }
@@ -65,6 +74,7 @@
     "css": "a { color: #}",
     "error": "Number or identifier is expected",
     "position": {
+        "offset": 12,
         "line": 1,
         "column": 13
     }
@@ -72,6 +82,7 @@
     "css": "a { color: # }",
     "error": "Number or identifier is expected",
     "position": {
+        "offset": 12,
         "line": 1,
         "column": 13
     }
@@ -79,6 +90,7 @@
     "css": ": {}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -86,6 +98,7 @@
     "css": ":{}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -93,6 +106,7 @@
     "css": ":",
     "error": "Colon or identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -100,6 +114,7 @@
     "css": "::",
     "error": "Identifier is expected",
     "position": {
+        "offset": 2,
         "line": 1,
         "column": 3
     }
@@ -107,6 +122,7 @@
     "css": ": ",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -114,6 +130,7 @@
     "css": ":pseudo({}",
     "error": "Unexpected input",
     "position": {
+        "offset": 8,
         "line": 1,
         "column": 9
     }
@@ -121,6 +138,7 @@
     "css": ":pseudo(--test) {}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 9,
         "line": 1,
         "column": 10
     }
@@ -128,6 +146,7 @@
     "css": ":pseudo(var(--test)) {}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 13,
         "line": 1,
         "column": 14
     }
@@ -135,6 +154,7 @@
     "css": ":nth-child(xxx)",
     "error": "Unexpected identifier",
     "position": {
+        "offset": 11,
         "line": 1,
         "column": 12
     }
@@ -142,6 +162,7 @@
     "css": ":nth-child(--test) {}",
     "error": "Unexpected identifier",
     "position": {
+        "offset": 13,
         "line": 1,
         "column": 14
     }
@@ -149,6 +170,7 @@
     "css": ":nth-child(var(--test)) {}",
     "error": "Unexpected identifier",
     "position": {
+        "offset": 11,
         "line": 1,
         "column": 12
     }
@@ -156,6 +178,7 @@
     "css": ":not(.a{)",
     "error": "Unexpected input",
     "position": {
+        "offset": 7,
         "line": 1,
         "column": 8
     }
@@ -163,6 +186,7 @@
     "css": ":not(,.b)",
     "error": "Simple selector is expected",
     "position": {
+        "offset": 5,
         "line": 1,
         "column": 6
     }
@@ -170,6 +194,7 @@
     "css": ":not(.a,)",
     "error": "Simple selector is expected",
     "position": {
+        "offset": 8,
         "line": 1,
         "column": 9
     }
@@ -177,6 +202,7 @@
     "css": ":not(.a,,)",
     "error": "Simple selector is expected",
     "position": {
+        "offset": 8,
         "line": 1,
         "column": 9
     }
@@ -184,6 +210,7 @@
     "css": ":not(.a,.b{)",
     "error": "Unexpected input",
     "position": {
+        "offset": 10,
         "line": 1,
         "column": 11
     }
@@ -191,6 +218,7 @@
     "css": ":not(--test) {}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 6,
         "line": 1,
         "column": 7
     }
@@ -198,6 +226,7 @@
     "css": ":not(var(--test)) {}",
     "error": "Unexpected input",
     "position": {
+        "offset": 8,
         "line": 1,
         "column": 9
     }
@@ -205,6 +234,7 @@
     "css": "[a+=1]{}",
     "error": "Attribute selector (=, ~=, ^=, $=, *=, |=) is expected",
     "position": {
+        "offset": 2,
         "line": 1,
         "column": 3
     }
@@ -212,6 +242,7 @@
     "css": "[var(--test)=1]{}",
     "error": "Attribute selector (=, ~=, ^=, $=, *=, |=) is expected",
     "position": {
+        "offset": 4,
         "line": 1,
         "column": 5
     }
@@ -219,6 +250,7 @@
     "css": "[--test=1]{}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 2,
         "line": 1,
         "column": 3
     }
@@ -226,6 +258,7 @@
     "css": "[--test:=1]{}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 2,
         "line": 1,
         "column": 3
     }
@@ -233,6 +266,7 @@
     "css": "[:--test=1]{}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -240,6 +274,7 @@
     "css": "[foo:--test=1]{}",
     "error": "Identifier is expected",
     "position": {
+        "offset": 6,
         "line": 1,
         "column": 7
     }
@@ -247,6 +282,7 @@
     "css": "[",
     "error": "Unexpected end of input",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -254,6 +290,7 @@
     "css": "]",
     "error": "Unexpected input",
     "position": {
+        "offset": 0,
         "line": 1,
         "column": 1
     }
@@ -261,6 +298,7 @@
     "css": ")",
     "error": "Unexpected input",
     "position": {
+        "offset": 0,
         "line": 1,
         "column": 1
     }
@@ -268,6 +306,7 @@
     "css": "}",
     "error": "Unexpected right curly brace",
     "position": {
+        "offset": 0,
         "line": 1,
         "column": 1
     }    
@@ -275,6 +314,7 @@
     "css": "/foo/",
     "error": "Identifier `deep` is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
@@ -282,6 +322,7 @@
     "css": ".a { value: 1 !impo-tant}",
     "error": "Identifier `important` is expected",
     "position": {
+        "offset": 15,
         "line": 1,
         "column": 16
     }
@@ -289,6 +330,7 @@
     "css": ".a {",
     "error": "RightCurlyBracket is expected",
     "position": {
+        "offset": 4,
         "line": 1,
         "column": 5
     }
@@ -296,6 +338,7 @@
     "css": ".a { v: . }",
     "error": "Unexpected input",
     "position": {
+        "offset": 8,
         "line": 1,
         "column": 9
     }
@@ -303,6 +346,7 @@
     "css": ".a {\n  \n",
     "error": "RightCurlyBracket is expected",
     "position": {
+        "offset": 4,
         "line": 1,
         "column": 5
     }
@@ -310,13 +354,31 @@
     "css": ".a",
     "error": "LeftCurlyBracket is expected",
     "position": {
+        "offset": 2,
         "line": 1,
+        "column": 3
+    }
+}, {
+    "css": ".a \n    ",
+    "error": "LeftCurlyBracket is expected",
+    "position": {
+        "offset": 2,
+        "line": 1,
+        "column": 3
+    }
+}, {
+    "css": "  \n   \n.a \n    ",
+    "error": "LeftCurlyBracket is expected",
+    "position": {
+        "offset": 9,
+        "line": 3,
         "column": 3
     }
 }, {
     "css": ".foo { var(--side): 20px }",
     "error": "Colon is expected",
     "position": {
+        "offset": 10,
         "line": 1,
         "column": 11
     }
@@ -324,6 +386,7 @@
     "css": "--test { padding: 20px }",
     "error": "Identifier is expected",
     "position": {
+        "offset": 1,
         "line": 1,
         "column": 2
     }
