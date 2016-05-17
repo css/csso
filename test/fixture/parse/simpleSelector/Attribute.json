@@ -64,6 +64,20 @@
             "flags": null
         }
     },
+    "attrib.2 with flags": {
+        "source": "[b i]",
+        "translate": "[b i]",
+        "ast": {
+            "type": "Attribute",
+            "name": {
+                "type": "Identifier",
+                "name": "b"
+            },
+            "operator": null,
+            "value": null,
+            "flags": "i"
+        }
+    },
     "attrib.3": {
         "source": "[ng:cloak]",
         "translate": "[ng:cloak]",
