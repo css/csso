@@ -127,6 +127,7 @@ describe('compress', function() {
             assert.equal(csso.minify('.a{ padding: calc(1px + 2px); }').css, '.a{padding:calc(1px + 2px)}');
             assert.equal(csso.minify('.a{ padding:10px; padding: calc(1px + 2px); }').css, '.a{padding:10px;padding:calc(1px + 2px)}');
             assert.equal(csso.minify('.a{ padding: calc(5px + 2px); padding: calc(1px + 2px); }').css, '.a{padding:calc(1px + 2px)}');
+            assert.equal(csso.minify('.a{ padding: calc(5px + 2px); padding: 40px; }').css, '.a{padding:calc(5px + 2px);padding:40px}');
         });
     });
 
