@@ -1,4 +1,0 @@
-.foo {
-	padding: 10px;
-	padding: calc(2px + 10px);
-}
