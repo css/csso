@@ -168,7 +168,6 @@ BODY
     transition: all .100s;
     display: flex;
     flex-direction: column;
-    flex: 0;
 }
 #change-log .header
 {
