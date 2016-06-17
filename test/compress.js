@@ -122,6 +122,14 @@ describe('compress', function() {
         });
     });
 
+    describe('calc function', function() {
+        it('should check code', function() {
+            assert.equal(csso.minify('.a{ padding: calc(1px + 2px); }').css, '.a{padding:calc(1px + 2px)}');
+            assert.equal(csso.minify('.a{ padding:10px; padding: calc(1px + 2px); }').css, '.a{padding:10px;padding:calc(1px + 2px)}');
+            assert.equal(csso.minify('.a{ padding: calc(5px + 2px); padding: calc(1px + 2px); }').css, '.a{padding:calc(1px + 2px)}');
+        });
+    });
+
     describe('debug option', function() {
         function runDebug(css, options) {
             var output = [];
