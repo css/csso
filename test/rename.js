@@ -20,7 +20,7 @@ function createRenameTest(name, test) {
     }
 };
 
-describe.only('rename', function() {
+describe('rename', function() {
     it('basic', function() {
         var result = csso.minify('.foo, .bar.foo, foo:not(.bar) { color: foo }', {
             rename: { classes: true }
