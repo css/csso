@@ -1,0 +1,11 @@
+.a .b {
+    opacity: 1;
+}
+.foo {
+    opacity: 0;
+    color: #ff0000;
+}
+.bar {
+    opacity: 1;
+    display: block;
+}
