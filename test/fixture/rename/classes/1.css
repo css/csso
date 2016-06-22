@@ -1,0 +1,9 @@
+.foo,
+.bar {
+    p: 1;
+}
+
+.foo:hover,
+.bar:hover {
+    p: 2;
+}
