@@ -1,6 +1,6 @@
 {
   "name": "csso",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "CSSO (CSS Optimizer) is a CSS minifier with structural optimisations",
   "keywords": [
     "css",

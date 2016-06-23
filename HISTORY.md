@@ -1,3 +1,12 @@
+## 2.2.0 (June 23, 2016)
+
+- Implement AST cloning by adding `clone()` [function](https://github.com/css/csso#cloneast) and `clone` [option](https://github.com/css/csso#compressast-options) for `compress()` function (#296)
+- Fix parse and translate attribute selector with flags but w/o operator (i.e. `[attrName i]`)
+- Don't merge rules with flagged attribute selectors with others (#291)
+- Take in account functions when merge TRBL-properties (#297, thanks to @ArturAralin)
+- Improve partial merge (#304)
+- Tweak scanner, reduce code deoptimizations and other small improvements
+
 ## 2.1.1 (May 11, 2016)
 
 - Fix wrong declaration with `\9` hack merge (#295)
