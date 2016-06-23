@@ -1,3 +1,9 @@
+## 1.8.2 (June 22, 2016)
+
+- Fix wrong declaration with `\9` hack merge (#295)
+- Take in account functions when merge TRBL-properties (#297)
+- Improve partial merge (#304)
+
 ## 1.8.1 (March 30, 2016)
 
 - Don't remove spaces after function/braces/urls since unsafe (#289)
