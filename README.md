@@ -301,6 +301,26 @@ Options:
 - usage `Object` - usage data for advanced optimisations (see [Usage data](#usage-data) for details)
 - logger `Function` - function to track every step of transformations
 
+#### clone(ast)
+
+Make an AST node deep copy.
+
+```js
+var orig = csso.parse('.test { color: red }');
+var copy = csso.clone(orig);
+
+csso.walk(copy, function(node) {
+    if (node.type === 'Class') {
+        node.name = 'replaced';
+    }
+});
+
+console.log(csso.translate(orig));
+// .test{color:red}
+console.log(csso.translate(copy));
+// .replaced{color:red}
+```
+
 #### translate(ast)
 
 Converts AST to string.
