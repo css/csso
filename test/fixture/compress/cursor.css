@@ -1,0 +1,45 @@
+.cursor {
+  cursor: auto;
+  cursor: crosshair;
+  cursor: default;
+  cursor: move;
+  cursor: text;
+  cursor: wait;
+  cursor: help;
+  cursor: n-resize;
+  cursor: e-resize;
+  cursor: s-resize;
+  cursor: w-resize;
+  cursor: ne-resize;
+  cursor: nw-resize;
+  cursor: se-resize;
+  cursor: sw-resize;
+  cursor: pointer;
+  cursor: progress;
+  cursor: not-allowed;
+  cursor: no-drop;
+  cursor: vertical-text;
+  cursor: all-scroll;
+  cursor: col-resize;
+  cursor: row-resize;
+
+  cursor: alias;
+  cursor: cell;
+  cursor: copy;
+  cursor: ew-resize;
+  cursor: ns-resize;
+  cursor: nesw-resize;
+  cursor: nwse-resize;
+  cursor: context-menu;
+  cursor: none;
+  cursor: inherit;
+  cursor: zoom-in;
+  cursor: zoom-out;
+  cursor: grab;
+  cursor: grabbing;
+}
+
+.foo {
+  cursor: url(1);
+  cursor: url(2);
+}
