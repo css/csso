@@ -1,3 +1,8 @@
+## 2.2.1 (July 25, 2016)
+
+- Fixed shorthand optimisation issue when value has a color value or something unknown (#311)
+- Fixed `cursor` broken fallback (#306)
+
 ## 2.2.0 (June 23, 2016)
 
 - Implement AST cloning by adding `clone()` [function](https://github.com/css/csso#cloneast) and `clone` [option](https://github.com/css/csso#compressast-options) for `compress()` function (#296)
