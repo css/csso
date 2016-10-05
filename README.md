@@ -218,6 +218,8 @@ Options:
 - sourceMap `Boolean` - generate source map if `true`
 - filename `String` - filename of input, uses for source map
 - debug `Boolean` - output debug information to `stderr`
+- beforeCompress `function|array<function>` - called right after parse is run. Callbacks arguments are `ast, options`.
+- afterCompress `function|array<function>` - called right after compress is run. Callbacks arguments are `compressResult, options`.
 - other options are the same as for `compress()`
 
 Returns an object with properties:
