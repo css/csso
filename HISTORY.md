@@ -1,3 +1,8 @@
+## 2.3.0 (October 25, 2016)
+
+- Added `beforeCompress` and `afterCompress` options support (#316)
+- Fixed crash on empty argument in function (#317)
+
 ## 2.2.1 (July 25, 2016)
 
 - Fixed shorthand optimisation issue when value has a color value or something unknown (#311)
