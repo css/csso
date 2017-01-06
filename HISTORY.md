@@ -1,3 +1,7 @@
+## 2.3.1 (January 6, 2016)
+
+- Added `\0` IE hack support (#320)
+
 ## 2.3.0 (October 25, 2016)
 
 - Added `beforeCompress` and `afterCompress` options support (#316)
