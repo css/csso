@@ -1,6 +1,6 @@
 /*
   Bootstrap and others uses \9 hack to target IE8-9
-  When value has \9 it should be avoid of merge
+  Declaration merge should be avoided when value has \9
 */
 
 .a {
