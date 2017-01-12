@@ -359,7 +359,7 @@ Context for handler an object, that contains references to some parent nodes:
 - root – refers to `ast` or root node
 - stylesheet – refers to closest `StyleSheet` node, it may be a top-level or at-rule block stylesheet
 - atruleExpression – refers to `AtruleExpression` node if current node inside at-rule expression
-- ruleset – refers to `Ruleset` node if current node inside a ruleset
+- ruleset – refers to `Rule` node if current node inside a ruleset
 - selector – refers to `Selector` node if current node inside a selector
 - declaration – refers to `Declaration` node if current node inside a declaration
 - function – refers to closest `Function` or `FunctionalPseudo` node if current node inside one of them
@@ -392,7 +392,7 @@ console.log(urls);
 
 #### walkRules(ast, handler)
 
-Same as `walk()` but visits `Ruleset` and `Atrule` nodes only.
+Same as `walk()` but visits `Rule` and `Atrule` nodes only.
 
 #### walkRulesRight(ast, handler)
 

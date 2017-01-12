@@ -1,4 +1,4 @@
-## 2.3.1 (January 6, 2016)
+## 2.3.1 (January 6, 2017)
 
 - Added `\0` IE hack support (#320)
 
