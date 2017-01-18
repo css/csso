@@ -6,7 +6,7 @@ var specificity = require('../lib/compressor/restructure/prepare/specificity.js'
 function createSpecificityTest(test) {
     it(test.selector, function() {
         var ast = csso.parse(test.selector, {
-            context: 'simpleSelector'
+            context: 'selector'
         });
 
         assert.equal(String(specificity(ast)), test.expected);
