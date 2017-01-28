@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "clap": "^1.0.9",
-    "css-tree": "1.0.0-alpha11",
+    "css-tree": "csstree/csstree",
     "source-map": "^0.5.3"
   },
   "devDependencies": {
