@@ -42,7 +42,7 @@ describe('compress', function() {
         });
 
         it('compress block', function() {
-            var ast = csso.parse('color:#ff0000;width:1px', { context: 'block' });
+            var ast = csso.parse('color:#ff0000;width:1px', { context: 'declarationList' });
             var resultAst = csso.compress(ast).ast;
 
             assert(ast === resultAst);
