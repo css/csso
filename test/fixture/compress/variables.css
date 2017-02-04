@@ -1,7 +1,7 @@
 :root {
     --mainColor: #fb4c42;
     --test-var: 5px;
-    /*--foo: if(x > 5) this.width = 10;*/
+    --foo: if(x > 5) this.width = 10;
 }
 
 .test {

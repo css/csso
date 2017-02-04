@@ -6,10 +6,10 @@
     /* single bad declaration */
     foo: ;
 }
-@media {
+@media x {
     /* empty */
 }
-@media {
+@media x {
     /* ruleset with single bad declaration */
     a {
         test: ;
