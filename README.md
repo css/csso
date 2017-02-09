@@ -85,7 +85,7 @@ Use `--input-map` option to specify input source map if needed. Possible values 
 - `none` - don't use input source map; actually it's using to disable `auto`-fetching
 - any other values treat as filename for input source map
 
-Generally you shouldn't care about input source map since defaults behaviour (`auto`) covers most use cases.
+Generally you shouldn't care about the input source map since defaults behaviour (`auto`) covers most use cases.
 
 > NOTE: Input source map is using only if output source map is generating.
 
@@ -142,7 +142,7 @@ Suppose we have a file:
 .module2-qux { font-size: 1.5em; background: yellow; width: 50px; }
 ```
 
-It can be assumed that first two rules never used with second two on the same markup. But we can't know that for sure without markup. The optimizer doesn't know it eather and will perform safe transformations only. The result will be the same as input but with no spaces and some semicolons:
+It can be assumed that first two rules are never used with the second two on the same markup. But we can't know that for sure without markup. The optimizer doesn't know it either and will perform safe transformations only. The result will be the same as input but with no spaces and some semicolons:
 
 ```css
 .module1-foo{color:red}.module1-bar{font-size:1.5em;background:#ff0}.module2-baz{color:red}.module2-qux{font-size:1.5em;background:#ff0;width:50px}
@@ -240,7 +240,7 @@ console.log(result.css);
 
 #### minifyBlock(source[, options])
 
-The same as `minify()` but for style block. Usualy it's a `style` attribute content.
+The same as `minify()` but for style block. Usually it's a `style` attribute content.
 
 ```js
 var result = csso.minifyBlock('color: rgba(255, 0, 0, 1); color: #ff0000').css;
