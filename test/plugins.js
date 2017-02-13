@@ -6,7 +6,7 @@ describe('plugins', function() {
     it('calls beforeCompress when it is a function', function() {
         var called = true;
         var ast = csso.minify(css, {
-            beforeCompress: function (ast, options) {
+            beforeCompress: function(ast, options) {
                 assert(ast);
                 assert(options);
                 called = true;
@@ -19,7 +19,7 @@ describe('plugins', function() {
 
     it('calls beforeCompress when it is an array', function() {
         var called = [false, false];
-        var pluginFactory = function (index) {
+        var pluginFactory = function(index) {
             return function callback(ast, options) {
                 assert(ast);
                 assert(options);
@@ -38,7 +38,7 @@ describe('plugins', function() {
     it('calls afterCompress when it is a function', function() {
         var called = true;
         var ast = csso.minify(css, {
-            afterCompress: function (compressResult, options) {
+            afterCompress: function(compressResult, options) {
                 assert(compressResult);
                 assert(compressResult.ast);
                 assert(options);
@@ -52,7 +52,7 @@ describe('plugins', function() {
 
     it('calls afterCompress when it is an array', function() {
         var called = [false, false];
-        var pluginFactory = function (index) {
+        var pluginFactory = function(index) {
             return function callback(compressResult, options) {
                 assert(compressResult);
                 assert(compressResult.ast);

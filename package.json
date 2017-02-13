@@ -41,7 +41,7 @@
   },
   "scripts": {
     "test": "mocha --reporter dot",
-    "codestyle": "jscs lib && eslint lib test",
+    "codestyle": "jscs lib test && eslint lib test",
     "codestyle-and-test": "npm run codestyle && npm test",
     "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
     "coverage": "istanbul cover _mocha -- -R dot",
