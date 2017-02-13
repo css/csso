@@ -36,7 +36,13 @@
     "rules": {
       "no-duplicate-case": 2,
       "no-undef": 2,
-      "no-unused-vars": [2, {"vars": "all", "args": "after-used"}]
+      "no-unused-vars": [
+        2,
+        {
+          "vars": "all",
+          "args": "after-used"
+        }
+      ]
     }
   },
   "scripts": {
@@ -61,6 +67,7 @@
     "istanbul": "^0.4.2",
     "jscs": "~2.10.0",
     "mocha": "~2.4.2",
+    "source-map": "^0.5.6",
     "uglify-js": "^2.6.1"
   },
   "engines": {
