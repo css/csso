@@ -52,9 +52,7 @@
     "prepublish": "npm run browserify"
   },
   "dependencies": {
-    "clap": "^1.0.9",
-    "css-tree": "csstree/csstree",
-    "source-map": "^0.5.3"
+    "css-tree": "csstree/csstree"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
