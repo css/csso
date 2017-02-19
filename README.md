@@ -9,23 +9,6 @@ CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformation
 [![Originated by Yandex](https://cdn.rawgit.com/css/csso/8d1b89211ac425909f735e7d5df87ee16c2feec6/docs/yandex.svg)](https://www.yandex.com/)
 [![Sponsored by Avito](https://cdn.rawgit.com/css/csso/8d1b89211ac425909f735e7d5df87ee16c2feec6/docs/avito.svg)](https://www.avito.ru/)
 
-<!-- MarkdownTOC -->
-
-- [Ready to use](#ready-to-use)
-- [Install](#install)
-- [API](#api)
-  - [minify\(source\[, options\]\)](#minifysource-options)
-  - [minifyBlock\(source\[, options\]\)](#minifyblocksource-options)
-  - [compress\(ast\[, options\]\)](#compressast-options)
-  - [Source maps](#source-maps)
-  - [Usage data](#usage-data)
-    - [Selector filtering](#selector-filtering)
-    - [Scopes](#scopes)
-  - [Debugging](#debugging)
-- [License](#license)
-
-<!-- /MarkdownTOC -->
-
 ## Ready to use
 
 - [Web interface](http://css.github.io/csso/csso.html)
@@ -43,6 +26,19 @@ npm install -g csso
 ```
 
 ## API
+
+<!-- MarkdownTOC -->
+
+- [minify\(source\[, options\]\)](#minifysource-options)
+- [minifyBlock\(source\[, options\]\)](#minifyblocksource-options)
+- [compress\(ast\[, options\]\)](#compressast-options)
+- [Source maps](#source-maps)
+- [Usage data](#usage-data)
+  - [Selector filtering](#selector-filtering)
+  - [Scopes](#scopes)
+- [Debugging](#debugging)
+
+<!-- /MarkdownTOC -->
 
 ```js
 var csso = require('csso');
@@ -226,7 +222,3 @@ Currently the optimizer doesn't care about out-of-bounds selectors order changin
 ### Debugging
 
 > TODO
-
-## License
-
-MIT
