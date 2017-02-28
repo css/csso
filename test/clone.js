@@ -1,20 +1,23 @@
 var assert = require('assert');
-var csso = require('../lib/index.js');
+var csso = require('../lib');
+var parse = csso.syntax.parse;
+var compress = csso.compress;
+var translate = csso.syntax.translate;
 
 describe('AST clone', function() {
     it('compress(ast, { clone: false })', function() {
-        var ast = csso.parse('.foo{color:red}.bar{color:#ff0000}');
-        var compressedAst = csso.compress(ast, { clone: false }).ast;
+        var ast = parse('.foo{color:red}.bar{color:#ff0000}');
+        var compressedAst = compress(ast, { clone: false }).ast;
 
-        assert.equal(csso.translate(compressedAst), '.bar,.foo{color:red}');
-        assert.equal(csso.translate(ast), '.bar,.foo{color:red}');
+        assert.equal(translate(compressedAst), '.bar,.foo{color:red}');
+        assert.equal(translate(ast), '.bar,.foo{color:red}');
     });
 
     it('compress(ast, { clone: true })', function() {
-        var ast = csso.parse('.foo{color:red}.bar{color:#ff0000}');
-        var compressedAst = csso.compress(ast, { clone: true }).ast;
+        var ast = parse('.foo{color:red}.bar{color:#ff0000}');
+        var compressedAst = compress(ast, { clone: true }).ast;
 
-        assert.equal(csso.translate(compressedAst), '.bar,.foo{color:red}');
-        assert.equal(csso.translate(ast), '.foo{color:red}.bar{color:#ff0000}');
+        assert.equal(translate(compressedAst), '.bar,.foo{color:red}');
+        assert.equal(translate(ast), '.foo{color:red}.bar{color:#ff0000}');
     });
 });

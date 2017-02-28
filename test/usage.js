@@ -1,5 +1,5 @@
 var assert = require('assert');
-var csso = require('../lib/index.js');
+var csso = require('../lib');
 var tests = require('./fixture/usage');
 
 function normalize(str) {

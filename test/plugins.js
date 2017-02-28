@@ -1,5 +1,5 @@
 var assert = require('assert');
-var csso = require('../lib/index.js');
+var csso = require('../lib');
 var css = '.test{color:red;}@media foo{div{color:green}}';
 
 describe('plugins', function() {

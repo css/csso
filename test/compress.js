@@ -1,7 +1,9 @@
 var path = require('path');
 var assert = require('assert');
-var csso = require('../lib/index.js');
-var translate = require('css-tree').translate;
+var csso = require('../lib');
+var parse = csso.syntax.parse;
+var compress = csso.compress;
+var translate = csso.syntax.translate;
 var tests = require('./fixture/compress');
 
 function normalize(str) {
@@ -14,8 +16,8 @@ function createCompressTest(name, test) {
 
         assert.equal(normalize(compressed.css), normalize(test.compressed), 'compress by minify()');
 
-        var ast = csso.parse(test.source);
-        var compressedAst = csso.compress(ast).ast;
+        var ast = parse(test.source);
+        var compressedAst = compress(ast).ast;
         var css = translate(compressedAst);
 
         assert.equal(normalize(css), normalize(test.compressed), 'compress step by step');
@@ -35,15 +37,15 @@ describe('compress', function() {
 
     describe('should return the same ast as input by default', function() {
         it('compress stylesheet', function() {
-            var ast = csso.parse('.test{color:red}');
-            var resultAst = csso.compress(ast).ast;
+            var ast = parse('.test{color:red}');
+            var resultAst = compress(ast).ast;
 
             assert(ast === resultAst);
         });
 
         it('compress block', function() {
-            var ast = csso.parse('color:#ff0000;width:1px', { context: 'declarationList' });
-            var resultAst = csso.compress(ast).ast;
+            var ast = parse('color:#ff0000;width:1px', { context: 'declarationList' });
+            var resultAst = compress(ast).ast;
 
             assert(ast === resultAst);
             assert.equal(translate(ast), 'color:red;width:1px');
@@ -171,6 +173,6 @@ describe('compress', function() {
     });
 
     it('should not fail if no ast passed', function() {
-        assert.equal(translate(csso.compress().ast, true), '');
+        assert.equal(translate(compress().ast, true), '');
     });
 });
