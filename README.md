@@ -40,29 +40,154 @@ npm install -g csso
 
 <!-- /MarkdownTOC -->
 
+Basic usage:
+
 ```js
 var csso = require('csso');
 
-var compressedCss = csso.minify('.test { color: #ff0000; }').css;
+var minifiedCss = csso.minify('.test { color: #ff0000; }').css;
 
-console.log(compressedCss);
+console.log(minifiedCss);
 // .test{color:red}
 ```
 
-You may minify CSS by yourself step by step:
+CSSO is based on [CSSTree](https://github.com/csstree/csstree) to parse CSS into AST, AST traversal and to generate AST back to CSS. All `CSSTree` API is available behind `syntax` field. You may minify CSS step by step:
 
 ```js
-var ast = csso.parse('.test { color: #ff0000; }');
-var compressResult = csso.compress(ast);
-var compressedCss = csso.translate(compressResult.ast);
+var csso = require('csso');
+var ast = csso.syntax.parse('.test { color: #ff0000; }');
+var compressedAst = csso.compress(ast).ast;
+var minifiedCss = csso.syntax.translate(compressedAst);
 
-console.log(compressedCss);
+console.log(minifiedCss);
 // .test{color:red}
 ```
 
-Working with source maps:
+> Warning: CSSO uses early versions of CSSTree that still in active development. CSSO doesn't guarantee API behind `syntax` field or AST format will not change in future releases of CSSO, since it's subject to change in CSSTree. Be carefull with CSSO updates if you use `syntax` API until this warning removal.
+
+### minify(source[, options])
+
+Minify `source` CSS passed as `String`.
+
+Returns an object with properties:
+
+- css `String` – resulting CSS
+- map `Object` – instance of [`SourceMapGenerator`](https://github.com/mozilla/source-map#sourcemapgenerator) or `null`
 
 ```js
+var result = csso.minify('.test { color: #ff0000; }', {
+    restructure: false,   // don't change CSS structure, i.e. don't merge declarations, rulesets etc
+    debug: true           // show additional debug information:
+                          // true or number from 1 to 3 (greater number - more details)
+});
+
+console.log(result.css);
+// > .test{color:red}
+```
+
+Options:
+
+- sourceMap
+
+  Type: `Boolean`  
+  Default: `false`
+
+  Generate a source map when `true`.
+
+- filename
+
+  Type: `String`  
+  Default: `'<unknown>'`
+
+  Filename of input CSS, uses for source map generation.
+
+- debug
+
+  Type: `Boolean`  
+  Default: `false`
+
+  Output debug information to `stderr`.
+
+- beforeCompress
+
+  Type: `function(ast, options)` or `Array<function(ast, options)>` or `null`  
+  Default: `null`
+
+  Called right after parse is run.
+
+- afterCompress
+
+  Type: `function(compressResult, options)` or `Array<function(compressResult, options)>` or `null`  
+  Default: `null`
+
+  Called right after [`compress()`](#compressast-options) is run.
+
+- Other options are the same as for [`compress()`](#compressast-options) function.
+
+### minifyBlock(source[, options])
+
+The same as `minify()` but for list of declarations. Usually it's a `style` attribute value.
+
+```js
+var result = csso.minifyBlock('color: rgba(255, 0, 0, 1); color: #ff0000');
+
+console.log(result.css);
+// > color:red
+```
+
+### compress(ast[, options])
+
+Does the main task – compress AST.
+
+> NOTE: `compress()` performs AST compression by transforming input AST by default (since AST cloning is expensive and needed in rare cases). Use `clone` option with truthy value in case you want to keep input AST untouched.
+
+Options:
+
+- restructure
+
+  Type: `Boolean`  
+  Default: `true`
+
+  Disable or enable a structure optimisations.
+
+- clone
+
+  Type: `Boolean`  
+  Default: `false`
+
+  Transform a copy of input AST if `true`. Useful in case of AST reuse.
+
+- comments
+
+  Type: `String` or `Boolean`  
+  Default: `true`
+
+  Specify what comments to left:
+
+  - `'exclamation'` or `true` – left all exclamation comments (i.e. `/*! .. */`)
+  - `'first-exclamation'` – remove every comments except first one
+  - `false` – remove every comments
+
+- usage
+
+  Type: `Object` or `null`  
+  Default: `null`
+
+  Usage data for advanced optimisations (see [Usage data](#usage-data) for details)
+
+- logger
+
+  Type: `Function` or `null`  
+  Default: `null`
+
+  Function to track every step of transformation.
+
+### Source maps
+
+To get a source map set `true` for `sourceMap` option. Additianaly `filename` option can be passed to specify source file. When `sourceMap` option is `true`, `map` field of result object will contain a [`SourceMapGenerator`](https://github.com/mozilla/source-map#sourcemapgenerator) instance. This object can be mixed with another source map or translated to string.
+
+```js
+var csso = require('csso');
 var css = fs.readFileSync('path/to/my.css', 'utf8');
 var result = csso.minify(css, {
   filename: 'path/to/my.css', // will be added to source map as reference to source file
@@ -76,66 +201,35 @@ console.log(result.map.toString());
 // '{ .. source map content .. }'
 ```
 
-### minify(source[, options])
-
-Minify `source` CSS passed as `String`.
-
-Options:
-
-- sourceMap `Boolean` - generate source map if `true`
-- filename `String` - filename of input, uses for source map
-- debug `Boolean` - output debug information to `stderr`
-- beforeCompress `function|array<function>` - called right after parse is run. Callbacks arguments are `ast, options`.
-- afterCompress `function|array<function>` - called right after compress is run. Callbacks arguments are `compressResult, options`.
-- other options are the same as for `compress()`
-
-Returns an object with properties:
-
-- css `String` – resulting CSS
-- map `Object` – instance of `SourceMapGenerator` or `null`
+Example of generating source map with respect of source map from input CSS:
 
 ```js
-var result = csso.minify('.test { color: #ff0000; }', {
-    restructure: false,   // don't change CSS structure, i.e. don't merge declarations, rulesets etc
-    debug: true           // show additional debug information:
-                          // true or number from 1 to 3 (greater number - more details)
+var require('source-map');
+var csso = require('csso');
+var inputFile = 'path/to/my.css';
+var input = fs.readFileSync(inputFile, 'utf8');
+var inputMap = input.match(/\/\*# sourceMappingURL=(\S+)\s*\*\/\s*$/);
+var output = csso.minify(input, {
+  filename: inputFile,
+  sourceMap: true
 });
 
-console.log(result.css);
-// > .test{color:red}
+// apply input source map to output
+if (inputMap) {
+  output.map.applySourceMap(
+    new SourceMapConsumer(inputMap[1]),
+    inputFile
+  )
+}
+
+// result CSS with source map
+console.log(
+  output.css +
+  '/*# sourceMappingURL=data:application/json;base64,' +
+  new Buffer(output.map.toString()).toString('base64') +
+  ' */'
+);
 ```
-
-### minifyBlock(source[, options])
-
-The same as `minify()` but for style block. Usually it's a `style` attribute content.
-
-```js
-var result = csso.minifyBlock('color: rgba(255, 0, 0, 1); color: #ff0000').css;
-
-console.log(result.css);
-// > color:red
-```
-
-### compress(ast[, options])
-
-Does the main task – compress AST.
-
-> NOTE: `compress` performs AST compression by transforming input AST by default (since AST cloning is expensive and needed in rare cases). Use `clone` option with truthy value in case you want to keep input AST untouched.
-
-Options:
-
-- restructure `Boolean` – do the structure optimisations or not (`true` by default)
-- clone `Boolean` - transform a copy of input AST if `true`, useful in case of AST reuse (`false` by default)
-- comments `String` or `Boolean` – specify what comments to left
-    - `'exclamation'` or `true` (default) – left all exclamation comments (i.e. `/*! .. */`)
-    - `'first-exclamation'` – remove every comments except first one
-    - `false` – remove every comments
-- usage `Object` - usage data for advanced optimisations (see [Usage data](#usage-data) for details)
-- logger `Function` - function to track every step of transformations
-
-### Source maps
-
-> TODO
 
 ### Usage data
 
