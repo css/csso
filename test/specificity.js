@@ -1,7 +1,7 @@
 var fs = require('fs');
 var assert = require('assert');
 var csso = require('../lib');
-var specificity = require('../lib/compressor/restructure/prepare/specificity.js');
+var specificity = require('../lib/restructure/prepare/specificity.js');
 
 function createSpecificityTest(test) {
     it(test.selector, function() {
