@@ -22,7 +22,7 @@ CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformation
 ## Install
 
 ```
-npm install -g csso
+npm install csso
 ```
 
 ## API
