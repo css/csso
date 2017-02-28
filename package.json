@@ -23,9 +23,6 @@
   "bugs": {
     "url": "https://github.com/css/csso/issues"
   },
-  "bin": {
-    "csso": "./bin/csso"
-  },
   "main": "./lib/index",
   "eslintConfig": {
     "env": {
