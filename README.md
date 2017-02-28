@@ -69,11 +69,6 @@ console.log(minifiedCss);
 
 Minify `source` CSS passed as `String`.
 
-Returns an object with properties:
-
-- css `String` – resulting CSS
-- map `Object` – instance of [`SourceMapGenerator`](https://github.com/mozilla/source-map#sourcemapgenerator) or `null`
-
 ```js
 var result = csso.minify('.test { color: #ff0000; }', {
     restructure: false,   // don't change CSS structure, i.e. don't merge declarations, rulesets etc
@@ -84,6 +79,11 @@ var result = csso.minify('.test { color: #ff0000; }', {
 console.log(result.css);
 // > .test{color:red}
 ```
+
+Returns an object with properties:
+
+- css `String` – resulting CSS
+- map `Object` – instance of [`SourceMapGenerator`](https://github.com/mozilla/source-map#sourcemapgenerator) or `null`
 
 Options:
 
@@ -137,9 +137,13 @@ console.log(result.css);
 
 ### compress(ast[, options])
 
-Does the main task – compress AST.
+Does the main task – compress an AST.
 
 > NOTE: `compress()` performs AST compression by transforming input AST by default (since AST cloning is expensive and needed in rare cases). Use `clone` option with truthy value in case you want to keep input AST untouched.
+
+Returns an object with properties:
+
+- ast `Object` – resulting AST
 
 Options:
 
