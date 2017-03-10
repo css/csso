@@ -1,3 +1,7 @@
+## 2.3.2 (March 11, 2016)
+
+- Fix infinite loop on value parse (#328)
+
 ## 2.3.1 (January 6, 2016)
 
 - Added `\0` IE hack support (#320)
