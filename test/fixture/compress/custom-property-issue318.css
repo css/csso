@@ -1,0 +1,9 @@
+/*
+  issue #318: whitespaces in custom property values shouldn't to be ommited
+*/
+
+.test {
+  --bar: ;
+  a: var(--foo, );
+  b: var(--foo,);
+}
