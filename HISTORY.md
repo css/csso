@@ -1,3 +1,8 @@
+## 3.0.0 (March 13, 2017)
+
+- Migrated to [CSSTree](https://github.com/csstree/csstree) as AST backend and exposed its API behind `syntax` property
+- Extracted CLI into standalone package [css/csso-cli](https://github.com/css/csso-cli)
+
 ## 2.3.1 (January 6, 2017)
 
 - Added `\0` IE hack support (#320)
