@@ -1,3 +1,7 @@
+## 3.0.1 (March 14, 2017)
+
+- Fixed declaration merging when declaration contains an `!important`
+
 ## 3.0.0 (March 13, 2017)
 
 - Migrated to [CSSTree](https://github.com/csstree/csstree) as AST backend and exposed its API behind `syntax` property
