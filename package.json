@@ -50,7 +50,7 @@
     "coverage": "istanbul cover _mocha -- -R dot",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R dot && cat ./coverage/lcov.info | coveralls",
     "travis": "npm run codestyle-and-test && npm run coveralls",
-    "browserify": "browserify --standalone csso lib/index.js | uglifyjs --compress --mangle -o dist/csso-browser.js",
+    "browserify": "browserify -t package-json-versionify --standalone csso lib/index.js | uglifyjs --compress --mangle -o dist/csso-browser.js",
     "gh-pages": "git clone -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
     "prepublish": "npm run browserify"
   },
@@ -64,6 +64,7 @@
     "istanbul": "^0.4.2",
     "jscs": "~2.10.0",
     "mocha": "~2.4.2",
+    "package-json-versionify": "^1.0.4",
     "source-map": "^0.5.6",
     "uglify-js": "^2.6.1"
   },
