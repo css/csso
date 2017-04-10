@@ -1,5 +1,5 @@
-a{color:red;width:200px}foo{border:none}b,foo{color:#00f;width:200px;height:50px}@media (min-width:400px){a{color:red;width:200px}foo{border:none}b,foo{color:#00f;width:200px;height:50px}}
+a{color:red;width:200px}foo{border:0}b,foo{color:#00f;width:200px;height:50px}@media (min-width:400px){a{color:red;width:200px}foo{border:0}b,foo{color:#00f;width:200px;height:50px}}
 /*!
   better solution
-  a,b,foo{color:red;width:200px}foo{border:none}b,foo{color:#00f;height:50px}@media (min-width:400px){a,b,foo{color:red;width:200px}foo{border:none}b,foo{color:#00f;height:50px}}
+  a,b,foo{color:red;width:200px}foo{border:0}b,foo{color:#00f;height:50px}@media (min-width:400px){a,b,foo{color:red;width:200px}foo{border:0}b,foo{color:#00f;height:50px}}
 */
