@@ -1,0 +1,27 @@
+/*
+  rgba with 0 as alpha value should be converted to `transparent`
+  the min length of rgba (i.e. `rbga(0,0,0,0)`) is 13, but `transparent` is 11
+*/
+
+a {
+  color: rgba(100%, -10%, 0%, 0);
+}
+b {
+  color: rgba(255, 0, 0, 0);
+}
+c {
+  color: rgba(255, 0, 0, -3);
+}
+
+/* should avoid replacement in gradients */
+d {
+  background: -webkit-gradient(linear, top, left, from(rgba(1,2,3,0)), color-stop(rgba(1,2,4,0)), to(rgba(1,2,5,0)));
+  background: -webkit-linear-gradient(top, rgba(1,2,3,0), rgba(1,2,5,0));
+}
+
+/* but it's ok when all component is zero (i.e. `rgba(0, 0, 0, 0)`) or not in gradient function */
+e {
+  background: -webkit-gradient(linear, top, left, from(rgba(0,0,0,0)), color-stop(rgba(0,0,0,0)), to(rgba(0,0,0,0)));
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0));
+  background: x(rgba(1,2,3,0));
+}

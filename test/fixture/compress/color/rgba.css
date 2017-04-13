@@ -8,6 +8,11 @@ a {
 b {
   color: rgba(150%, -25%, 0%, 0.5);
 }
+
+/*
+  values should be clipped
+*/
+
 c {
-  color: rgba(+255, -100, 0, -.2);
+  color: rgba(+255, -100, 0, +.2);
 }
