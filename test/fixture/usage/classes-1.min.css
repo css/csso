@@ -1,1 +1,1 @@
-div{p:1}.foo{p:2}.bar{p:3}div.foo>*{p:4}:not(.foo){p:7}:not(.remove){p:8}#id{p:9}*{p:10}
+div{p:1}.foo{p:2}.bar{p:3}div.foo>*{p:4}:not(.foo){p:7}:not(.remove){p:8}#id{p:9}*{p:10}:matches(.foo){matches:1}:matches(.bar){matches:3}:has(>.foo){has:1}:has(.bar){has:3}:nth-child(2n of .foo){nth:1}:nth-child(2n of .bar){nth:3}.foo,:has(.bar),:has(:matches(.foo)){complex:1}:has(:matches(:not(.a))),:has(:not(:matches(.a))){complex:2}
