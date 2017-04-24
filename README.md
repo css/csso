@@ -12,7 +12,7 @@ CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformation
 ## Ready to use
 
 - [Web interface](http://css.github.io/csso/csso.html)
-- CLI: [csso-cli](https://github.com/css/csso-cli)
+- [Command line interface](https://github.com/css/csso-cli)
 - Gulp: [gulp-csso](https://github.com/ben-eb/gulp-csso)
 - Grunt: [grunt-csso](https://github.com/t32k/grunt-csso)
 - Broccoli: [broccoli-csso](https://github.com/sindresorhus/broccoli-csso)
@@ -237,20 +237,20 @@ console.log(
 
 ### Usage data
 
-`CSSO` can use data about how `CSS` is using for better compression. File with this data (`JSON` format) can be set using `usage` option. Usage data may contain follow sections:
+`CSSO` can use data about how `CSS` is used in a markup for better compression. File with this data (`JSON`) can be set using `usage` option. Usage data may contain following sections:
 
 - `tags` – white list of tags
 - `ids` – white list of ids
 - `classes` – white list of classes
-- `scopes` – groups of classes which never used with classes from other groups on single element
+- `scopes` – groups of classes which never used with classes from other groups on the same element
 
-All sections are optional. Value of `tags`, `ids` and `classes` should be array of strings, value of `scopes` should be an array of arrays of strings. Other values are ignoring.
+All sections are optional. Value of `tags`, `ids` and `classes` should be an array of a string, value of `scopes` should be an array of arrays of strings. Other values are ignoring.
 
 #### Selector filtering
 
-`tags`, `ids` and `classes` are using on clean stage to filter selectors that contains something that not in list. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if selector hasn't any type selector (or even any type selector) it isn't filter.
+`tags`, `ids` and `classes` are using on clean stage to filter selectors that contain something not in list. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if all type selectors in selector present in list or selector has no any type selector it isn't filter.
 
-> `ids` and `classes` names are case sensitive, `tags` – is not.
+> `ids` and `classes` are case sensitive, `tags` – is not.
 
 Input CSS:
 
@@ -276,7 +276,7 @@ Result CSS:
 
 #### Scopes
 
-Scopes is designed for CSS scope isolation solutions such as [css-modules](https://github.com/css-modules/css-modules). Scopes are similar to namespaces and defines lists of class names that exclusively used on some markup. This information allows the optimizer to move rulesets more agressive. Since it assumes selectors from different scopes can't to be matched on the same element. That leads to better ruleset merging.
+Scopes is designed for CSS scope isolation solutions such as [css-modules](https://github.com/css-modules/css-modules). Scopes are similar to namespaces and define lists of class names that exclusively used on some markup. This information allows the optimizer to move rules more agressive. Since it assumes selectors from different scopes don't match for the same element. This can improve rule merging.
 
 Suppose we have a file:
 
@@ -288,13 +288,13 @@ Suppose we have a file:
 .module2-qux { font-size: 1.5em; background: yellow; width: 50px; }
 ```
 
-It can be assumed that first two rules are never used with the second two on the same markup. But we can't know that for sure without markup. The optimizer doesn't know it either and will perform safe transformations only. The result will be the same as input but with no spaces and some semicolons:
+It can be assumed that first two rules are never used with the second two on the same markup. But we can't say that for sure without a markup review. The optimizer doesn't know it either and will perform safe transformations only. The result will be the same as input but with no spaces and some semicolons:
 
 ```css
 .module1-foo{color:red}.module1-bar{font-size:1.5em;background:#ff0}.module2-baz{color:red}.module2-qux{font-size:1.5em;background:#ff0;width:50px}
 ```
 
-But with usage data `CSSO` can get better output. If follow usage data is provided:
+With usage data `CSSO` can produce better output. If follow usage data is provided:
 
 ```json
 {
@@ -305,17 +305,17 @@ But with usage data `CSSO` can get better output. If follow usage data is provid
 }
 ```
 
-New result (29 bytes extra saving):
+The result will be (29 bytes extra saving):
 
 ```css
 .module1-foo,.module2-baz{color:red}.module1-bar,.module2-qux{font-size:1.5em;background:#ff0}.module2-qux{width:50px}
 ```
 
-If class name doesn't specified in `scopes` it belongs to default "scope". `scopes` doesn't affect `classes`. If class name presents in `scopes` but missed in `classes` (both sections specified) it will be filtered.
+If class name isn't mentioned in the `scopes` it belongs to default scope. `scopes` data doesn't affect `classes` whitelist. If class name mentioned in `scopes` but missed in `classes` (both sections are specified) it will be filtered.
 
-Note that class name can't be specified in several scopes. Also selector can't has classes from different scopes. In both cases an exception throws.
+Note that class name can't be set for several scopes. Also selector can't has a class names from different scopes. In both cases an exception will thrown.
 
-Currently the optimizer doesn't care about out-of-bounds selectors order changing safety (i.e. selectors that may be matched to elements with no class name of scope, e.g. `.scope div` or `.scope ~ :last-child`) since assumes scoped CSS modules doesn't relay on it's order. It may be fix in future if to be an issue.
+Currently the optimizer doesn't care about changing order safety for out-of-bounds selectors (i.e. selectors that match to elements without class name, e.g. `.scope div` or `.scope ~ :last-child`). It assumes that scoped CSS modules doesn't relay on it's order. It may be fix in future if to be an issue.
 
 ### Debugging
 
