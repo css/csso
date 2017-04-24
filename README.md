@@ -12,12 +12,12 @@ CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformation
 ## Ready to use
 
 - [Web interface](http://css.github.io/csso/csso.html)
-- [Command line interface](https://github.com/css/csso-cli)
-- Gulp: [gulp-csso](https://github.com/ben-eb/gulp-csso)
-- Grunt: [grunt-csso](https://github.com/t32k/grunt-csso)
-- Broccoli: [broccoli-csso](https://github.com/sindresorhus/broccoli-csso)
-- PostCSS: [postcss-csso](https://github.com/lahmatiy/postcss-csso)
-- Webpack: [csso-loader](https://github.com/sandark7/csso-loader)
+- [csso-cli](https://github.com/css/csso-cli) – command line interface
+- [gulp-csso](https://github.com/ben-eb/gulp-csso) – `Gulp` plugin
+- [grunt-csso](https://github.com/t32k/grunt-csso) – `Grant` plugin
+- [broccoli-csso](https://github.com/sindresorhus/broccoli-csso) – `Broccoli` plugin
+- [postcss-csso](https://github.com/lahmatiy/postcss-csso) – `PostCSS` plugin
+- [csso-loader](https://github.com/sandark7/csso-loader) – `webpack` loader
 
 ## Install
 
