@@ -1,0 +1,6 @@
+.foo { p: 1 }
+#foo { p: 2 }
+foo { p: 3 }
+.foo, .bar, #foo, #bar, foo, bar { p: 4 }
+* { p: 5 }
+:not(.foo), :not(.bar) { p: 6 }

@@ -1,0 +1,1 @@
+#bar,.bar,bar{p:4}*{p:5}:not(.bar),:not(.foo){p:6}
