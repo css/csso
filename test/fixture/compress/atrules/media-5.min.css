@@ -1,0 +1,1 @@
+@media (ident:foo) and (number:1) and (dimension:1px) and (ratio:16/9){.test{color:red}}
