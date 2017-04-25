@@ -1,3 +1,13 @@
+## 3.1.0 (April 24, 2017)
+
+- Implemented optimisation for `none` keyword in `border` and `outline` properties (@zoobestik, #41)
+- Implemented replacing `rgba(x, x, x, 0)` to `transparent`
+- Fixed plus sign omitting for numbers following identifier, hex color, number or unicode range, since it can change the meaning of CSS (e.g. `calc(1px+2px)` has been optimized to `calc(1px2px)` before, now it stays the same)
+- Improved usage filtering for nested selectors (i.e. for `:nth-*()`, `:has()`, `:matches` and other pseudos)
+- Implemented `blacklist` filtering in usage (#334, see [Black list filtering](https://github.com/css/csso#black-list-filtering))
+- Improved white space removing, now white spaces are removing in the beginning and at the ending of sequences, and between stylesheet and block nodes
+- Bumped `css-tree` to `1.0.0-alpha19`
+
 ## 3.0.1 (March 14, 2017)
 
 - Fixed declaration merging when declaration contains an `!important`
