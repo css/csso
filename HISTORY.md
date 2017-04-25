@@ -1,3 +1,7 @@
+## 3.1.1 (April 25, 2017)
+
+- Fixed crash on a number processing when it used not in a list (#335)
+
 ## 3.1.0 (April 24, 2017)
 
 - Implemented optimisation for `none` keyword in `border` and `outline` properties (@zoobestik, #41)
