@@ -34,7 +34,8 @@ npm install csso
 - [compress\(ast\[, options\]\)](#compressast-options)
 - [Source maps](#source-maps)
 - [Usage data](#usage-data)
-  - [Selector filtering](#selector-filtering)
+  - [White list filtering](#white-list-filtering)
+  - [Black list filtering](#black-list-filtering)
   - [Scopes](#scopes)
 - [Debugging](#debugging)
 
@@ -239,6 +240,7 @@ console.log(
 
 `CSSO` can use data about how `CSS` is used in a markup for better compression. File with this data (`JSON`) can be set using `usage` option. Usage data may contain following sections:
 
+- `blacklist` – a set of black lists (see [Black list filtering](#black-list-filtering))
 - `tags` – white list of tags
 - `ids` – white list of ids
 - `classes` – white list of classes
@@ -246,9 +248,9 @@ console.log(
 
 All sections are optional. Value of `tags`, `ids` and `classes` should be an array of a string, value of `scopes` should be an array of arrays of strings. Other values are ignoring.
 
-#### Selector filtering
+#### White list filtering
 
-`tags`, `ids` and `classes` are using on clean stage to filter selectors that contain something not in list. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if all type selectors in selector present in list or selector has no any type selector it isn't filter.
+`tags`, `ids` and `classes` are using on clean stage to filter selectors that contain something not in the lists. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if all type selectors in selector present in list or selector has no any type selector it isn't filter.
 
 > `ids` and `classes` are case sensitive, `tags` – is not.
 
@@ -268,10 +270,54 @@ Usage data:
 }
 ```
 
-Result CSS:
+Resulting CSS:
 
 ```css
 *{color:green}ul,li{color:blue}ul.foo{color:red}
+```
+
+Filtering performs for nested selectors too. `:not()` pseudos content is ignoring since the result of matching is unpredictable. Example for the same usage data as above:
+
+```css
+:nth-child(2n of ul, ol) { color: red }
+:nth-child(3n + 1 of img) { color: yellow }
+:not(div, ol, ul) { color: green }
+:has(:matches(ul, ol), ul, ol) { color: blue }
+```
+
+Turns into:
+
+```css
+:nth-child(2n of ul){color:red}:not(div,ol,ul){color:green}:has(:matches(ul),ul){color:blue}
+```
+
+#### Black list filtering
+
+Black list filtering performs the same as white list filtering, but filters things that mentioned in the lists. `blacklist` can contain the lists `tags`, `ids` and `classes`.
+
+Black list has a higher priority, so when something mentioned in the white list and in the black list then white list occurrence is ignoring. The `:not()` pseudos content ignoring as well.
+
+```css
+* { color: green; }
+ul, ol, li { color: blue; }
+UL.foo, li.bar { color: red; }
+```
+
+Usage data:
+
+```json
+{
+    "blacklist": {
+        "tags": ["ul"]
+    },
+    "tags": ["ul", "LI"]
+}
+```
+
+Resulting CSS:
+
+```css
+*{color:green}li{color:blue}li.bar{color:red}
 ```
 
 #### Scopes
