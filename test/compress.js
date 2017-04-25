@@ -2,6 +2,7 @@ var path = require('path');
 var assert = require('assert');
 var csso = require('../lib');
 var parse = csso.syntax.parse;
+var walk = csso.syntax.walk;
 var compress = csso.compress;
 var translate = csso.syntax.translate;
 var tests = require('./fixture/compress');
@@ -34,6 +35,40 @@ describe('compress', function() {
     for (var name in tests) {
         createCompressTest(name, tests[name]);
     }
+
+    it('should remove white spaces in transformed AST', function() {
+        var WHITESPACE = {
+            type: 'WhiteSpace',
+            loc: null,
+            value: ' '
+        };
+        var ast = parse(
+            '.a { border: 1px solid red; display: block } .b { color: red }' +
+            '@media all { .a { border: 1px solid red; display: block } .b { color: red } }'
+        );
+
+        // add white spaces
+        walk(ast, function(node) {
+            // don't touch some lists
+            if (node.type === 'SelectorList' ||
+                node.type === 'MediaQueryList') {
+                return;
+            }
+
+            // insert white spaces in the beginning, in the ending and between items
+            if (node.children) {
+                node.children.each(function(node, item, list) {
+                    list.insertData(WHITESPACE, item);
+                });
+                node.children.appendData(WHITESPACE);
+            }
+        });
+
+        assert.equal(
+            translate(compress(ast).ast),
+            '.a{border:1px solid red;display:block}.b{color:red}@media all{.a{border:1px solid red;display:block}.b{color:red}}'
+        );
+    });
 
     describe('should return the same ast as input by default', function() {
         it('compress stylesheet', function() {
