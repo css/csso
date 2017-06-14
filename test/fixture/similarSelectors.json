@@ -1,0 +1,4 @@
+[
+    { "rule1": "ul#nav, .a .b, ul.a.b {}", "rule2": "div > a, .c .d, li.active {}", "expected": true },
+    { "rule1": "ul#nav, .a .b, ul.a.b {}", "rule2": "div > a, .c .d .e, li.active {}", "expected": false }
+]
