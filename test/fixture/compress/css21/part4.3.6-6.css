@@ -1,25 +1,69 @@
-a {
-    color0 : yellow 'yellow';
-    color1 : fuchsia 'fuchsia';
-    color2 : white 'white';
-    color3 : black 'black';
-    color4 : blue 'blue';
-    color5 : aqua 'aqua';
-    color6 : #f00 '#f00';
-    color7 : #c0c0c0 '#c0c0c0';
-    color8 : #808080 '#808080';
-    color9 : #800000 '#800000';
-    color10 : #800080 '#800080';
-    color11 : #008000 '#008000';
-    color12 : #808000 '#808000';
-    color13 : #000080 '#000080';
-    color14 : #008080 '#008080';
-    color15 : YELLOW 'yellow';
-    color16 : FUCHSIA 'fuchsia';
-    color17 : WHITE 'white';
-    color18 : BLACK 'black';
-    color19 : BLUE 'blue';
-    color20 : AQUA 'aqua';
-    color21 : #F00 '#f00';
-    color22 : #C0C0C0 '#c0c0c0';
+.test0 {
+    color: yellow 'yellow';
+}
+.test1 {
+    color: fuchsia 'fuchsia';
+}
+.test2 {
+    color: white 'white';
+}
+.test3 {
+    color: black 'black';
+}
+.test4 {
+    color: blue 'blue';
+}
+.test5 {
+    color: aqua 'aqua';
+}
+.test6 {
+    color: #f00 '#f00';
+}
+.test7 {
+    color: #c0c0c0 '#c0c0c0';
+}
+.test8 {
+    color: #808080 '#808080';
+}
+.test9 {
+    color: #800000 '#800000';
+}
+.test10 {
+    color: #800080 '#800080';
+}
+.test11 {
+    color: #008000 '#008000';
+}
+.test12 {
+    color: #808000 '#808000';
+}
+.test13 {
+    color: #000080 '#000080';
+}
+.test14 {
+    color: #008080 '#008080';
+}
+.test15 {
+    color: YELLOW 'yellow';
+}
+.test16 {
+    color: FUCHSIA 'fuchsia';
+}
+.test17 {
+    color: WHITE 'white';
+}
+.test18 {
+    color: BLACK 'black';
+}
+.test19 {
+    color: BLUE 'blue';
+}
+.test20 {
+    color: AQUA 'aqua';
+}
+.test21 {
+    color: #F00 '#f00';
+}
+.test22 {
+    color: #C0C0C0 '#c0c0c0';
 }

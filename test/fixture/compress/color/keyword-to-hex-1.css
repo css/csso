@@ -1,0 +1,21 @@
+.test {
+    color: black;
+    background: url(1) black;
+    font: 10px Arial black;
+    transition: 1s black ease-in;
+    unknown: black;
+}
+
+.test-case-insensitive {
+    COLOR: BLACK;
+    BACKGROUND: url(2) BLACK;
+    FONT: 10px Arial BLACK;
+    TRANSITION: 2s black ease-in;
+    UNKNOWN: BLACK;
+}
+
+@supports (background: url() black) and (font: 10px Arial black) {
+    .test {
+        color: black;
+    }
+}
