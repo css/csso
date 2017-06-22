@@ -1,0 +1,32 @@
+:root {
+    --mainColor: #fb4c42;
+    --test-var: 5px;
+    --foo: if(x > 5) this.width = 10;
+}
+
+.test {
+    color: var(--mainColor, blue);
+    border: 1px solid var(--test-var);
+}
+
+/* https://www.w3.org/TR/css-variables/ example 6 */
+a::after {
+    content: " (" var(--external-link) ")"
+}
+
+/* https://www.w3.org/TR/css-variables/ example 7 */
+.example7 {
+  --main-color: #c06;
+  --accent-background: linear-gradient(to top, var(--main-color), white);
+}
+
+/* https://www.w3.org/TR/css-variables/ example 8 */
+.example8 {
+  --one: calc(var(--two) + 20px);
+  --two: calc(var(--one) - 20px);
+}
+
+/* https://www.w3.org/TR/css-variables/ example 9 */
+one   { --foo: 10px; }
+two   { --bar: calc(var(--foo) + 10px); }
+three { --foo: calc(var(--bar) + 10px); }

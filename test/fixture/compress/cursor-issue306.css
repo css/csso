@@ -1,0 +1,5 @@
+/* issue #306 */
+.drag-and-drop__handle {
+  cursor: url('cursors/grag.cur'), move;
+  cursor: grab;
+}

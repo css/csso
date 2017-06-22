@@ -1,0 +1,7 @@
+{
+  "blacklist": {
+    "tags": ["remove"],
+    "ids": ["remove"],
+    "classes": ["remove"]
+  }
+}

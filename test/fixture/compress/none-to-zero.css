@@ -1,0 +1,11 @@
+.o { outline: 1px none red }
+.o-none { outline: none }
+.o-none-red { outline: none red }
+.o-red-none { outline: red none }
+.o-reverse { outline: none 1px red }
+
+.b { border: 1px none red }
+.b-none { border: none }
+.b-none-red { border: none red }
+.b-red-none { border: red none }
+.b-reverse { border: none 1px red }

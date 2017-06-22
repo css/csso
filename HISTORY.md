@@ -1,3 +1,82 @@
+## 3.1.1 (April 25, 2017)
+
+- Fixed crash on a number processing when it used not in a list (#335)
+
+## 3.1.0 (April 24, 2017)
+
+- Implemented optimisation for `none` keyword in `border` and `outline` properties (@zoobestik, #41)
+- Implemented replacing `rgba(x, x, x, 0)` to `transparent`
+- Fixed plus sign omitting for numbers following identifier, hex color, number or unicode range, since it can change the meaning of CSS (e.g. `calc(1px+2px)` has been optimized to `calc(1px2px)` before, now it stays the same)
+- Improved usage filtering for nested selectors (i.e. for `:nth-*()`, `:has()`, `:matches` and other pseudos)
+- Implemented `blacklist` filtering in usage (#334, see [Black list filtering](https://github.com/css/csso#black-list-filtering))
+- Improved white space removing, now white spaces are removing in the beginning and at the ending of sequences, and between stylesheet and block nodes
+- Bumped `css-tree` to `1.0.0-alpha19`
+
+## 3.0.1 (March 14, 2017)
+
+- Fixed declaration merging when declaration contains an `!important`
+
+## 3.0.0 (March 13, 2017)
+
+- Migrated to [CSSTree](https://github.com/csstree/csstree) as AST backend and exposed its API behind `syntax` property
+- Extracted CLI into standalone package [css/csso-cli](https://github.com/css/csso-cli)
+
+## 2.3.1 (January 6, 2017)
+
+- Added `\0` IE hack support (#320)
+
+## 2.3.0 (October 25, 2016)
+
+- Added `beforeCompress` and `afterCompress` options support (#316)
+- Fixed crash on empty argument in function (#317)
+
+## 2.2.1 (July 25, 2016)
+
+- Fixed shorthand optimisation issue when value has a color value or something unknown (#311)
+- Fixed `cursor` broken fallback (#306)
+
+## 2.2.0 (June 23, 2016)
+
+- Implement AST cloning by adding `clone()` [function](https://github.com/css/csso#cloneast) and `clone` [option](https://github.com/css/csso#compressast-options) for `compress()` function (#296)
+- Fix parse and translate attribute selector with flags but w/o operator (i.e. `[attrName i]`)
+- Don't merge rules with flagged attribute selectors with others (#291)
+- Take in account functions when merge TRBL-properties (#297, thanks to @ArturAralin)
+- Improve partial merge (#304)
+- Tweak scanner, reduce code deoptimizations and other small improvements
+
+## 2.1.1 (May 11, 2016)
+
+- Fix wrong declaration with `\9` hack merge (#295)
+
+## 2.1.0 (May 8, 2016)
+
+- New option `comments` to specify what comments to left: `exclamation`, `first-exclamation` and `none`
+- Add `offset` to CSS parse error details
+- Fix token `offset` computation
+
+## 2.0.0 (April 5, 2016)
+
+- No more `gonzales` AST format and related code
+- `minify()` and `minifyBlock()` is always return an object as result now (i.e. `{ css: String, map: SourceMapGenerator or null }`)
+- `parse()`
+    - Returns AST in new format (so called `internal`)
+    - Dynamic scanner implemented
+    - New AST format + dynamic scanner = performance boost and less memory consumption
+    - No more `context` argument, context should be specified via `options`
+    - Supported contexts now: `stylesheet`, `atrule`, `atruleExpression`, `ruleset`, `selector`, `simpleSelector`, `block`, `declaration` and `value` 
+    - Drop `needPositions` option, `positions` option should be used instead
+    - Drop `needInfo` option, `info` object is attaching to nodes when some information is requested by `options`
+    - `options` should be an object, otherwise it treats as empty object
+- `compress()`
+    - No more AST converting (performance boost and less memory consumption)
+    - Drop `outputAst` option
+    - Returns an object as result instead of AST (i.e. `{ ast: Object }`)
+- Drop methods: `justDoIt()`, `stringify()`, `cleanInfo()`
+
+## 1.8.1 (March 30, 2016)
+
+- Don't remove spaces after function/braces/urls since unsafe (#289)
+
 ## 1.8.0 (March 24, 2016)
 
 - Usage data support:

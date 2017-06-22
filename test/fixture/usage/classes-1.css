@@ -8,3 +8,17 @@ div.foo > * { p: 4 }
 :not(.remove) { p: 8 }
 #id { p: 9 }
 * { p: 10 }
+:matches(.foo) { matches: 1 }
+:matches(.remove) { matches: 2 }
+:matches(.bar, .baz) { matches: 3 }
+:matches(.remove, .baz) { matches: 4 }
+:has(> .foo) { has: 1 }
+:has(> .remove) { has: 2 }
+:has(.bar, > .remove) { has: 3 }
+:has(.baz, > .remove) { has: 4 }
+:nth-child(2n of .foo) { nth: 1 }
+:nth-child(2n of .remove) { nth: 2 }
+:nth-child(2n of .remove, .bar) { nth: 3 }
+:nth-child(2n of .remove, .remove2) { nth: 4 }
+:has(:matches(.a, .b), > .c), :has(:matches(.foo, .b)), :has(:matches(.a, .b), .bar), .foo { complex: 1 }
+:has(:matches(.a, :not(.a))), :has(:not(:matches(.a))) { complex: 2 }

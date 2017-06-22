@@ -1,5 +1,5 @@
 var assert = require('assert');
-var csso = require('../lib/index.js');
+var csso = require('../lib');
 var tests = require('./fixture/usage');
 
 function normalize(str) {
@@ -12,7 +12,7 @@ function createCompressWithUsageTest(name, test) {
             usage: test.usage
         });
 
-        assert.equal(normalize(compressed), normalize(test.compressed));
+        assert.equal(normalize(compressed.css), normalize(test.compressed));
     });
 }
 
@@ -30,7 +30,7 @@ describe('compress with usage', function() {
             }
         });
 
-        assert.equal(compressed, '*{p:1}');
+        assert.equal(compressed.css, '*{p:1}');
     });
 
     it('should ignore wrong values', function() {
@@ -42,7 +42,7 @@ describe('compress with usage', function() {
             }
         });
 
-        assert.equal(compressed, '#a,.a,a{p:1}');
+        assert.equal(compressed.css, '#a,.a,a{p:1}');
     });
 
     it('should be case insensitive for tag names', function() {
@@ -52,7 +52,7 @@ describe('compress with usage', function() {
             }
         });
 
-        assert.equal(compressed, 'A,b{p:1}');
+        assert.equal(compressed.css, 'A,b{p:1}');
     });
 
     it('should be case sensitive for classes and ids', function() {
@@ -63,7 +63,7 @@ describe('compress with usage', function() {
             }
         });
 
-        assert.equal(compressed, '#a,.A{p:1}');
+        assert.equal(compressed.css, '#a,.A{p:1}');
     });
 
     describe('shouldn\'t affect classes whitelist', function() {
@@ -75,7 +75,7 @@ describe('compress with usage', function() {
                 }
             });
 
-            assert.equal(compressed, '.a{p:1}');
+            assert.equal(compressed.css, '.a{p:1}');
         });
 
         it('when "classes" isn\'t defined', function() {
@@ -85,7 +85,7 @@ describe('compress with usage', function() {
                 }
             });
 
-            assert.equal(compressed, '.a,.b{p:1}');
+            assert.equal(compressed.css, '.a,.b{p:1}');
         });
     });
 
@@ -108,7 +108,7 @@ describe('compress with usage', function() {
             }
         });
 
-        assert.equal(compressed, '.foo .bar{p:1}');
+        assert.equal(compressed.css, '.foo .bar{p:1}');
     });
 
     it('should throw exception when selector has classes from different scopes', function() {

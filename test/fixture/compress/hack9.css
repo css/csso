@@ -1,11 +1,15 @@
 /*
   Bootstrap and others uses \9 hack to target IE8-9
-  When value has \9 it should be avoid of merge
+  Declaration merge should be avoided when value has \9
 */
 
 .a {
   border-top: 4px dashed;
   border-top: 4px solid \9;
+}
+.a-2 {
+  border-top: 5px dashed;
+  border-top: 5px solid\9;
 }
 .b {
   margin: 5px;

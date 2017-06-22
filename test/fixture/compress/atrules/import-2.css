@@ -1,4 +1,4 @@
 @import 'foo.css';
-@media { }
+@media all { }
 @import 'bar.css';
 

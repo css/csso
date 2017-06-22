@@ -1,0 +1,5 @@
+/* issue #311 */
+.foo {
+  border-color: red;
+  border-right-color: blue;
+}

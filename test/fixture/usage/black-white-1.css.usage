@@ -1,0 +1,10 @@
+{
+  "blacklist": {
+    "tags": ["foo"],
+    "ids": ["foo"],
+    "classes": ["foo"]
+  },
+  "tags": ["foo", "bar"],
+  "ids": ["foo", "bar"],
+  "classes": ["foo", "bar"]
+}

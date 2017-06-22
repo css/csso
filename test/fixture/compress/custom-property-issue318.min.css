@@ -1,0 +1,1 @@
+.test{--bar: ;a:var(--foo, );b:var(--foo,)}

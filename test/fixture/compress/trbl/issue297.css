@@ -1,0 +1,19 @@
+.a {
+	padding: 10px;
+	padding: calc(1px + 2px);
+}
+
+.b {
+	padding: 20px;
+	padding: 50px;
+}
+
+.c {
+	padding: calc(20px + 10px);
+	padding: calc(10px + 7px);
+}
+
+.d {
+	padding: calc(20px + 10px);
+	padding: 50px;
+}

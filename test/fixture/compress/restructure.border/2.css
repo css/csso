@@ -1,0 +1,4 @@
+.foo {
+  border-color: red;
+  border-right-color: something "strange" goes here;
+}

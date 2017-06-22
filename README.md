@@ -9,108 +9,250 @@ CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformation
 [![Originated by Yandex](https://cdn.rawgit.com/css/csso/8d1b89211ac425909f735e7d5df87ee16c2feec6/docs/yandex.svg)](https://www.yandex.com/)
 [![Sponsored by Avito](https://cdn.rawgit.com/css/csso/8d1b89211ac425909f735e7d5df87ee16c2feec6/docs/avito.svg)](https://www.avito.ru/)
 
-## Usage
+## Ready to use
+
+- [Web interface](http://css.github.io/csso/csso.html)
+- [csso-cli](https://github.com/css/csso-cli) – command line interface
+- [gulp-csso](https://github.com/ben-eb/gulp-csso) – `Gulp` plugin
+- [grunt-csso](https://github.com/t32k/grunt-csso) – `Grunt` plugin
+- [broccoli-csso](https://github.com/sindresorhus/broccoli-csso) – `Broccoli` plugin
+- [postcss-csso](https://github.com/lahmatiy/postcss-csso) – `PostCSS` plugin
+- [csso-loader](https://github.com/sandark7/csso-loader) – `webpack` loader
+
+## Install
 
 ```
-npm install -g csso
+npm install csso
 ```
 
-Or try out CSSO [right in your browser](http://css.github.io/csso/csso.html) (web interface).
+## API
 
-### Runners
+<!-- MarkdownTOC -->
 
-- Gulp: [gulp-csso](https://github.com/ben-eb/gulp-csso)
-- Grunt: [grunt-csso](https://github.com/t32k/grunt-csso)
-- Broccoli: [broccoli-csso](https://github.com/sindresorhus/broccoli-csso)
-- PostCSS: [postcss-csso](https://github.com/lahmatiy/postcss-csso)
+- [minify\(source\[, options\]\)](#minifysource-options)
+- [minifyBlock\(source\[, options\]\)](#minifyblocksource-options)
+- [compress\(ast\[, options\]\)](#compressast-options)
+- [Source maps](#source-maps)
+- [Usage data](#usage-data)
+  - [White list filtering](#white-list-filtering)
+  - [Black list filtering](#black-list-filtering)
+  - [Scopes](#scopes)
+- [Debugging](#debugging)
 
-### Command line
+<!-- /MarkdownTOC -->
 
+Basic usage:
+
+```js
+var csso = require('csso');
+
+var minifiedCss = csso.minify('.test { color: #ff0000; }').css;
+
+console.log(minifiedCss);
+// .test{color:red}
 ```
-csso [input] [output] [options]
+
+CSSO is based on [CSSTree](https://github.com/csstree/csstree) to parse CSS into AST, AST traversal and to generate AST back to CSS. All `CSSTree` API is available behind `syntax` field. You may minify CSS step by step:
+
+```js
+var csso = require('csso');
+var ast = csso.syntax.parse('.test { color: #ff0000; }');
+var compressedAst = csso.compress(ast).ast;
+var minifiedCss = csso.syntax.translate(compressedAst);
+
+console.log(minifiedCss);
+// .test{color:red}
+```
+
+> Warning: CSSO uses early versions of CSSTree that still in active development. CSSO doesn't guarantee API behind `syntax` field or AST format will not change in future releases of CSSO, since it's subject to change in CSSTree. Be carefull with CSSO updates if you use `syntax` API until this warning removal.
+
+### minify(source[, options])
+
+Minify `source` CSS passed as `String`.
+
+```js
+var result = csso.minify('.test { color: #ff0000; }', {
+    restructure: false,   // don't change CSS structure, i.e. don't merge declarations, rulesets etc
+    debug: true           // show additional debug information:
+                          // true or number from 1 to 3 (greater number - more details)
+});
+
+console.log(result.css);
+// > .test{color:red}
+```
+
+Returns an object with properties:
+
+- css `String` – resulting CSS
+- map `Object` – instance of [`SourceMapGenerator`](https://github.com/mozilla/source-map#sourcemapgenerator) or `null`
 
 Options:
 
-      --debug [level]       Output intermediate state of CSS during compression
-  -h, --help                Output usage information
-  -i, --input <filename>    Input file
-      --input-map <source>  Input source map: none, auto (default) or <filename>
-  -m, --map <destination>   Generate source map: none (default), inline, file or <filename>
-  -o, --output <filename>   Output file (result outputs to stdout if not set)
-      --restructure-off     Turns structure minimization off
-      --stat                Output statistics in stderr
-  -u, --usage <filenane>    Usage data file
-  -v, --version             Output version
+- sourceMap
+
+  Type: `Boolean`  
+  Default: `false`
+
+  Generate a source map when `true`.
+
+- filename
+
+  Type: `String`  
+  Default: `'<unknown>'`
+
+  Filename of input CSS, uses for source map generation.
+
+- debug
+
+  Type: `Boolean`  
+  Default: `false`
+
+  Output debug information to `stderr`.
+
+- beforeCompress
+
+  Type: `function(ast, options)` or `Array<function(ast, options)>` or `null`  
+  Default: `null`
+
+  Called right after parse is run.
+
+- afterCompress
+
+  Type: `function(compressResult, options)` or `Array<function(compressResult, options)>` or `null`  
+  Default: `null`
+
+  Called right after [`compress()`](#compressast-options) is run.
+
+- Other options are the same as for [`compress()`](#compressast-options) function.
+
+### minifyBlock(source[, options])
+
+The same as `minify()` but for list of declarations. Usually it's a `style` attribute value.
+
+```js
+var result = csso.minifyBlock('color: rgba(255, 0, 0, 1); color: #ff0000');
+
+console.log(result.css);
+// > color:red
 ```
 
-Some examples:
+### compress(ast[, options])
 
-```
-> csso in.css out.css
+Does the main task – compress an AST.
 
-> csso in.css
-...output result in stdout...
+> NOTE: `compress()` performs AST compression by transforming input AST by default (since AST cloning is expensive and needed in rare cases). Use `clone` option with truthy value in case you want to keep input AST untouched.
 
-> echo '.test { color: #ff0000; }' | csso
-.test{color:red}
+Returns an object with properties:
 
-> cat source1.css source2.css | csso | gzip -9 -c > production.css.gz
+- ast `Object` – resulting AST
 
-> echo '.test { color: #ff0000 }' | csso --stat >/dev/null
-File:       <stdin>
-Original:   25 bytes
-Compressed: 16 bytes (64.00%)
-Saving:     9 bytes (36.00%)
-Time:       12 ms
-Memory:     0.346 MB
-```
+Options:
+
+- restructure
+
+  Type: `Boolean`  
+  Default: `true`
+
+  Disable or enable a structure optimisations.
+
+- clone
+
+  Type: `Boolean`  
+  Default: `false`
+
+  Transform a copy of input AST if `true`. Useful in case of AST reuse.
+
+- comments
+
+  Type: `String` or `Boolean`  
+  Default: `true`
+
+  Specify what comments to left:
+
+  - `'exclamation'` or `true` – left all exclamation comments (i.e. `/*! .. */`)
+  - `'first-exclamation'` – remove every comments except first one
+  - `false` – remove every comments
+
+- usage
+
+  Type: `Object` or `null`  
+  Default: `null`
+
+  Usage data for advanced optimisations (see [Usage data](#usage-data) for details)
+
+- logger
+
+  Type: `Function` or `null`  
+  Default: `null`
+
+  Function to track every step of transformation.
 
 ### Source maps
 
-Source map doesn't generate by default. To generate map use `--map` CLI option, that can be:
+To get a source map set `true` for `sourceMap` option. Additianaly `filename` option can be passed to specify source file. When `sourceMap` option is `true`, `map` field of result object will contain a [`SourceMapGenerator`](https://github.com/mozilla/source-map#sourcemapgenerator) instance. This object can be mixed with another source map or translated to string.
 
-- `none` (default) – don't generate source map
-- `inline` – add source map into result CSS (via `/*# sourceMappingURL=application/json;base64,... */`)
-- `file` – write source map into file with same name as output file, but with `.map` extension (in this case `--output` option is required)
-- any other values treat as filename for generated source map
+```js
+var csso = require('csso');
+var css = fs.readFileSync('path/to/my.css', 'utf8');
+var result = csso.minify(css, {
+  filename: 'path/to/my.css', // will be added to source map as reference to source file
+  sourceMap: true             // generate source map
+});
 
-Examples:
+console.log(result);
+// { css: '...minified...', map: SourceMapGenerator {} }
 
+console.log(result.map.toString());
+// '{ .. source map content .. }'
 ```
-> csso my.css --map inline
-> csso my.css --output my.min.css --map file
-> csso my.css --output my.min.css --map maps/my.min.map
+
+Example of generating source map with respect of source map from input CSS:
+
+```js
+var require('source-map');
+var csso = require('csso');
+var inputFile = 'path/to/my.css';
+var input = fs.readFileSync(inputFile, 'utf8');
+var inputMap = input.match(/\/\*# sourceMappingURL=(\S+)\s*\*\/\s*$/);
+var output = csso.minify(input, {
+  filename: inputFile,
+  sourceMap: true
+});
+
+// apply input source map to output
+if (inputMap) {
+  output.map.applySourceMap(
+    new SourceMapConsumer(inputMap[1]),
+    inputFile
+  )
+}
+
+// result CSS with source map
+console.log(
+  output.css +
+  '/*# sourceMappingURL=data:application/json;base64,' +
+  new Buffer(output.map.toString()).toString('base64') +
+  ' */'
+);
 ```
-
-Use `--input-map` option to specify input source map if needed. Possible values for option:
-
-- `auto` (default) - attempt to fetch input source map by follow steps:
-  - try to fetch inline map from input
-  - try to fetch source map filename from input and read its content
-  - (when `--input` is specified) check file with same name as input file but with `.map` extension exists and read its content
-- `none` - don't use input source map; actually it's using to disable `auto`-fetching
-- any other values treat as filename for input source map
-
-Generally you shouldn't care about input source map since defaults behaviour (`auto`) covers most use cases.
-
-> NOTE: Input source map is using only if output source map is generating.
 
 ### Usage data
 
-`CSSO` can use data about how `CSS` is using for better compression. File with this data (`JSON` format) can be set using `--usage` option. Usage data may contain follow sections:
+`CSSO` can use data about how `CSS` is used in a markup for better compression. File with this data (`JSON`) can be set using `usage` option. Usage data may contain following sections:
 
+- `blacklist` – a set of black lists (see [Black list filtering](#black-list-filtering))
 - `tags` – white list of tags
 - `ids` – white list of ids
 - `classes` – white list of classes
-- `scopes` – groups of classes which never used with classes from other groups on single element
+- `scopes` – groups of classes which never used with classes from other groups on the same element
 
-All sections are optional. Value of `tags`, `ids` and `classes` should be array of strings, value of `scopes` should be an array of arrays of strings. Other values are ignoring.
+All sections are optional. Value of `tags`, `ids` and `classes` should be an array of a string, value of `scopes` should be an array of arrays of strings. Other values are ignoring.
 
-#### Selector filtering
+#### White list filtering
 
-`tags`, `ids` and `classes` are using on clean stage to filter selectors that contains something that not in list. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if selector hasn't any type selector (or even any type selector) it isn't filter.
+`tags`, `ids` and `classes` are using on clean stage to filter selectors that contain something not in the lists. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if all type selectors in selector present in list or selector has no any type selector it isn't filter.
 
-> `ids` and `classes` comparison is case sensetive, `tags` – is not.
+> `ids` and `classes` are case sensitive, `tags` – is not.
 
 Input CSS:
 
@@ -128,15 +270,59 @@ Usage data:
 }
 ```
 
-Result CSS:
+Resulting CSS:
 
 ```css
 *{color:green}ul,li{color:blue}ul.foo{color:red}
 ```
 
+Filtering performs for nested selectors too. `:not()` pseudos content is ignoring since the result of matching is unpredictable. Example for the same usage data as above:
+
+```css
+:nth-child(2n of ul, ol) { color: red }
+:nth-child(3n + 1 of img) { color: yellow }
+:not(div, ol, ul) { color: green }
+:has(:matches(ul, ol), ul, ol) { color: blue }
+```
+
+Turns into:
+
+```css
+:nth-child(2n of ul){color:red}:not(div,ol,ul){color:green}:has(:matches(ul),ul){color:blue}
+```
+
+#### Black list filtering
+
+Black list filtering performs the same as white list filtering, but filters things that mentioned in the lists. `blacklist` can contain the lists `tags`, `ids` and `classes`.
+
+Black list has a higher priority, so when something mentioned in the white list and in the black list then white list occurrence is ignoring. The `:not()` pseudos content ignoring as well.
+
+```css
+* { color: green; }
+ul, ol, li { color: blue; }
+UL.foo, li.bar { color: red; }
+```
+
+Usage data:
+
+```json
+{
+    "blacklist": {
+        "tags": ["ul"]
+    },
+    "tags": ["ul", "LI"]
+}
+```
+
+Resulting CSS:
+
+```css
+*{color:green}li{color:blue}li.bar{color:red}
+```
+
 #### Scopes
 
-Scopes is designed for CSS scope isolation solutions such as [css-modules](https://github.com/css-modules/css-modules). Scopes are similar to namespaces and defines lists of class names that exclusively used on some markup. This information allows the optimizer to move rulesets more agressive. Since it assumes selectors from different scopes can't to be matched on the same element. That leads to better ruleset merging.
+Scopes is designed for CSS scope isolation solutions such as [css-modules](https://github.com/css-modules/css-modules). Scopes are similar to namespaces and define lists of class names that exclusively used on some markup. This information allows the optimizer to move rules more agressive. Since it assumes selectors from different scopes don't match for the same element. This can improve rule merging.
 
 Suppose we have a file:
 
@@ -148,13 +334,13 @@ Suppose we have a file:
 .module2-qux { font-size: 1.5em; background: yellow; width: 50px; }
 ```
 
-It can be assumed that first two rules never used with second two on the same markup. But we can't know that for sure without markup. The optimizer doesn't know it eather and will perform safe transformations only. The result will be the same as input but with no spaces and some semicolons:
+It can be assumed that first two rules are never used with the second two on the same markup. But we can't say that for sure without a markup review. The optimizer doesn't know it either and will perform safe transformations only. The result will be the same as input but with no spaces and some semicolons:
 
 ```css
 .module1-foo{color:red}.module1-bar{font-size:1.5em;background:#ff0}.module2-baz{color:red}.module2-qux{font-size:1.5em;background:#ff0;width:50px}
 ```
 
-But with usage data `CSSO` can get better output. If follow usage data is provided:
+With usage data `CSSO` can produce better output. If follow usage data is provided:
 
 ```json
 {
@@ -165,137 +351,18 @@ But with usage data `CSSO` can get better output. If follow usage data is provid
 }
 ```
 
-New result (29 bytes extra saving):
+The result will be (29 bytes extra saving):
 
 ```css
 .module1-foo,.module2-baz{color:red}.module1-bar,.module2-qux{font-size:1.5em;background:#ff0}.module2-qux{width:50px}
 ```
 
-If class name doesn't specified in `scopes` it belongs to default "scope". `scopes` doesn't affect `classes`. If class name presents in `scopes` but missed in `classes` (both sections specified) it will be filtered.
+If class name isn't mentioned in the `scopes` it belongs to default scope. `scopes` data doesn't affect `classes` whitelist. If class name mentioned in `scopes` but missed in `classes` (both sections are specified) it will be filtered.
 
-Note that class name can't be specified in several scopes. Also selector can't has classes from different scopes. In both cases an exception throws.
+Note that class name can't be set for several scopes. Also selector can't has a class names from different scopes. In both cases an exception will thrown.
 
-Currently the optimizer doesn't care about out-of-bounds selectors order changing safety (i.e. selectors that may be matched to elements with no class name of scope, e.g. `.scope div` or `.scope ~ :last-child`) since assumes scoped CSS modules doesn't relay on it's order. It may be fix in future if to be an issue.
-
-### API
-
-```js
-var csso = require('csso');
-
-var compressedCss = csso.minify('.test { color: #ff0000; }');
-
-console.log(compressedCss);
-// .test{color:red}
-
-
-// there are some options you can pass
-var compressedWithOptions = csso.minify('.test { color: #ff0000; }', {
-    restructure: false,   // don't change css structure, i.e. don't merge declarations, rulesets etc
-    debug: true           // show additional debug information:
-                          // true or number from 1 to 3 (greater number - more details)
-});
-```
-
-You may minify CSS by yourself step by step:
-
-```js
-var ast = csso.parse('.test { color: #ff0000; }');
-var compressedAst = csso.compress(ast);
-var compressedCss = csso.translate(compressedAst, true);
-
-console.log(compressedCss);
-// .test{color:red}
-```
-
-Working with source maps:
-
-```js
-var css = fs.readFileSync('path/to/my.css', 'utf8');
-var result = csso.minify(css, {
-  filename: 'path/to/my.css', // will be added to source map as reference to source file
-  sourceMap: true             // generate source map
-});
-
-console.log(result);
-// { css: '...minified...', map: SourceMapGenerator {} }
-
-console.log(result.map.toString());
-// '{ .. source map content .. }'
-```
+Currently the optimizer doesn't care about changing order safety for out-of-bounds selectors (i.e. selectors that match to elements without class name, e.g. `.scope div` or `.scope ~ :last-child`). It assumes that scoped CSS modules doesn't relay on it's order. It may be fix in future if to be an issue.
 
 ### Debugging
 
-```
-> echo '.test { color: green; color: #ff0000 } .foo { color: red }' | csso --debug
-## parsing done in 10 ms
-
-Compress block #1
-(0.002ms) convertToInternal
-(0.000ms) clean
-(0.001ms) compress
-(0.002ms) prepare
-(0.000ms) initialRejoinRuleset
-(0.000ms) rejoinAtrule
-(0.000ms) disjoin
-(0.000ms) buildMaps
-(0.000ms) markShorthands
-(0.000ms) processShorthand
-(0.001ms) restructBlock
-(0.000ms) rejoinRuleset
-(0.000ms) restructRuleset
-## compressing done in 9 ms
-
-.foo,.test{color:red}
-```
-
-More details are provided when `--debug` flag has a number greater than `1`:
-
-```
-> echo '.test { color: green; color: #ff0000 } .foo { color: red }' | csso --debug 2
-## parsing done in 8 ms
-
-Compress block #1
-(0.000ms) clean
-  .test{color:green;color:#ff0000}.foo{color:red}
-
-(0.001ms) compress
-  .test{color:green;color:red}.foo{color:red}
-
-...
-
-(0.002ms) restructBlock
-  .test{color:red}.foo{color:red}
-
-(0.001ms) rejoinRuleset
-  .foo,.test{color:red}
-
-## compressing done in 13 ms
-
-.foo,.test{color:red}
-```
-
-Using `--debug` option adds stack trace to CSS parse error output. That can help to find out problem in parser.
-
-```
-> echo '.a { color }' | csso --debug
-
-Parse error <stdin>: Colon is expected
-    1 |.a { color }
-------------------^
-    2 |
-
-/usr/local/lib/node_modules/csso/lib/cli.js:243
-                throw e;
-                ^
-
-Error: Colon is expected
-    at parseError (/usr/local/lib/node_modules/csso/lib/parser/index.js:54:17)
-    at eat (/usr/local/lib/node_modules/csso/lib/parser/index.js:88:5)
-    at getDeclaration (/usr/local/lib/node_modules/csso/lib/parser/index.js:394:5)
-    at getBlock (/usr/local/lib/node_modules/csso/lib/parser/index.js:380:27)
-    ...
-```
-
-## License
-
-MIT
+> TODO

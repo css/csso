@@ -1,0 +1,18 @@
+/*
+    Issue #291 rules with case insensitive attribute selector should to be mixed
+    with others because lack of support
+    http://caniuse.com/#feat=css-case-insensitive
+*/
+
+.foo[x i], .bar {
+  color: red;
+}
+.bar[a=b] {
+  color: red;
+}
+span[a=b i] {
+  color: red;
+}
+[b i] {
+  color: red;
+}

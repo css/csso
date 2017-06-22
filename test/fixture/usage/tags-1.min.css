@@ -1,1 +1,1 @@
-div{p:1}span{p:2}div.class{p:4}div.class>span{p:7}.class{p:8}#id{p:9}.div span{p:10}:not(div){p:11}:not(remove){p:12}*{p:13}.class2{p:14}
+div{p:1}span{p:2}div.class{p:4}div.class>span{p:7}.class{p:8}#id{p:9}.div span{p:10}:not(div){p:11}:not(remove){p:12}*{p:13}.class2{p:14}:matches(div){matches:1}:matches(span){matches:3}:has(>div){has:1}:has(span){has:3}:nth-child(2n of div){nth:1}:nth-child(2n of span){nth:3}:has(:matches(div)),:has(span),div{complex:1}:has(:matches(:not(a))),:has(:not(:matches(a))){complex:2}
