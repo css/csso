@@ -52,7 +52,7 @@ describe('compress with usage', function() {
             }
         });
 
-        assert.equal(compressed.css, 'A,b{p:1}');
+        assert.equal(compressed.css, 'a,b{p:1}');
     });
 
     it('should be case sensitive for classes and ids', function() {
