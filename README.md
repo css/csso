@@ -18,6 +18,7 @@ CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformation
 - [broccoli-csso](https://github.com/sindresorhus/broccoli-csso) – `Broccoli` plugin
 - [postcss-csso](https://github.com/lahmatiy/postcss-csso) – `PostCSS` plugin
 - [csso-loader](https://github.com/sandark7/csso-loader) – `webpack` loader
+- [csso-webpack-plugin](https://github.com/zoobestik/csso-webpack-plugin) – `webpack` plugin
 
 ## Install
 
