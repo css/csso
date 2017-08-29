@@ -1,0 +1,17 @@
+/* @supports with no expression should be removed */
+
+@supports {
+    .foo { top: 0 }
+}
+
+@supports /*comment*/ {
+    .bar { top: 0 }
+}
+
+@-webkit-supports {
+    .foo { top: 0 }
+}
+
+@-webkit-supports /*comment*/ {
+    .bar { top: 0 }
+}

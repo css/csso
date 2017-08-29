@@ -1,0 +1,17 @@
+/* @keyframes with no name should be removed */
+
+@keyframes {
+    from { top: 0 }
+}
+
+@keyframes /*comment*/ {
+    to { top: 0 }
+}
+
+@-webkit-keyframes {
+    from { top: 0 }
+}
+
+@-webkit-keyframes /*comment*/ {
+    to { top: 0 }
+}

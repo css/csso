@@ -1,0 +1,9 @@
+/* media with no media query should be removed */
+
+@media {
+    .foo { color: red }
+}
+
+@media /* comment */ {
+    .bar { color: red }
+}
