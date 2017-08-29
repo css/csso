@@ -1,0 +1,11 @@
+/* a non-special unit value should always beat a specials */
+a {
+  margin-top: 1rem;
+  margin-top: 1px;
+}
+
+b {
+  margin-top: 2px;
+  margin-top: 2rem;
+  margin-top: 3px;
+}

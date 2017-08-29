@@ -1,0 +1,16 @@
+/* a non-special unit value with important */
+
+a {
+  margin-top: 1px !important;
+  margin-top: 1rem;
+}
+
+b {
+  margin-top: 2px !important;
+  margin-top: 2rem !important;
+}
+
+c {
+  margin-top: 3px;
+  margin-top: 3rem !important;
+}

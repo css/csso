@@ -1,0 +1,11 @@
+a {
+    margin-top: 1px;
+    margin-top: 1rem;
+    margin-bottom: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+/*! better solution:
+  a{margin:1px;margin-top:1rem}
+*/
