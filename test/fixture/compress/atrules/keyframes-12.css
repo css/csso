@@ -1,0 +1,17 @@
+/* keyframes should be lifted up but after @charset and @import */
+
+@charset 'utf-8';
+/* comment */
+@import 'something';
+
+@keyframes foo {
+    from { top: 0 }
+}
+
+.rule {
+    color: red;
+}
+
+@-webkit-keyframes foo {
+    from { top: 0 }
+}

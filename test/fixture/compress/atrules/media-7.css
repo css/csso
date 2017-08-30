@@ -1,0 +1,21 @@
+/* compress.options{ "forceMediaMerge": true } */
+
+.foo {
+    color: white;
+}
+
+@media (min-width: 100px) {
+    .foo {
+        color: red;
+    }
+}
+
+.foo {
+    color: blue;
+}
+
+@media (min-width: 100px) {
+    .foo {
+        color: green;
+    }
+}

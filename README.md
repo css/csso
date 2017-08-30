@@ -156,6 +156,13 @@ Options:
 
   Disable or enable a structure optimisations.
 
+- forceMediaMerge
+
+  Type: `Boolean`  
+  Default: `false`
+
+  Enables merging of `@media` rules with the same media query by splitted by other rules. The optimisation is unsafe in general, but should work fine in most cases. Use it on your own risk.
+
 - clone
 
   Type: `Boolean`  

@@ -24,6 +24,13 @@ var tests = {};
             }
 
             tests[name][key] = fs.readFileSync(fullpath, 'utf8').trim();
+
+            if (key === 'source') {
+                var match = tests[name][key].match(/\bcompress.options({.*?})/);
+                if (match !== null) {
+                    tests[name].options = JSON.parse(match[1]);
+                }
+            }
         }
     });
 })(__dirname);

@@ -8,17 +8,17 @@ var translate = csso.syntax.translate;
 var tests = require('./fixture/compress');
 
 function normalize(str) {
-    return str.replace(/\n|\r\n?|\f/g, '\n');
+    return (str || '').replace(/\n|\r\n?|\f/g, '\n');
 }
 
 function createCompressTest(name, test) {
     var testFn = function() {
-        var compressed = csso.minify(test.source);
+        var compressed = csso.minify(test.source, test.options);
 
         assert.equal(normalize(compressed.css), normalize(test.compressed), 'compress by minify()');
 
         var ast = parse(test.source);
-        var compressedAst = compress(ast).ast;
+        var compressedAst = compress(ast, test.options).ast;
         var css = translate(compressedAst);
 
         assert.equal(normalize(css), normalize(test.compressed), 'compress step by step');

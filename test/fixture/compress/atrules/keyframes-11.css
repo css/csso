@@ -1,0 +1,41 @@
+/* @keyframes with the same name should be overrided by later rules */
+
+@keyframes foo {
+    from { top: 0 }
+}
+
+@-webkit-keyframes foo {
+    from { top: 0 }
+}
+
+@-webkit-keyframes bar {
+    from { top: 0 }
+}
+
+@keyframes Foo {
+    from { top: 0 }
+}
+
+@-WebKit-keyframes foo {
+    from { top: 0 }
+}
+
+@keyframes foo {
+    to { top: 1 }
+}
+
+@-webkit-keyframes foo {
+    to { top: 1 }
+}
+
+@-webkit-keyframes bar {
+    to { top: 1 }
+}
+
+@keyframes Foo {
+    to { top: 1 }
+}
+
+@-WebKit-keyframes foo {
+    to { top: 1 }
+}

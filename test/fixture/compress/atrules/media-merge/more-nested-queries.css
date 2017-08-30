@@ -1,0 +1,33 @@
+/* test from https://github.com/hail2u/node-css-mqpacker */
+/* compress.options{ "forceMediaMerge": true } */
+.foo {
+  z-index: 1;
+}
+
+@media (min-width: 1px) {
+  .foo {
+    z-index: 3;
+  }
+
+  @supports (display: auto) {
+    .foo {
+      z-index: 4;
+    }
+
+    @media (min-width: 2px) {
+      .foo {
+        z-index: 5;
+      }
+    }
+  }
+}
+
+.bar {
+  z-index: 2;
+}
+
+@media (min-width: 1px) {
+  .bar {
+    z-index: 6;
+  }
+}
