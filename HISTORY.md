@@ -1,3 +1,12 @@
+## 3.2.0 (September 10, 2017)
+
+- Fixed named color compression to apply only when an identifier is guaranteed to be a color
+- Added lifting of `@keyframes` to the beginning of style sheet (chunk), but after `@charset` and `@import` rules
+- Added removal of `@keyframes`, `@media` and `@supports` with no prelude
+- Added removal of duplicate `@keyframes` (#202)
+- Added new option `forceMediaMerge` to force media rules merging. It's unsafe in general, but works fine in many cases. Use it on your own risk (#350)
+- Bumped `CSSTree` to `1.0.0-alpha23`
+
 ## 3.1.1 (April 25, 2017)
 
 - Fixed crash on a number processing when it used not in a list (#335)
@@ -10,7 +19,7 @@
 - Improved usage filtering for nested selectors (i.e. for `:nth-*()`, `:has()`, `:matches` and other pseudos)
 - Implemented `blacklist` filtering in usage (#334, see [Black list filtering](https://github.com/css/csso#black-list-filtering))
 - Improved white space removing, now white spaces are removing in the beginning and at the ending of sequences, and between stylesheet and block nodes
-- Bumped `css-tree` to `1.0.0-alpha19`
+- Bumped `CSSTree` to `1.0.0-alpha19`
 
 ## 3.0.1 (March 14, 2017)
 

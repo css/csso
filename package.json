@@ -1,13 +1,15 @@
 {
   "name": "csso",
-  "version": "3.1.1",
-  "description": "CSSO (CSS Optimizer) is a CSS minifier with structural optimisations",
+  "version": "3.2.0",
+  "description": "CSS minifier with structural optimisations",
   "keywords": [
     "css",
+    "compress",
     "minifier",
     "minify",
-    "compress",
-    "optimisation"
+    "optimise",
+    "optimisation",
+    "csstree"
   ],
   "homepage": "https://github.com/css/csso",
   "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (https://github.com/afelix)",
