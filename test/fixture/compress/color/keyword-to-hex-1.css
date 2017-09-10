@@ -14,7 +14,7 @@
     UNKNOWN: BLACK;
 }
 
-@supports (background: url() black) and (font: 10px Arial black) {
+@supports (background: url(3) black) and (font: 10px Arial black) {
     .test {
         color: black;
     }

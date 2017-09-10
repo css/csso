@@ -55,7 +55,7 @@
     "prepublish": "npm run browserify"
   },
   "dependencies": {
-    "css-tree": "1.0.0-alpha20"
+    "css-tree": "1.0.0-alpha23"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
