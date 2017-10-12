@@ -1,3 +1,9 @@
+## 3.3.0 (October 12, 2017)
+
+- Migrated to [CSSTree](https://github.com/csstree/csstree) `1.0.0-alpha25`
+    - Changed AST format (see [CSSTree change log](https://github.com/csstree/csstree/blob/master/HISTORY.md) for details)
+    - Fixed performance issue when generate CSS with source map (quadratic increase in time depending on the size of the CSS)
+
 ## 3.2.0 (September 10, 2017)
 
 - Fixed named color compression to apply only when an identifier is guaranteed to be a color
