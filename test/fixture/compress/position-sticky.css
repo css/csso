@@ -1,5 +1,5 @@
 .position {
   position: relative;
-  position:-webkit-sticky;
+  position: -webkit-sticky;
   position: sticky;
 }
