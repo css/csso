@@ -1,3 +1,7 @@
+## 3.3.1 (October 17, 2017)
+
+- Fixed merge of `position` declarations when `sticky` fallback is using (@gruzzilkin, #356)
+
 ## 3.3.0 (October 12, 2017)
 
 - Migrated to [CSSTree](https://github.com/csstree/csstree) `1.0.0-alpha25`

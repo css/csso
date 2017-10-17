@@ -1,6 +1,6 @@
 {
   "name": "csso",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "CSS minifier with structural optimisations",
   "keywords": [
     "css",
