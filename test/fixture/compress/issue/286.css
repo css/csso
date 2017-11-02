@@ -1,0 +1,67 @@
+a {
+    margin: 0 0px 0% 0rem;
+    padding: 0 0px 0% 0rem;
+}
+
+b {
+    margin-top: 0%;
+    margin-left: 0%;
+    margin-bottom: 0%;
+    margin-right: 0%;
+
+    padding-top: 0%;
+    padding-left: 0%;
+    padding-bottom: 0%;
+    padding-right: 0%;
+}
+
+/* Exclude: https://github.com/jakubpawlowicz/clean-css/issues/957 */
+i {
+    width: 0%;
+    min-width: 0%;
+    max-width: 0%;
+
+    height: 0%;
+    min-height: 0%;
+    max-height: 0%
+}
+
+em {
+    top: 0%;
+    bottom: 0%;
+    right: 0%;
+    top: 0%;
+
+    -webkit-mask-box-image: url('logo.png') 0% 100% 0 0 round round;
+    -webkit-mask-position-x: 0%;
+    -webkit-mask-position-y: 0%;
+
+    background-position-x: 0%;
+    background-position-y: 0%;
+
+    border: 0%;
+    border-width: 0%;
+    border-top-width: 0%;
+    border-left-width: 0%;
+    border-bottom-width: 0%;
+    border-right-width: 0%;
+    border-image-width: 0%;
+
+    border-radius: 0%;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+
+    font-size: 0%;
+    grid-column-gap: 0%;
+    grid-row-gap: 0%;
+    letter-spacing: 0%;
+    offset-distance: 0%;
+    scroll-snap-points-x: 0%;
+    scroll-snap-points-y: 0%;
+    shape-margin: 0%;
+    text-indent: 0%;
+    transform-origin: 0%;
+    word-spacing: 0%;
+}
