@@ -1,6 +1,8 @@
 /*
-  issue 200: don't remove units in flex property as it could change value meaning
+  issue 200: should not remove units in flex since IE10/11 breaks
+  issue 362: should not remove units in -ms-flex since IE10/11 breaks
 */
 a {
+  -ms-flex: 5 1 0px;
   flex: 5 1 0px;
 }
