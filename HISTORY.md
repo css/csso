@@ -1,3 +1,9 @@
+## 3.4.0 (November 3, 2017)
+
+- Added percent sign removal for zero percentages for some properties that is safe (@RubaXa, #286)
+- Removed unit removal for zero values in `-ms-flex` due it breaks flex in IE10/11 (#362)
+- Improved performance of selectors comparison (@smelukov, #343)
+
 ## 3.3.1 (October 17, 2017)
 
 - Fixed merge of `position` declarations when `sticky` fallback is using (@gruzzilkin, #356)
