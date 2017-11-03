@@ -16,7 +16,7 @@ function createHasSimilarSelectorsTest(test) {
         processSelector(rule1);
         processSelector(rule2);
 
-        assert.equal(restructureUtils.hasSimilarSelectors(rule1.selector.children, rule2.selector.children), test.expected);
+        assert.equal(restructureUtils.hasSimilarSelectors(rule1.prelude.children, rule2.prelude.children), test.expected);
     });
 }
 
