@@ -175,11 +175,11 @@ Options:
   Type: `String` or `Boolean`  
   Default: `true`
 
-  Specify what comments to left:
+  Specify what comments to leave:
 
-  - `'exclamation'` or `true` – left all exclamation comments (i.e. `/*! .. */`)
-  - `'first-exclamation'` – remove every comments except first one
-  - `false` – remove every comments
+  - `'exclamation'` or `true` – leave all exclamation comments (i.e. `/*! .. */`)
+  - `'first-exclamation'` – remove every comment except first one
+  - `false` – remove all comments
 
 - usage
 
