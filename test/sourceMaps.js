@@ -46,7 +46,7 @@ function getGeneratedPosition(str, source) {
 }
 
 function defineSourceMap(filename) {
-    var string = '{"version":3,"sources":["' + filename + '"],"names":[],"mappings":"AAAA,E,CAAK,S,CACL,E,CAAK,cAAgB,U","file":"' + filename + '","sourcesContent":[' + JSON.stringify(css) + ']}';
+    var string = '{"version":3,"sources":["' + filename + '"],"names":[],"mappings":"AAAA,E,CAAK,S,CACL,E,CAAK,a,CAAgB,U","file":"' + filename + '","sourcesContent":[' + JSON.stringify(css) + ']}';
     var base64 = new Buffer(string, 'utf8').toString('base64');
     var inline = '/*# sourceMappingURL=data:application/json;base64,' + base64 + ' */';
 
@@ -100,7 +100,7 @@ describe('sourceMaps', function() {
         assert.equal(result.css,
             '/*! check location merge */\n.a{a:2;b:2}\n' +
             '/*! several exlamation comments */\n.foo{color:red}');
-        assert.equal(result.map.toString(), '{"version":3,"sources":["<unknown>"],"names":[],"mappings":";AAA2B,E,CAAQ,IAAS,G;;AAAsC,I,CAAO,S","file":"<unknown>","sourcesContent":[' + JSON.stringify(css) + ']}');
+        assert.equal(result.map.toString(), '{"version":3,"sources":["<unknown>"],"names":[],"mappings":";AAA2B,E,CAAQ,G,CAAS,G;;AAAsC,I,CAAO,S","file":"<unknown>","sourcesContent":[' + JSON.stringify(css) + ']}');
     });
 
     describe('check positions', function() {
