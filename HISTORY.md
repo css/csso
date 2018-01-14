@@ -1,3 +1,7 @@
+## 3.5.0 (January 14, 2018)
+
+- Migrated to [CSSTree](https://github.com/csstree/csstree) `1.0.0-alpha.27`
+
 ## 3.4.0 (November 3, 2017)
 
 - Added percent sign removal for zero percentages for some properties that is safe (@RubaXa, #286)
