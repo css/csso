@@ -3,8 +3,8 @@ var assert = require('assert');
 var csso = require('../lib');
 var parse = csso.syntax.parse;
 var walk = csso.syntax.walk;
+var generate = csso.syntax.generate;
 var compress = csso.compress;
-var translate = csso.syntax.translate;
 var tests = require('./fixture/compress');
 
 function normalize(str) {
@@ -19,7 +19,7 @@ function createCompressTest(name, test) {
 
         var ast = parse(test.source);
         var compressedAst = compress(ast, test.options).ast;
-        var css = translate(compressedAst);
+        var css = generate(compressedAst);
 
         assert.equal(normalize(css), normalize(test.compressed), 'compress step by step');
     };
@@ -65,7 +65,7 @@ describe('compress', function() {
         });
 
         assert.equal(
-            translate(compress(ast).ast),
+            generate(compress(ast).ast),
             '.a{border:1px solid red;display:block}.b{color:red}@media all{.a{border:1px solid red;display:block}.b{color:red}}'
         );
     });
@@ -83,7 +83,7 @@ describe('compress', function() {
             var resultAst = compress(ast).ast;
 
             assert(ast === resultAst);
-            assert.equal(translate(ast), 'color:red;width:1px');
+            assert.equal(generate(ast), 'color:red;width:1px');
         });
     });
 
@@ -208,6 +208,6 @@ describe('compress', function() {
     });
 
     it('should not fail if no ast passed', function() {
-        assert.equal(translate(compress().ast, true), '');
+        assert.equal(generate(compress().ast, true), '');
     });
 });
