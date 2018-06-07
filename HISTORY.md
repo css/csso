@@ -1,3 +1,7 @@
+## 3.5.1 (June 7, 2018)
+
+- Bumped [CSSTree](https://github.com/csstree/csstree) to `1.0.0-alpha.29` (fixes some issues)
+
 ## 3.5.0 (January 14, 2018)
 
 - Migrated to [CSSTree](https://github.com/csstree/csstree) `1.0.0-alpha.27`
