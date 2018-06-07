@@ -65,8 +65,8 @@
     "coveralls": "^2.11.6",
     "eslint": "^2.2.0",
     "istanbul": "^0.4.2",
-    "jscs": "~2.10.0",
-    "mocha": "~2.4.2",
+    "jscs": "~3.0.7",
+    "mocha": "^3.5.3",
     "package-json-versionify": "^1.0.4",
     "source-map": "^0.5.6",
     "uglify-js": "^2.6.1"
