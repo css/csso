@@ -58,7 +58,7 @@
     "postpublish": "npm run gh-pages"
   },
   "dependencies": {
-    "css-tree": "1.0.0-alpha.27"
+    "css-tree": "1.0.0-alpha.29"
   },
   "devDependencies": {
     "browserify": "^13.0.0",
