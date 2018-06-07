@@ -367,7 +367,7 @@ The result will be (29 bytes extra saving):
 
 If class name isn't mentioned in the `scopes` it belongs to default scope. `scopes` data doesn't affect `classes` whitelist. If class name mentioned in `scopes` but missed in `classes` (both sections are specified) it will be filtered.
 
-Note that class name can't be set for several scopes. Also selector can't has a class names from different scopes. In both cases an exception will thrown.
+Note that class name can't be set for several scopes. Also a selector can't have class names from different scopes. In both cases an exception will thrown.
 
 Currently the optimizer doesn't care about changing order safety for out-of-bounds selectors (i.e. selectors that match to elements without class name, e.g. `.scope div` or `.scope ~ :last-child`). It assumes that scoped CSS modules doesn't relay on it's order. It may be fix in future if to be an issue.
 
