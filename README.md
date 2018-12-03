@@ -65,7 +65,7 @@ console.log(minifiedCss);
 // .test{color:red}
 ```
 
-> Warning: CSSO uses early versions of CSSTree that still in active development. CSSO doesn't guarantee API behind `syntax` field or AST format will not change in future releases of CSSO, since it's subject to change in CSSTree. Be carefull with CSSO updates if you use `syntax` API until this warning removal.
+> Warning: CSSO uses early versions of CSSTree that still in active development. CSSO doesn't guarantee API behind `syntax` field or AST format will not change in future releases of CSSO, since it's subject to change in CSSTree. Be careful with CSSO updates if you use `syntax` API until this warning removal.
 
 ### minify(source[, options])
 
