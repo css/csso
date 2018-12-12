@@ -34,7 +34,7 @@
     "coverage": "istanbul cover _mocha -- -R dot",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R dot && cat ./coverage/lcov.info | coveralls",
     "travis": "npm test && npm run coveralls",
-    "browserify": "browserify -t package-json-versionify -t [ babelify --presets [ @babel/preset-env ] ] --standalone csso lib/index.js | uglifyjs --compress --mangle -o dist/csso-browser.js",
+    "browserify": "browserify -t package-json-versionify -t [ babelify --presets [ @babel/preset-env ] ] --standalone csso lib/index.js | uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --output dist/csso-browser.js",
     "gh-pages": "git clone --depth=1 -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
     "prepublish": "npm run browserify",
     "postpublish": "npm run gh-pages"
@@ -46,13 +46,13 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "babelify": "^10.0.0",
-    "browserify": "^13.0.0",
-    "coveralls": "^2.11.6",
-    "istanbul": "^0.4.2",
-    "mocha": "^3.5.3",
+    "browserify": "^13.3.0",
+    "coveralls": "^3.0.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
     "package-json-versionify": "^1.0.4",
     "source-map": "^0.5.6",
-    "uglify-js": "^2.6.1",
+    "uglify-js": "^3.4.9",
     "xo": "^0.24.0"
   },
   "engines": {
