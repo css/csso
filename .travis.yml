@@ -1,6 +1,10 @@
 language: node_js
-script: "npm run travis"
+os:
+  - linux
+  - windows
 node_js:
   - "6"
   - "8"
   - "10"
+after_success:
+  - if [[ "$TRAVIS_NODE_VERSION" = "10" && "$TRAVIS_OS_NAME" == "linux" ]]; then npm run coveralls; fi
