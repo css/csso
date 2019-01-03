@@ -19,6 +19,7 @@ CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformation
 - [postcss-csso](https://github.com/lahmatiy/postcss-csso) – `PostCSS` plugin
 - [csso-loader](https://github.com/sandark7/csso-loader) – `webpack` loader
 - [csso-webpack-plugin](https://github.com/zoobestik/csso-webpack-plugin) – `webpack` plugin
+- [CSSO Visual Studio Code plugin](https://marketplace.visualstudio.com/items?itemName=Aneryu.csso) - `VS Code plugin`
 
 ## Install
 
