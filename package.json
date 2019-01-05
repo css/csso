@@ -33,7 +33,7 @@
     "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
     "coverage": "istanbul cover _mocha -- -R dot",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R dot && cat ./coverage/lcov.info | coveralls",
-    "browserify": "browserify -t package-json-versionify -t [ babelify --presets [ @babel/preset-env ] ] --standalone csso lib/index.js | uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --output dist/csso-browser.js",
+    "browserify": "browserify -p browser-pack-flat -t package-json-versionify -t [ babelify --presets [ @babel/preset-env ] ] --standalone csso lib/index.js | uglifyjs --compress typeofs=false --mangle --comments \"/^!/\" --output dist/csso-browser.js",
     "gh-pages": "git clone --depth=1 -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
     "prepublish": "npm run browserify",
     "postpublish": "npm run gh-pages"
@@ -45,6 +45,7 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "babelify": "^10.0.0",
+    "browser-pack-flat": "^3.2.0",
     "browserify": "^13.3.0",
     "coveralls": "^3.0.2",
     "istanbul": "^0.4.5",
