@@ -26,33 +26,15 @@
     "url": "https://github.com/css/csso/issues"
   },
   "main": "./lib/index",
-  "eslintConfig": {
-    "env": {
-      "node": true,
-      "mocha": true,
-      "es6": true
-    },
-    "rules": {
-      "no-duplicate-case": 2,
-      "no-undef": 2,
-      "no-unused-vars": [
-        2,
-        {
-          "vars": "all",
-          "args": "after-used"
-        }
-      ]
-    }
-  },
   "scripts": {
-    "test": "mocha --reporter dot",
-    "codestyle": "jscs lib test && eslint lib test",
-    "codestyle-and-test": "npm run codestyle && npm test",
+    "mocha": "mocha --reporter dot",
+    "xo": "xo",
+    "test": "npm run xo && npm run mocha",
     "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
     "coverage": "istanbul cover _mocha -- -R dot",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R dot && cat ./coverage/lcov.info | coveralls",
-    "travis": "npm run codestyle-and-test && npm run coveralls",
-    "browserify": "browserify -t package-json-versionify --standalone csso lib/index.js | uglifyjs --compress --mangle -o dist/csso-browser.js",
+    "travis": "npm test && npm run coveralls",
+    "browserify": "browserify -t package-json-versionify -t [ babelify --presets [ @babel/preset-env ] ] --standalone csso lib/index.js | uglifyjs --compress --mangle -o dist/csso-browser.js",
     "gh-pages": "git clone --depth=1 -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
     "prepublish": "npm run browserify",
     "postpublish": "npm run gh-pages"
@@ -61,24 +43,68 @@
     "css-tree": "1.0.0-alpha.29"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babelify": "^10.0.0",
     "browserify": "^13.0.0",
     "coveralls": "^2.11.6",
-    "eslint": "^2.2.0",
     "istanbul": "^0.4.2",
-    "jscs": "~3.0.7",
     "mocha": "^3.5.3",
     "package-json-versionify": "^1.0.4",
     "source-map": "^0.5.6",
-    "uglify-js": "^2.6.1"
+    "uglify-js": "^2.6.1",
+    "xo": "^0.24.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=6"
   },
   "files": [
     "dist/csso-browser.js",
-    "lib",
-    "HISTORY.md",
-    "LICENSE",
-    "README.md"
-  ]
+    "lib/**/*.js",
+    "HISTORY.md"
+  ],
+  "xo": {
+    "rules": {
+      "capitalized-comments": "off",
+      "default-case": "off",
+      "func-names": "off",
+      "indent": [
+        "error",
+        4,
+        {
+          "MemberExpression": "off",
+          "SwitchCase": 1
+        }
+      ],
+      "object-curly-spacing": [
+        "error",
+        "always"
+      ],
+      "prefer-destructuring": [
+        "error",
+        {
+          "object": true,
+          "array": false
+        }
+      ],
+      "quote-props": [
+        "error",
+        "consistent"
+      ],
+      "space-before-function-paren": [
+        "error",
+        "never"
+      ],
+      "unicorn/explicit-length-check": "off",
+      "unicorn/filename-case": "off"
+    },
+    "overrides": [
+      {
+        "files": "test/*.js",
+        "envs": [
+          "mocha"
+        ]
+      }
+    ]
+  }
 }

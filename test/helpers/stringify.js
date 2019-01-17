@@ -9,12 +9,13 @@ module.exports = function stringify(ast, withInfo) {
         }
 
         if (source && typeof source === 'object') {
-            var result = {};
-            for (var key in source) {
+            const result = {};
+            for (const key in source) {
                 if (withInfo || key !== 'info') {
                     result[key] = clean(source[key]);
                 }
             }
+
             return result;
         }
 

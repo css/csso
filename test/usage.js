@@ -1,28 +1,30 @@
-var assert = require('assert');
-var csso = require('../lib');
-var tests = require('./fixture/usage');
+const assert = require('assert');
+const csso = require('../lib');
+const tests = require('./fixture/usage');
 
 function normalize(str) {
     return str.replace(/\n|\r\n?|\f/g, '\n');
 }
 
 function createCompressWithUsageTest(name, test) {
-    it(name, function() {
-        var compressed = csso.minify(test.source, {
+    it(name, () => {
+        const compressed = csso.minify(test.source, {
             usage: test.usage
         });
 
-        assert.equal(normalize(compressed.css), normalize(test.compressed));
+        assert.strictEqual(normalize(compressed.css), normalize(test.compressed));
     });
 }
 
-describe('compress with usage', function() {
-    for (var name in tests) {
-        createCompressWithUsageTest(name, tests[name]);
+describe('compress with usage', () => {
+    for (const name in tests) {
+        if (Object.prototype.hasOwnProperty.call(tests, name)) {
+            createCompressWithUsageTest(name, tests[name]);
+        }
     }
 
-    it('should remove selectors with unused things but not an entire rule', function() {
-        var compressed = csso.minify('*, .a, #a, a { p: 1 } .b { p: 2 }', {
+    it('should remove selectors with unused things but not an entire rule', () => {
+        const compressed = csso.minify('*, .a, #a, a { p: 1 } .b { p: 2 }', {
             usage: {
                 tags: [],
                 ids: [],
@@ -30,11 +32,11 @@ describe('compress with usage', function() {
             }
         });
 
-        assert.equal(compressed.css, '*{p:1}');
+        assert.strictEqual(compressed.css, '*{p:1}');
     });
 
-    it('should ignore wrong values', function() {
-        var compressed = csso.minify('#a, .a, a { p: 1 }', {
+    it('should ignore wrong values', () => {
+        const compressed = csso.minify('#a, .a, a { p: 1 }', {
             usage: {
                 tags: true,
                 ids: {},
@@ -42,83 +44,83 @@ describe('compress with usage', function() {
             }
         });
 
-        assert.equal(compressed.css, '#a,.a,a{p:1}');
+        assert.strictEqual(compressed.css, '#a,.a,a{p:1}');
     });
 
-    it('should be case insensitive for tag names', function() {
-        var compressed = csso.minify('A, b, c, D { p: 1 }', {
+    it('should be case insensitive for tag names', () => {
+        const compressed = csso.minify('A, b, c, D { p: 1 }', {
             usage: {
                 tags: ['a', 'B']
             }
         });
 
-        assert.equal(compressed.css, 'A,b{p:1}');
+        assert.strictEqual(compressed.css, 'A,b{p:1}');
     });
 
-    it('should be case sensitive for classes and ids', function() {
-        var compressed = csso.minify('.a, .A, #a, #A { p: 1 }', {
+    it('should be case sensitive for classes and ids', () => {
+        const compressed = csso.minify('.a, .A, #a, #A { p: 1 }', {
             usage: {
                 ids: ['a'],
                 classes: ['A']
             }
         });
 
-        assert.equal(compressed.css, '#a,.A{p:1}');
+        assert.strictEqual(compressed.css, '#a,.A{p:1}');
     });
 
-    describe('shouldn\'t affect classes whitelist', function() {
-        it('when "classes" is defined', function() {
-            var compressed = csso.minify('.a, .b { p: 1 }', {
+    describe('shouldn\'t affect classes whitelist', () => {
+        it('when "classes" is defined', () => {
+            const compressed = csso.minify('.a, .b { p: 1 }', {
                 usage: {
                     classes: ['a'],
                     scopes: [['a'], ['b']]
                 }
             });
 
-            assert.equal(compressed.css, '.a{p:1}');
+            assert.strictEqual(compressed.css, '.a{p:1}');
         });
 
-        it('when "classes" isn\'t defined', function() {
-            var compressed = csso.minify('.a, .b { p: 1 }', {
+        it('when "classes" isn\'t defined', () => {
+            const compressed = csso.minify('.a, .b { p: 1 }', {
                 usage: {
                     scopes: [['a'], ['b']]
                 }
             });
 
-            assert.equal(compressed.css, '.a,.b{p:1}');
+            assert.strictEqual(compressed.css, '.a,.b{p:1}');
         });
     });
 
-    it('should throw exception when class name specified in several scopes', function() {
-        assert.throws(function() {
+    it('should throw exception when class name specified in several scopes', () => {
+        assert.throws(() => {
             csso.minify('.foo { p: 1 }', {
                 usage: {
                     scopes: [['foo'], ['foo']]
                 }
             });
-        }, function(e) {
+        }, e => {
             return e.message === 'Class can\'t be used for several scopes: foo';
         });
     });
 
-    it('should not throw exception when several class names from one scope in single selector', function() {
-        var compressed = csso.minify('.foo .bar { p: 1 }', {
+    it('should not throw exception when several class names from one scope in single selector', () => {
+        const compressed = csso.minify('.foo .bar { p: 1 }', {
             usage: {
                 scopes: [['foo', 'bar']]
             }
         });
 
-        assert.equal(compressed.css, '.foo .bar{p:1}');
+        assert.strictEqual(compressed.css, '.foo .bar{p:1}');
     });
 
-    it('should throw exception when selector has classes from different scopes', function() {
-        assert.throws(function() {
+    it('should throw exception when selector has classes from different scopes', () => {
+        assert.throws(() => {
             csso.minify('.a.b { p: 1 }', {
                 usage: {
                     scopes: [['a'], ['b']]
                 }
             });
-        }, function(e) {
+        }, e => {
             return e.message === 'Selector can\'t has classes from different scopes: .a.b';
         });
     });

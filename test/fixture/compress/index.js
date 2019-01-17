@@ -1,10 +1,11 @@
-var fs = require('fs');
-var path = require('path');
-var tests = {};
+const fs = require('fs');
+const path = require('path');
+
+const tests = {};
 
 (function scan(dir) {
-    fs.readdirSync(dir).forEach(function(filename) {
-        var fullpath = path.join(dir, filename);
+    fs.readdirSync(dir).forEach(filename => {
+        const fullpath = path.join(dir, filename);
 
         // nested dir
         if (fs.statSync(fullpath).isDirectory()) {
@@ -12,12 +13,12 @@ var tests = {};
             return;
         }
 
-        var name = filename.replace(/(\.min)?\.css$/, '');
-        var key = /\.min\.css/.test(filename) ? 'compressed' : 'source';
+        let name = filename.replace(/(\.min)?\.css$/, '');
+        const key = /\.min\.css/.test(filename) ? 'compressed' : 'source';
 
         // in case there is a filename that doesn't ends with `.css` or `.min.css`
         if (name !== filename) {
-            name = path.relative(__dirname + '/../../..', fullpath).replace(/\.min\.css$/, '.css');
+            name = path.relative(path.join(__dirname, '/../../..'), fullpath).replace(/\.min\.css$/, '.css');
 
             if (!tests[name]) {
                 tests[name] = {};
@@ -26,7 +27,7 @@ var tests = {};
             tests[name][key] = fs.readFileSync(fullpath, 'utf8').trim();
 
             if (key === 'source') {
-                var match = tests[name][key].match(/\bcompress.options({.*?})/);
+                const match = tests[name][key].match(/\bcompress.options({.*?})/);
                 if (match !== null) {
                     tests[name].options = JSON.parse(match[1]);
                 }
