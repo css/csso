@@ -2,15 +2,6 @@
   "name": "csso",
   "version": "3.5.1",
   "description": "CSS minifier with structural optimisations",
-  "keywords": [
-    "css",
-    "compress",
-    "minifier",
-    "minify",
-    "optimise",
-    "optimisation",
-    "csstree"
-  ],
   "homepage": "https://github.com/css/csso",
   "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (https://github.com/afelix)",
   "maintainers": [
@@ -25,6 +16,15 @@
   "bugs": {
     "url": "https://github.com/css/csso/issues"
   },
+  "keywords": [
+    "css",
+    "compress",
+    "minifier",
+    "minify",
+    "optimise",
+    "optimisation",
+    "csstree"
+  ],
   "main": "./lib/index",
   "eslintConfig": {
     "env": {
@@ -53,7 +53,7 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "travis": "nyc npm run lint-and-test && npm run coveralls",
     "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
-    "gh-pages": "git clone --depth=1 -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
+    "gh-pages": "git clone --depth=1 -b gh-pages https://github.com/css/csso.git .gh-pages && npm run build && cp dist/csso.min.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
     "prepublish": "npm run browserify",
     "postpublish": "npm run gh-pages"
   },
