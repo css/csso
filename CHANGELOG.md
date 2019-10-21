@@ -1,6 +1,7 @@
-## next (October 21, 2019)
+## 4.0.0 (October 21, 2019)
 
-- Dropped support for Node.js prior 8.0
+- Dropped support for Node < 8
+- Refreshed dev dependencies and scripts
 - Bumped [CSSTree](https://github.com/csstree/csstree) to `1.0.0-alpha.36` (#399)
 - Changed bundle files: `dist/csso.js` and `dist/csso.min.js` instead single `dist/csso-browser.js` (min version)
 - Expose `compress()` as `syntax.compress()`
