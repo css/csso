@@ -48,11 +48,11 @@
     "test": "mocha --reporter dot",
     "lint": "eslint lib test",
     "lint-and-test": "npm run lint && npm test",
-    "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
+    "build": "rollup --config && terser dist/csso.js --compress --mangle -o dist/csso.min.js",
     "coverage": "nyc npm test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "travis": "nyc npm run lint-and-test && npm run coveralls",
-    "browserify": "rollup --config && terser dist/csso-browser.js --compress --mangle -o dist/csso-browser.js",
+    "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
     "gh-pages": "git clone --depth=1 -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
     "prepublish": "npm run browserify",
     "postpublish": "npm run gh-pages"
@@ -76,10 +76,8 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "dist/csso-browser.js",
-    "lib",
-    "HISTORY.md",
-    "LICENSE",
-    "README.md"
+    "dist/csso.js",
+    "dist/csso.min.js",
+    "lib"
   ]
 }

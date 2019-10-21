@@ -1,3 +1,4 @@
+const path = require('path');
 const resolve = require('rollup-plugin-node-resolve');
 const json = require('rollup-plugin-json');
 const commonjs = require('rollup-plugin-commonjs');
@@ -5,7 +6,7 @@ const commonjs = require('rollup-plugin-commonjs');
 module.exports = {
     input: 'lib/index.js',
     output: {
-        file: 'dist/csso-browser.js',
+        file: 'dist/csso.js',
         exports: 'named',
         name: 'csso',
         format: 'umd'
@@ -13,6 +14,14 @@ module.exports = {
     plugins: [
         resolve({ browser: true }),
         commonjs(),
-        json()
+        json(),
+        {
+            name: 'version',
+            load(id) {
+                if (id === path.resolve('package.json')) {
+                    return '{ "version": "?????" }';
+                }
+            }
+        }
     ]
 };
