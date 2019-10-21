@@ -46,7 +46,7 @@
   },
   "scripts": {
     "test": "mocha --reporter dot",
-    "codestyle": "jscs lib test && eslint lib test",
+    "codestyle": "eslint lib test",
     "codestyle-and-test": "npm run codestyle && npm test",
     "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
     "coverage": "istanbul cover _mocha -- -R dot",
@@ -63,9 +63,8 @@
   "devDependencies": {
     "browserify": "^13.0.0",
     "coveralls": "^2.11.6",
-    "eslint": "^2.2.0",
+    "eslint": "^6.5.1",
     "istanbul": "^0.4.2",
-    "jscs": "~3.0.7",
     "mocha": "^3.5.3",
     "package-json-versionify": "^1.0.4",
     "source-map": "^0.5.6",

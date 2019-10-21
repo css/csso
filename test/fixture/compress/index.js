@@ -33,6 +33,6 @@ var tests = {};
             }
         }
     });
-})(__dirname);
+}(__dirname));
 
 module.exports = tests;
