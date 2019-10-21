@@ -47,7 +47,7 @@ function getGeneratedPosition(str, source) {
 
 function defineSourceMap(filename) {
     var string = '{"version":3,"sources":["' + filename + '"],"names":[],"mappings":"AAAA,E,CAAK,S,CACL,E,CAAK,a,CAAgB,U","file":"' + filename + '","sourcesContent":[' + JSON.stringify(css) + ']}';
-    var base64 = new Buffer(string, 'utf8').toString('base64');
+    var base64 = Buffer.from(string, 'utf8').toString('base64');
     var inline = '/*# sourceMappingURL=data:application/json;base64,' + base64 + ' */';
 
     return {
@@ -61,7 +61,7 @@ function extractSourceMap(source) {
     var m = source.match(/\/\*# sourceMappingURL=data:application\/json;base64,(.+) \*\//);
 
     if (m) {
-        return new Buffer(m[1], 'base64').toString();
+        return Buffer.from(m[1], 'base64').toString();
     }
 }
 
