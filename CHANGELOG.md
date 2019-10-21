@@ -3,6 +3,7 @@
 - Dropped support for Node.js prior 8.0
 - Bumped [CSSTree](https://github.com/csstree/csstree) to `1.0.0-alpha.36` (#399)
 - Changed bundle files: `dist/csso.js` and `dist/csso.min.js` instead single `dist/csso-browser.js` (min version)
+- Expose `compress()` as `syntax.compress()`
 
 ## 3.5.1 (June 7, 2018)
 

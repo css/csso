@@ -28,19 +28,18 @@ npm install csso
 
 ## API
 
-<!-- MarkdownTOC -->
+<!-- TOC depthfrom:3 -->
 
-- [minify\(source\[, options\]\)](#minifysource-options)
-- [minifyBlock\(source\[, options\]\)](#minifyblocksource-options)
-- [compress\(ast\[, options\]\)](#compressast-options)
+- [minify(source[, options])](#minifysource-options)
+- [minifyBlock(source[, options])](#minifyblocksource-options)
+- [syntax.compress(ast[, options])](#syntaxcompressast-options)
 - [Source maps](#source-maps)
 - [Usage data](#usage-data)
-  - [White list filtering](#white-list-filtering)
-  - [Black list filtering](#black-list-filtering)
-  - [Scopes](#scopes)
-- [Debugging](#debugging)
+    - [White list filtering](#white-list-filtering)
+    - [Black list filtering](#black-list-filtering)
+    - [Scopes](#scopes)
 
-<!-- /MarkdownTOC -->
+<!-- /TOC -->
 
 Basic usage:
 
@@ -58,7 +57,7 @@ CSSO is based on [CSSTree](https://github.com/csstree/csstree) to parse CSS into
 ```js
 var csso = require('csso');
 var ast = csso.syntax.parse('.test { color: #ff0000; }');
-var compressedAst = csso.compress(ast).ast;
+var compressedAst = csso.syntax.compress(ast).ast;
 var minifiedCss = csso.syntax.generate(compressedAst);
 
 console.log(minifiedCss);
@@ -122,9 +121,9 @@ Options:
   Type: `function(compressResult, options)` or `Array<function(compressResult, options)>` or `null`  
   Default: `null`
 
-  Called right after [`compress()`](#compressast-options) is run.
+  Called right after [`syntax.compress()`](#syntaxcompressast-options) is run.
 
-- Other options are the same as for [`compress()`](#compressast-options) function.
+- Other options are the same as for [`syntax.compress()`](#syntaxcompressast-options) function.
 
 ### minifyBlock(source[, options])
 
@@ -137,11 +136,11 @@ console.log(result.css);
 // > color:red
 ```
 
-### compress(ast[, options])
+### syntax.compress(ast[, options])
 
-Does the main task – compress an AST.
+Does the main task – compress an AST. This is CSSO's extension in CSSTree syntax API.
 
-> NOTE: `compress()` performs AST compression by transforming input AST by default (since AST cloning is expensive and needed in rare cases). Use `clone` option with truthy value in case you want to keep input AST untouched.
+> NOTE: `syntax.compress()` performs AST compression by transforming input AST by default (since AST cloning is expensive and needed in rare cases). Use `clone` option with truthy value in case you want to keep input AST untouched.
 
 Returns an object with properties:
 
@@ -370,7 +369,3 @@ If class name isn't mentioned in the `scopes` it belongs to default scope. `scop
 Note that class name can't be set for several scopes. Also a selector can't have class names from different scopes. In both cases an exception will thrown.
 
 Currently the optimizer doesn't care about changing order safety for out-of-bounds selectors (i.e. selectors that match to elements without class name, e.g. `.scope div` or `.scope ~ :last-child`). It assumes that scoped CSS modules doesn't relay on it's order. It may be fix in future if to be an issue.
-
-### Debugging
-
-> TODO

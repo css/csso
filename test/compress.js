@@ -4,7 +4,7 @@ var csso = require('../lib');
 var parse = csso.syntax.parse;
 var walk = csso.syntax.walk;
 var generate = csso.syntax.generate;
-var compress = csso.compress;
+var compress = csso.syntax.compress;
 var tests = require('./fixture/compress');
 
 function normalize(str) {

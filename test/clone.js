@@ -1,7 +1,7 @@
 var assert = require('assert');
 var csso = require('../lib');
 var parse = csso.syntax.parse;
-var compress = csso.compress;
+var compress = csso.syntax.compress;
 var generate = csso.syntax.generate;
 
 describe('AST clone', function() {
