@@ -52,7 +52,7 @@
     "coverage": "nyc npm test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "travis": "nyc npm run lint-and-test && npm run coveralls",
-    "browserify": "browserify -t package-json-versionify --standalone csso lib/index.js | uglifyjs --compress --mangle -o dist/csso-browser.js",
+    "browserify": "rollup --config && terser dist/csso-browser.js --compress --mangle -o dist/csso-browser.js",
     "gh-pages": "git clone --depth=1 -b gh-pages https://github.com/css/csso.git .gh-pages && npm run browserify && cp dist/csso-browser.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
     "prepublish": "npm run browserify",
     "postpublish": "npm run gh-pages"
@@ -61,14 +61,16 @@
     "css-tree": "1.0.0-alpha.36"
   },
   "devDependencies": {
-    "browserify": "^13.0.0",
     "coveralls": "^3.0.7",
     "eslint": "^6.5.1",
     "mocha": "^3.5.3",
     "nyc": "^14.1.0",
-    "package-json-versionify": "^1.0.4",
+    "rollup": "^1.23.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "source-map": "^0.5.6",
-    "uglify-js": "^2.6.1"
+    "terser": "^4.3.8"
   },
   "engines": {
     "node": ">=8.0.0"
