@@ -19,7 +19,7 @@ module.exports = {
             name: 'version',
             load(id) {
                 if (id === path.resolve('package.json')) {
-                    return '{ "version": "?????" }';
+                    return '{ "version": "' + require('./package.json').version + '" }';
                 }
             }
         }
