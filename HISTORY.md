@@ -1,3 +1,7 @@
+## next (October 21, 2019)
+
+- Bumped [CSSTree](https://github.com/csstree/csstree) to `1.0.0-alpha.36` (#399)
+
 ## 3.5.1 (June 7, 2018)
 
 - Bumped [CSSTree](https://github.com/csstree/csstree) to `1.0.0-alpha.29` (fixes some issues)
