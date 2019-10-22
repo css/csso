@@ -1,3 +1,7 @@
+## next
+
+- Bumped CSSTree to [`1.0.0-alpha.37`](https://github.com/csstree/csstree/releases/tag/v1.0.0-alpha.37) to fix source map generation inconsistency across node.js versions
+
 ## 4.0.0 (October 21, 2019)
 
 - Dropped support for Node < 8

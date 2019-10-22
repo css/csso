@@ -58,7 +58,7 @@
     "postpublish": "npm run gh-pages"
   },
   "dependencies": {
-    "css-tree": "1.0.0-alpha.36"
+    "css-tree": "1.0.0-alpha.37"
   },
   "devDependencies": {
     "coveralls": "^3.0.7",
@@ -69,7 +69,7 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "source-map": "^0.5.6",
+    "source-map": "^0.6.1",
     "terser": "^4.3.8"
   },
   "engines": {
