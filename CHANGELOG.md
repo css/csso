@@ -1,10 +1,10 @@
-## next
+## 4.0.1 (October 22, 2019)
 
-- Bumped CSSTree to [`1.0.0-alpha.37`](https://github.com/csstree/csstree/releases/tag/v1.0.0-alpha.37) to fix source map generation inconsistency across node.js versions
+- Bumped CSSTree to [`1.0.0-alpha.37`](https://github.com/csstree/csstree/releases/tag/v1.0.0-alpha.37) to avoid source map generation inconsistency across Node.js versions
 
 ## 4.0.0 (October 21, 2019)
 
-- Dropped support for Node < 8
+- Dropped support for Node.js < 8
 - Refreshed dev dependencies and scripts
 - Bumped [CSSTree](https://github.com/csstree/csstree) to `1.0.0-alpha.36` (#399)
 - Changed bundle files: `dist/csso.js` and `dist/csso.min.js` instead single `dist/csso-browser.js` (min version)
