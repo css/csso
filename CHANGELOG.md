@@ -1,3 +1,8 @@
+## 4.0.2 (October 28, 2019)
+
+- Fixed clean stage to avoid exceptions when source has unparsed or bad parts (#380)
+- Fixed wrong percentage sign removal for zero values (#395)
+
 ## 4.0.1 (October 22, 2019)
 
 - Bumped CSSTree to [`1.0.0-alpha.37`](https://github.com/csstree/csstree/releases/tag/v1.0.0-alpha.37) to avoid source map generation inconsistency across Node.js versions
