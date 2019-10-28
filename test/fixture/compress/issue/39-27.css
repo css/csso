@@ -1,0 +1,14 @@
+b, c, x:test {
+    color: blue;
+}
+b, a, x:test {
+    color: red
+}
+a, c, x:test {
+    color: green
+}
+
+/*
+    Correct solution (because `b` is now used without `:test` which can has limited support) is 
+    b,x:test{color:red}a,c,x:test{color:green}
+*/

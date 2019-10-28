@@ -1,0 +1,15 @@
+@media {
+    .foo { color: red; }
+}
+
+@media all {
+    .bar {
+        // bad comment
+        color: red;
+    }
+}
+
+.foo {
+    // bad comment
+    color: red;
+}
