@@ -58,8 +58,8 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "dist/csso.js",
-    "dist/csso.min.js",
-    "lib"
+    "dist/csso.{js,map}",
+    "dist/csso.min.{js,map}",
+    "lib/**/*.js"
   ]
 }
