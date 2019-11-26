@@ -40,16 +40,16 @@
     "postpublish": "npm run gh-pages"
   },
   "dependencies": {
-    "css-tree": "1.0.0-alpha.37"
+    "css-tree": "^1.0.0-alpha.38"
   },
   "devDependencies": {
+    "@rollup/plugin-json": "^4.0.0",
     "coveralls": "^3.0.7",
     "eslint": "^6.6.0",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "rollup": "^1.26.3",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "source-map": "^0.6.1",
     "terser": "^4.3.9"

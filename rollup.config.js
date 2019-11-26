@@ -1,6 +1,6 @@
 const path = require('path');
 const resolve = require('rollup-plugin-node-resolve');
-const json = require('rollup-plugin-json');
+const json = require('@rollup/plugin-json');
 const commonjs = require('rollup-plugin-commonjs');
 
 module.exports = {
