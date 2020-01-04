@@ -1,0 +1,1 @@
+.content .container{display:flex;flex-direction:column}@media (--viewport-l){.content .container{flex-direction:row}}.column,.row{display:flex}.column{flex-direction:column}
