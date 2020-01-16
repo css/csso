@@ -28,7 +28,7 @@
   "main": "./lib/index",
   "scripts": {
     "test": "mocha --reporter dot",
-    "lint": "eslint lib test",
+    "lint": "eslint .",
     "lint-and-test": "npm run lint && npm test",
     "build": "rollup --config && terser dist/csso.js --compress --mangle -o dist/csso.min.js",
     "coverage": "nyc npm test",

@@ -57,7 +57,7 @@ describe('compress', function() {
 
             // insert white spaces in the beginning, in the ending and between items
             if (node.children) {
-                node.children.each(function(node, item, list) {
+                node.children.forEach(function(node, item, list) {
                     list.insertData(WHITESPACE, item);
                 });
                 node.children.appendData(WHITESPACE);
