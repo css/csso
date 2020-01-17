@@ -42,19 +42,13 @@ describe('compress', function() {
             loc: null,
             value: ' '
         };
-        var ast = parse(
-            '.a { border: 1px solid red; display: block } .b { color: red }' +
-            '@media all { .a { border: 1px solid red; display: block } .b { color: red } }'
-        );
+        var ast = parse(`
+            .a { border: 1px solid red; display: block } .b { color: red }
+            @media all { .a { border: 1px solid red; display: block } .b { color: red } }
+        `);
 
         // add white spaces
         walk(ast, function(node) {
-            // don't touch some lists
-            if (node.type === 'SelectorList' ||
-                node.type === 'MediaQueryList') {
-                return;
-            }
-
             // insert white spaces in the beginning, in the ending and between items
             if (node.children) {
                 node.children.forEach(function(node, item, list) {

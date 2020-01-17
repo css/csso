@@ -73,7 +73,7 @@ keep-plussign-number {
     d:#abc+15;
     e:ident+15;
     f:u+00-aa+15;
-    f:calc(15+15);
+    f:calc(15 + 15);
 }
 
 keep-plussign-dimension {
@@ -83,7 +83,7 @@ keep-plussign-dimension {
     d:#abc+15ms;
     e:ident+15ms;
     f:u+00-aa+15ms;
-    f:calc(15ms+15ms);
+    f:calc(15ms + 15ms);
 }
 
 keep-plussign-percentage {
@@ -93,5 +93,5 @@ keep-plussign-percentage {
     d:#abc+15%;
     e:ident+15%;
     f:u+00-aa+15%;
-    f:calc(15px+15%);
+    f:calc(15px + 15%);
 }
