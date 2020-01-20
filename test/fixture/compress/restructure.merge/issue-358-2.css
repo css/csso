@@ -1,0 +1,22 @@
+/*
+    Issue #358 at-rules should be considered when merging
+*/
+
+.content .container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (--viewport-l) {
+  .content .container {
+    flex-direction: row;
+  }
+}
+
+.row, .column {
+  display: flex;
+}
+
+.column {
+  flex-direction: column;
+}
