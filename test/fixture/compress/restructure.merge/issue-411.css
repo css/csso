@@ -1,0 +1,21 @@
+/*
+    Issue #411
+*/
+
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+}
+
+.layout {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

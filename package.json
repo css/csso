@@ -40,19 +40,19 @@
     "postpublish": "npm run gh-pages"
   },
   "dependencies": {
-    "css-tree": "1.0.0-alpha.37"
+    "css-tree": "1.0.0-alpha.39"
   },
   "devDependencies": {
-    "coveralls": "^3.0.7",
-    "eslint": "^6.6.0",
-    "mocha": "^6.2.2",
-    "nyc": "^14.1.1",
-    "rollup": "^1.26.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-json": "^4.0.1",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "coveralls": "^3.0.9",
+    "eslint": "^6.8.0",
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0",
+    "rollup": "^1.29.0",
     "source-map": "^0.6.1",
-    "terser": "^4.3.9"
+    "terser": "^4.6.3"
   },
   "engines": {
     "node": ">=8.0.0"

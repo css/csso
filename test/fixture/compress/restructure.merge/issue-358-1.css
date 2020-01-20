@@ -1,0 +1,29 @@
+/*
+    Issue #358 at-rules should be considered when merging
+*/
+
+h1 {
+  font-size: 22px;
+}
+
+@media (min-width: 641px) {
+  h1 {
+    font-size: 35px;
+  }
+}
+
+h2 {
+  color: blue;
+  font-size: 20px;
+}
+
+@media (min-width: 641px) {
+  h2 {
+    font-size: 30px;
+  }
+}
+
+h3 {
+  color: blue;
+  font-size: 22px;
+}
