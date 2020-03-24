@@ -1,3 +1,9 @@
+## 4.0.3 (March 24, 2020)
+
+- Prevented percent sign removal in `flex`/`-ms-flex` (#410)
+- Fixed restructuring optimisation in some cases (@charlessuh & @chsuh, #358, #411)
+- Bumped dependencies (@AviVahl, #409)
+
 ## 4.0.2 (October 28, 2019)
 
 - Fixed clean stage to avoid exceptions when source has unparsed or bad parts (#380)
