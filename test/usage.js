@@ -66,7 +66,7 @@ describe('compress with usage', function() {
         assert.equal(compressed.css, '#a,.A{p:1}');
     });
 
-    describe('shouldn\'t affect classes whitelist', function() {
+    describe('shouldn\'t affect classes allowlist', function() {
         it('when "classes" is defined', function() {
             var compressed = csso.minify('.a, .b { p: 1 }', {
                 usage: {

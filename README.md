@@ -36,8 +36,8 @@ npm install csso
 - [syntax.compress(ast[, options])](#syntaxcompressast-options)
 - [Source maps](#source-maps)
 - [Usage data](#usage-data)
-    - [White list filtering](#white-list-filtering)
-    - [Black list filtering](#black-list-filtering)
+    - [Allow list filtering](#allow-list-filtering)
+    - [Block list filtering](#block-list-filtering)
     - [Scopes](#scopes)
 
 <!-- /TOC -->
@@ -91,35 +91,35 @@ Options:
 
 - sourceMap
 
-  Type: `Boolean`  
+  Type: `Boolean`
   Default: `false`
 
   Generate a source map when `true`.
 
 - filename
 
-  Type: `String`  
+  Type: `String`
   Default: `'<unknown>'`
 
   Filename of input CSS, uses for source map generation.
 
 - debug
 
-  Type: `Boolean`  
+  Type: `Boolean`
   Default: `false`
 
   Output debug information to `stderr`.
 
 - beforeCompress
 
-  Type: `function(ast, options)` or `Array<function(ast, options)>` or `null`  
+  Type: `function(ast, options)` or `Array<function(ast, options)>` or `null`
   Default: `null`
 
   Called right after parse is run.
 
 - afterCompress
 
-  Type: `function(compressResult, options)` or `Array<function(compressResult, options)>` or `null`  
+  Type: `function(compressResult, options)` or `Array<function(compressResult, options)>` or `null`
   Default: `null`
 
   Called right after [`syntax.compress()`](#syntaxcompressast-options) is run.
@@ -151,28 +151,28 @@ Options:
 
 - restructure
 
-  Type: `Boolean`  
+  Type: `Boolean`
   Default: `true`
 
   Disable or enable a structure optimisations.
 
 - forceMediaMerge
 
-  Type: `Boolean`  
+  Type: `Boolean`
   Default: `false`
 
   Enables merging of `@media` rules with the same media query by splitted by other rules. The optimisation is unsafe in general, but should work fine in most cases. Use it on your own risk.
 
 - clone
 
-  Type: `Boolean`  
+  Type: `Boolean`
   Default: `false`
 
   Transform a copy of input AST if `true`. Useful in case of AST reuse.
 
 - comments
 
-  Type: `String` or `Boolean`  
+  Type: `String` or `Boolean`
   Default: `true`
 
   Specify what comments to leave:
@@ -183,14 +183,14 @@ Options:
 
 - usage
 
-  Type: `Object` or `null`  
+  Type: `Object` or `null`
   Default: `null`
 
   Usage data for advanced optimisations (see [Usage data](#usage-data) for details)
 
 - logger
 
-  Type: `Function` or `null`  
+  Type: `Function` or `null`
   Default: `null`
 
   Function to track every step of transformation.
@@ -248,17 +248,17 @@ console.log(
 
 `CSSO` can use data about how `CSS` is used in a markup for better compression. File with this data (`JSON`) can be set using `usage` option. Usage data may contain following sections:
 
-- `blacklist` – a set of black lists (see [Black list filtering](#black-list-filtering))
-- `tags` – white list of tags
-- `ids` – white list of ids
-- `classes` – white list of classes
+- `blocklist` – a set of block lists (see [Block list filtering](#block-list-filtering))
+- `tags` – list of allowed tags
+- `ids` – list of allowed ids
+- `classes` – list of allowed classes
 - `scopes` – groups of classes which never used with classes from other groups on the same element
 
 All sections are optional. Value of `tags`, `ids` and `classes` should be an array of a string, value of `scopes` should be an array of arrays of strings. Other values are ignoring.
 
-#### White list filtering
+#### Allow list filtering
 
-`tags`, `ids` and `classes` are using on clean stage to filter selectors that contain something not in the lists. Selectors are filtering only by those kind of simple selector which white list is specified. For example, if only `tags` list is specified then type selectors are checking, and if all type selectors in selector present in list or selector has no any type selector it isn't filter.
+`tags`, `ids` and `classes` are using on clean stage to filter selectors that contain something not in the lists. Selectors are filtering only by those kind of simple selector which allow list is specified. For example, if only `tags` list is specified then type selectors are checking, and if all type selectors in selector present in list or selector has no any type selector it isn't filter.
 
 > `ids` and `classes` are case sensitive, `tags` – is not.
 
@@ -299,11 +299,11 @@ Turns into:
 :nth-child(2n of ul){color:red}:not(div,ol,ul){color:green}:has(:matches(ul),ul){color:blue}
 ```
 
-#### Black list filtering
+#### Block list filtering
 
-Black list filtering performs the same as white list filtering, but filters things that mentioned in the lists. `blacklist` can contain the lists `tags`, `ids` and `classes`.
+Block list filtering performs the same as allow list filtering, but filters things that mentioned in the lists. `blocklist` can contain the lists `tags`, `ids` and `classes`.
 
-Black list has a higher priority, so when something mentioned in the white list and in the black list then white list occurrence is ignoring. The `:not()` pseudos content ignoring as well.
+Block list has a higher priority, so when something mentioned in the allow list and in the block list then allow list occurrence is ignoring. The `:not()` pseudos content ignoring as well.
 
 ```css
 * { color: green; }
@@ -315,7 +315,7 @@ Usage data:
 
 ```json
 {
-    "blacklist": {
+    "blocklist": {
         "tags": ["ul"]
     },
     "tags": ["ul", "LI"]
@@ -365,7 +365,7 @@ The result will be (29 bytes extra saving):
 .module1-foo,.module2-baz{color:red}.module1-bar,.module2-qux{font-size:1.5em;background:#ff0}.module2-qux{width:50px}
 ```
 
-If class name isn't mentioned in the `scopes` it belongs to default scope. `scopes` data doesn't affect `classes` whitelist. If class name mentioned in `scopes` but missed in `classes` (both sections are specified) it will be filtered.
+If class name isn't mentioned in the `scopes` it belongs to default scope. `scopes` data doesn't affect `classes` allowlist. If class name mentioned in `scopes` but missed in `classes` (both sections are specified) it will be filtered.
 
 Note that class name can't be set for several scopes. Also a selector can't have class names from different scopes. In both cases an exception will thrown.
 

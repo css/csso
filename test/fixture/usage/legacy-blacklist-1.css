@@ -1,0 +1,13 @@
+.foo { p: 1 }
+.remove { p: 2 }
+#foo { p: 3 }
+#remove { p: 4 }
+foo { p: 5 }
+remove { p: 6 }
+* { p: 7 }
+:remove { p: 8 }
+.foo > .remove { p: 9 }
+:has(.remove, .bar) { p: 10 }
+:not(.remove) { p: 11 }
+:has(:matches(.foo, .remove), .bar) { complex: 1 }
+:not(.remove, #remove, remove) { complex: 2 }

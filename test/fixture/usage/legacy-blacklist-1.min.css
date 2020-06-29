@@ -1,0 +1,1 @@
+.foo{p:1}#foo{p:3}foo{p:5}*{p:7}:remove{p:8}:has(.bar){p:10}:not(.remove){p:11}:has(:matches(.foo),.bar){complex:1}:not(.remove,#remove,remove){complex:2}

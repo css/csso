@@ -64,7 +64,7 @@
 - Implemented replacing `rgba(x, x, x, 0)` to `transparent`
 - Fixed plus sign omitting for numbers following identifier, hex color, number or unicode range, since it can change the meaning of CSS (e.g. `calc(1px+2px)` has been optimized to `calc(1px2px)` before, now it stays the same)
 - Improved usage filtering for nested selectors (i.e. for `:nth-*()`, `:has()`, `:matches` and other pseudos)
-- Implemented `blacklist` filtering in usage (#334, see [Black list filtering](https://github.com/css/csso#black-list-filtering))
+- Implemented `blocklist` filtering in usage (#334, see [Block list filtering](https://github.com/css/csso#block-list-filtering))
 - Improved white space removing, now white spaces are removing in the beginning and at the ending of sequences, and between stylesheet and block nodes
 - Bumped `CSSTree` to `1.0.0-alpha19`
 
@@ -119,7 +119,7 @@
     - Dynamic scanner implemented
     - New AST format + dynamic scanner = performance boost and less memory consumption
     - No more `context` argument, context should be specified via `options`
-    - Supported contexts now: `stylesheet`, `atrule`, `atruleExpression`, `ruleset`, `selector`, `simpleSelector`, `block`, `declaration` and `value` 
+    - Supported contexts now: `stylesheet`, `atrule`, `atruleExpression`, `ruleset`, `selector`, `simpleSelector`, `block`, `declaration` and `value`
     - Drop `needPositions` option, `positions` option should be used instead
     - Drop `needInfo` option, `info` object is attaching to nodes when some information is requested by `options`
     - `options` should be an object, otherwise it treats as empty object
@@ -136,7 +136,7 @@
 ## 1.8.0 (March 24, 2016)
 
 - Usage data support:
-    - Filter rulesets by tag names, class names and ids white lists.
+    - Filter rulesets by tag names, class names and ids allow lists.
     - More aggressive ruleset moving using class name scopes information.
     - New CLI option `--usage` to pass usage data file.
 - Improve initial ruleset merge
