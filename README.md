@@ -24,7 +24,7 @@ CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformation
 ## Install
 
 ```
-npm install csso
+npm install csso  
 ```
 
 ## API
@@ -36,13 +36,13 @@ npm install csso
 - [syntax.compress(ast[, options])](#syntaxcompressast-options)
 - [Source maps](#source-maps)
 - [Usage data](#usage-data)
-    - [White list filtering](#white-list-filtering)
-    - [Black list filtering](#black-list-filtering)
-    - [Scopes](#scopes)
+      - [White list filtering](#white-list-filtering)
+      - [Black list filtering](#black-list-filtering)
+      - [Scopes](#scopes)
 
 <!-- /TOC -->
 
-Basic usage:
+## Basic usage:
 
 ```js
 var csso = require('csso');
