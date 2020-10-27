@@ -1,4 +1,4 @@
-## next
+## 4.1.0 (October 27, 2020)
 
 - Bumped [CSSTree](https://github.com/csstree/csstree) to `^1.0.0`
 - Fixed wrongly merging of TRBL values when one of them contains `var()` (#420)
