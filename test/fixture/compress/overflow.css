@@ -1,0 +1,5 @@
+/* https://github.com/css/csso/issues/415 */
+.selector {
+    overflow: auto;
+    overflow: overlay;
+}
