@@ -1,3 +1,7 @@
+## next
+
+- Bumped [CSSTree](https://github.com/csstree/csstree) to `^1.0.0`
+
 ## 4.0.3 (March 24, 2020)
 
 - Prevented percent sign removal in `flex`/`-ms-flex` (#410)

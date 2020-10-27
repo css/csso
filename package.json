@@ -40,7 +40,7 @@
     "postpublish": "npm run gh-pages"
   },
   "dependencies": {
-    "css-tree": "1.0.0-alpha.39"
+    "css-tree": "^1.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.1",
