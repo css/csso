@@ -1,6 +1,7 @@
 ## next
 
 - Bumped [CSSTree](https://github.com/csstree/csstree) to `^1.0.0`
+- Fixed wrong merging of TRBL values when one of them contains `var()` (#420)
 
 ## 4.0.3 (March 24, 2020)
 
