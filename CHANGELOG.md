@@ -1,7 +1,8 @@
 ## next
 
 - Bumped [CSSTree](https://github.com/csstree/csstree) to `^1.0.0`
-- Fixed wrong merging of TRBL values when one of them contains `var()` (#420)
+- Fixed wrongly merging of TRBL values when one of them contains `var()` (#420)
+- Fixed wrongly merging of pseudo class and element with the same name, e.g. `:-ms-input-placeholder` and `::-ms-input-placeholder` (#383)
 
 ## 4.0.3 (March 24, 2020)
 
