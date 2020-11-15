@@ -1,9 +1,9 @@
-## next
+## 4.1.1 (November 15, 2020)
 
-- Fixed build setup to exclude full `mdn/data`. That's reduce sizes:
+- Fixed build setup to exclude full `mdn/data` that reduced the lib size:
     * dist/csso.js: 794.5Kb -> 255.2Kb
     * dist/csso.min.js: 394.4Kb -> 194.2Kb
-    * package size:  237.8 kB -> 156.1 kB
+    * package size: 237.8 kB -> 156.1 kB
     * package unpacked size: 1.3 MB -> 586.8 kB
 
 ## 4.1.0 (October 27, 2020)
