@@ -1,0 +1,248 @@
+HTML,
+BODY
+{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: white;
+    color: black;
+    font-family: Arial;
+    font-size: small;
+}
+
+.layout
+{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.toolbar
+{
+    background: green;
+    padding: 10px;
+    display: none;
+}
+.main
+{
+    flex: 1;
+    display: flex;
+}
+
+.main-section
+{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 50%;
+}
+.main-section:first-child
+{
+    border-right: 1px solid #26A;
+}
+.header
+{
+    display: flex;
+    flex: 0 0 auto;
+    padding: 10px;
+    background: #0381d3;
+    color: white;
+}
+.caption
+{
+    font-size: 140%;
+    line-height: 1;
+    flex: 1;
+}
+.header LABEL
+{
+    padding-left: 15px;
+    cursor: pointer;
+}
+.header INPUT
+{
+    margin-bottom: 0;
+}
+.header BUTTON
+{
+    margin: 0;
+}
+.header BUTTON::-moz-focus-inner
+{
+    border: 0;
+}
+
+.editor
+{
+    flex: 1;
+    padding: 10px;
+    
+    outline: none;
+    border: none;
+    resize: none;
+
+    font-family: Consolas, Monaco, Courier New, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.result
+{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #E8E8E8;
+}
+.output
+{
+    flex: 1;
+    overflow: auto;
+    padding: 10px;
+
+    white-space: pre-wrap;
+    font-family: Consolas, Monaco, Courier New, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+
+    transition: all .100s;
+}
+.stat-block
+{
+    padding: 5px 10px;
+    background: #D8E8F8;
+    display: flex;
+    align-items: flex-end;
+}
+.powered
+{
+    flex: 1;
+    text-align: right;
+}
+#stat
+{
+    white-space: pre-wrap;
+    font-family: Consolas, Monaco, Courier New, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+#result
+{
+    position: relative;
+}
+#error
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, .98);
+    color: #D00;
+    transition: all .15s;
+    opacity: 0;
+    visibility: hidden;
+}
+#error.show
+{
+    transition: all .35s;
+    opacity: 1;
+    visibility: visible;
+}
+#error .header
+{
+    background: #E82020;
+}
+#errorMessage
+{
+    padding: 10px;
+    font-size: 120%;
+    white-space: pre-wrap;
+    font-family: Consolas, Monaco, Courier New, monospace;
+}
+
+#change-log
+{
+    transition: all .100s;
+    display: flex;
+    flex-direction: column;
+}
+#change-log .header
+{
+    display: block;
+    font-size: 10px;
+    padding: 4px 10px;
+    background: #ABC;
+    text-align: center;
+    cursor: pointer;
+}
+#change-log .content
+{
+    overflow: auto;
+    background: #F4F4FA;
+    transition: .100s;
+    transition-property: padding, height;
+    padding: 10px;
+}
+#result.show-transformations #change-log .content
+{
+    flex: 1;
+    padding: 10px;
+}
+#change-log H2
+{
+    display: inline-block;
+    padding: 2px 5px 1px;
+    position: relative;
+    left: -5px;
+    color: #AAA;
+    background: rgba(255, 255, 255, .65);
+    margin: 0 0 .5em;
+    font-size: 14px;
+    font-weight: normal;
+}
+#change-log .delta + H2
+{
+    margin-top: 1.25em;
+}
+#change-log .empty-delta
+{
+    color: #CCC;
+    font-size: 12px;
+}
+#change-log .delta
+{
+    font-family: Consolas, Monaco, Courier New, monospace;
+    line-height: 1.5;
+}
+#change-log .delta .added
+{
+    padding: 2px 0;
+    background: #595;
+    color: white;
+}
+#change-log .delta .removed
+{
+    padding: 2px 0;
+    background: #A66;
+    color: white;
+}
+#change-log .header:hover
+{
+    background: #9AB;
+}
+
+#change-log .content,
+#result.show-transformations .output
+{
+    flex: 0;
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+#result.show-transformations #change-log
+{
+    flex: 1;
+}

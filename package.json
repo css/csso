@@ -35,15 +35,13 @@
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "travis": "nyc npm run lint-and-test && npm run coveralls",
     "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null",
-    "gh-pages": "git clone --depth=1 -b gh-pages https://github.com/css/csso.git .gh-pages && npm run build && cp dist/csso.min.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
-    "prepublishOnly": "npm run build",
-    "postpublish": "npm run gh-pages"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "css-tree": "^1.0.0"
   },
   "browser": {
-    "css-tree": "./node_modules/css-tree/dist/csstree.min.js"
+    "css-tree": "css-tree/dist/csstree.min.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.1",
