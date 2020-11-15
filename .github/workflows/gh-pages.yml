@@ -23,7 +23,7 @@ jobs:
           node-version: '14.x'
       - run: npm ci --ignore-scripts
       - run: npm run build
-      - run: cp dist/csso.min.js .gh-pages
+      - run: cp ./dist/csso.min.js ./.gh-pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
