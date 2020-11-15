@@ -1,3 +1,11 @@
+## next
+
+- Fixed build setup to exclude full `mdn/data`. That's reduce sizes:
+    * dist/csso.js: 794.5Kb -> 255.2Kb
+    * dist/csso.min.js: 394.4Kb -> 194.2Kb
+    * package size:  237.8 kB -> 156.1 kB
+    * package unpacked size: 1.3 MB -> 586.8 kB
+
 ## 4.1.0 (October 27, 2020)
 
 - Bumped [CSSTree](https://github.com/csstree/csstree) to `^1.0.0`

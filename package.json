@@ -42,6 +42,9 @@
   "dependencies": {
     "css-tree": "^1.0.0"
   },
+  "browser": {
+    "css-tree": "./node_modules/css-tree/dist/csstree.min.js"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-json": "^4.0.1",
@@ -58,8 +61,7 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "dist/csso.js",
-    "dist/csso.min.js",
+    "dist",
     "lib"
   ]
 }
