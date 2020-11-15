@@ -30,7 +30,7 @@
     "test": "mocha --reporter dot",
     "lint": "eslint lib test",
     "lint-and-test": "npm run lint && npm test",
-    "build": "rollup --config && terser dist/csso.js --compress --mangle -o dist/csso.min.js && cp dist/csso.min.js .gh-pages",
+    "build": "rollup --config && terser dist/csso.js --compress --mangle -o dist/csso.min.js",
     "coverage": "nyc npm test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "travis": "nyc npm run lint-and-test && npm run coveralls",
