@@ -11,52 +11,43 @@
     <script src="libs/base64.js"></script>
     <script src="libs/diff.js"></script>
 
-    <div class="layout">
-        <div class="toolbar">
-            toolbar
+    <section>
+        <div class="header">
+            <span class="caption">Original CSS</span>
+            <button id="beautifySource">Beautify</button>
         </div>
-        <div class="main">
-            <div class="main-section">
-                <div class="header">
-                    <span class="caption">Source</span>
-                    <button id="beautifySource">Beautify</button>
-                </div>
-                <textarea id="source" class="editor">.foo { color: #ff0000; }
+        <textarea id="source" class="editor">.foo { color: #ff0000; }
 .bar { color: rgba(255, 0, 0, 1); }</textarea>
-            </div>
-            <div class="main-section" id="result">
-                <div class="header">
-                    <span class="caption">Result</span>
-                    <label for="sourceMap">
-                        <input type="checkbox" id="sourceMap"> Source map
-                    </label>
-                    <label for="restructure">
-                        <input type="checkbox" id="restructure" checked> Restructure
-                    </label>
-                    <label for="beautify">
-                        <input type="checkbox" id="beautify"> Beautify
-                    </label>
-                </div>
-                <div id="output" class="output"></div>
-                <div id="change-log">
-                    <div class="header">Show transformations</div>
-                    <div id="transformations" class="content"></div>
-                </div>
-                <div class="stat-block">
-                    <div id="stat"></div>
-                    <div class="powered">
-                        Powered by <a href="https://github.com/css/csso">CSSO</a> <span id="version"></span>
-                    </div>
-                </div>
-                <div id="error">
-                    <div class="header">
-                        <span class="caption">Error</span>
-                    </div>
-                    <div id="errorMessage"></div>
-                </div>
+    </section>
+    <section id="result">
+        <div class="header">
+            <span class="caption">Minified CSS</span>
+            <label for="sourceMap">
+                <input type="checkbox" id="sourceMap"> Source map
+            </label>
+            <label for="restructure">
+                <input type="checkbox" id="restructure" checked> Restructure
+            </label>
+            <label for="beautify">
+                <input type="checkbox" id="beautify"> Beautify
+            </label>
+        </div>
+        <div id="output"><div class="content"></div></div>
+        <div class="change-log-toggle">Show transformations log</div>
+        <div id="transformations-log"><div class="content"></div></div>
+        <div class="stat-block">
+            <div id="stat"></div>
+            <div class="powered">
+                Powered by <a href="https://github.com/css/csso">CSSO</a> <span id="version"></span>
             </div>
         </div>
-    </div>
+        <div id="error">
+            <div class="header">
+                <span class="caption">Error</span>
+            </div>
+            <div id="errorMessage"></div>
+        </div>
+    </section>
 
     <script>
         var lastSource;
@@ -65,11 +56,6 @@
 
         function beautifySourceCSS() {
             source.value = cssbeautify(source.value);
-        }
-
-        function setText(element, text) {
-            element.innerHTML = '';
-            element.appendChild(document.createTextNode(text));
         }
 
         function processParseError(source, details, message) {
@@ -124,7 +110,7 @@
             }
 
 
-            setText(output, css);
+            document.querySelector('#output .content').textContent = css;
         }
 
         function outputChanges(steps) {
@@ -154,7 +140,7 @@
                 });
             }
 
-            document.getElementById('transformations').innerHTML =
+            document.querySelector('#transformations-log .content').innerHTML =
                 transformations +
                 '<h2>result</h2><div class="delta">' + 
                 lastStep +
@@ -193,11 +179,9 @@
 
                 error.classList.remove('show');
             } catch(e) {
-                if (e.parseError) {
-                    setText(errorMessage, processParseError(source.value, e.parseError, e.message));
-                } else {
-                    setText(errorMessage, e.message);
-                }
+                errorMessage.textContent = e.parseError
+                    ? processParseError(source.value, e.parseError, e.message)
+                    : e.message;
                 error.classList.add('show');
                 return;
             }
@@ -218,10 +202,13 @@
         beautify.addEventListener('change', setOutput, false);
         restructure.addEventListener('change', process.bind(null, true), false);
         sourceMap.addEventListener('change', process.bind(null, true), false);
-        document.querySelector('#change-log .header').addEventListener('click', function() {
-            result.classList.toggle('show-transformations');
-            if (result.classList.contains('show-transformations')) {
+        document.querySelector('.change-log-toggle').addEventListener('click', function({ target }) {
+            const show = result.classList.toggle('show-transformations');
+            if (show) {
+                target.textContent = 'Hide transformations log';
                 process(true);
+            } else {
+                target.textContent = 'Show transformations log';
             }
         }, false);
 
