@@ -1,3 +1,7 @@
+## next
+
+- Fixed removing unit for zero-length dimentions in `min()`, `max()` and `clamp()` functions (#426)
+
 ## 4.1.1 (November 15, 2020)
 
 - Fixed build setup to exclude full `mdn/data` that reduced the lib size:
