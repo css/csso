@@ -1,5 +1,6 @@
 ## next
 
+- Trim Custom Property values when possible (#393)
 - Fixed removing unit for zero-length dimentions in `min()`, `max()` and `clamp()` functions (#426)
 - Fixed crash on bad value in TRBL declaration value (#412)
 
