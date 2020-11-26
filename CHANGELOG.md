@@ -1,6 +1,7 @@
 ## next
 
 - Fixed removing unit for zero-length dimentions in `min()`, `max()` and `clamp()` functions (#426)
+- Fixed crash on bad value in TRBL declaration value (#412)
 
 ## 4.1.1 (November 15, 2020)
 
