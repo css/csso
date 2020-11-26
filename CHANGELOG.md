@@ -1,4 +1,4 @@
-## next
+## 4.2.0 (November 26, 2020)
 
 - Trim Custom Property values when possible (#393)
 - Fixed removing unit for zero-length dimentions in `min()`, `max()` and `clamp()` functions (#426)

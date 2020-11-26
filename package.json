@@ -1,6 +1,6 @@
 {
   "name": "csso",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "CSS minifier with structural optimisations",
   "homepage": "https://github.com/css/csso",
   "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (https://github.com/afelix)",
