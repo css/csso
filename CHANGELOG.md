@@ -1,3 +1,7 @@
+## next
+
+- Added support for [CSS Selectors Level 4](https://www.w3.org/TR/selectors-4/) and legacy pseudos in specificity calculation, i.e. `:has()`, `:not(<selector-list>)`, `:is()`, `:matches()`, `:-moz-any()`, `:-webkit-any()`, `:where()`, `:nth-child(... of <selector-list>)` and `:nth-last-child(... of <selector-list>)`
+
 ## 4.2.0 (November 26, 2020)
 
 - Trim Custom Property values when possible (#393)
