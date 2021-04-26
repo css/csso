@@ -51,6 +51,12 @@ module.exports = [
     { selector: ':not(em, strong#foo)', expected: '1,0,1' },
 
     // OWN TESTS
+    { selector: 'ns|*:hover', expected: '0,1,0' },
+    { selector: '*|*:hover', expected: '0,1,0' },
+    { selector: '|*:hover', expected: '0,1,0' },
+    { selector: 'ns|tag:hover', expected: '0,1,1' },
+    { selector: '*|tag:hover', expected: '0,1,1' },
+
     { selector: '::selection', expected: '0,0,1' },
     { selector: '::before::after::next', expected: '0,0,3' },
     { selector: ':before:after:next', expected: '0,1,2' },
