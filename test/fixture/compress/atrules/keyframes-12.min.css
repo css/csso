@@ -1,1 +1,1 @@
-@charset 'utf-8';@import 'something';@keyframes foo{0%{top:0}}@-webkit-keyframes foo{0%{top:0}}.rule{color:red}
+@charset "utf-8";@import "something";@keyframes foo{0%{top:0}}@-webkit-keyframes foo{0%{top:0}}.rule{color:red}

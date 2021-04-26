@@ -1,4 +1,4 @@
-@import 'a';
+@import "a";
 /*! should keep this @import as only @import before */
-@import 'b';a{color:red}
+@import "b";a{color:red}
 /*! should remove this @import as ruleset before */
