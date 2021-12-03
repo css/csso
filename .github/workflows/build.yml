@@ -1,0 +1,50 @@
+name: build
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    lint-coverage:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup node 16
+              uses: actions/setup-node@v2
+              with:
+                  node-version: 16
+                  cache: "npm"
+            - run: npm ci
+            - run: npm run lint
+              env:
+                  REPORTER: "min"
+            - run: npm run coverage
+              env:
+                  REPORTER: "min"
+            - name: Send coverage to Coveralls
+              uses: coverallsapp/github-action@1.1.3
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    run-tests:
+        needs: lint-coverage
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+                node_version:
+                    - 14.16
+                    - 16
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup node ${{ matrix.node_version }}
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node_version }}
+                  cache: "npm"
+            - run: npm ci
+            - run: npm test
+              env:
+                  REPORTER: "min"

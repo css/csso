@@ -20,10 +20,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: 16
       - run: npm ci --ignore-scripts
-      - run: npm run build
-      - run: cp dist/csso.min.js .gh-pages
+      - run: npm run bundle
+      - run: cp dist/csso.js .gh-pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
