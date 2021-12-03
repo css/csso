@@ -20,7 +20,7 @@
   "main": "./lib/index",
   "scripts": {
     "test": "mocha --reporter dot",
-    "lint": "eslint .",
+    "lint": "eslint lib scripts test",
     "lint-and-test": "npm run lint && npm test",
     "build": "node scripts/bundle",
     "coverage": "nyc npm test",
@@ -35,14 +35,13 @@
     "css-tree": "2.0.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.9",
+    "coveralls": "^3.1.1",
     "esbuild": "^0.14.1",
-    "eslint": "^6.8.0",
-    "mocha": "^7.0.0",
+    "eslint": "^7.24.0",
+    "mocha": "^9.1.2",
     "nyc": "^15.0.0",
     "rollup": "^2.60.2",
-    "source-map": "^0.6.1",
-    "terser": "^4.6.3"
+    "source-map": "^0.6.1"
   },
   "engines": {
     "node": ">=8.0.0"
