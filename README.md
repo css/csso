@@ -1,5 +1,5 @@
 [![NPM version](https://img.shields.io/npm/v/csso.svg)](https://www.npmjs.com/package/csso)
-[![Build Status](https://travis-ci.org/css/csso.svg?branch=master)](https://travis-ci.org/css/csso)
+[![Build Status](https://github.com/css/csso/actions/workflows/build.yml/badge.svg)](https://github.com/css/csso/actions/workflows/build.yml)
 [![Coverage Status](https://coveralls.io/repos/github/css/csso/badge.svg?branch=master)](https://coveralls.io/github/css/csso?branch=master)
 [![NPM Downloads](https://img.shields.io/npm/dm/csso.svg)](https://www.npmjs.com/package/csso)
 [![Twitter](https://img.shields.io/badge/Twitter-@cssoptimizer-blue.svg)](https://twitter.com/cssoptimizer)
