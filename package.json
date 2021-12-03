@@ -23,8 +23,7 @@
     "lint": "eslint lib scripts test",
     "lint-and-test": "npm run lint && npm test",
     "build": "node scripts/bundle",
-    "coverage": "nyc npm test",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "c8 --reporter=lcovonly npm test",
     "travis": "nyc npm run lint-and-test && npm run coveralls",
     "gh-pages": "git clone --depth=1 -b gh-pages https://github.com/css/csso.git .gh-pages && npm run build && cp dist/csso.min.js .gh-pages/ && cd .gh-pages && git commit -am \"update\" && git push && cd .. && rm -rf .gh-pages",
     "prepublishOnly": "npm run build",
@@ -35,11 +34,11 @@
     "css-tree": "2.0.0"
   },
   "devDependencies": {
+    "c8": "^7.10.0",
     "coveralls": "^3.1.1",
     "esbuild": "^0.14.1",
     "eslint": "^7.24.0",
     "mocha": "^9.1.2",
-    "nyc": "^15.0.0",
     "rollup": "^2.60.2",
     "source-map": "^0.6.1"
   },
