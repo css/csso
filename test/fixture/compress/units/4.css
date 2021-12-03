@@ -1,0 +1,17 @@
+/*
+  issue #426: https://github.com/css/csso/issues/426
+  safe units should merge with keyword values
+*/
+
+.min {
+    width: min(0px, (100% / 3 - 0px));
+    height: min((100% / 3 - 0px), 0px);
+}
+.max {
+    width: max(0px, (100% / 3 - 0px));
+    height: max((100% / 3 - 0px), 0px);
+}
+.clamp {
+    width: clamp(0px, 0px, 0px);
+    height: clamp((100% / 3 - 0px), (100% / 3 - 0px), (100% / 3 - 0px));
+}

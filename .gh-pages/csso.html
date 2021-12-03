@@ -1,0 +1,220 @@
+<!doctype html>
+
+<html>
+<head>
+    <title>CSSO – CSS optimizer</title>
+    <link rel="stylesheet" href="csso.css" type="text/css">
+</head>
+<body>
+    <script src="csso.min.js"></script>
+    <script src="libs/cssbeautify.js"></script>
+    <script src="libs/base64.js"></script>
+    <script src="libs/diff.js"></script>
+
+    <section>
+        <div class="header">
+            <span class="caption">Original CSS</span>
+            <button id="beautifySource">Beautify</button>
+        </div>
+        <textarea id="source" class="editor">.foo { color: #ff0000; }
+.bar { color: rgba(255, 0, 0, 1); }</textarea>
+    </section>
+    <section id="result">
+        <div class="header">
+            <span class="caption">Minified CSS</span>
+            <label for="sourceMap">
+                <input type="checkbox" id="sourceMap"> Source map
+            </label>
+            <label for="restructure">
+                <input type="checkbox" id="restructure" checked> Restructure
+            </label>
+            <label for="beautify">
+                <input type="checkbox" id="beautify"> Beautify
+            </label>
+        </div>
+        <div id="output"><div class="content"></div></div>
+        <div class="change-log-toggle">Show transformations log</div>
+        <div id="transformations-log"><div class="content"></div></div>
+        <div class="stat-block">
+            <div id="stat"></div>
+            <div class="powered">
+                Powered by <a href="https://github.com/css/csso">CSSO</a> <span id="version"></span>
+            </div>
+        </div>
+        <div id="error">
+            <div class="header">
+                <span class="caption">Error</span>
+            </div>
+            <div id="errorMessage"></div>
+        </div>
+    </section>
+
+    <script>
+        var lastSource;
+        var lastResult;
+        var lastResultMap;
+
+        function beautifySourceCSS() {
+            source.value = cssbeautify(source.value);
+        }
+
+        function processParseError(source, details, message) {
+            function formatLines(start, end) {
+                return lines.slice(start, end).map(function(line, idx) {
+                    var num = String(start + idx + 1);
+
+                    while (num.length < maxNumLength) {
+                        num = ' ' + num;
+                    }
+
+                    return num + ' |' + line;
+                }).join('\n');
+            }
+
+            var lines = source.split(/\n|\r\n?|\f/);
+            var column = details.column;
+            var line = details.line;
+            var startLine = Math.max(1, line - 3);
+            var endLine = Math.min(line + 3, lines.length + 1);
+            var maxNumLength = Math.max(4, String(endLine).length) + 1;
+
+            return [
+                'CSS parse error: ' + message + '\n',
+                formatLines(startLine - 1, line),
+                new Array(column + maxNumLength + 2).join('-') + '^',
+                formatLines(line, endLine)
+            ].join('\n');
+        }
+
+        function updateStat(originalSize, resultSize, time) {
+            function percent(value) {
+                return value ? ' (' + (100 * value).toFixed(2) + '%)' : '';
+            }
+
+            var delta = originalSize - resultSize;
+
+            stat.innerHTML =
+                'Original:   ' + originalSize + ' bytes\n' +
+                'Compressed: ' + resultSize + ' bytes' + percent(resultSize / originalSize) + '\n' +
+                'Saving:     ' + delta + ' bytes' + percent(delta / originalSize) + '\n' +
+                'Time:       ' + time + ' ms';
+        }
+
+        function setOutput() {
+            var css = lastResult;
+
+            if (sourceMap.checked && lastResultMap) {
+                css += '\n/*# sourceMappingURL=application/json;base64,' + Base64.encode(lastResultMap) + ' */';
+            } else if (beautify.checked) {
+                css = cssbeautify(css);
+            }
+
+
+            document.querySelector('#output .content').textContent = css;
+        }
+
+        function outputChanges(steps) {
+            var lastStep = '';
+            var transformations = '';
+
+            if (result.classList.contains('show-transformations')) {
+                steps.forEach(function(item) {
+                    if (item.css !== lastStep && lastStep) {
+                        // transformations += '<span class="delta empty-delta">(no transformations)</span><br/>';
+                        transformations += '<h2>' + item.name + '</h2>';
+                        transformations +=
+                            '<div class="delta">' +
+                            JsDiff.diffCss(lastStep, item.css).map(function(chunk) {
+                                if (chunk.removed) {
+                                    return '<span class="removed">' + chunk.value + '</span>';
+                                } else if (chunk.added) {
+                                    return '<span class="added">' + chunk.value + '</span>';
+                                } else {
+                                    return chunk.value;
+                                }
+                            }).join('') +
+                            '</div>';
+                    }
+
+                    lastStep = item.css;
+                });
+            }
+
+            document.querySelector('#transformations-log .content').innerHTML =
+                transformations +
+                '<h2>result</h2><div class="delta">' + 
+                lastStep +
+                '</div>';
+        }
+
+        function process(force) {
+            var time;
+
+            if (force !== true && source.value === lastSource) {
+                return;
+            }
+
+            beautify.disabled = sourceMap.checked;
+
+            var time = (window.performance || Date).now();
+            var steps = [];
+
+            try {
+                lastSource = source.value;
+                lastResult = csso.minify(source.value, {
+                    restructure: restructure.checked,
+                    sourceMap: sourceMap.checked,
+                    logger: function(name, ast) {
+                        if (ast) {
+                            steps.push({
+                                name: name,
+                                css: csso.syntax.generate(ast)
+                            });
+                        }
+                    }
+                });
+
+                lastResultMap = lastResult.map ? lastResult.map.toString() : null;
+                lastResult = lastResult.css;
+
+                error.classList.remove('show');
+            } catch(e) {
+                errorMessage.textContent = e.parseError
+                    ? processParseError(source.value, e.parseError, e.message)
+                    : e.message;
+                error.classList.add('show');
+                return;
+            }
+
+            updateStat(
+                lastSource.length,
+                lastResult.length,
+                Math.round((window.performance || Date).now() - time)
+            );
+
+            setOutput();
+            outputChanges(steps);
+        }
+        
+        source.addEventListener('input', process, false);
+        source.addEventListener('keyup', process, false);
+        beautifySource.addEventListener('click', beautifySourceCSS, false);
+        beautify.addEventListener('change', setOutput, false);
+        restructure.addEventListener('change', process.bind(null, true), false);
+        sourceMap.addEventListener('change', process.bind(null, true), false);
+        document.querySelector('.change-log-toggle').addEventListener('click', function({ target }) {
+            const show = result.classList.toggle('show-transformations');
+            if (show) {
+                target.textContent = 'Hide transformations log';
+                process(true);
+            } else {
+                target.textContent = 'Show transformations log';
+            }
+        }, false);
+
+        document.getElementById('version').innerHTML = csso.version;
+        process();
+    </script>
+
+</body>
+</html>

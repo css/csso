@@ -1,3 +1,34 @@
+## next
+
+- Added support for [CSS Selectors Level 4](https://www.w3.org/TR/selectors-4/) and legacy pseudos in specificity calculation, i.e. `:has()`, `:not(<selector-list>)`, `:is()`, `:matches()`, `:-moz-any()`, `:-webkit-any()`, `:where()`, `:nth-child(... of <selector-list>)` and `:nth-last-child(... of <selector-list>)`
+
+## 4.2.0 (November 26, 2020)
+
+- Trim Custom Property values when possible (#393)
+- Fixed removing unit for zero-length dimentions in `min()`, `max()` and `clamp()` functions (#426)
+- Fixed crash on bad value in TRBL declaration value (#412)
+
+## 4.1.1 (November 15, 2020)
+
+- Fixed build setup to exclude full `mdn/data` that reduced the lib size:
+    * dist/csso.js: 794.5Kb -> 255.2Kb
+    * dist/csso.min.js: 394.4Kb -> 194.2Kb
+    * package size: 237.8 kB -> 156.1 kB
+    * package unpacked size: 1.3 MB -> 586.8 kB
+
+## 4.1.0 (October 27, 2020)
+
+- Bumped [CSSTree](https://github.com/csstree/csstree) to `^1.0.0`
+- Fixed wrongly merging of TRBL values when one of them contains `var()` (#420)
+- Fixed wrongly merging of pseudo class and element with the same name, e.g. `:-ms-input-placeholder` and `::-ms-input-placeholder` (#383, #416)
+- Fixed wrongly merging of `overflow` fallback (#415)
+
+## 4.0.3 (March 24, 2020)
+
+- Prevented percent sign removal in `flex`/`-ms-flex` (#410)
+- Fixed restructuring optimisation in some cases (@charlessuh & @chsuh, #358, #411)
+- Bumped dependencies (@AviVahl, #409)
+
 ## 4.0.2 (October 28, 2019)
 
 - Fixed clean stage to avoid exceptions when source has unparsed or bad parts (#380)

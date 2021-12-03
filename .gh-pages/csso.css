@@ -1,0 +1,195 @@
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: white;
+    color: black;
+    font-family: Arial;
+    font-size: small;
+}
+
+body {
+    display: flex;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    flex: 1;
+    width: 50%;
+}
+section + section {
+    border-left: 1px solid #26A;
+}
+section > .header {
+    display: flex;
+    align-items: center;
+    height: 42px;
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    padding: 10px;
+    background: #0381d3;
+    color: white;
+}
+section > .header > .caption {
+    font-size: 140%;
+    line-height: 1;
+    flex: 1;
+}
+section > .header label {
+    padding-left: 15px;
+    cursor: pointer;
+}
+section > .header input {
+    margin-top: 0;
+    vertical-align: middle;
+}
+section > .header button {
+    margin: 0;
+}
+section > .header button::-moz-focus-inner {
+    border: 0;
+}
+
+.editor {
+    flex: 1;
+    padding: 10px;
+    
+    outline: none;
+    border: none;
+    resize: none;
+
+    font-family: Consolas, Monaco, Courier New, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#result {
+    position: relative;
+}
+#error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, .98);
+    color: #D00;
+    transition: all .15s;
+    opacity: 0;
+    visibility: hidden;
+}
+#error.show
+{
+    transition: all .35s;
+    opacity: 1;
+    visibility: visible;
+}
+#error .header
+{
+    background: #E82020;
+}
+#errorMessage
+{
+    padding: 10px;
+    font-size: 120%;
+    white-space: pre-wrap;
+    font-family: Consolas, Monaco, Courier New, monospace;
+}
+
+#output {
+    overflow: auto;
+    white-space: pre-wrap;
+    font-family: Consolas, Monaco, Courier New, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+#output .content {
+    padding: 10px;
+}
+
+.change-log-toggle {
+    display: block;
+    font-size: 10px;
+    padding: 4px 10px;
+    background: #ABC;
+    text-align: center;
+    cursor: pointer;
+}
+
+#transformations-log {
+    overflow: auto;
+    background: #F4F4FA;
+}
+#transformations-log .content {
+    padding: 10px;
+}
+#transformations-log H2 {
+    display: inline-block;
+    padding: 2px 5px 1px;
+    position: relative;
+    left: -5px;
+    color: #AAA;
+    background: rgba(255, 255, 255, .65);
+    margin: 0 0 .5em;
+    font-size: 14px;
+    font-weight: normal;
+}
+#transformations-log .delta + H2 {
+    margin-top: 1.25em;
+}
+#transformations-log .empty-delta {
+    color: #CCC;
+    font-size: 12px;
+}
+#transformations-log .delta {
+    font-family: Consolas, Monaco, Courier New, monospace;
+    line-height: 1.5;
+}
+#transformations-log .delta .added {
+    padding: 2px 0;
+    background: #595;
+    color: white;
+}
+#transformations-log .delta .removed {
+    padding: 2px 0;
+    background: #A66;
+    color: white;
+}
+#transformations-log .header:hover {
+    background: #9AB;
+}
+
+#output,
+#transformations-log {
+    flex: 1;
+    max-height: 100vh;
+    height: auto;
+    transition: .25s ease-in-out;
+    transition-property: padding, max-height, height, flex-grow;
+    box-sizing: border-box;
+}
+#result.show-transformations #output,
+#result:not(.show-transformations) #transformations-log {
+    flex-grow: 0;
+    overflow: hidden;
+}
+
+.stat-block {
+    padding: 5px 10px;
+    background: #D8E8F8;
+    display: flex;
+    align-items: flex-end;
+}
+.stat-block .powered {
+    flex: 1;
+    text-align: right;
+}
+.stat-block #stat {
+    white-space: pre-wrap;
+    font-family: Consolas, Monaco, Courier New, monospace;
+    font-size: 12px;
+    line-height: 1.4;
+}

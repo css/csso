@@ -1,6 +1,6 @@
 {
   "name": "csso",
-  "version": "4.0.2",
+  "version": "4.2.0",
   "description": "CSS minifier with structural optimisations",
   "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (https://github.com/afelix)",
   "maintainers": [
@@ -46,8 +46,7 @@
     "node": ">=8.0.0"
   },
   "files": [
-    "dist/csso.js",
-    "dist/csso.min.js",
+    "dist",
     "lib"
   ]
 }
