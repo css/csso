@@ -1,4 +1,4 @@
-name: build
+name: Build
 
 on:
     push:
@@ -16,8 +16,6 @@ jobs:
                   cache: "npm"
             - run: npm ci
             - run: npm run lint
-              env:
-                  REPORTER: "min"
             - run: npm run coverage
               env:
                   REPORTER: "min"
