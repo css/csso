@@ -33,7 +33,8 @@ jobs:
             matrix:
                 # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
                 node_version:
-                    - 14.16
+                    - 12.20.0
+                    - 14.13.0
                     - 16
 
         steps:
