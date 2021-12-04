@@ -1,6 +1,5 @@
 import { deepStrictEqual } from 'assert';
 import { syntax } from 'csso';
-import specificity from '../lib/restructure/prepare/specificity.js';
 import tests from './fixture/specificity.js';
 
 describe('specificity', () => {
@@ -10,7 +9,7 @@ describe('specificity', () => {
                 context: 'selector'
             });
 
-            deepStrictEqual(specificity(ast), test.expected.split(',').map(Number));
+            deepStrictEqual(syntax.specificity(ast), test.expected.split(',').map(Number));
         });
     });
 });

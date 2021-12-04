@@ -1,8 +1,6 @@
 import { readFileSync } from 'fs';
 import { equal } from 'assert';
-import { syntax } from 'csso';
-import processSelector from '../lib/restructure/prepare/processSelector.js';
-import { hasSimilarSelectors } from '../lib/restructure/utils.js';
+import { syntax, utils } from 'csso';
 
 function createHasSimilarSelectorsTest(test) {
     it('[' + test.rule1 + '] vs [' + test.rule2 + ']', () => {
@@ -13,10 +11,13 @@ function createHasSimilarSelectorsTest(test) {
             context: 'rule'
         });
 
-        processSelector(rule1);
-        processSelector(rule2);
+        utils.processSelector(rule1);
+        utils.processSelector(rule2);
 
-        equal(hasSimilarSelectors(rule1.prelude.children, rule2.prelude.children), test.expected);
+        equal(
+            utils.hasSimilarSelectors(rule1.prelude.children, rule2.prelude.children),
+            test.expected
+        );
     });
 }
 

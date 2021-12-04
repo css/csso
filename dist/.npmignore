@@ -1,3 +1,4 @@
 *
 !csso.js
-!csso.min.js
+!csso.esm.js
+!version.js

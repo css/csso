@@ -16,6 +16,7 @@ jobs:
                   cache: "npm"
             - run: npm ci
             - run: npm run lint
+            - run: npm run bundle-and-test
             - run: npm run coverage
               env:
                   REPORTER: "min"
@@ -43,6 +44,9 @@ jobs:
                   node-version: ${{ matrix.node_version }}
                   cache: "npm"
             - run: npm ci
-            - run: npm test
+            - run: npm run test
+              env:
+                  REPORTER: "min"
+            - run: npm run test:cjs
               env:
                   REPORTER: "min"

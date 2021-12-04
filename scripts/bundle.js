@@ -1,11 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const esbuild = require('esbuild');
-const { version } = require('../package.json');
+import { writeFileSync } from 'fs';
+import { resolve, basename } from 'path';
+import esbuild from 'esbuild';
+import { createRequire } from 'module';
+
+const { version } = createRequire(import.meta.url)('../package.json');
 
 async function build() {
     const genModules = {
-        [path.resolve('lib/version.js')]: () => `export const version = "${version}";`
+        [resolve('lib/version.js')]: () => `export const version = "${version}";`
     };
     const genModulesFilter = new RegExp('(' + Object.keys(genModules).join('|').replace(/\./g, '\\.') + ')$');
     const genModuleCache = new Map();
@@ -49,8 +51,8 @@ async function build() {
     ]);
 
     for (const [key, value] of genModuleCache) {
-        const fn = path.basename(key);
-        fs.writeFileSync(`dist/${fn}`, value);
+        const fn = basename(key);
+        writeFileSync(`dist/${fn}`, value);
     }
 }
 

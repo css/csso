@@ -1,5 +1,7 @@
 .vscode
 .idea
 .gh-pages/csso.min.js
-/node_modules/
-/coverage/
+cjs
+cjs-test
+node_modules
+coverage
