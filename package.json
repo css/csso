@@ -19,6 +19,8 @@
   ],
   "type": "module",
   "main": "./lib/index",
+  "unpkg": "dist/csso.esm.js",
+  "jsdelivr": "dist/csso.esm.js",
   "browser": {
     "./cjs/version.cjs": "./dist/version.js",
     "./lib/version.js": "./dist/version.js"
