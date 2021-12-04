@@ -44,7 +44,7 @@
     "esm-to-cjs": "node scripts/esm-to-cjs",
     "esm-to-cjs-and-test": "npm run esm-to-cjs && npm run test:cjs",
     "coverage": "c8 --reporter=lcovonly npm test",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run lint-and-test && npm run build-and-test",
     "hydrogen": "node --trace-hydrogen --trace-phase=Z --trace-deopt --code-comments --hydrogen-track-positions --redirect-code-traces --redirect-code-traces-to=code.asm --trace_hydrogen_file=code.cfg --print-opt-code bin/csso --stat -o /dev/null"
   },
   "dependencies": {
