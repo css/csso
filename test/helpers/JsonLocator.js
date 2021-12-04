@@ -1,18 +1,22 @@
-var fs = require('fs');
-var path = require('path');
+import { readFileSync } from 'fs';
+import { relative, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-function JsonLocator(filename) {
-    this.content = fs.readFileSync(filename, 'utf-8');
-    this.filename = path.relative(__dirname + '/../..', filename);
-}
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-JsonLocator.prototype.get = function(name) {
-    var lines = this.content.split('"' + name + '"')[0].split('\n');
-    return [
-        this.filename,
-        lines.length,
-        lines.pop().length + name.length + 5
-    ].join(':') + ' (' + name + ')';
+export default class JsonLocator {
+    constructor(filename) {
+        this.content = readFileSync(filename, 'utf-8');
+        this.filename = relative(__dirname + '/../..', filename);
+    }
+
+    get(name) {
+        const lines = this.content.split('"' + name + '"')[0].split('\n');
+
+        return [
+            this.filename,
+            lines.length,
+            lines.pop().length + name.length + 5
+        ].join(':') + ' (' + name + ')';
+    }
 };
-
-module.exports = JsonLocator;

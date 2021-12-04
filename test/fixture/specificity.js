@@ -1,4 +1,4 @@
-module.exports = [
+export default [
     // source: https://github.com/keeganstreet/specificity/blob/master/test/test.js
 
     // http://css-tricks.com/specifics-on-css-specificity/

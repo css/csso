@@ -17,7 +17,16 @@
     "optimisation",
     "csstree"
   ],
+  "type": "module",
   "main": "./lib/index",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js",
+      "require": "./cjs/index.cjs"
+    },
+    "./dist/*": "./dist/*.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "test": "mocha --reporter ${REPORTER:-progress}",
     "lint": "eslint lib scripts test",

@@ -1,16 +1,16 @@
-var assert = require('assert');
-var csso = require('../lib');
-var specificity = require('../lib/restructure/prepare/specificity.js');
-var tests = require(__dirname + '/fixture/specificity.js', 'utf8');
+import { deepStrictEqual } from 'assert';
+import { syntax } from 'csso';
+import specificity from '../lib/restructure/prepare/specificity.js';
+import tests from './fixture/specificity.js';
 
-describe('specificity', function() {
-    tests.forEach(function(test) {
-        (test.only ? it.only : it)(test.selector, function() {
-            var ast = csso.syntax.parse(test.selector, {
+describe('specificity', () => {
+    tests.forEach((test) => {
+        (test.only ? it.only : it)(test.selector, () => {
+            const ast = syntax.parse(test.selector, {
                 context: 'selector'
             });
 
-            assert.deepStrictEqual(specificity(ast), test.expected.split(',').map(Number));
+            deepStrictEqual(specificity(ast), test.expected.split(',').map(Number));
         });
     });
 });

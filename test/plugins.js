@@ -1,12 +1,13 @@
-var assert = require('assert');
-var csso = require('../lib');
-var css = '.test{color:red;}@media foo{div{color:green}}';
+import assert from 'assert';
+import { minify } from 'csso';
 
-describe('plugins', function() {
-    it('calls beforeCompress when it is a function', function() {
-        var called = true;
-        var ast = csso.minify(css, {
-            beforeCompress: function(ast, options) {
+const css = '.test{color:red;}@media foo{div{color:green}}';
+
+describe('plugins', () => {
+    it('calls beforeCompress when it is a function', () => {
+        let called = true;
+        const ast = minify(css, {
+            beforeCompress(ast, options) {
                 assert(ast);
                 assert(options);
                 called = true;
@@ -17,16 +18,14 @@ describe('plugins', function() {
         assert(ast);
     });
 
-    it('calls beforeCompress when it is an array', function() {
-        var called = [false, false];
-        var pluginFactory = function(index) {
-            return function callback(ast, options) {
-                assert(ast);
-                assert(options);
-                called[index] = true;
-            };
+    it('calls beforeCompress when it is an array', () => {
+        let called = [false, false];
+        const pluginFactory = (index) => (ast, options) => {
+            assert(ast);
+            assert(options);
+            called[index] = true;
         };
-        var ast = csso.minify(css, {
+        const ast = minify(css, {
             beforeCompress: [pluginFactory(0), pluginFactory(1)]
         });
 
@@ -35,10 +34,10 @@ describe('plugins', function() {
         assert(ast);
     });
 
-    it('calls afterCompress when it is a function', function() {
-        var called = true;
-        var ast = csso.minify(css, {
-            afterCompress: function(compressResult, options) {
+    it('calls afterCompress when it is a function', () => {
+        let called = true;
+        const ast = minify(css, {
+            afterCompress(compressResult, options) {
                 assert(compressResult);
                 assert(compressResult.ast);
                 assert(options);
@@ -50,17 +49,15 @@ describe('plugins', function() {
         assert(ast);
     });
 
-    it('calls afterCompress when it is an array', function() {
-        var called = [false, false];
-        var pluginFactory = function(index) {
-            return function callback(compressResult, options) {
-                assert(compressResult);
-                assert(compressResult.ast);
-                assert(options);
-                called[index] = true;
-            };
+    it('calls afterCompress when it is an array', () => {
+        const called = [false, false];
+        const pluginFactory = (index) => (compressResult, options) => {
+            assert(compressResult);
+            assert(compressResult.ast);
+            assert(options);
+            called[index] = true;
         };
-        var ast = csso.minify(css, {
+        const ast = minify(css, {
             afterCompress: [pluginFactory(0), pluginFactory(1)]
         });
 

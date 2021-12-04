@@ -1,23 +1,22 @@
-var assert = require('assert');
-var csso = require('../lib');
-var parse = csso.syntax.parse;
-var compress = csso.syntax.compress;
-var generate = csso.syntax.generate;
+import { equal } from 'assert';
+import { syntax } from 'csso';
 
-describe('AST clone', function() {
-    it('compress(ast, { clone: false })', function() {
-        var ast = parse('.foo{color:red}.bar{color:#ff0000}');
-        var compressedAst = compress(ast, { clone: false }).ast;
+const { parse, compress, generate } = syntax;
 
-        assert.equal(generate(compressedAst), '.bar,.foo{color:red}');
-        assert.equal(generate(ast), '.bar,.foo{color:red}');
+describe('AST clone', () => {
+    it('compress(ast, { clone: false })', () => {
+        const ast = parse('.foo{color:red}.bar{color:#ff0000}');
+        const { ast: compressedAst } = compress(ast, { clone: false });
+
+        equal(generate(compressedAst), '.bar,.foo{color:red}');
+        equal(generate(ast), '.bar,.foo{color:red}');
     });
 
-    it('compress(ast, { clone: true })', function() {
-        var ast = parse('.foo{color:red}.bar{color:#ff0000}');
-        var compressedAst = compress(ast, { clone: true }).ast;
+    it('compress(ast, { clone: true })', () => {
+        const ast = parse('.foo{color:red}.bar{color:#ff0000}');
+        const { ast: compressedAst } = compress(ast, { clone: true });
 
-        assert.equal(generate(compressedAst), '.bar,.foo{color:red}');
-        assert.equal(generate(ast), '.foo{color:red}.bar{color:#ff0000}');
+        equal(generate(compressedAst), '.bar,.foo{color:red}');
+        equal(generate(ast), '.foo{color:red}.bar{color:#ff0000}');
     });
 });
