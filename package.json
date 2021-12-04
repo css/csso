@@ -1,10 +1,14 @@
 {
   "name": "csso",
-  "version": "4.2.0",
+  "version": "5.0.0",
   "description": "CSS minifier with structural optimisations",
   "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (https://github.com/afelix)",
   "maintainers": [
-    "Roman Dvornov <rdvornov@gmail.com> (https://github.com/lahmatiy)"
+    {
+      "name": "Roman Dvornov",
+      "email": "rdvornov@gmail.com",
+      "github-username": "lahmatiy"
+    }
   ],
   "repository": "css/csso",
   "license": "MIT",

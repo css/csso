@@ -1,11 +1,11 @@
-## next
+## 5.0.0 (December 4, 2021)
 
 - Added support for [CSS Selectors Level 4](https://www.w3.org/TR/selectors-4/) and legacy pseudos in specificity calculation, i.e. `:has()`, `:not(<selector-list>)`, `:is()`, `:matches()`, `:-moz-any()`, `:-webkit-any()`, `:where()`, `:nth-child(... of <selector-list>)` and `:nth-last-child(... of <selector-list>)`
 - Package
     - Changed supported versions of Node.js to `^12.20.0`, `^14.13.0` and `>=15.0.0`
     - Converted to ES modules. However, CommonJS is supported as well (dual module)
     - Changed bundle set to provide `dist/csso.js` (an IIFE version with `csso` as a global name) and `dist/csso.esm.js` (as ES module). Both are minified
-    - Bumped `css-tree` to `2.0.1`
+    - Bumped `css-tree` to [`2.0`](https://github.com/csstree/csstree/releases/tag/v2.0.0)
 
 ## 4.2.0 (November 26, 2020)
 
