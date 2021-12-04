@@ -40,6 +40,7 @@
     "build": "npm run bundle && npm run esm-to-cjs",
     "build-and-test": "npm run build && npm run test:dist && npm run test:cjs",
     "bundle": "node scripts/bundle",
+    "bundle-and-test": "npm run bundle && npm run test:dist",
     "esm-to-cjs": "node scripts/esm-to-cjs",
     "esm-to-cjs-and-test": "npm run esm-to-cjs && npm run test:cjs",
     "coverage": "c8 --reporter=lcovonly npm test",
