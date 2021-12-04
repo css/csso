@@ -1,8 +1,7 @@
 import { readdirSync, statSync, readFileSync } from 'fs';
-import { join, relative, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { join, relative } from 'path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = 'fixtures/compress';
 const tests = {};
 
 (function scan(dir) {
