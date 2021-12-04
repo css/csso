@@ -21,7 +21,7 @@ function createHasSimilarSelectorsTest(test) {
 }
 
 describe('hasSimilarSelectors', () => {
-    const tests = readFileSync('./test/fixture/similarSelectors.json', 'utf8')
+    const tests = readFileSync('./fixtures/similarSelectors.json', 'utf8')
         .replace(/\/\/.+/g, '');
 
     JSON.parse(tests).forEach(createHasSimilarSelectorsTest);

@@ -1,6 +1,6 @@
 import { equal, throws } from 'assert';
 import { minify } from 'csso';
-import tests from './fixture/usage/index.js';
+import tests from './fixture/usage.js';
 
 function normalize(str) {
     return str.replace(/\n|\r\n?|\f/g, '\n');

@@ -1,7 +1,7 @@
 import { basename } from 'path';
 import assert, { strictEqual, deepEqual } from 'assert';
 import { syntax, minify, minifyBlock } from 'csso';
-import tests from './fixture/compress/index.js';
+import tests from './fixture/compress.js';
 
 const { parse, walk, generate, compress } = syntax;
 

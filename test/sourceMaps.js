@@ -127,7 +127,7 @@ describe('sourceMaps', () => {
     });
 
     describe('input source map', () => {
-        const filename = './test/fixture/sourceMaps/autoprefixer.css';
+        const filename = './fixtures/sourceMaps/autoprefixer.css';
         const source = readFileSync(filename, 'utf8');
         const inputSourceMap = JSON.parse(extractSourceMap(source));
         const sourceContent = inputSourceMap.sourcesContent[0];
