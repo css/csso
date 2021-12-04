@@ -29,10 +29,10 @@ npm install csso
 
 ## Usage
 
-Basic usage:
-
 ```js
 import { minify } from 'csso';
+// CommonJS is also supported
+// const { minify } = require('csso');
 
 const minifiedCss = minify('.test { color: #ff0000; }').css;
 
@@ -40,7 +40,7 @@ console.log(minifiedCss);
 // .test{color:red}
 ```
 
-There are bundles are available for using in a browser:
+Bundles are also available for use in a browser:
 
 - `dist/csso.js` – minified IIFE with `csso` as global
 ```html
