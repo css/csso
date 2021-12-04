@@ -48,6 +48,6 @@ jobs:
             - run: npm run test
               env:
                   REPORTER: "min"
-            - run: npm run test:cjs
+            - run: npm run esm-to-cjs-and-test
               env:
                   REPORTER: "min"
