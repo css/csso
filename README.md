@@ -6,21 +6,6 @@
 
 CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformations: cleaning (removing redundants), compression (replacement for the shorter forms) and restructuring (merge of declarations, rules and so on). As a result an output CSS becomes much smaller in size.
 
-## Ready to use
-
-- [Web interface](http://css.github.io/csso/csso.html)
-- [csso-cli](https://github.com/css/csso-cli) – command line interface
-- [gulp-csso](https://github.com/ben-eb/gulp-csso) – `Gulp` plugin
-- [grunt-csso](https://github.com/t32k/grunt-csso) – `Grunt` plugin
-- [broccoli-csso](https://github.com/sindresorhus/broccoli-csso) – `Broccoli` plugin
-- [postcss-csso](https://github.com/lahmatiy/postcss-csso) – `PostCSS` plugin
-- [csso-loader](https://github.com/sandark7/csso-loader) – `webpack` loader
-- [csso-webpack-plugin](https://github.com/zoobestik/csso-webpack-plugin) – `webpack` plugin
-- [CSSO Visual Studio Code plugin](https://marketplace.visualstudio.com/items?itemName=Aneryu.csso)
-- [vscode-csso](https://github.com/1000ch/vscode-csso) - Visual Studio Code plugin
-- [atom-csso](https://github.com/1000ch/atom-csso) - Atom plugin
-- [Sublime-csso](https://github.com/1000ch/Sublime-csso) - Sublime plugin
-
 ## Install
 
 ```
@@ -87,6 +72,21 @@ console.log(minifiedCss);
 ```
 
 > Warning: CSSO doesn't guarantee API behind a `syntax` field as well as AST format. Both might be changed with changes in CSSTree. If you rely heavily on `syntax` API, a better option might be to use CSSTree directly.
+
+## Related projects
+
+- [Web interface](http://css.github.io/csso/csso.html)
+- [csso-cli](https://github.com/css/csso-cli) – command line interface
+- [gulp-csso](https://github.com/ben-eb/gulp-csso) – `Gulp` plugin
+- [grunt-csso](https://github.com/t32k/grunt-csso) – `Grunt` plugin
+- [broccoli-csso](https://github.com/sindresorhus/broccoli-csso) – `Broccoli` plugin
+- [postcss-csso](https://github.com/lahmatiy/postcss-csso) – `PostCSS` plugin
+- [csso-loader](https://github.com/sandark7/csso-loader) – `webpack` loader
+- [csso-webpack-plugin](https://github.com/zoobestik/csso-webpack-plugin) – `webpack` plugin
+- [CSSO Visual Studio Code plugin](https://marketplace.visualstudio.com/items?itemName=Aneryu.csso)
+- [vscode-csso](https://github.com/1000ch/vscode-csso) - Visual Studio Code plugin
+- [atom-csso](https://github.com/1000ch/atom-csso) - Atom plugin
+- [Sublime-csso](https://github.com/1000ch/Sublime-csso) - Sublime plugin
 
 ## API
 
