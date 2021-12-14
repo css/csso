@@ -1,7 +1,7 @@
 import { readdirSync, statSync, readFileSync } from 'fs';
-import { join, relative } from 'path';
+import { join, relative, resolve } from 'path';
 
-const __dirname = 'fixtures/compress';
+const __dirname = resolve(new URL(import.meta.url).pathname, '../../../fixtures/compress');
 const tests = {};
 
 (function scan(dir) {
