@@ -1,3 +1,8 @@
+## next
+
+- Added exports:
+    - `csso/syntax`
+
 ## 5.0.0 (December 4, 2021)
 
 - Added support for [CSS Selectors Level 4](https://www.w3.org/TR/selectors-4/) and legacy pseudos in specificity calculation, i.e. `:has()`, `:not(<selector-list>)`, `:is()`, `:matches()`, `:-moz-any()`, `:-webkit-any()`, `:where()`, `:nth-child(... of <selector-list>)` and `:nth-last-child(... of <selector-list>)`

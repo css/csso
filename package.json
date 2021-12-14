@@ -34,6 +34,10 @@
       "import": "./lib/index.js",
       "require": "./cjs/index.cjs"
     },
+    "./syntax": {
+      "import": "./lib/syntax.js",
+      "require": "./cjs/syntax.cjs"
+    },
     "./dist/*": "./dist/*.js",
     "./package.json": "./package.json"
   },
