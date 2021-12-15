@@ -71,6 +71,19 @@ console.log(minifiedCss);
 // .test{color:red}
 ```
 
+Also syntax can be imported using `csso/syntax` entry point:
+
+```js
+import { parse, compress, generate } from 'csso/syntax';
+
+const ast = parse('.test { color: #ff0000; }');
+const compressedAst = compress(ast).ast;
+const minifiedCss = generate(compressedAst);
+
+console.log(minifiedCss);
+// .test{color:red}
+```
+
 > Warning: CSSO doesn't guarantee API behind a `syntax` field as well as AST format. Both might be changed with changes in CSSTree. If you rely heavily on `syntax` API, a better option might be to use CSSTree directly.
 
 ## Related projects
