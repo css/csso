@@ -1,6 +1,6 @@
-## next
+## 5.0.1 (December 14, 2021)
 
-- Bumped `css-tree` to `~2.0.2`
+- Bumped `css-tree` to `~2.0.3` (various fixes on generate CSS)
 - Added exports:
     - `csso/syntax`
 

@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import assert, { equal, deepEqual } from 'assert';
 import { minify } from 'csso';
-import { SourceMapConsumer } from 'source-map';
+import { SourceMapConsumer } from 'source-map-js';
 
 const css = '.a { color: #ff0000; }\n.b { display: block; float: left; }';
 const minifiedCss = '.a{color:red}.b{display:block;float:left}';
