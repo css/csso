@@ -4,31 +4,39 @@ on:
     push:
     pull_request:
 
+env:
+    PRIMARY_NODEJS_VERSION: 16
+    REPORTER: "min"
+
 jobs:
-    lint-coverage:
+    lint:
+        name: Lint
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - name: Setup node 16
+            - name: Setup node ${{ env.PRIMARY_NODEJS_VERSION }}
               uses: actions/setup-node@v2
               with:
-                  node-version: 16
-                  cache: "npm"
+                node-version: ${{ env.PRIMARY_NODEJS_VERSION }}
+                cache: "npm"
             - run: npm ci
             - run: npm run lint
-            - run: npm run bundle-and-test
-              env:
-                  REPORTER: "min"
-            - run: npm run coverage
-              env:
-                  REPORTER: "min"
-            - name: Send coverage to Coveralls
-              uses: coverallsapp/github-action@1.1.3
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
 
-    run-tests:
-        needs: lint-coverage
+    test-bundle:
+        name: Test bundle
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup node ${{ env.PRIMARY_NODEJS_VERSION }}
+              uses: actions/setup-node@v2
+              with:
+                node-version: ${{ env.PRIMARY_NODEJS_VERSION }}
+                cache: "npm"
+            - run: npm ci
+            - run: npm run bundle-and-test
+
+    unit-tests:
+        name: Unit tests
         runs-on: ubuntu-latest
 
         strategy:
@@ -44,12 +52,29 @@ jobs:
             - name: Setup node ${{ matrix.node_version }}
               uses: actions/setup-node@v2
               with:
-                  node-version: ${{ matrix.node_version }}
-                  cache: "npm"
+                node-version: ${{ matrix.node_version }}
+                cache: "npm"
             - run: npm ci
             - run: npm run test
-              env:
-                  REPORTER: "min"
             - run: npm run esm-to-cjs-and-test
-              env:
-                  REPORTER: "min"
+
+            - run: npm run coverage
+              if: ${{ matrix.node_version == env.PRIMARY_NODEJS_VERSION }}
+            - name: Coveralls parallel
+              if: ${{ matrix.node_version == env.PRIMARY_NODEJS_VERSION }}
+              uses: coverallsapp/github-action@1.1.3
+              with:
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                flag-name: node-${{ matrix.node_version }}
+                parallel: true
+
+    send-to-coveralls:
+        name: Send coverage to Coveralls
+        needs: unit-tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Send coverage to Coveralls
+              uses: coverallsapp/github-action@1.1.3
+              with:
+                github-token: ${{ secrets.GITHUB_TOKEN }}
+                parallel-finished: true
