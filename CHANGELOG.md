@@ -1,5 +1,6 @@
 ## next
 
+- Bumped `css-tree` to `~2.0.2`
 - Added exports:
     - `csso/syntax`
 
