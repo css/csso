@@ -1,4 +1,4 @@
-## next
+## 5.0.2 (December 17, 2021)
 
 - Extended Node.js support to include `^10`
 - Fixed `main` field in `package.json` to refer to CommonJS module
