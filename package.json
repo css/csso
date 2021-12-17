@@ -22,7 +22,7 @@
     "csstree"
   ],
   "type": "module",
-  "main": "./lib/index",
+  "main": "./cjs/index.cjs",
   "unpkg": "dist/csso.esm.js",
   "jsdelivr": "dist/csso.esm.js",
   "browser": {
