@@ -51,7 +51,7 @@
     "build-and-test": "npm run build && npm run test:dist && npm run test:cjs",
     "bundle": "node scripts/bundle",
     "bundle-and-test": "npm run bundle && npm run test:dist",
-    "esm-to-cjs": "node scripts/esm-to-cjs",
+    "esm-to-cjs": "node scripts/esm-to-cjs.cjs",
     "esm-to-cjs-and-test": "npm run esm-to-cjs && npm run test:cjs",
     "coverage": "c8 --reporter=lcovonly npm test",
     "prepublishOnly": "npm run lint-and-test && npm run build-and-test",
@@ -69,7 +69,7 @@
     "source-map-js": "^1.0.1"
   },
   "engines": {
-    "node": "^12.20.0 || ^14.13.0 || >=15.0.0",
+    "node": "^10 || ^12.20.0 || ^14.13.0 || >=15.0.0",
     "npm": ">=7.0.0"
   },
   "files": [

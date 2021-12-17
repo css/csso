@@ -43,6 +43,7 @@ jobs:
             matrix:
                 # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
                 node_version:
+                    - 10
                     - 12.20.0
                     - 14.13.0
                     - 16
@@ -56,6 +57,7 @@ jobs:
                 cache: "npm"
             - run: npm ci
             - run: npm run test
+              if: ${{ matrix.node_version != '10' }}
             - run: npm run esm-to-cjs-and-test
 
             - run: npm run coverage
