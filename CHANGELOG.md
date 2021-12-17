@@ -1,6 +1,7 @@
 ## next
 
 - Fixed `main` field in `package.json` to refer to CommonJS module
+- Bumped `css-tree` to `~2.0.4` (fixed CSS serialization issue in IE11)
 
 ## 5.0.1 (December 14, 2021)
 
