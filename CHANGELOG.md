@@ -1,3 +1,8 @@
+## next
+
+- Fixed CommonJS version bundling when `browser` field is used
+- Added `module` field
+
 ## 5.0.2 (December 17, 2021)
 
 - Extended Node.js support to include `^10`

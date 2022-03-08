@@ -22,13 +22,14 @@
     "csstree"
   ],
   "type": "module",
-  "main": "./cjs/index.cjs",
   "unpkg": "dist/csso.esm.js",
   "jsdelivr": "dist/csso.esm.js",
   "browser": {
-    "./cjs/version.cjs": "./dist/version.js",
+    "./cjs/version.cjs": "./dist/version.cjs",
     "./lib/version.js": "./dist/version.js"
   },
+  "main": "./cjs/index.cjs",
+  "module": "./lib/index.js",
   "exports": {
     ".": {
       "import": "./lib/index.js",

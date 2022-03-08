@@ -7,22 +7,15 @@ const { version } = createRequire(import.meta.url)('../package.json');
 
 async function build() {
     const genModules = {
-        [resolve('lib/version.js')]: () => `export const version = "${version}";`
+        [resolve('lib/version.js')]: `export const version = "${version}";`,
+        [resolve('cjs/version.cjs')]: `module.exports = "${version}";`
     };
     const genModulesFilter = new RegExp('(' + Object.keys(genModules).join('|').replace(/\./g, '\\.') + ')$');
-    const genModuleCache = new Map();
-    const genModule = (fn) => {
-        if (!genModuleCache.has(fn)) {
-            genModuleCache.set(fn, genModules[fn]());
-        }
-
-        return genModuleCache.get(fn);
-    };
     const plugins = [{
         name: 'replace',
         setup({ onLoad }) {
             onLoad({ filter: genModulesFilter }, args => ({
-                contents: genModule(args.path)
+                contents: genModules[args.path]
             }));
         }
     }];
@@ -50,8 +43,9 @@ async function build() {
         })
     ]);
 
-    for (const [key, value] of genModuleCache) {
+    for (const [key, value] of Object.entries(genModules)) {
         const fn = basename(key);
+
         writeFileSync(`dist/${fn}`, value);
     }
 }
