@@ -1,4 +1,4 @@
-## next
+## 5.0.3 (March 9, 2022)
 
 - Fixed CommonJS version bundling when `browser` field is used
 - Added `module` field
