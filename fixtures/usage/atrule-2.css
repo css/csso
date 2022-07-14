@@ -1,0 +1,31 @@
+/*
+  should not apply usage filtering to @keyframes & @page at-rules
+*/
+
+used1 { color: green }
+unused { color: red }
+used2 { color: green }
+@page left {
+    margin: 5;
+    @top-center {
+        content: "text";
+    }
+}
+@keyframes test {
+    from { color: blue }
+    to { color: yellow }
+}
+@-webkit-keyframes test {
+    from { color: blue }
+    to { color: yellow }
+}
+@media some-used {
+    used2 { color: green }
+    from { color: red }
+    unused { color: red }
+    used1 { color: green }
+}
+@media all-unused {
+    from { color: red }
+    unused { color: red }
+}

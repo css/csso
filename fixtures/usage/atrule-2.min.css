@@ -1,0 +1,1 @@
+@keyframes test{0%{color:#00f}to{color:#ff0}}@-webkit-keyframes test{0%{color:#00f}to{color:#ff0}}used1,used2{color:green}@page left{margin:5;@top-center{content:"text"}}@media some-used{used1,used2{color:green}}
