@@ -1,7 +1,7 @@
-## next
+## 5.0.4 (July 14, 2022)
 
 - Fixed usage filtering for from/to selectors in keyframes at-rule (#448)
-- Fixed removing `medium` in `font` declaration since it breaks the value since `<font-size>` is required
+- Fixed removing `medium` in `font` declarations since it breaks the value since `<font-size>` is required (#449)
 
 ## 5.0.3 (March 9, 2022)
 
