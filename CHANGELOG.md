@@ -1,3 +1,7 @@
+## next
+
+- Bumped `css-tree` to `~2.2.0`
+
 ## 5.0.4 (July 14, 2022)
 
 - Fixed usage filtering for from/to selectors in keyframes at-rule (#448)
