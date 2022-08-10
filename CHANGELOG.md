@@ -1,6 +1,6 @@
-## next
+## 5.0.5 (August 10, 2022)
 
-- Bumped `css-tree` to `~2.2.0`
+- Bumped `css-tree` to `~2.2.0` (#458)
 
 ## 5.0.4 (July 14, 2022)
 
