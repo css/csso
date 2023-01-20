@@ -4,7 +4,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/csso.svg)](https://www.npmjs.com/package/csso)
 [![Twitter](https://img.shields.io/badge/Twitter-@cssoptimizer-blue.svg)](https://twitter.com/cssoptimizer)
 
-CSSO (CSS Optimizer) is a CSS minifier. It performs three sort of transformations: cleaning (removing redundants), compression (replacement for the shorter forms) and restructuring (merge of declarations, rules and so on). As a result an output CSS becomes much smaller in size.
+CSSO (CSS Optimizer) is a CSS minifier unlike others. It performs three sort of transformations: cleaning (removing redundants), compression (replacement for the shorter forms) and restructuring (merge of declarations, rules and so on). In addition to usual minification techniques it can perform structural optimization of CSS files, resulting in smaller file size compared to other minifiers.
 
 ## Install
 
