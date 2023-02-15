@@ -30,7 +30,6 @@ CSSO (CSS Optimizer)는 다른 CSS압축툴과는 다릅니다. 일반적인 압
 # 저자
 
 * 초안&nbsp;— Vitaly Harisov (<vitaly@harisov.name>)
-* 구현&nbsp;— Sergey Kryzhanovsky (<skryzhanovsky@ya.ru>)
 * 영어 번역&nbsp;— Leonid Khachaturov (<leonidkhachaturov@gmail.com>)
 * 일본어 번역&nbsp;— Koji Ishimoto (<ijok.ijok@gmail.com>)
 * 한국어 번역&nbsp;— Wankyu Kim (<wankyu19@gmail.com>)
@@ -38,8 +37,6 @@ CSSO (CSS Optimizer)는 다른 CSS압축툴과는 다릅니다. 일반적인 압
 # 피드백
 
 문제가 있을 경우 [Github](https://github.com/css/csso/issues)에 올려주시기 바랍니다.
-
-피드백, 제안 등은 <skryzhanovsky@ya.ru>로 전달바랍니다.
 
 # 라이센스
 

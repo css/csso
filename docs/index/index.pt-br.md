@@ -30,7 +30,6 @@ As técnicas de minificação são descritas em detalhes em [descrição detalha
 ## Autores
 
 * Ideia inicial&nbsp;— Vitaly Harisov (<vitaly@harisov.name>)
-* Implementação&nbsp;— Sergey Kryzhanovsky (<skryzhanovsky@ya.ru>)
 * Tradução Inglês&nbsp;— Leonid Khachaturov (<leonidkhachaturov@gmail.com>)
 * Tradução Japonês&nbsp;— Koji Ishimoto (<ijok.ijok@gmail.com>)
 * Tradução Coreano&nbsp;— Wankyu Kim (<wankyu19@gmail.com>)
@@ -39,8 +38,6 @@ As técnicas de minificação são descritas em detalhes em [descrição detalha
 ## Comentários
 
 Por favor, reporte problemas no [Github](https://github.com/css/csso/issues).
-
-Para comentários, sugestões, etc. Escreva para <skryzhanovsky@ya.ru>.
 
 ## Licença
 
