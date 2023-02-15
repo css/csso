@@ -2,7 +2,6 @@
   "name": "csso",
   "version": "5.0.5",
   "description": "CSS minifier with structural optimisations",
-  "author": "Sergey Kryzhanovsky <skryzhanovsky@ya.ru> (https://github.com/afelix)",
   "maintainers": [
     {
       "name": "Roman Dvornov",
